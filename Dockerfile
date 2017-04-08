@@ -34,7 +34,7 @@ LABEL Description="This image is used to render and deploy TYPO3 Documentation."
     RUN mkdir /t3docs/toolchains \
         && git clone -b this-is-the-future https://github.com/marble/Toolchain_RenderDocumentation.git /t3docs/toolchains/RenderDocumentation
 
-    COPY ["tctconfig.cfg", "/t3docs/tctconfig.cfg"]
+    COPY ["tctconfig.cfg", "/etc/tctconfig.cfg"]
     COPY ["makedir", "/t3docs/makedir"]
 
 # Provide "interface" to outer world
