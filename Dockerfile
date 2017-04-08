@@ -38,9 +38,10 @@ LABEL Description="This image is used to render and deploy TYPO3 Documentation."
     COPY ["makedir", "/t3docs/makedir"]
 
 # Provide "interface" to outer world
-    ENTRYPOINT ["tct"]
+    # ENTRYPOINT ["tct"]
     CMD [ \
-        "-v" \
+        "tct" \
+        ,"-v" \
         ,"run" \
         ,"RenderDocumentation" \
         ,"--config" \
