@@ -21,9 +21,7 @@ LABEL Description="This image is used to render and deploy TYPO3 Documentation."
 # Setup environment
     WORKDIR /t3docs
 
-     # TODO: How to rebuild or exclude?!
-
-    RUN git clone https://github.com/marble/TCT.git /t3docs/tct \
+    RUN git clone https://github.com/DanielSiepmann/TCT.git /t3docs/tct \
         && cd /t3docs/tct \
         && python setup.py install
 
@@ -57,3 +55,5 @@ LABEL Description="This image is used to render and deploy TYPO3 Documentation."
         ,"makedir" \
         ,"/t3docs/makedir" \
     ]
+
+    # tct -v run RenderDocumentation --config talk 2 --config rebuild_needed 1 --config make_latex 0 --config makedir /t3docs/makedir
