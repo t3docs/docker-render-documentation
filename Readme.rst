@@ -1,3 +1,5 @@
+.. _highlight: bash
+
 About
 =====
 
@@ -14,6 +16,7 @@ Install
 =======
 
 ::
+
     docker build -t danielsiepmann/t3docs-ci .
 
 Usage
@@ -22,6 +25,7 @@ Usage
 ``cd`` into an extension folder, containing the ``Documentation`` folder.
 
 Run::
+
     docker run -v "$PWD":/tmp/makedir danielsiepmann/t3docs-ci
 
 The results are inside the new ``build`` folder.
