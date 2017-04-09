@@ -21,7 +21,7 @@ LABEL Description="This image is used to render and deploy TYPO3 Documentation."
 # Setup environment
     WORKDIR /t3docs
 
-    RUN git clone https://github.com/DanielSiepmann/TCT.git /t3docs/tct \
+    RUN git clone https://github.com/marble/TCT.git /t3docs/tct \
         && cd /t3docs/tct \
         && python setup.py install
 
