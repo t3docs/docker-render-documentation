@@ -23,7 +23,7 @@ RUN \
    true "Create executable COMMENT as a workaround to allow commenting" \
    && cp /bin/true /bin/COMMENT \
    \
-   COMMENT "We want Makedir to be world writable" \
+   && COMMENT "We want Makedir to be world writable" \
    && chmod -R o+w /ALL/Makedir \
    \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
