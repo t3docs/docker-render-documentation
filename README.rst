@@ -11,7 +11,6 @@ This is the recipe to build a Docker image.
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 
 .. default-role:: code
-.. highlight:: shell
 
 Quickstart on Linux
 ===================
@@ -21,9 +20,15 @@ Prepare
 
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
 
-2. Verify Docker is running::
+2. Verify Docker is working::
 
-      `docker run --rm hello-world`
+      docker run --rm hello-world
+
+   You should see::
+
+      Hello from Docker.
+      This message shows that ...
+
 
 3. Download the image::
 
@@ -43,7 +48,7 @@ Prepare
       # just show
       docker run --rm t3docs/render-documentation show-shell-commands
 
-      # actually define (no blanks between '<(')
+      # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
 
       # verify
@@ -88,6 +93,3 @@ Please contribute.
 
 Use the `issue tracker <https://github.com/t3docs/docker-render-documentation/issues>`__ for your contributions and
 help other Windows users to enjoy.
-
-End of document.
-
