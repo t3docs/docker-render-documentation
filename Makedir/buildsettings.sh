@@ -1,28 +1,32 @@
-# Source: https://docs.typo3.org/~mbless/github.com/TYPO3-Documentation/TYPO3/Book/ExtbaseFluid.git.make/buildsettings.sh
 # buildsettings.sh
 
+# we assume 'docker run -v MyProject/Documentation:/tmp/T3DOCDIR t3docs/render-documentation"
 # absolute path, or relative to conf.py, without suffix (.rst)
-MASTERDOC= /tmp/makedir/Documentation/Index.rst
+MASTERDOC= /PROJECT/Documentation/Index.rst
 
 # absolute path, or relative to conf.py
+# legacy setting. not used any more.
 LOGDIR=.
 
-PROJECT=t3extbasebook
-VERSION=latest
+PROJECT=Project
+VERSION=0.0.0
 
 # Where to publish documentation
-BUILDDIR= /tmp/makedir/build
+BUILDDIR= /PROJECT/Documentation-GENERATED-temp
 
 # If GITURL is empty then GITDIR is expected to be "ready" to be processed
 # GITURL=https://github.com/TYPO3-Documentation/TYPO3CMS-Book-ExtbaseFluid.git
 GITURL=
-GITDIR= /tmp/makedir
-GITBRANCH=latest
+GITDIR= /PROJECT
+GITBRANCH=master
 
 # Path to the documentation within the Git repository
 T3DOCDIR= $GITDIR/Documentation
 
 # Packaging information
 PACKAGE_ZIP=0
-PACKAGE_KEY=typo3cms.reference.ExtbaseBook
+PACKAGE_KEY=
 PACKAGE_LANGUAGE=default
+
+TER_EXTENSION=0
+LOCALIZATION=default

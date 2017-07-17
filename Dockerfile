@@ -1,59 +1,73 @@
-FROM python:2.7
+FROM python:2
 
-MAINTAINER TYPO3 Documentation Team
-LABEL Description="This image is used to render and deploy TYPO3 Documentation." Vendor="t3docs" Version="1.0"
+ENV \
+   OUR_IMAGE="t3docs/render-documentation" \
+   OUR_IMAGE_SHORT=t3rd
 
-# Install System dependencies
-    RUN apt-get update && apt-get install -y \
-        git \
-        zip
+LABEL \
+   Maintainer="TYPO3 Documentation Team" \
+   Description="This image is used to render and deploy TYPO3 documentation." \
+   Vendor="t3docs" Version="0.2.0"
 
-# Install TYPO3 pip requirements
-    RUN pip install Sphinx && \
-        pip install pyyaml
+# all the container resources
+COPY . /ALL
 
-# Install TYPO3 specific pip packages like theme.
-    RUN pip install t3SphinxThemeRtd && \
-        pip install t3fieldlisttable && \
-        pip install t3tablerows && \
-        pip install t3targets
+# The host project ($PWD) is mounted as /PROJECT
+WORKDIR /PROJECT
 
-# Setup environment
-    WORKDIR /t3docs
+# From here we start TCT. Place a tctconfig.cfg here.
+# Use a mount if desired.
+WORKDIR /ALL/Rundir
 
-    RUN git clone https://github.com/marble/TCT.git /t3docs/tct \
-        && cd /t3docs/tct \
-        && python setup.py install
+RUN \
+   true "Create executable COMMENT as a workaround to allow commenting" \
+   && cp /bin/true /bin/COMMENT \
+   \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
+        --quiet --output-document /usr/local/bin/check_include_files.py \
+   && chmod +x /usr/local/bin/check_include_files.py \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2015-10.py \
+           --quiet --output-document /ALL/Makedir/conf.py \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
+           --quiet --output-document /ALL/Makedir/_htaccess
+RUN \
+   COMMENT "Install System dependencies" \
+   && apt-get update \
+   && apt-get install -y --no-install-recommends \
+      rsync \
+      unzip \
+      zip \
+   \
+   && COMMENT "Remove downloaded packages and lists" \
+   && apt-get clean \
+   && rm -rf /var/lib/apt/lists/*
 
-    RUN mkdir /t3docs/resources \
-        && git clone https://github.com/marble/typo3-docs-typo3-org-resources.git /t3docs/resources \
-        && ln -s /t3docs/resources/check_include_files.py /usr/local/bin
+RUN \
+   COMMENT "Install TYPO3 pip requirements" \
+   && pip install --no-cache-dir -r /ALL/requirements.txt \
+   \
+   && COMMENT "Install Sphinx-Extensions" \
+   && hg clone https://bitbucket.org/xperseguers/sphinx-contrib /ALL/Downloads/sphinx-contrib \
+   \
+   && pip install /ALL/Downloads/sphinx-contrib/googlechart \
+   && pip install /ALL/Downloads/sphinx-contrib/googlemaps \
+   && pip install /ALL/Downloads/sphinx-contrib/httpdomain \
+   && pip install /ALL/Downloads/sphinx-contrib/mscgen \
+   && pip install /ALL/Downloads/sphinx-contrib/slide \
+   && pip install /ALL/Downloads/sphinx-contrib/youtube \
+   && rm -rf /ALL/Downloads/sphinx-contrib
 
-    RUN mkdir /t3docs/toolchains \
-        && git clone -b this-is-the-future https://github.com/marble/Toolchain_RenderDocumentation.git /t3docs/toolchains/RenderDocumentation
+RUN \
+   COMMENT "Install TCT (ToolChainTool), the toolchain runner" \
+   && git clone https://github.com/marble/TCT.git /ALL/Downloads/tct \
+   && pip install /ALL/Downloads/tct/
 
-    COPY ["tctconfig.cfg", "/etc/tctconfig.cfg"]
-    COPY ["makedir", "/t3docs/makedir"]
+RUN \
+   COMMENT "Download the toolchain" \
+   && git clone -b this-is-the-future \
+          https://github.com/marble/Toolchain_RenderDocumentation.git \
+          /ALL/Toolchains/RenderDocumentation
 
-# Provide "interface" to outer world
-    # ENTRYPOINT ["tct"]
-    CMD [ \
-        "tct" \
-        ,"-v" \
-        ,"run" \
-        ,"RenderDocumentation" \
-        ,"--config" \
-        ,"talk" \
-        ,"2" \
-        ,"--config" \
-        ,"rebuild_needed" \
-        ,"1" \
-        ,"--config" \
-        ,"make_latex" \
-        ,"0" \
-        ,"--config" \
-        ,"makedir" \
-        ,"/t3docs/makedir" \
-    ]
+ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
 
-    # tct -v run RenderDocumentation --config talk 2 --config rebuild_needed 1 --config make_latex 0 --config makedir /t3docs/makedir
+CMD []

@@ -1,0 +1,7 @@
+beautifulsoup4
+PyYAML
+Sphinx
+t3fieldlisttable
+t3SphinxThemeRtd
+t3tablerows
+t3targets

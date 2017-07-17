@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# mb, 2015-10-01, 2016-09-14, 2017-03-01
+# mb, 2015-10-01, 2016-09-14, 2017-07-10
 
 # This file lives at https://github.com/marble/typo3-docs-typo3-org-resources/blob/master/userroot/scripts/bin/conf-2015-10.py
 # Check for a new version!
 
+# 2017-07-10 add theme option 'path_to_documentation_dir'
 # 2017-03-01 set master_doc according to masterdocabspath, allow *.md for masterdoc
 # 2016-09-14 load t3SphinxThemeRtd (>= 3.6.3) as Sphinx extension
 # 2016-09-04 update extlinks Forge and Review
@@ -197,6 +198,7 @@ html_theme_options = {}
 html_theme_options['github_branch']        = ''  # latest'
 html_theme_options['github_commit_hash']   = ''  # 'a2e479886bfa7e866dbb5bfd6aad77355f567db0'
 html_theme_options['github_repository']    = ''  # 'TYPO3-Documentation/TYPO3CMS-Reference-Typoscript'
+html_theme_options['path_to_documentation_dir'] = ''  # 'Documentation' or e.g. 'typo3/sysext/form/Documentation'
 html_theme_options['github_revision_msg']  = ''  # '<a href="https://github.com/TYPO3-Documentation/t3SphinxThemeRtd' + '/commit/' +'a2e479886bfa7e866dbb5bfd6aad77355f567db0' + '" target="_blank">' + 'a2e47988' + '</a>'
 html_theme_options['github_sphinx_locale'] = ''  # ?
 html_theme_options['project_contact']      = ''  # 'mailto:documentation@typo3.org'

@@ -1,0 +1,18 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Do not rewrite URLs starting with any valid version number followed by a slash
+RewriteRule ^[0-9]+(\.[0-9]+)(\.[0-9]+)*(-dev)?/(.*)$ -  [L]
+
+# Do not rewrite URLs like '8-dev/'
+RewriteRule ^[0-9]+-dev/(.*)$ -  [L]
+
+# Do not rewrite URLs starting with the provided words
+RewriteRule ^(latest|packages|stable)(.*)$ -  [L]
+
+# still needed?
+RewriteRule ^manuals.json(.*)$ -  [L]
+
+# Rewrite other cases into the folder stable/
+RewriteRule ^(.*)$ stable/$1

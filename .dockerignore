@@ -1,0 +1,14 @@
+**/.dockerignore
+**/.git/
+**/.gitkeep
+**/.idea/
+*GENERATED*
+Dockerfile
+Documentation/
+README.rst
+RepoHelpers/
+tmp/
+
+
+
+
