@@ -74,7 +74,7 @@ else
 
 Final exit status: $exitstatus (aborted)
 
-Check for possible results:
+Check for results:
    ./Documentation-GENERATED-temp/
 EOT
 fi
@@ -93,6 +93,13 @@ tct -v run RenderDocumentation \
 -c rebuild_needed 1 \
 -c talk 2 \
 -c make_latex 0 $@
+
+local exitstatus=$?
+if [ $exitstatus -eq 0 ]
+then
+rsync -a /ALL/dummy_webroot/typo3cms/project/0.0.0/ /RESULT/ --delete
+exitstatus=$?
+fi
 
 tell-about-results $?
 }

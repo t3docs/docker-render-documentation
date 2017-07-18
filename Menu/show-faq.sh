@@ -8,7 +8,6 @@ cat <<EOT
 
 FAQ
 ===
-
 Assume we are speaking of our container as '${OUR_IMAGE}' with
 the shortname '${OUR_IMAGE_SHORT}'.
 
@@ -19,10 +18,10 @@ Q: Where can I report problems?
 A: https://github.com/t3docs/docker-render-documentation/issues
 
 Q: Where can I find more information?
-A: https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/LocalRendering/UsingDocker/
+A: https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 
-About GNU-Linux
-
+FAQ About GNU-Linux
+-------------------
 Q: What functions are defined (commandline)?
 A: Type 'functions' as command.
 
@@ -33,8 +32,8 @@ A: Type 'declare -f FUNCTIONNAME'
       declare -f dockrun_${OUR_IMAGE_SHORT}
       declare -f dockbash_${OUR_IMAGE_SHORT}
 
-About Docker
-
+FAQ about Docker
+----------------
 Q: How can I remove all untagged Docker images?
 A: # list all images
    docker images

@@ -14,35 +14,50 @@ cat <<EOT
 
 # the usual worker command
 function dockrun_$OUR_IMAGE_SHORT () { \
-docker run --rm -v "\$PWD":/PROJECT --user=\$(stat \$PWD --format="%u:%g") $OUR_IMAGE \$@ ;
+mkdir Documentation-GENERATED-temp 2>/dev/null
+docker run --rm \\
+-v "\$PWD":/PROJECT/:ro \\
+-v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
+--user=\$(stat \$PWD --format="%u:%g") \\
+$OUR_IMAGE \$@ ;
 }
 
 # switch to the container's bash
 function dockbash_$OUR_IMAGE_SHORT() { \
+mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm -it --entrypoint /bin/bash \
--v "\$PWD":/PROJECT \
+-v "\$PWD":/PROJECT/:ro \
+-v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
 --user=\$(stat \$PWD --format="%u:%g") \
 $OUR_IMAGE ;
 }
 
 # for developers
 function devdockrun_$OUR_IMAGE_SHORT () { \
+# cd t3docs/docker-render-documentation
+mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm \
 --user=\$(stat \$PWD --format="%u:%g") \
--v "\$PWD":/PROJECT/ \
+-v "\$PWD":/PROJECT/:ro \
+-v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
 -v "\$PWD"/Makedir/:/ALL/Makedir/ \
 -v "\$PWD"/Rundir/:/ALL/Rundir/ \
 -v "\$PWD"/tmp/:/tmp/ \
+-v "\$PWD"/dummy_webroot/:/ALL/dummy_webroot/ \
 $OUR_IMAGE \$@ ;
 }
 
 function devdockbash_$OUR_IMAGE_SHORT() { \
+# cd t3docs/docker-render-documentation
+mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm -it --entrypoint /bin/bash \
 --user=\$(stat \$PWD --format="%u:%g") \
--v "\$PWD":/PROJECT/ \
+-v "\$PWD":/PROJECT/:ro \
+-v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
 -v "\$PWD"/Makedir/:/ALL/Makedir/ \
 -v "\$PWD"/Rundir/:/ALL/Rundir/ \
 -v "\$PWD"/tmp/:/tmp/ \
+-v "\$PWD"/dummy_webroot/:/ALL/dummy_webroot/ \
 $OUR_IMAGE ;
 }
 
