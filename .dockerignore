@@ -4,10 +4,8 @@
 **/.idea/
 *GENERATED*
 *NOT_VERSIONED*
-Dockerfile
+ALL-for-RW-mount/
 Documentation/
-Downloads/*
-dummy_webroot/*
 PROJECT/
 README.rst
 RepoHelpers/

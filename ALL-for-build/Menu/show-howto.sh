@@ -5,11 +5,12 @@ OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 
 cat <<EOT
+==================================================
 Howto
-=====
+--------------------------------------------------
 
-Quickstart for experts
-----------------------
+Experts: Quickstart for the impatient
+=====================================
 
 Prepare:
 
@@ -17,17 +18,13 @@ Prepare:
    source <(docker run --rm t3docs/renderdocumentation show-shell-commands)
 
 Render:
-   cd PROJECT/Documentation
-   cd ..
-   dockrun_${OUR_IMAGE_SHORT} makehtml
 
-Render:
-   cd PROJECT2
+   cd PROJECT
    dockrun_${OUR_IMAGE_SHORT} makehtml
 
 
-For everybody: Getting started
-------------------------------
+Everybody: Get started
+======================
 
 Verify your Docker is working:
 
@@ -36,15 +33,12 @@ Verify your Docker is working:
 
 Get a project with documentation:
 
-   # create directory
-   mkdir -p ~/Repositories
-
-   # fetch a sample project
+   # fetch a sample project as PROJECT
    git clone https://github.com/T3DocumentationStarter/Public-Info-000 \\
-             ~/Repositories/PROJECT
+             PROJECT
 
-   # go to the root folder of the PROJECT
-   cd ~/Repositories/PROJECT
+   # go to PROJECT
+   cd PROJECT
 
 
 Get the Docker image:
@@ -56,9 +50,9 @@ Get the Docker image:
    Or build it yourself:
 
       git clone https://github.com/t3docs/docker-render-documentation \\
-                ~/Repositories/t3docs/docker-render-documentation
+                t3docs/docker-render-documentation
 
-      cd \~/Repositories/t3docs/docker-render-documentation
+      cd t3docs/docker-render-documentation
       docker build -t ${OUR_IMAGE} .
 
 
@@ -72,7 +66,7 @@ Run the Docker image:
 
 Render your documentation:
 
-   cd ~/Repositories/PROJECT
+   cd PROJECT
    mkdir Documentation-GENERATED-temp 2>/dev/null
    docker run --rm \\
       -v "\$PWD":/PROJECT/:ro \\
@@ -102,14 +96,14 @@ Create handy shortcuts for the commandline:
 
 Use the new command to render the documentation:
 
-   cd ~/Repositories/PROJECT
+   cd PROJECT
    dockrun_${OUR_IMAGE_SHORT} makehtml
 
 Use the new command in general:
 
    dockrun_$OUR_IMAGE_SHORT
    dockrun_$OUR_IMAGE_SHORT --help
-   dockrun_$OUR_IMAGE_SHORT show-faw
+   dockrun_$OUR_IMAGE_SHORT show-faq
    dockrun_$OUR_IMAGE_SHORT show-howto
    dockrun_$OUR_IMAGE_SHORT tct --help
    ...
@@ -117,69 +111,61 @@ Use the new command in general:
 If you did create the shortcuts there should be another one as well.
 It takes you to the shell of your container:
 
-   dockbash_t3rd
+   dockbash_$OUR_IMAGE_SHORT
 
-This is a shortcut for the long form:
+To find out what it means in expanded form type:
 
-   mkdir Documentation-GENERATED-temp 2>/dev/null
-   docker run -it --rm \\
-      --entrypoint /bin/bash \\
-      -v "\$PWD":/PROJECT/:ro \\
-      -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
-      --user=\$(stat \$PWD --format="%u:%g") \\
-      $OUR_IMAGE
+   dockrun_$OUR_IMAGE_SHORT show-shell-commands
 
 
-For developers
---------------
+
+Developers
+==========
+
+Fetch a suitable project that has a read-write folder structure /ALL:
+
+   git clone  https://github.com/t3docs/docker-render-documentation \\
+              t3docs/docker-render-documentation
+
+   # go to the project
+   cd t3docs/docker-render-documentation
+
 
 Required and possible volume mappings:
 
     Host      Container     :ro  Type      Comment
     ========= ============= ===  ========= =======
-    PROJECT/  /PROJECT/:ro  yes  required  Read only. The project that has PROJECT/Documentation/
-    1)        /RESULT/      no   required  For the result of the rendering process.
-    ALLxxx/   /ALL/         no   optional  For development
+    PROJECT/  /PROJECT/:ro  yes  required  Read only. The project that has documentation/
+    1)        /RESULT/      no   required  Read-write output folder for the result.
+    2)        /ALL/         no   optional  For development
     tmp/      /tmp/         no   optional  To find out about the created tmp data.
 
     1) = PROJECT/Documentation-GENERATED-temp/
+    2) = ALL-for-RW-mount   (provide files yourself)
 
-Complete standalone example:
 
-   # fetch a suitable project that has folders ./tmp, ./Rundir, ./Makedir
-   git clone        https://github.com/t3docs/docker-render-documentation \\
-             ~/Repositories/github.com/t3docs/docker-render-documentation
+    ===================
+    ATTENTION & WARNING
+    ===================
+    Be sure to map the correct folder to /RESULT/.
+    It's content will totally be overwritten!
+    Don't accidentally mount all your harddrive.
 
-   # go to the project
-   cd ~/Repositories/github.com/t3docs/docker-render-documentation
 
-   # get the docker image (= our executable)
+Fetch the docker image (= our executable):
+
    docker pull t3docs/render-documentation
 
-   # render documentation
-   # there is shortcut 'devdockrun_${OUR_IMAGE_SHORT}' for this as well
-   mkdir Documentation-GENERATED-temp 2>/dev/null
-   docker run --rm \\
-      --user=\$(stat \$PWD --format="%u:%g") \\
-      -v "\$PWD":/PROJECT/:ro \\
-      -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
-      -v "\$PWD"/Makedir/:/ALL/Makedir/ \\
-      -v "\$PWD"/Rundir/:/ALL/Rundir/ \\
-      -v "\$PWD"/tmp/:/tmp/ \\
-      $OUR_IMAGE makehtml
+Run the container in developer mode.
+Look for `devdockrun_$OUR_IMAGE_SHORT` and `devdockbash_$OUR_IMAGE_SHORT`
+in the shell commands:
 
-   # enter the shell
-   # there is shortcut 'devdockbash_${OUR_IMAGE_SHORT}' for this as well
-   mkdir Documentation-GENERATED-temp 2>/dev/null
-   docker run -it --rm \\
-      --entrypoint /bin/bash \\
-      --user=\$(stat \$PWD --format="%u:%g") \\
-      -v "\$PWD":/PROJECT/:ro \\
-      -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
-      -v "\$PWD"/tmp/:/tmp/ \\
-      -v "\$PWD"/Rundir/:/ALL/Rundir/ \\
-      -v "\$PWD"/Makedir/:/ALL/Makedir/ \\
-      $OUR_IMAGE
+   dockrun_$OUR_IMAGE_SHORT show-shell-commands
 
-End of document.
+
+==================================================
+Finally
+--------------------------------------------------
+
+Have fun!
 EOT
