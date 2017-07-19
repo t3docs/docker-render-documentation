@@ -7,7 +7,7 @@ This is the recipe to build a Docker image.
 
 :Authors:         TYPO3 Documentation Team
 :Repository:      https://github.com/t3docs/docker-render-documentation
-:Docker image:    `t3docs/render-documentation <https://store.docker.com/community/images/t3docs/renderdocumentation>`__
+:Docker image:    `t3docs/render-documentation <https://store.docker.com/community/images/t3docs/render-documentation>`__
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 
 .. default-role:: code
