@@ -10,7 +10,7 @@ LABEL \
    Vendor="t3docs" Version="0.3.0"
 
 # all our sources
-COPY . /ALL
+COPY ALL /ALL
 
 # From here we start TCT. Place a tctconfig.cfg here.
 # Use a mount if desired.

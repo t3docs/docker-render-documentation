@@ -3,12 +3,13 @@
 **/.gitkeep
 **/.idea/
 *GENERATED*
+*NOT_VERSIONED*
 Dockerfile
 Documentation/
+Downloads/*
+dummy_webroot/*
+PROJECT/
 README.rst
 RepoHelpers/
+RESULT/
 tmp/
-
-
-
-
