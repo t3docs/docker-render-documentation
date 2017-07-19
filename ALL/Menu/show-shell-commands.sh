@@ -35,29 +35,27 @@ $OUR_IMAGE ;
 # for developers
 function devdockrun_$OUR_IMAGE_SHORT () { \
 # cd t3docs/docker-render-documentation
+# cp -rp /ALL /ALL-NOT_VERSIONED
 mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm \
 --user=\$(stat \$PWD --format="%u:%g") \
 -v "\$PWD":/PROJECT/:ro \
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
--v "\$PWD"/Makedir/:/ALL/Makedir/ \
--v "\$PWD"/Rundir/:/ALL/Rundir/ \
+-v "\$PWD"/ALL-NOT_VERSIONED/:/ALL/ \
 -v "\$PWD"/tmp/:/tmp/ \
--v "\$PWD"/dummy_webroot/:/ALL/dummy_webroot/ \
 $OUR_IMAGE \$@ ;
 }
 
 function devdockbash_$OUR_IMAGE_SHORT() { \
 # cd t3docs/docker-render-documentation
+# cp -rp /ALL /ALL-NOT_VERSIONED
 mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm -it --entrypoint /bin/bash \
 --user=\$(stat \$PWD --format="%u:%g") \
 -v "\$PWD":/PROJECT/:ro \
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
--v "\$PWD"/Makedir/:/ALL/Makedir/ \
--v "\$PWD"/Rundir/:/ALL/Rundir/ \
+-v "\$PWD"/ALL-NOT_VERSIONED/:/ALL/ \
 -v "\$PWD"/tmp/:/tmp/ \
--v "\$PWD"/dummy_webroot/:/ALL/dummy_webroot/ \
 $OUR_IMAGE ;
 }
 

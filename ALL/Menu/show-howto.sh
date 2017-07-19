@@ -139,8 +139,7 @@ Required and possible volume mappings:
     ========= ============= ===  ========= =======
     PROJECT/  /PROJECT/:ro  yes  required  Read only. The project that has PROJECT/Documentation/
     1)        /RESULT/      no   required  For the result of the rendering process.
-    Makedir/  /ALL/Makedir  no   optional  To supply a specific Makedir/
-    Rundir/   /ALL/Rundir   no   optional  To supply a specific tctconfig.cfg
+    ALLxxx/   /ALL/         no   optional  For development
     tmp/      /tmp/         no   optional  To find out about the created tmp data.
 
     1) = PROJECT/Documentation-GENERATED-temp/
