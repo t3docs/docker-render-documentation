@@ -71,6 +71,14 @@ RUN \
    && rm -rf /ALL/Downloads/sphinx-contrib
 
 RUN \
+   COMMENT "Update TypoScript lexer for highlighting" \
+   && COMMENT "usually: /usr/local/lib/python2.7/site-packages/pygments/lexers" \
+   && destdir=$(dirname $(python -c "import pygments; print pygments.__file__"))/lexers \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/master/bitbucket-org-birkenfeld-pygments-main/typoscript.py \
+        --output-document $destdir/typoscript.py \
+   && cd $destdir; python _mapping.py
+
+RUN \
    COMMENT "Install TCT (ToolChainTool), the toolchain runner" \
    && git clone https://github.com/marble/TCT.git /ALL/Downloads/tct \
    && pip install /ALL/Downloads/tct/ \
