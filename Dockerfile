@@ -10,7 +10,7 @@ LABEL \
    Vendor="t3docs" Version="0.3.0"
 
 # all our sources
-COPY ALL /ALL
+COPY ALL-for-build  /ALL
 
 # From here we start TCT. Place a tctconfig.cfg here.
 # Use a mount if desired.
@@ -78,11 +78,13 @@ RUN \
    && COMMENT "Download the toolchain" \
    && git clone -b this-is-the-future \
           https://github.com/marble/Toolchain_RenderDocumentation.git \
-          /ALL/Toolchains/RenderDocumentation \
-   \
-   && COMMENT "Download latex files (not used yet)" \
-   && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
-          /ALL/Downloads/latex.typo3
+          /ALL/Toolchains/RenderDocumentation
+
+# we'll need this later for PDF generation
+# RUN \
+#   && COMMENT "Download latex files" \
+#   && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
+#          /ALL/Downloads/latex.typo3
 
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
