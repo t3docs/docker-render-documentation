@@ -95,13 +95,15 @@ tct -v run RenderDocumentation \
 -c make_latex 0 $@
 
 local exitstatus=$?
-if [ $exitstatus -eq 0 ]
+if [[ ( $exitstatus -eq 0 ) \
+   && ( -d /ALL/dummy_webroot/typo3cms/project/0.0.0 ) \
+   && ( -d /RESULT ) ]]
 then
 rsync -a /ALL/dummy_webroot/typo3cms/project/0.0.0/ /RESULT/ --delete
 exitstatus=$?
 fi
 
-tell-about-results $?
+tell-about-results $exitstatus
 }
 
 case "$1" in
