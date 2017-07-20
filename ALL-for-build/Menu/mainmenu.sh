@@ -31,8 +31,7 @@ Usage:
     Examples:
         dockrun_$OUR_IMAGE_SHORT
         dockrun_$OUR_IMAGE_SHORT --help
-        dockrun_$OUR_IMAGE_SHORT showfaq
-        dockrun_$OUR_IMAGE_SHORT showhowto
+        dockrun_$OUR_IMAGE_SHORT show-faq
         ...
 
 End of usage.
