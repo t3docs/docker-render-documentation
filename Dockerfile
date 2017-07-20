@@ -7,7 +7,7 @@ ENV \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation of a project locally to html." \
-   Vendor="t3docs" Version="0.3.0"
+   Vendor="t3docs" Version="0.3.1"
 
 # all our sources
 COPY ALL-for-build  /ALL
