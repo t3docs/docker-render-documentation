@@ -3,12 +3,11 @@
 **/.gitkeep
 **/.idea/
 *GENERATED*
-Dockerfile
+*NOT_VERSIONED*
+ALL-for-RW-mount/
 Documentation/
+PROJECT/
 README.rst
 RepoHelpers/
+RESULT/
 tmp/
-
-
-
-

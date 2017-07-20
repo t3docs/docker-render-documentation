@@ -39,7 +39,7 @@ A: # list all images
    docker images
 
    # remove all untagged
-   docker rmi --force $(docker images | grep "^<none>" | awk '{print $3}')
+   docker rmi --force \$(docker images | grep "^<none>" | awk '{print \$3}')
 
 
 End of document.

@@ -7,10 +7,10 @@ ENV \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation of a project locally to html." \
-   Vendor="t3docs" Version="0.3.0"
+   Vendor="t3docs" Version="0.3.1"
 
 # all our sources
-COPY . /ALL
+COPY ALL-for-build  /ALL
 
 # From here we start TCT. Place a tctconfig.cfg here.
 # Use a mount if desired.
@@ -71,6 +71,14 @@ RUN \
    && rm -rf /ALL/Downloads/sphinx-contrib
 
 RUN \
+   COMMENT "Update TypoScript lexer for highlighting" \
+   && COMMENT "usually: /usr/local/lib/python2.7/site-packages/pygments/lexers" \
+   && destdir=$(dirname $(python -c "import pygments; print pygments.__file__"))/lexers \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/master/bitbucket-org-birkenfeld-pygments-main/typoscript.py \
+        --output-document $destdir/typoscript.py \
+   && cd $destdir; python _mapping.py
+
+RUN \
    COMMENT "Install TCT (ToolChainTool), the toolchain runner" \
    && git clone https://github.com/marble/TCT.git /ALL/Downloads/tct \
    && pip install /ALL/Downloads/tct/ \
@@ -78,11 +86,13 @@ RUN \
    && COMMENT "Download the toolchain" \
    && git clone -b this-is-the-future \
           https://github.com/marble/Toolchain_RenderDocumentation.git \
-          /ALL/Toolchains/RenderDocumentation \
-   \
-   && COMMENT "Download latex files (not used yet)" \
-   && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
-          /ALL/Downloads/latex.typo3
+          /ALL/Toolchains/RenderDocumentation
+
+# we'll need this later for PDF generation
+# RUN \
+#   && COMMENT "Download latex files" \
+#   && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
+#          /ALL/Downloads/latex.typo3
 
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]

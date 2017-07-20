@@ -13,52 +13,50 @@ cat <<EOT
 #     No whitespace between '<('
 
 # the usual worker command
-function dockrun_$OUR_IMAGE_SHORT () { \
+function dockrun_$OUR_IMAGE_SHORT () {
 mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm \\
 -v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
 --user=\$(stat \$PWD --format="%u:%g") \\
-$OUR_IMAGE \$@ ;
+$OUR_IMAGE \$@
 }
 
 # switch to the container's bash
-function dockbash_$OUR_IMAGE_SHORT() { \
+function dockbash_$OUR_IMAGE_SHORT() {
 mkdir Documentation-GENERATED-temp 2>/dev/null
-docker run --rm -it --entrypoint /bin/bash \
--v "\$PWD":/PROJECT/:ro \
+docker run --rm -it \\
+--entrypoint /bin/bash \\
+-v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
---user=\$(stat \$PWD --format="%u:%g") \
+--user=\$(stat \$PWD --format="%u:%g") \\
 $OUR_IMAGE ;
 }
 
 # for developers
-function devdockrun_$OUR_IMAGE_SHORT () { \
+function devdockrun_$OUR_IMAGE_SHORT () {
 # cd t3docs/docker-render-documentation
 mkdir Documentation-GENERATED-temp 2>/dev/null
-docker run --rm \
---user=\$(stat \$PWD --format="%u:%g") \
--v "\$PWD":/PROJECT/:ro \
+docker run --rm \\
+--user=\$(stat \$PWD --format="%u:%g") \\
+-v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
--v "\$PWD"/Makedir/:/ALL/Makedir/ \
--v "\$PWD"/Rundir/:/ALL/Rundir/ \
--v "\$PWD"/tmp/:/tmp/ \
--v "\$PWD"/dummy_webroot/:/ALL/dummy_webroot/ \
-$OUR_IMAGE \$@ ;
+-v "\$PWD"/ALL-for-RW-mount/:/ALL/ \\
+-v "\$PWD"/tmp/:/tmp/ \\
+$OUR_IMAGE \$@
 }
 
-function devdockbash_$OUR_IMAGE_SHORT() { \
+function devdockbash_$OUR_IMAGE_SHORT() {
 # cd t3docs/docker-render-documentation
 mkdir Documentation-GENERATED-temp 2>/dev/null
-docker run --rm -it --entrypoint /bin/bash \
---user=\$(stat \$PWD --format="%u:%g") \
--v "\$PWD":/PROJECT/:ro \
+docker run --rm -it \\
+--entrypoint /bin/bash \\
+--user=\$(stat \$PWD --format="%u:%g") \\
+-v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
--v "\$PWD"/Makedir/:/ALL/Makedir/ \
--v "\$PWD"/Rundir/:/ALL/Rundir/ \
--v "\$PWD"/tmp/:/tmp/ \
--v "\$PWD"/dummy_webroot/:/ALL/dummy_webroot/ \
-$OUR_IMAGE ;
+-v "\$PWD"/ALL-for-RW-mount/:/ALL/ \\
+-v "\$PWD"/tmp/:/tmp/ \\
+$OUR_IMAGE
 }
 
 echo "These functions are now defined FOR THIS terminal window."
