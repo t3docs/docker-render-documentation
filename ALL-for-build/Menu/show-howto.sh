@@ -71,7 +71,7 @@ Render your documentation:
    docker run --rm \\
       -v "\$PWD":/PROJECT/:ro \\
       -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
-      --user=\$(stat \$PWD --format="%u:%g") \\
+      --user=\$(id -u):\$(id -g) \\
       $OUR_IMAGE makehtml
 
 

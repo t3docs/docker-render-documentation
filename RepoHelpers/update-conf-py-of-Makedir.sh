@@ -2,7 +2,7 @@
 # update-conf-py-of-Makedir.sh
 
 src=https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2015-10.py
-destdir="$PWD"/../ALL/Makedir
+destdir="$PWD"/../ALL-for-build/Makedir
 dest=$destdir/conf.py
 
 echo Updating "$dest"
