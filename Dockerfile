@@ -4,10 +4,14 @@ ENV \
    OUR_IMAGE="t3docs/render-documentation" \
    OUR_IMAGE_SHORT=t3rd
 
+# influence apt-get at build time
+ARG \
+   DEBIAN_FRONTEND=noninteractive
+
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation of a project locally to html." \
-   Vendor="t3docs" Version="0.3.1"
+   Vendor="t3docs" Version="0.3.2"
 
 # all our sources
 COPY ALL-for-build  /ALL
@@ -46,6 +50,7 @@ RUN \
    && apt-get update \
    && apt-get install -y --no-install-recommends \
       pandoc \
+      php5-cli \
       rsync \
       unzip \
       zip \
@@ -66,6 +71,7 @@ RUN \
    && pip install /ALL/Downloads/sphinx-contrib/googlemaps \
    && pip install /ALL/Downloads/sphinx-contrib/httpdomain \
    && pip install /ALL/Downloads/sphinx-contrib/mscgen \
+   && pip install /ALL/Downloads/sphinx-contrib/numfig \
    && pip install /ALL/Downloads/sphinx-contrib/slide \
    && pip install /ALL/Downloads/sphinx-contrib/youtube \
    && rm -rf /ALL/Downloads/sphinx-contrib
@@ -86,13 +92,11 @@ RUN \
    && COMMENT "Download the toolchain" \
    && git clone -b this-is-the-future \
           https://github.com/marble/Toolchain_RenderDocumentation.git \
-          /ALL/Toolchains/RenderDocumentation
-
-# we'll need this later for PDF generation
-# RUN \
-#   && COMMENT "Download latex files" \
-#   && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
-#          /ALL/Downloads/latex.typo3
+          /ALL/Toolchains/RenderDocumentation \
+   \
+   && COMMENT "Download latex files" \
+   && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
+                /ALL/Downloads/latex.typo3
 
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
