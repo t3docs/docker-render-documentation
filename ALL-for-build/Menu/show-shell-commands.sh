@@ -18,7 +18,7 @@ mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm \\
 -v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
---user=\$(stat \$PWD --format="%u:%g") \\
+--user=\$(id -u):\$(id -g) \\
 $OUR_IMAGE \$@
 }
 
@@ -29,7 +29,7 @@ docker run --rm -it \\
 --entrypoint /bin/bash \\
 -v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
---user=\$(stat \$PWD --format="%u:%g") \\
+--user=\$(id -u):\$(id -g) \\
 $OUR_IMAGE ;
 }
 
@@ -38,7 +38,7 @@ function devdockrun_$OUR_IMAGE_SHORT () {
 # cd t3docs/docker-render-documentation
 mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm \\
---user=\$(stat \$PWD --format="%u:%g") \\
+--user=\$(id -u):\$(id -g) \\
 -v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
 -v "\$PWD"/ALL-for-RW-mount/:/ALL/ \\
@@ -51,7 +51,7 @@ function devdockbash_$OUR_IMAGE_SHORT() {
 mkdir Documentation-GENERATED-temp 2>/dev/null
 docker run --rm -it \\
 --entrypoint /bin/bash \\
---user=\$(stat \$PWD --format="%u:%g") \\
+--user=\$(id -u):\$(id -g) \\
 -v "\$PWD":/PROJECT/:ro \\
 -v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
 -v "\$PWD"/ALL-for-RW-mount/:/ALL/ \\
