@@ -90,7 +90,7 @@ RUN \
    && pip install /ALL/Downloads/tct/ \
    \
    && COMMENT "Download the toolchain" \
-   && git clone -b this-is-the-future \
+   && git clone -b develop \
           https://github.com/marble/Toolchain_RenderDocumentation.git \
           /ALL/Toolchains/RenderDocumentation \
    \

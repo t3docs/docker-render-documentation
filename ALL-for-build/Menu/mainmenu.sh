@@ -9,6 +9,8 @@ function mm-minimalhelp(){
    cat <<EOT
 For help:
    docker run --rm $OUR_IMAGE --help
+
+   ... did you mean 'dockrun_$OUR_IMAGE_SHORT makehtml'?
 EOT
 }
 
@@ -83,15 +85,11 @@ function mm-makehtml() {
    shift
 echo "tct -v run RenderDocumentation \
 -c makedir /ALL/Makedir \
--c rebuild_needed 1 \
--c talk 2 \
--c make_latex 0 $@"
+$@"
 
 tct -v run RenderDocumentation \
 -c makedir /ALL/Makedir \
--c rebuild_needed 1 \
--c talk 2 \
--c make_latex 0 $@
+$@
 
 local exitstatus=$?
 if [[ ( $exitstatus -eq 0 ) \
