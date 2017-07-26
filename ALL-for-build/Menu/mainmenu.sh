@@ -10,7 +10,8 @@ function mm-minimalhelp(){
 For help:
    docker run --rm $OUR_IMAGE --help
 
-   ... did you mean 'dockrun_$OUR_IMAGE_SHORT makehtml'?
+... did you mean 'dockrun_$OUR_IMAGE_SHORT makehtml'?
+
 EOT
 }
 
