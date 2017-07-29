@@ -78,9 +78,9 @@ RUN \
    \
    && COMMENT "Install Sphinx-Extensions" \
    && COMMENT "doesn't work with apt-cacher: hg clone https://bitbucket.org/xperseguers/sphinx-contrib /ALL/Downloads/sphinx-contrib" \
-   && wget -q https://bitbucket.org/xperseguers/sphinx-contrib/get/${SPHINX-CONTRIB-HASH}.zip -O /tmp/sphinx-contrib-${SPHINX-CONTRIB-HASH}.zip \
-   && unzip -qq /tmp/sphinx-contrib-${SPHINX-CONTRIB-HASH}.zip -d /tmp/ \
-   && mv /tmp/xperseguers-sphinx-contrib-${SPHINX-CONTRIB-HASH} /ALL/Downloads/sphinx-contrib \
+   && sh -c "wget -q https://bitbucket.org/xperseguers/sphinx-contrib/get/${SPHINX-CONTRIB-HASH}.zip -O /tmp/sphinx-contrib-${SPHINX-CONTRIB-HASH}.zip" \
+   && sh -c "unzip -qq /tmp/sphinx-contrib-${SPHINX-CONTRIB-HASH}.zip -d /tmp/" \
+   && sh -c "mv /tmp/xperseguers-sphinx-contrib-${SPHINX-CONTRIB-HASH} /ALL/Downloads/sphinx-contrib" \
    \
    && pip install /ALL/Downloads/sphinx-contrib/googlechart \
    && pip install /ALL/Downloads/sphinx-contrib/googlemaps \
