@@ -3,7 +3,7 @@
 docker-render-documentation
 ===========================
 
-This is the recipe to build a Docker image.
+This is the official recipe to build the Docker image 't3docs/render-documentation'.
 
 :Authors:         TYPO3 Documentation Team
 :Repository:      https://github.com/t3docs/docker-render-documentation
@@ -12,13 +12,24 @@ This is the recipe to build a Docker image.
 
 .. default-role:: code
 
+Contribute
+==========
+
+Please use the `issue tracker <https://github.com/t3docs/docker-render-documentation/issues>`__ for
+contributing and reporting.
+
+
 Quickstart on Linux
 ===================
+
+Please confirm this is working on BSD-Linux (Mac) as well.
+
 
 Prepare
 -------
 
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
+
 
 2. Verify Docker is working::
 
@@ -33,6 +44,11 @@ Prepare
 3. Download the image::
 
       docker pull t3docs/render-documentation
+
+   **Note:** The first download is rather big (> 2.5 GB) as it now contains
+   LaTeX files for PDF-generation. Most of it should not change often and
+   needs to be downloaded only once.
+
 
 4. Verify::
 
@@ -51,8 +67,8 @@ Prepare
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
 
-      # verify
-      dockrun_t3rd --help
+      # verify 'TYPO3 render documentation full'
+      dockrun_t3rdf --help
 
 
 Render your documentation
@@ -66,20 +82,28 @@ Render your documentation
       # go to the root folder of the project
       cd PROJECT
 
-2. Start rendering::
+2. Do the rendering::
 
-      dockrun_t3rd makehtml
+      dockrun_t3rdf makehtml
+
 
 3. Find the results::
 
       # html
       PROJECT/Documentation-GENERATED-temp/Index.html
 
+      # singlehtml (all in one file)
+      PROJECT/Documentation-GENERATED-temp/singlehtml/Index.html
+
       # build information
       PROJECT/Documentation-GENERATED-temp/_buildinfo/
 
-      # Sphinx warnings and errors
+      # Sphinx warnings and errors - should be empty!
       PROJECT/Documentation-GENERATED-temp/_buildinfo/warnings.txt
+
+      # Sphinx latex files (only if existing and PDF-createn failed)
+      PROJECT/Documentation-GENERATED-temp/_buildinfo/latex/
+
 
 Enjoy!
 
@@ -87,9 +111,28 @@ Enjoy!
 Quickstart on Windows
 =====================
 
-((to be written))
+((to be contributed))
 
 Please contribute.
 
-Use the `issue tracker <https://github.com/t3docs/docker-render-documentation/issues>`__ for your contributions and
-help other Windows users to enjoy.
+
+Building (for developers)
+=========================
+
+Run build:
+
+    docker build -t t3docs/render-documentation .
+
+In case you have an `apt-cacher <https://docs.docker.com/engine/examples/apt-cacher-ng/>`__
+at hand this may be *the* way. Apt-packages are then downloaded only once and kept
+to later be reused again::
+
+    docker start my-apt-cacher
+    HOSTIP=$(ip route get 8.8.8.8 | awk '{print $NF; exit}')
+    docker build -t t3docs/t3docs/render-documentation --build-arg http_proxy=http://${HOSTIP}:3142 .
+
+
+Finally
+=======
+
+Enjoy!

@@ -4,9 +4,11 @@
 # provide defaults
 export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
+export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
 function mm-minimalhelp(){
    cat <<EOT
+$OUR_IMAGE_SLOGAN
 For help:
    docker run --rm $OUR_IMAGE --help
 
@@ -66,9 +68,12 @@ then
 
 Final exit status: 0 (completed)
 
-Find the results:
+Find the (possible) results:
    ./Documentation-GENERATED-temp/Index.html
+   ./Documentation-GENERATED-temp/singlehtml/Index.html
+   ./Documentation-GENERATED-temp/_pdf/
    ./Documentation-GENERATED-temp/_buildinfo/
+   ./Documentation-GENERATED-temp/_buildinfo/latex/
    ./Documentation-GENERATED-temp/_buildinfo/warnings.txt
 EOT
 else
