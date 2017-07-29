@@ -3,8 +3,9 @@
 FROM t3docs/python2-with-latex
 
 # t3rdf means: TYPO3 render documentation full
+# Github-branch: master, Docker-image: latest, Toolchain: latest
 ENV \
-   OUR_IMAGE_TAG="develop" \
+   OUR_IMAGE_TAG="latest" \
    OUR_IMAGE="t3docs/render-documentation" \
    OUR_IMAGE_SHORT="t3rdf" \
    OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
