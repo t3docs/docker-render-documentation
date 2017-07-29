@@ -8,7 +8,7 @@ ENV \
    OUR_IMAGE="t3docs/render-documentation" \
    OUR_IMAGE_SHORT="t3rdf" \
    OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
-   SPHINX-CONTRIB-HASH="3fe09d84cbef"
+   SPHINX_CONTRIB_HASH="3fe09d84cbef"
 
 
 # flag for apt-get - only at build time!
@@ -78,9 +78,9 @@ RUN \
    \
    && COMMENT "Install Sphinx-Extensions" \
    && COMMENT "doesn't work with apt-cacher: hg clone https://bitbucket.org/xperseguers/sphinx-contrib /ALL/Downloads/sphinx-contrib" \
-   && sh -c "wget -q https://bitbucket.org/xperseguers/sphinx-contrib/get/${SPHINX-CONTRIB-HASH}.zip -O /tmp/sphinx-contrib-${SPHINX-CONTRIB-HASH}.zip" \
-   && sh -c "unzip -qq /tmp/sphinx-contrib-${SPHINX-CONTRIB-HASH}.zip -d /tmp/" \
-   && sh -c "mv /tmp/xperseguers-sphinx-contrib-${SPHINX-CONTRIB-HASH} /ALL/Downloads/sphinx-contrib" \
+   && sh -c "wget -q https://bitbucket.org/xperseguers/sphinx-contrib/get/\${SPHINX_CONTRIB_HASH}.zip -O /tmp/sphinx-contrib-\${SPHINX_CONTRIB_HASH}.zip" \
+   && sh -c "unzip -qq /tmp/sphinx-contrib-\${SPHINX_CONTRIB_HASH}.zip -d /tmp/" \
+   && sh -c "mv /tmp/xperseguers-sphinx-contrib-\${SPHINX_CONTRIB_HASH} /ALL/Downloads/sphinx-contrib" \
    \
    && pip install /ALL/Downloads/sphinx-contrib/googlechart \
    && pip install /ALL/Downloads/sphinx-contrib/googlemaps \
@@ -105,9 +105,9 @@ RUN \
    && pip install /ALL/Downloads/tct/ \
    \
    && COMMENT "Download the toolchain" \
-   && git clone --branch ${}OUR_IMAGE_TAG} \
+   && sh -c "git clone --branch \${OUR_IMAGE_TAG} \
           https://github.com/marble/Toolchain_RenderDocumentation.git \
-          /ALL/Toolchains/RenderDocumentation \
+          /ALL/Toolchains/RenderDocumentation" \
    \
    && COMMENT "Download latex files" \
    && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
