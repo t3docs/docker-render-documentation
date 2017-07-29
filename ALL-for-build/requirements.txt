@@ -1,7 +1,7 @@
 beautifulsoup4
 pillow
 PyYAML
-Sphinx
+Sphinx<1.6
 t3fieldlisttable
 t3SphinxThemeRtd
 t3tablerows

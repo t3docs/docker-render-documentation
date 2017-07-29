@@ -4,11 +4,16 @@
 # provide defaults
 export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
+export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
 function mm-minimalhelp(){
    cat <<EOT
+$OUR_IMAGE_SLOGAN
 For help:
    docker run --rm $OUR_IMAGE --help
+
+... did you mean 'dockrun_$OUR_IMAGE_SHORT makehtml'?
+
 EOT
 }
 
@@ -63,9 +68,12 @@ then
 
 Final exit status: 0 (completed)
 
-Find the results:
+Find the (possible) results:
    ./Documentation-GENERATED-temp/Index.html
+   ./Documentation-GENERATED-temp/singlehtml/Index.html
+   ./Documentation-GENERATED-temp/_pdf/
    ./Documentation-GENERATED-temp/_buildinfo/
+   ./Documentation-GENERATED-temp/_buildinfo/latex/
    ./Documentation-GENERATED-temp/_buildinfo/warnings.txt
 EOT
 else
@@ -83,15 +91,11 @@ function mm-makehtml() {
    shift
 echo "tct -v run RenderDocumentation \
 -c makedir /ALL/Makedir \
--c rebuild_needed 1 \
--c talk 2 \
--c make_latex 0 $@"
+$@"
 
 tct -v run RenderDocumentation \
 -c makedir /ALL/Makedir \
--c rebuild_needed 1 \
--c talk 2 \
--c make_latex 0 $@
+$@
 
 local exitstatus=$?
 if [[ ( $exitstatus -eq 0 ) \
