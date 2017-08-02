@@ -13,7 +13,7 @@ VERSION=0.0.0
 
 # Where to publish documentation
 # BUILDDIR=/RESULT
-BUILDDIR=/ALL/dummy_webroot/typo3cms/project/0.0.0
+BUILDDIR=/ALL/dummy_webroot/typo3cms/project/default/0.0.0
 
 # If GITURL is empty then GITDIR is expected to be "ready" to be processed
 # GITURL=https://github.com/TYPO3-Documentation/TYPO3CMS-Book-ExtbaseFluid.git

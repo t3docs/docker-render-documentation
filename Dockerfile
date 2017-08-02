@@ -3,7 +3,6 @@
 FROM t3docs/python2-with-latex
 
 # t3rdf means: TYPO3 render documentation full
-# Github-branch: master, Docker-image: latest, Toolchain: latest
 ENV \
    OUR_IMAGE_TAG="latest" \
    OUR_IMAGE="t3docs/render-documentation" \
@@ -19,7 +18,7 @@ ARG \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="0.4.0"
+   Vendor="t3docs" Version="0.4.2"
 
 # all our sources
 COPY ALL-for-build  /ALL
@@ -62,6 +61,8 @@ RUN \
    && COMMENT "Install system packages" \
    && apt-get update \
    && apt-get install -yq \
+      less \
+      nano \
       ncdu \
       pandoc \
       php5-cli \

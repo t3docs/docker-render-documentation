@@ -68,13 +68,13 @@ then
 
 Final exit status: 0 (completed)
 
-Find the (possible) results:
-   ./Documentation-GENERATED-temp/Index.html
-   ./Documentation-GENERATED-temp/singlehtml/Index.html
-   ./Documentation-GENERATED-temp/_pdf/
-   ./Documentation-GENERATED-temp/_buildinfo/
-   ./Documentation-GENERATED-temp/_buildinfo/latex/
-   ./Documentation-GENERATED-temp/_buildinfo/warnings.txt
+Find the (possible) results. For example:
+   ./Documentation-GENERATED-temp/.../Index.html
+   ./Documentation-GENERATED-temp/.../singlehtml/Index.html
+   ./Documentation-GENERATED-temp/.../_pdf/
+   ./Documentation-GENERATED-temp/.../_buildinfo/
+   ./Documentation-GENERATED-temp/.../_buildinfo/latex/
+   ./Documentation-GENERATED-temp/.../_buildinfo/warnings.txt
 EOT
 else
    cat <<EOT
@@ -89,6 +89,13 @@ fi
 
 function mm-makehtml() {
    shift
+
+# make sure nothing is left over from previous run
+if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
+then
+   rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
+fi
+
 echo "tct -v run RenderDocumentation \
 -c makedir /ALL/Makedir \
 $@"
@@ -98,11 +105,18 @@ tct -v run RenderDocumentation \
 $@
 
 local exitstatus=$?
+
+# do localizations
+if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
+then
+   source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
+fi
+
 if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms/project/0.0.0 ) \
+   && ( -d /ALL/dummy_webroot/typo3cms/project ) \
    && ( -d /RESULT ) ]]
 then
-rsync -a /ALL/dummy_webroot/typo3cms/project/0.0.0/ /RESULT/ --delete
+rsync -a /ALL/dummy_webroot/typo3cms/project /RESULT/ --delete
 exitstatus=$?
 fi
 
