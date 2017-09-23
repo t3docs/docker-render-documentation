@@ -18,12 +18,14 @@ Contribute
 Please use the `issue tracker <https://github.com/t3docs/docker-render-documentation/issues>`__ for
 contributing and reporting.
 
+What does it do?
+================
 
-Quickstart on Linux
-===================
+If you are on Mac or Linux and you have Docker installed you can now do all the rendering with just a short command easily. At the moment we only supply the *full* rendering. The drawback is that you have to download about 2.3 GB once. But having endured that it's only a matter of saying `dockrun_t3rdf makehtml` to get it all!
 
-Please confirm this is working on BSD-Linux (Mac) as well.
 
+Quickstart for Linux and Mac
+============================
 
 Prepare
 -------
@@ -45,7 +47,7 @@ Prepare
 
       docker pull t3docs/render-documentation
 
-   **Note:** The first download is rather big (> 2.5 GB) as it now contains
+   **Note:** The first download is rather big (> 2.3 GB) as it now contains
    LaTeX files for PDF-generation. Most of it should not change often and
    needs to be downloaded only once.
 
@@ -104,6 +106,8 @@ Render your documentation
       # Sphinx latex files (only if existing and PDF-createn failed)
       PROJECT/Documentation-GENERATED-temp/_buildinfo/latex/
 
+4. You can simply run the 'makehtml' command in any of your existing TYPO3 projects.
+
 
 Enjoy!
 
@@ -118,6 +122,8 @@ Please contribute.
 
 Building (for developers)
 =========================
+
+Just some notes.
 
 Run build:
 
