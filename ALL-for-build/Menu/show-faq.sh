@@ -34,8 +34,7 @@ Q: How can I see the definition of a function?
 A: Type 'declare -f FUNCTIONNAME'
 
    For example:
-      declare -f dockrun_${OUR_IMAGE_SHORT}
-      declare -f dockbash_${OUR_IMAGE_SHORT}
+      declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}
 
 
 FAQ about Docker

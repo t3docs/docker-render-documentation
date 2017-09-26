@@ -12,7 +12,7 @@ $OUR_IMAGE_SLOGAN
 For help:
    docker run --rm $OUR_IMAGE --help
 
-... did you mean 'dockrun_$OUR_IMAGE_SHORT makehtml'?
+... did you mean '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml'?
 
 EOT
 }
@@ -21,10 +21,10 @@ function mm-usage() {
    cat <<EOT
 Usage:
     Prepare:
-        Define function 'dockrun_$OUR_IMAGE_SHORT' on the commandline of your system:
+        Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the commandline of your system:
             source <(docker run --rm $OUR_IMAGE show-shell-commands)
     Usage:
-        dockrun_$OUR_IMAGE_SHORT [ARGS]
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]
             ARGUMENT             DESCRIPTION
             --help               Show this menu
             makehtml             Run for production
@@ -32,11 +32,13 @@ Usage:
             show-howto           Show howto
             show-faq             Show questions and answers
             show-shell-commands  Show useful shell commands and functions
+            /bin/bash            Enter the container's Bash shell
 
     Examples:
-        dockrun_$OUR_IMAGE_SHORT
-        dockrun_$OUR_IMAGE_SHORT --help
-        dockrun_$OUR_IMAGE_SHORT show-faq
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT show-faq
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
         ...
 
 End of usage.
@@ -88,6 +90,7 @@ fi
 }
 
 function mm-makehtml() {
+   local cmd
    shift
 
 # make sure nothing is left over from previous run
@@ -95,14 +98,11 @@ if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
 then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
+cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
+cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir $@"
 
-echo "tct -v run RenderDocumentation \
--c makedir /ALL/Makedir \
-$@"
-
-tct -v run RenderDocumentation \
--c makedir /ALL/Makedir \
-$@
+echo $cmd
+eval $cmd
 
 local exitstatus=$?
 
@@ -113,10 +113,10 @@ then
 fi
 
 if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms/project ) \
+   && ( -d /ALL/dummy_webroot/typo3cms ) \
    && ( -d /RESULT ) ]]
 then
-rsync -a /ALL/dummy_webroot/typo3cms/project /RESULT/ --delete
+rsync -a /ALL/dummy_webroot/typo3cms /RESULT/ --delete
 exitstatus=$?
 fi
 

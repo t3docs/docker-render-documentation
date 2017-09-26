@@ -1,8 +1,8 @@
 beautifulsoup4
 pillow
 PyYAML
+recommonmark==0.4.0
 Sphinx<1.6
 t3fieldlisttable
-t3SphinxThemeRtd
 t3tablerows
 t3targets

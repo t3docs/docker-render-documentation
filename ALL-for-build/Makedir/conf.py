@@ -2,9 +2,10 @@
 
 # mb, 2015-10-01, 2016-09-14, 2017-07-10
 
-# This file lives at https://github.com/marble/typo3-docs-typo3-org-resources/blob/master/userroot/scripts/bin/conf-2015-10.py
+# This file lives at https://github.com/marble/typo3-docs-typo3-org-resources/blob/master/userroot/scripts/bin/conf-2017-09.py
 # Check for a new version!
 
+# 2017-09-12 care about recommonmark. See http://blog.readthedocs.com/adding-markdown-support/
 # 2017-07-10 add theme option 'path_to_documentation_dir'
 # 2017-03-01 set master_doc according to masterdocabspath, allow *.md for masterdoc
 # 2016-09-14 load t3SphinxThemeRtd (>= 3.6.3) as Sphinx extension
@@ -18,10 +19,10 @@
 # - MAKEDIR/buildsettings.sh   (maintained by admin)
 # - MAKEDIR/Overrides.cfg      (maintained by admin)
 
-from cStringIO import StringIO
 import codecs
 import ConfigParser
 import os
+import pprint
 import sys
 import t3SphinxThemeRtd
 
@@ -30,6 +31,17 @@ from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
+
+try:
+    from recommonmark.parser import CommonMarkParser
+except ImportError:
+    CommonMarkParser = None
+
+if CommonMarkParser:
+    source_parsers = {'.md': CommonMarkParser}
+    source_suffix = ['.rst', '.md']
+else:
+    source_suffix = ['.rst']
 
 # a dictionary to take notes while we do this processing
 notes = {}
@@ -84,19 +96,20 @@ if os.path.isabs(MASTERDOC):
 else:
     masterdocabspath = os.path.normpath(os.path.join(confpyabspath, '..', MASTERDOC))
 
-e = False
-if os.path.exists(masterdocabspath + '.rst'):
-    e = True
-elif os.path.exists(masterdocabspath + '.md'):
-    e = True
-else:
-    s = os.path.split(masterdocabspath)[0] + '/Index'
-    if os.path.exists(s + '.rst') or os.path.exists(s + '.md'):
-        e = True
-        masterdocabspath = s
-if not e:
-    sys.stdout.write('Can\'t find MASTERDOC ' + masterdocabspath + '(.md|.rst)\n')
-    sys.exit(1)
+### Looks stupid by now 2017-09-12
+# e = False
+# if os.path.exists(masterdocabspath + '.rst'):
+#     e = True
+# elif os.path.exists(masterdocabspath + '.md'):
+#     e = True
+# else:
+#     s = os.path.split(masterdocabspath)[0] + '/Index'
+#     if os.path.exists(s + '.rst') or os.path.exists(s + '.md'):
+#         e = True
+#         masterdocabspath = s
+# if not e:
+#     sys.stdout.write('Can\'t find MASTERDOC ' + masterdocabspath + '(.md|.rst)\n')
+#     sys.exit(1)
 
 if os.path.isabs(LOGDIR):
     logdirabspath = LOGDIR
@@ -219,8 +232,8 @@ html_use_smartypants = False
 language = None
 master_doc = os.path.splitext(os.path.split(masterdocabspath)[1])[0]
 pygments_style = 'sphinx'
-source_suffix = ['.rst', '.md']
 todo_include_todos = False
+
 
 # make a copy (!)
 extensions = extensions_to_be_loaded[:]
@@ -422,11 +435,9 @@ del k
 settingsLogFile = logdirabspath + '/Settings.pprinted.txt'
 
 if 0 and 'dump resulting settings':
-    import pprint
     pprint.pprint(globals())
 
 if 1 and 'dump resulting settings to file':
-    import pprint
     f2 = codecs.open(settingsLogFile, 'w', 'utf-8')
     pprint.pprint(globals(), stream=f2)
     f2.close()

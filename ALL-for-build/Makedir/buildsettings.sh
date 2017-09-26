@@ -1,33 +1,31 @@
 # buildsettings.sh
 
-# we assume 'docker run -v MyProject/Documentation:/tmp/T3DOCDIR t3docs/render-documentation"
-# absolute path, or relative to conf.py, without suffix (.rst)
-MASTERDOC=/PROJECT/Documentation/Index.rst
-
-# absolute path, or relative to conf.py
-# legacy setting. not used any more.
-LOGDIR=.
-
-PROJECT=Project
-VERSION=0.0.0
-
-# Where to publish documentation
-# BUILDDIR=/RESULT
-BUILDDIR=/ALL/dummy_webroot/typo3cms/project/default/0.0.0
-
-# If GITURL is empty then GITDIR is expected to be "ready" to be processed
-# GITURL=https://github.com/TYPO3-Documentation/TYPO3CMS-Book-ExtbaseFluid.git
+# Mandatory. We need one of these. Used in this order.
+TER_EXTKEY=
 GITURL=
 GITDIR=/PROJECT
+
+# keep these here like so
+PROJECT=project
+VERSION=0.0.0
+LOCALIZATION=default
+BUILDDIR=typo3cms/project/0.0.0
+
+# More specs
 GITBRANCH=master
+TER_EXTVERSION=
 
-# Path to the documentation within the Git repository
-T3DOCDIR=/PROJECT/Documentation
+# A TYPO3 default layout has this:
+T3DOCDIR=Documentation
+MASTERDOC=Documentation/Index
 
-# Packaging information
-PACKAGE_ZIP=0
-PACKAGE_KEY=
+# packaging
+PACKAGE_ZIP=1
+PACKAGE_KEY=project
 PACKAGE_LANGUAGE=default
 
+# symlink 'stable' to this version?
 TER_EXTENSION=0
-LOCALIZATION=default
+
+# not used any more
+LOGDIR=.

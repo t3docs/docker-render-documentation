@@ -3,22 +3,34 @@
 FROM t3docs/python2-with-latex
 
 # t3rdf means: TYPO3 render documentation full
+
 ENV \
-   OUR_IMAGE_TAG="latest" \
+   DOCKRUN_PREFIX="dockrun_" \
    OUR_IMAGE="t3docs/render-documentation" \
    OUR_IMAGE_SHORT="t3rdf" \
    OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
-   SPHINX_CONTRIB_HASH="3fe09d84cbef"
+   SPHINX_CONTRIB_HASH="3fe09d84cbef" \
+   TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-release-2.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/release-2.0.zip"
 
+#  Versions we use:
+#
+#  Sphinx theme      t3SphinxThemeRtd       release-3.6.13
+#  Toolchain         RenderDocumentation    release-2.0.0
+#  Toolchain tool    TCT                    0.2.0
+#  Python packages   see requirements.txt
+#                    Sphinx                 < 1.6
+#                    recommonmark           0.4.0
 
-# flag for apt-get - only at build time!
+# flag for apt-get - affects only build time
 ARG \
    DEBIAN_FRONTEND=noninteractive
 
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="0.4.2"
+   Vendor="t3docs" Version="0.5.0"
 
 # all our sources
 COPY ALL-for-build  /ALL
@@ -41,6 +53,11 @@ RUN \
    && mkdir /PROJECT \
    && mkdir /RESULT \
    \
+   && COMMENT "Avoid GIT bug" \
+   && cp /ALL/global-gitconfig.cfg /root/.gitconfig \
+   && cp /ALL/global-gitconfig.cfg /.gitconfig \
+   && chmod 666 /.gitconfig \
+   \
    && COMMENT "Make sure other users can write" \
    && chmod -R o+w \
       /ALL/Makedir \
@@ -50,8 +67,6 @@ RUN \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
         --quiet --output-document /usr/local/bin/check_include_files.py \
    && chmod +x /usr/local/bin/check_include_files.py \
-   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2015-10.py \
-           --quiet --output-document /ALL/Makedir/conf.py \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
            --quiet --output-document /ALL/Makedir/_htaccess \
    && wget https://github.com/etobi/Typo3ExtensionUtils/raw/master/bin/t3xutils.phar \
@@ -74,8 +89,10 @@ RUN \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/*
 
+
 RUN \
    COMMENT "Install Python packages" \
+   && pip install git+https://github.com/TYPO3-Documentation/t3SphinxThemeRtd@release-3.6.13 \
    && pip install -r /ALL/requirements.txt \
    \
    && COMMENT "Install Sphinx-Extensions" \
@@ -103,19 +120,19 @@ RUN \
 
 RUN \
    COMMENT "Install TCT (ToolChainTool), the toolchain runner" \
-   && git clone https://github.com/marble/TCT.git /ALL/Downloads/tct \
-   && pip install /ALL/Downloads/tct/ \
+   && pip install ${TCT_PIPINSTALL_URL} \
    \
-   && COMMENT "Download the toolchain" \
-   && sh -c "git clone --branch \${OUR_IMAGE_TAG} \
-          https://github.com/marble/Toolchain_RenderDocumentation.git \
-          /ALL/Toolchains/RenderDocumentation" \
+   && COMMENT "Provide the toolchain" \
+   && wget ${TOOLCHAIN_URL} -qO /ALL/Downloads/Toolchain_RenderDocumentation.zip \
+   && unzip /ALL/Downloads/Toolchain_RenderDocumentation.zip -d /ALL/Toolchains \
+   && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    \
    && COMMENT "Download latex files" \
    && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
                 /ALL/Downloads/latex.typo3 \
    \
    && COMMENT "Final cleanup" \
+   && apt-get clean \
    && rm -rf /tmp/* \
    ;
 

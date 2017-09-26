@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # update-conf-py-of-Makedir.sh
 
-src=https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2015-10.py
+src=https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2017-09.py
 destdir="$PWD"/../ALL-for-build/Makedir
 dest=$destdir/conf.py
 

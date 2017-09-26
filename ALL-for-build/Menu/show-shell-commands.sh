@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # provide default
+DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-devdockrun_}
 OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 
@@ -13,28 +14,44 @@ cat <<EOT
 #     No whitespace between '<('
 
 # the usual worker command
-function dockrun_$OUR_IMAGE_SHORT () {
+function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
+local cmd;
 mkdir Documentation-GENERATED-temp 2>/dev/null
-docker run --rm \\
--v "\$PWD":/PROJECT/:ro \\
--v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
---user=\$(id -u):\$(id -g) \\
-$OUR_IMAGE \$@
+cmd="docker run --rm"
+if [[ "\$@" != "/bin/bash" ]]; then
+cmd="\$cmd --user=\$(id -u):\$(id -g)"
+else
+cmd="\$cmd --entrypoint /bin/bash -it"
+fi
+cmd="\$cmd -v \$PWD:/PROJECT/:ro -v \$PWD/Documentation-GENERATED-temp/:/RESULT/"
+if [ -d ./tmp-GENERATED-temp ]; then
+   /bin/bash -c "rm -rf ./tmp-GENERATED-temp/*"
+   cmd="\$cmd -v \$PWD/tmp-GENERATED-temp/:/tmp/"
+fi
+if [ -d ./tmp-GENERATED-Toolchains ]; then
+cmd="\$cmd -v \$PWD/tmp-GENERATED-Toolchains/:/ALL/Toolchains/"
+fi
+if [ -d ./tmp-GENERATED-dummy_webroot ]; then
+cmd="\$cmd -v \$PWD/tmp-GENERATED-dummy_webroot/:/ALL/dummy_webroot/"
+fi
+if [ -d ./tmp-GENERATED-Makedir ]; then
+cmd="\$cmd -v \$PWD/tmp-GENERATED-Makedir/:/ALL/Makedir"
+fi
+if [ -d ./tmp-GENERATED-Menu ]; then
+cmd="\$cmd -v \$PWD/tmp-GENERATED-Menu/:/ALL/Menu"
+fi
+if [ -d ./tmp-GENERATED-Rundir ]; then
+cmd="\$cmd -v \$PWD/tmp-GENERATED-Rundir/:/ALL/Rundir"
+fi
+cmd="\$cmd $OUR_IMAGE"
+if [[ "\$@" != "/bin/bash" ]]; then
+cmd="\$cmd \$@"
+fi
+echo \$cmd >Documentation-GENERATED-temp/last-docker-run-command-GENERATED.sh
+eval \$cmd
 }
 
-# switch to the container's bash
-function dockbash_$OUR_IMAGE_SHORT() {
-mkdir Documentation-GENERATED-temp 2>/dev/null
-docker run --rm -it \\
---entrypoint /bin/bash \\
--v "\$PWD":/PROJECT/:ro \\
--v "\$PWD"/Documentation-GENERATED-temp/:/RESULT/ \\
---user=\$(id -u):\$(id -g) \\
-$OUR_IMAGE ;
-}
-
-
-echo "These functions are now defined FOR THIS terminal window."
-echo "    dockrun_$OUR_IMAGE_SHORT, dockbash_$OUR_IMAGE_SHORT"
+echo "This function is now defined FOR THIS terminal window:"
+echo "    ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT"
 
 EOT
