@@ -66,6 +66,11 @@ Prepare
 
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
+      
+      # If line `source <(...)` doesn't work on your OS use these three lines
+      docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
+      source tempfile.sh
+      rm tempfile.sh
 
       # verify 'TYPO3 render documentation full'
       dockrun_t3rdf --help
