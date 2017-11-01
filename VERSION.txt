@@ -1,5 +1,5 @@
 
-0.6.0-dev
+0.6.0
 
 
 This is the development state of the upcoming version 0.6.0

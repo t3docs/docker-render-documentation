@@ -23,8 +23,8 @@ FROM t3docs/python2-with-latex
 
 
 ENV \
-   DOCKRUN_PREFIX="ddockrun_" \
-   OUR_IMAGE="t3rdf" \
+   DOCKRUN_PREFIX="dockrun_" \
+   OUR_IMAGE="t3docs/render-documentation" \
    OUR_IMAGE_SHORT="t3rdf" \
    OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
    SPHINX_CONTRIB_HASH="3fe09d84cbef" \
@@ -48,7 +48,7 @@ ARG \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="0.6.0-dev"
+   Vendor="t3docs" Version="0.6.0"
 
 # all our sources
 COPY ALL-for-build  /ALL
