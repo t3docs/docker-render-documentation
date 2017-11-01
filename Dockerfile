@@ -4,23 +4,24 @@ FROM t3docs/python2-with-latex
 
 # t3rdf means: TYPO3 render documentation full
 
-# Build develop:
-#     docker rmi t3rdf
-#     docker build -t t3rdf .
+# Clean:
+#     docker rmi t3docs/render-documentation
+#     docker rmi t3docs/render-documentation:master
+#     docker rmi t3docs/render-documentation:develop
+# Build:
+#     docker build -t t3docs/render-documentation .
+#     docker build -t t3docs/render-documentation:master .
+#     docker build -t t3docs/render-documentation:develop .
 # Use:
-#     docker run --rm t3rdf
-#     source <(docker run --rm t3rdf show-shell-commands)
-#     ddockrun_t3rdf
-#     ddockrun_t3rdf makehtml
-
-# master:
-#   DOCKRUN_PREFIX="dockrun_"
-#   OUR_IMAGE="t3docs/render-documentation"
-
-# develop:
-#   DOCKRUN_PREFIX="ddockrun_"
-#   OUR_IMAGE="t3rdf"
-
+#     docker run --rm t3docs/render-documentation
+#     source <(docker run --rm t3docs/render-documentation show-shell-commands)
+#     dockrun_t3rdf
+#     dockrun_t3rdf makehtml
+# Use development:
+#     docker rmi t3docs/render-documentation
+#     docker pull t3docs/render-documentation:develop
+#     # rename:
+#     docker tag t3docs/render-documentation:develop t3docs/render-documentation:master
 
 ENV \
    DOCKRUN_PREFIX="dockrun_" \
@@ -29,8 +30,8 @@ ENV \
    OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
    SPHINX_CONTRIB_HASH="3fe09d84cbef" \
    TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.1.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.1.0.zip"
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.1.1" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.1.1.zip"
 
 #  Versions we use:
 #
@@ -48,7 +49,7 @@ ARG \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="0.6.0"
+   Vendor="t3docs" Version="0.6.1"
 
 # all our sources
 COPY ALL-for-build  /ALL
