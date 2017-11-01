@@ -30,8 +30,8 @@ ENV \
    OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
    SPHINX_CONTRIB_HASH="3fe09d84cbef" \
    TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.1.1" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.1.1.zip"
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.1.2" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.1.2.zip"
 
 #  Versions we use:
 #
@@ -49,7 +49,7 @@ ARG \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="0.6.1"
+   Vendor="t3docs" Version="0.6.2"
 
 # all our sources
 COPY ALL-for-build  /ALL

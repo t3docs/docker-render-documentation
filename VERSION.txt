@@ -1,8 +1,8 @@
 
-0.6.1
+0.6.2
 
 
-This is the development state of the upcoming version 0.6.1
+This is the development state of the upcoming version 0.6.2
 
 Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.
 
