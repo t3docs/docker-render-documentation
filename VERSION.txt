@@ -1,0 +1,13 @@
+
+0.6.0-dev
+
+
+This is the development state of the upcoming version 0.6.0
+
+Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.
+
+Keep version number like above in files:
+- ./Dockerfile
+
+
+

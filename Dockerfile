@@ -4,20 +4,38 @@ FROM t3docs/python2-with-latex
 
 # t3rdf means: TYPO3 render documentation full
 
+# Build develop:
+#     docker rmi t3rdf
+#     docker build -t t3rdf .
+# Use:
+#     docker run --rm t3rdf
+#     source <(docker run --rm t3rdf show-shell-commands)
+#     ddockrun_t3rdf
+#     ddockrun_t3rdf makehtml
+
+# master:
+#   DOCKRUN_PREFIX="dockrun_"
+#   OUR_IMAGE="t3docs/render-documentation"
+
+# develop:
+#   DOCKRUN_PREFIX="ddockrun_"
+#   OUR_IMAGE="t3rdf"
+
+
 ENV \
-   DOCKRUN_PREFIX="dockrun_" \
-   OUR_IMAGE="t3docs/render-documentation" \
+   DOCKRUN_PREFIX="ddockrun_" \
+   OUR_IMAGE="t3rdf" \
    OUR_IMAGE_SHORT="t3rdf" \
    OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
    SPHINX_CONTRIB_HASH="3fe09d84cbef" \
    TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-release-2.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/release-2.0.zip"
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.1.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.1.0.zip"
 
 #  Versions we use:
 #
 #  Sphinx theme      t3SphinxThemeRtd       release-3.6.13
-#  Toolchain         RenderDocumentation    release-2.0.0
+#  Toolchain         RenderDocumentation    Tag v2.1.0.zip
 #  Toolchain tool    TCT                    0.2.0
 #  Python packages   see requirements.txt
 #                    Sphinx                 < 1.6
@@ -30,7 +48,7 @@ ARG \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="0.5.0"
+   Vendor="t3docs" Version="0.6.0-dev"
 
 # all our sources
 COPY ALL-for-build  /ALL
@@ -77,11 +95,13 @@ RUN \
    && apt-get update \
    && apt-get install -yq \
       less \
+      libreoffice-base \
       nano \
       ncdu \
       pandoc \
       php5-cli \
       rsync \
+      tidy \
       unzip \
       zip \
    \
