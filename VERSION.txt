@@ -1,14 +1,13 @@
 
-0.6.2
+1.6.4
 
-
-This is the development state of the upcoming version 0.6.2
 
 Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.
 
 Keep version number like above in files:
-- ./Dockerfile
+
 - ./ALL-for-build/Menu/mainmenu.sh
+- ./Dockerfile
+- ./README.rst
 
-
-
+End of text.

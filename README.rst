@@ -3,6 +3,8 @@
 docker-render-documentation
 ===========================
 
+.. default-role:: code
+
 This is the official recipe to build the Docker image 't3docs/render-documentation'.
 
 :Authors:         TYPO3 Documentation Team
@@ -10,8 +12,9 @@ This is the official recipe to build the Docker image 't3docs/render-documentati
 :Docker image:    t3docs/render-documentation, https://store.docker.com/community/images/t3docs/render-documentation, https://hub.docker.com/r/t3docs/render-documentation/
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation' https://github.com/marble/Toolchain_RenderDocumentation
+:Date:            2017-11-16
+:Version:         1.6.4
 
-.. default-role:: code
 
 Contribute
 ==========

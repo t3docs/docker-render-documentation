@@ -1,0 +1,9 @@
+
+Changelog.txt
+
+2017-11-16
+   Bump version from v0.6.3 to v1.6.4
+   Use toolchain RenderDocumentation v2.2.0
+
+
+End of text.

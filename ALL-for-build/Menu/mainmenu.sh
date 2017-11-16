@@ -8,7 +8,7 @@ export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
 function mm-minimalhelp(){
    cat <<EOT
-$OUR_IMAGE_SLOGAN (v0.6.2)
+$OUR_IMAGE_SLOGAN (v0.6.3)
 For help:
    docker run --rm $OUR_IMAGE --help
 
