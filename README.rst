@@ -13,7 +13,7 @@ This is the official recipe to build the Docker image 't3docs/render-documentati
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation' https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2017-11-16
-:Version:         1.6.4
+:Version:         1.6.5
 
 
 Contribute
@@ -70,7 +70,7 @@ Prepare
 
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
-      
+
       # If line `source <(...)` doesn't work on your OS use these three lines
       docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
       source tempfile.sh

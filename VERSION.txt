@@ -1,5 +1,5 @@
 
-1.6.4
+1.6.5
 
 
 Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.
