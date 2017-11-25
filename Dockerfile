@@ -1,6 +1,6 @@
 # FROM python:2
 
-FROM t3docs/python2-with-latex
+FROM t3docs/docker-libreoffice-on-python2-with-latex
 
 # t3rdf means: TYPO3 render documentation full
 
@@ -20,7 +20,8 @@ FROM t3docs/python2-with-latex
 # Use development:
 #     docker rmi t3docs/render-documentation
 #     docker pull t3docs/render-documentation:develop
-#     # rename:
+#
+#     # then rename:
 #     docker tag t3docs/render-documentation:develop t3docs/render-documentation:master
 
 ENV \
@@ -34,10 +35,10 @@ ENV \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.2.0" \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.2.0.zip"
 
-#  Versions we use:
+#  Versions we use for this 1.6.5:
 #
 #  Sphinx theme      t3SphinxThemeRtd       release-3.6.13
-#  Toolchain         RenderDocumentation    Tag v2.1.0.zip
+#  Toolchain         RenderDocumentation    Tag v2.2.0.zip
 #  Toolchain tool    TCT                    0.2.0
 #  Python packages   see requirements.txt
 #                    Sphinx                 < 1.6
@@ -50,7 +51,7 @@ ARG \
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="0.6.3"
+   Vendor="t3docs" Version="1.6.5"
 
 # all our sources
 COPY ALL-for-build  /ALL
@@ -95,9 +96,8 @@ RUN \
    \
    && COMMENT "Install system packages" \
    && apt-get update \
-   && apt-get install -yq \
+   && apt-get install -yq --no-install-recommends \
       less \
-      libreoffice-base \
       nano \
       ncdu \
       pandoc \
