@@ -122,13 +122,14 @@ Adjust source and target directories
 
 Instead of using the current directory ``PROJECT`` as source and target you may also
 set the following environment variables pointing to them:
-* ``T3DOCS_TARGET``
+
+# ``T3DOCS_TARGET``
     Points to an existing (!) directory to create the result
     
-* ``T3DOCS_WEBROOT``
+# ``T3DOCS_WEBROOT``
     Points to an existing (!) directory to create a deployable representation of the result
 
-* ``T3DOCS_SOURCE``
+# ``T3DOCS_SOURCE``
     Points to the PROJECT root directory
     
 
