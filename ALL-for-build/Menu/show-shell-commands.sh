@@ -15,7 +15,6 @@ cat <<EOT
 
 # the usual worker command
 function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
-set -x
 local cmd
 local TARGET_DIR
 local WEBROOT_DIR
