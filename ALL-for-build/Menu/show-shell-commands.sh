@@ -15,6 +15,7 @@ cat <<EOT
 
 # the usual worker command
 function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
+set -x
 local cmd
 local TARGET_DIR
 local WEBROOT_DIR
@@ -30,12 +31,10 @@ else
   WEBROOT_DIR="\$T3DOCS_WEBROOT"
 fi
 /bin/bash -c "rm -rf \${WEBROOT_DIR}/*"
-if [ -n "\$T3DOCS_SOURCE" ]; then
-  cd "\$T3DOCS_SOURCE"
-fi
 if [ -z "\$T3DOCS_SOURCE" ]; then
   T3DOCS_SOURCE="\$PWD"
 fi
+cd "\$T3DOCS_SOURCE"
 cmd="docker run --rm"
 if [[ "\$@" != "/bin/bash" ]]; then
 cmd="\$cmd --user=\$(id -u):\$(id -g)"
@@ -66,7 +65,7 @@ cmd="\$cmd $OUR_IMAGE"
 if [[ "\$@" != "/bin/bash" ]]; then
 cmd="\$cmd \$@"
 fi
-echo \$cmd >Documentation-GENERATED-temp/last-docker-run-command-GENERATED.sh
+echo \$cmd >\$TARGET_DIR/Documentation-GENERATED-temp/last-docker-run-command-GENERATED.sh
 eval \$cmd
 }
 
