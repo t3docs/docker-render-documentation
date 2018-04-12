@@ -117,6 +117,28 @@ Render your documentation
 Enjoy!
 
 
+Adjust source and target directories
+------------------------------------
+
+You may come into the situation starting rendering from out of another docker container (e.g. Jenkins).
+In this case you need a shared directory of the docker host mounted into the container.
+The following environment variables were avaiable to adjust the behaviour of the rendering container:
+
+# ``T3DOCS_EXTERNAL_MOUNT`` (docker container) & ``T3DOCS_HOST_MOUNT`` (docker host)
+    Both are pointing to the same shared mount point from each view 
+    
+# ``T3DOCS_TARGET_ROOT``
+    You may point to a subdirectory if you like to use a deeper structure
+
+# ``T3DOCS_SOURCE``
+    Points to the PROJECT root directory from the view of the docker host
+    
+# ``T3DOCS_FORCE_WEBROOT``
+    Just set it to any value to force generating the directory ``tmp-GENERATED-dummy_webroot`` in the target
+    
+
+
+
 Quickstart on Windows
 =====================
 
