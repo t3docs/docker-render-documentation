@@ -2,3 +2,21 @@
 
 Keep  /ALL/Makedir world-writable
 because - at the moment - the toolchain is writing there
+
+
+
+Building (for developers)
+=========================
+
+Run build:
+
+    docker build -t t3docs/render-documentation .
+
+In case you have an `apt-cacher <https://docs.docker.com/engine/examples/apt-cacher-ng/>`__
+at hand this may be *the* way. Apt-packages are then downloaded only once and kept
+to later be reused again::
+
+    docker start my-apt-cacher
+    HOSTIP=$(ip route get 8.8.8.8 | awk '{print $NF; exit}')
+    docker build -t t3docs/t3docs/render-documentation --build-arg http_proxy=http://${HOSTIP}:3142 .
+
