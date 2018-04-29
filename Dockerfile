@@ -24,6 +24,13 @@ FROM t3docs/docker-libreoffice-on-python2-with-latex
 #     # then rename:
 #     docker tag t3docs/render-documentation:develop t3docs/render-documentation:master
 
+ARG \
+   VERSION="1.6.5"
+
+# flag for apt-get - affects only build time
+ARG \
+   DEBIAN_FRONTEND=noninteractive
+
 ENV \
    DOCKRUN_PREFIX="dockrun_" \
    HOME="/ALL/userhome" \
@@ -44,24 +51,13 @@ ENV \
 #                    Sphinx                 < 1.6
 #                    recommonmark           0.4.0
 
-# flag for apt-get - affects only build time
-ARG \
-   DEBIAN_FRONTEND=noninteractive
-
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="1.6.5"
+   Vendor="t3docs" Version="$VERSION"
 
 # all our sources
 COPY ALL-for-build  /ALL
-
-# I'm not sure when to use the VOLUME setting.
-# We are using:
-#    VOLUME /PROJECT   read-only
-#    VOLUME /RESULT    output
-# optional:
-#    VOLUME /tmp       temp data
 
 # From here we start TCT. Place a tctconfig.cfg here.
 WORKDIR /ALL/Rundir
@@ -109,11 +105,10 @@ RUN \
    \
    && COMMENT "Try extra cleaning besides /etc/apt/apt.conf.d/docker-clean" \
    && apt-get clean \
-   && rm -rf /var/lib/apt/lists/*
-
-
-RUN \
+   && rm -rf /var/lib/apt/lists/* \
+   \
    COMMENT "Install Python packages" \
+   && pip install --upgrade pip \
    && pip install git+https://github.com/TYPO3-Documentation/t3SphinxThemeRtd@release-3.6.13 \
    && pip install -r /ALL/requirements.txt \
    \
@@ -156,7 +151,12 @@ RUN \
    && COMMENT "Final cleanup" \
    && apt-get clean \
    && rm -rf /tmp/* \
-   ;
+   \
+   && COMMENT "Let's have some debug info" \
+   && echo "debug_info DOCKRUN_PREFIX..: ${DOCKRUN_PREFIX}"  \
+   && echo "debug_info OUR_IMAGE.......: ${OUR_IMAGE}"       \
+   && echo "debug_info OUR_IMAGE_SHORT.: ${OUR_IMAGE_SHORT}" \
+   && echo "debug_info OUR_IMAGE_SLOGAN: ${OUR_IMAGE_SLOGAN}"
 
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
