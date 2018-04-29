@@ -18,7 +18,7 @@ This is the official recipe to build the Docker image
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-04-29
-:Version:         1.6.5
+:Version:         1.6.6
 
 
 Contribute

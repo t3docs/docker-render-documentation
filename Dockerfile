@@ -25,7 +25,7 @@ FROM t3docs/docker-libreoffice-on-python2-with-latex
 #     docker tag t3docs/render-documentation:develop t3docs/render-documentation:master
 
 ARG \
-   VERSION="1.6.5"
+   VERSION="1.6.6"
 
 # flag for apt-get - affects only build time
 ARG \
@@ -44,7 +44,7 @@ ENV \
 
 #  Versions we use for this 1.6.5:
 #
-#  Sphinx theme      t3SphinxThemeRtd       release-3.6.13
+#  Sphinx theme      t3SphinxThemeRtd       v3.6.14
 #  Toolchain         RenderDocumentation    Tag v2.2.0.zip
 #  Toolchain tool    TCT                    0.2.0
 #  Python packages   see requirements.txt
@@ -109,7 +109,7 @@ RUN \
    \
    COMMENT "Install Python packages" \
    && pip install --upgrade pip \
-   && pip install git+https://github.com/TYPO3-Documentation/t3SphinxThemeRtd@release-3.6.13 \
+   && pip install git+https://github.com/TYPO3-Documentation/t3SphinxThemeRtd@v3.6.14 \
    && pip install -r /ALL/requirements.txt \
    \
    && COMMENT "Install Sphinx-Extensions" \
