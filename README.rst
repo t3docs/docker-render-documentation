@@ -4,33 +4,36 @@ docker-render-documentation
 ===========================
 
 .. default-role:: code
+.. highlight:: shell
 
-This is the official recipe to build the Docker image 't3docs/render-documentation'.
+This is the official recipe to build the Docker image
+'t3docs/render-documentation'.
 
 :Authors:         TYPO3 Documentation Team
 :Repository:      https://github.com/t3docs/docker-render-documentation
-:Docker image:    t3docs/render-documentation, https://store.docker.com/community/images/t3docs/render-documentation, https://hub.docker.com/r/t3docs/render-documentation/
+:Docker image:    t3docs/render-documentation,
+                  https://store.docker.com/community/images/t3docs/render-documentation,
+                  https://hub.docker.com/r/t3docs/render-documentation/
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
-:See also:        Toolchain 'RenderDocumentation' https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2017-11-16
+:See also:        Toolchain 'RenderDocumentation'
+                  https://github.com/marble/Toolchain_RenderDocumentation
+:Date:            2018-04-29
 :Version:         1.6.5
 
 
 Contribute
 ==========
 
-Please use the `issue tracker <https://github.com/t3docs/docker-render-documentation/issues>`__ for
+Please use the `issue tracker
+<https://github.com/t3docs/docker-render-documentation/issues>`__ for
 contributing and reporting.
 
 
 Quickstart on Linux
 ===================
 
-Please confirm this is working on BSD-Linux (Mac) as well.
-
-
-Prepare
--------
+Prepare Docker
+--------------
 
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
 
@@ -71,25 +74,39 @@ Prepare
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
 
-      # If line `source <(...)` doesn't work on your OS use these three lines
-      docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
-      source tempfile.sh
-      rm tempfile.sh
+      # In case line `source <(...)` doesn't work on your OS use these three
+        lines::
 
-      # verify 'TYPO3 render documentation full'
-      dockrun_t3rdf --help
+           docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
+           source tempfile.sh
+           rm tempfile.sh
+
+      # Verify there now is a command to 'TYPO3 render documentation full'::
+
+           dockrun_t3rdf --help
 
 
 Render your documentation
 -------------------------
 
-1. Get a sample project with documentation::
+1. Go to the **start folder** of your PROJECT. It should have a subfolder
+   PROJECT/Documentation.
 
-      # clone a starter project
-      git clone https://github.com/T3DocumentationStarter/Public-Info-000 PROJECT
+   You can use this `starter project
+   <https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip>`__
+   as an example::
 
-      # go to the root folder of the project
-      cd PROJECT
+      # download
+      wget https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip
+
+      # unpack
+      unzip  Public-Info-000-master.zip
+
+      # DO NOT go to the subfolder Public-Info-000-master/Documentation !!!
+
+      # go to the **start folder** of the PROJECT
+      cd Public-Info-000-master
+
 
 2. Do the rendering::
 
@@ -110,11 +127,9 @@ Render your documentation
       # Sphinx warnings and errors - should be empty!
       PROJECT/Documentation-GENERATED-temp/_buildinfo/warnings.txt
 
-      # Sphinx latex files (only if existing and PDF-createn failed)
+      # Sphinx latex files (only if existing and PDF-creation failed)
       PROJECT/Documentation-GENERATED-temp/_buildinfo/latex/
 
-
-Enjoy!
 
 
 Quickstart on Windows
@@ -124,21 +139,56 @@ Quickstart on Windows
 
 Please contribute.
 
+The Docker image will run just fine on Windows and do the all the rendering.
+What's missing is the text in this read me file and appropriate helper
+functions.
 
-Building (for developers)
-=========================
 
-Run build:
+Advanced
+========
 
-    docker build -t t3docs/render-documentation .
+Run control
+-----------
+Do not generate 'singlehtml', 'latex' and 'pdf' off::
 
-In case you have an `apt-cacher <https://docs.docker.com/engine/examples/apt-cacher-ng/>`__
-at hand this may be *the* way. Apt-packages are then downloaded only once and kept
-to later be reused again::
+   dockrun_t3rdf makehtml \
+         -c make_singlehtml 0 \
+         -c make_latex 0 \
 
-    docker start my-apt-cacher
-    HOSTIP=$(ip route get 8.8.8.8 | awk '{print $NF; exit}')
-    docker build -t t3docs/t3docs/render-documentation --build-arg http_proxy=http://${HOSTIP}:3142 .
+Turn 'singlehtml', 'latex' and 'pdf' on::
+
+   dockrun_t3rdf makehtml \
+         -c make_singlehtml 1 \
+         -c make_latex 1 \
+         -c make_pdf
+
+Specifying folders
+------------------
+Read through the output of `docker run --rm
+t3docs/render-documentation show-shell-commands` for more information.
+
+*Note:* Use absolute paths. Do not use '/' at the end.
+
+If your source project is not in the current directory you can specify that
+by setting the environment variable `T3DOCS_PROJECT`::
+
+   T3DOCS_PROJECT=/abs/path/to/project
+   t3dockrun_t3rdf makehtml
+
+Specify a result folder if you don't want to have the result in the current
+directory. The final output folder
+`$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
+
+   T3DOCS_RESULT=/abs/path/to/result
+   t3dockrun_t3rdf makehtml
+
+Specify a path to a temp folder if you want to expose all those many
+intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
+will be used::
+
+   T3DOCS_TMP=/tmp
+   t3dockrun_t3rdf makehtml
+
 
 
 Finally
