@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /ALL/Downloads/envvars.sh
+
 # provide default
 OUR_IMAGE=${OUR_IMAGE:-t3docs/renderdocumentation}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}

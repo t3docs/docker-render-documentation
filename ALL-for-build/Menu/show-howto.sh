@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /ALL/Downloads/envvars.sh
+
 # provide default
 OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
@@ -107,15 +109,6 @@ Use the new command in general:
    dockrun_$OUR_IMAGE_SHORT show-howto
    dockrun_$OUR_IMAGE_SHORT tct --help
    ...
-
-If you did create the shortcuts there should be another one as well.
-It takes you to the shell of your container:
-
-   dockbash_$OUR_IMAGE_SHORT
-
-To find out what it means in expanded form type:
-
-   dockrun_$OUR_IMAGE_SHORT show-shell-commands
 
 
 

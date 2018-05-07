@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /ALL/Downloads/envvars.sh
+
 # provide default
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-devdockrun_}
 OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
@@ -19,93 +21,133 @@ cat <<EOT
 # the usual worker command like 'dockrun_t3rdf'
 function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 
-# Environment variables the USER may find important,
+# Environment variables the USER may find important (on the host!),
 # no slash ('/') at the end,
-# default is the current directory ('pwd()'):
+# default is the current directory \$(pwd):
 #
-#     T3DOCS_PROJECT=/absolute/path/to/project
-#     T3DOCS_RESULT=/absolute/path/to/output/folder
+#     T3DOCS_PROJECT=/absolute/path/to/project/start/folder
+#     T3DOCS_RESULT=/absolute/path/to/result/folder
 #     T3DOCS_TMP=/absolute/path/to/temporary/folder
-#     T3DOCS_DUMMY_WEBROOT=/absolute/path/to/output/folder-2/
-
-# assume folder PROJECT/Documentation
-# absolute path to folder PROJECT
-local PROJECT=\${T3DOCS_PROJECT:-\$(pwd)}
-# assume folder RESULT/Documentation-GENERATED-temp
-# absolute path to folder RESULT
-local RESULT=\${T3DOCS_RESULT:-\$(pwd)}
-# assume folder TMP/tmp-GENERATED-temp
-# absolute path to folder TMP
-local TMP=\${T3DOCS_TMP:-\$(pwd)}
-# assume folder DUMMY_WEBROOT/tmp-GENERATED-dummy_webroot
-# absolute path to folder DUMMY_WEBROOT
-local DUMMY_WEBROOT=\${T3DOCS_DUMMY_WEBROOT:-\$(pwd)}
-
+#     T3DOCS_DUMMY_WEBROOT=/absolute/path/to/output/dummy_webroot/
+#
 # Environment variables only some DEVELOPERS may find important,
 # no slash ('/') at the end,
-# default is the current directory ('pwd()'):
 #
 #     T3DOCS_MAKEDIR=/absolute/path/to/makedir
 #     T3DOCS_MENU=/absolute/path/to/menu
 #     T3DOCS_RUNDIR=/absolute/path/to/rundir
 #     T3DOCS_TOOLCHAINS=/absolute/path/to/toolchains
 
-# assume folder MAKEDIR/tmp-GENERATED-Makedir
-# absolute path to folder MAKEDIR
-local MAKEDIR=\${T3DOCS_MAKEDIR:-\$(pwd)}
-# assume folder MENU/tmp-GENERATED-Menu
-# absolute path to folder MENU
-local MENU=\${T3DOCS_MENU:-\$(pwd)}
-# assume folder RUNDIR/tmp-GENERATED-Rundir
-# absolute path to folder RUNDIR
-local RUNDIR=\${T3DOCS_RUNDIR:-\$(pwd)}
-# assume folder TOOLCHAINS/tmp-GENERATED-Toolchains
-# absolute path to folder TOOLCHAINS
-local TOOLCHAINS=\${T3DOCS_TOOLCHAINS:-\$(pwd)}
+# Example:
+# local DEBUG=\${T3DOCS_DEBUG:-0}
+# local DEBUG=\${T3DOCS_DEBUG:-1}
+# set T3DOCS_DEBUG=0 or set T3DOCS_DEBUG=1
+local DEBUG=\${T3DOCS_DEBUG:-0}
 
-# always create the resultfolder
-mkdir "\$RESULT/Documentation-GENERATED-temp" 2>/dev/null
-
-# start building the command
+# start command building
 local cmd="docker run --rm"
-
-if [[ "\$@" != "/bin/bash" ]]; then
-cmd="\$cmd --user=\$(id -u):\$(id -g)"
+if [[ \$# -eq 0 ]]; then
+   local CREATING=0
+elif [[ "\$@" = "/bin/bash" ]]; then
+   cmd="\$cmd --entrypoint /bin/bash -it"
+   local CREATING=0
 else
-cmd="\$cmd --entrypoint /bin/bash -it"
+   cmd="\$cmd --user=\$(id -u):\$(id -g)"
+   local CREATING=1
 fi
 
-cmd="\$cmd -v \$PROJECT:/PROJECT:ro -v \$RESULT/Documentation-GENERATED-temp:/RESULT"
-if [ -d "\$TMP/tmp-GENERATED-temp" ]; then
-   /bin/bash -c "rm -rf \$TMP/tmp-GENERATED-temp/*"
-   cmd="\$cmd -v \$TMP/tmp-GENERATED-temp:/tmp"
+# PROJECT - read only!
+# assume existing folder PROJECT/Documentation
+# absolute path to existing folder PROJECT or current dir
+local PROJECT=\${T3DOCS_PROJECT:-\$(pwd)}
+cmd="\$cmd -v \$PROJECT:/PROJECT:ro"
+if ((\$DEBUG)); then; echo "PROJECT......: \$PROJECT"; fi
+
+# RESULT
+# absolute path to existing folder RESULT of (RESULT/Documentation-GENERATED-temp)
+local RESULT=\${T3DOCS_RESULT:-\$(pwd)}
+# force special name to prevent create/delete disasters
+RESULT=\${RESULT}/Documentation-GENERATED-temp
+cmd="\$cmd -v \$RESULT:/RESULT"
+if ((\$CREATING)); then
+   mkdir "\$RESULT" 2>/dev/null
 fi
-if [ -d "\$DUMMY_WEBROOT/tmp-GENERATED-dummy_webroot" ]; then
-cmd="\$cmd -v \$DUMMY_WEBROOT/tmp-GENERATED-dummy_webroot:/ALL/dummy_webroot"
+if ((\$DEBUG)); then; echo "RESULT.......: \$RESULT"; fi
+
+# TMP
+# absolute path to existing folder TMP of (TMP/tmp-GENERATED-temp)
+local TMP=\${T3DOCS_TMP:-\$(pwd)}
+# force special name to prevent create/delete disasters
+TMP=\${TMP}/tmp-GENERATED-temp
+if ((\$CREATING)) && [[ -n "\${T3DOCS_TMP}" ]]; then
+   mkdir "\$TMP" 2>/dev/null
 fi
-if [ -d "\$MAKEDIR/tmp-GENERATED-Makedir" ]; then
-cmd="\$cmd -v \$MAKEDIR/tmp-GENERATED-Makedir:/ALL/Makedir"
+if [[ -d "\${TMP}" ]]; then
+   cmd="\$cmd -v \$TMP:/tmp"
+   if ((\$CREATING)); then
+      /bin/bash -c "rm -rf \$TMP/*"
+   fi
+   if ((\$DEBUG)); then; echo "TMP..........: \$TMP"; fi
 fi
-if [ -d "\$MENU/tmp-GENERATED-Menu" ]; then
-cmd="\$cmd -v \$MENU/tmp-GENERATED-Menu:/ALL/Menu"
+
+# DUMMY_WEBROOT
+# absolute path to existing folder DUMMY_WEBROOT
+local DUMMY_WEBROOT=\${T3DOCS_DUMMY_WEBROOT:-\$(pwd)/tmp-GENERATED-dummy_webroot}
+if [ -d "\$DUMMY_WEBROOT" ]; then
+   cmd="\$cmd -v \$DUMMY_WEBROOT:/ALL/dummy_webroot"
+   if ((\$DEBUG)); then; echo "DUMMY_WEBROOT: \$DUMMY_WEBROOT"; fi
 fi
-if [ -d "\$RUNDIR/tmp-GENERATED-Rundir" ]; then
-cmd="\$cmd -v \$RUNDIR/tmp-GENERATED-Rundir:/ALL/Rundir"
+
+# MAKEDIR
+# absolute path to existing folder MAKEDIR
+local MAKEDIR=\${T3DOCS_MAKEDIR:-\$(pwd)/tmp-GENERATED-Makedir}
+if [ -d "\$MAKEDIR" ]; then
+   cmd="\$cmd -v \$MAKEDIR:/ALL/Makedir"
+   if ((\$DEBUG)); then; echo "MAKEDIR......: \$MAKEDIR"; fi
 fi
-if [ -d "\$TOOLCHAINS/tmp-GENERATED-Toolchains" ]; then
-cmd="\$cmd -v \$TOOLCHAINS/tmp-GENERATED-Toolchains:/ALL/Toolchains"
+
+# MENU
+# absolute path to existing folder MENU
+local MENU=\${T3DOCS_MENU:-\$(pwd)/tmp-GENERATED-Menu}
+if [ -d "\$MENU" ]; then
+   cmd="\$cmd -v \$MENU:/ALL/Menu"
+   if ((\$DEBUG)); then; echo "MENU.........: \$MENU"; fi
 fi
+
+# RUNDIR
+# absolute path to existing folder RUNDIR
+local RUNDIR=\${T3DOCS_RUNDIR:-\$(pwd)/tmp-GENERATED-Rundir}
+if [ -d "\$RUNDIR" ]; then
+   cmd="\$cmd -v \$RUNDIR:/ALL/Rundir"
+   if ((\$DEBUG)); then; echo "RUNDIR.......: \$RUNDIR"; fi
+fi
+
+# TOOLCHAINS
+# absolute path to existing folder TOOLCHAINS
+local TOOLCHAINS=\${T3DOCS_TOOLCHAINS:-\$(pwd)/tmp-GENERATED-Toolchains}
+if [ -d "\$TOOLCHAINS" ]; then
+   cmd="\$cmd -v \$TOOLCHAINS:/ALL/Toolchains"
+   if ((\$DEBUG)); then; echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
+fi
+
 cmd="\$cmd $OUR_IMAGE"
+if ((\$DEBUG)); then; echo "OUR_IMAGE....: $OUR_IMAGE"; fi
+
+# add remaining arguments
 if [[ "\$@" != "/bin/bash" ]]; then
-cmd="\$cmd \$@"
+   cmd="\$cmd \$@"
 fi
-echo "\$cmd" >"\$RESULT/Documentation-GENERATED-temp/last-docker-run-command-GENERATED.sh"
+
+echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >>"\$RESULT/last-docker-run-command-GENERATED.sh"
+if ((\$DEBUG)); then
+   echo \$cmd | sed "s/-v /\\\\\\\\\\\\n   -v /g"
+fi
 eval "\$cmd"
 }
 
+echo "Tip: Inspect the function:"
+echo "    declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 echo "This function is now defined FOR THIS terminal window:"
 echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
-echo "Tip: To inspect the function:"
-echo "    declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 
 EOT
