@@ -1,6 +1,18 @@
-# FROM python:2
+# Choose and uncomment one of the 3 possible base images:
 
-FROM t3docs/docker-libreoffice-on-python2-with-latex
+# ==================================================
+# (1) results in ca. 821MB
+FROM python:2
+
+# ((only testing: FROM ubuntu:18.04))
+
+# (2) results in ca. 2.06GB, can create latex pdf
+#FROM t3docs/python2-with-latex
+
+# (3) results in ca. 2.53 GB, can create latex pdf, can read OpenOffice
+#FROM t3docs/docker-libreoffice-on-python2-with-latex
+
+# ==================================================
 
 # t3rdf means: TYPO3 render documentation full
 
@@ -8,10 +20,19 @@ FROM t3docs/docker-libreoffice-on-python2-with-latex
 #     docker rmi t3docs/render-documentation
 #     docker rmi t3docs/render-documentation:master
 #     docker rmi t3docs/render-documentation:develop
+# List:
+#     docker image ls
 # Build:
 #     docker build -t t3docs/render-documentation .
 #     docker build -t t3docs/render-documentation:master .
 #     docker build -t t3docs/render-documentation:develop .
+#     Explicit:
+#         docker build --force-rm=true --no-cache=true \
+#             -t t3docs/render-documentation:develop   \
+#             -f Dockerfile . || {
+#                 echo "There was an error building the image."
+#                 exit 1
+#              }
 # Use:
 #     docker run --rm t3docs/render-documentation
 #     source <(docker run --rm t3docs/render-documentation show-shell-commands)
@@ -24,37 +45,28 @@ FROM t3docs/docker-libreoffice-on-python2-with-latex
 #     # then rename:
 #     docker tag t3docs/render-documentation:develop t3docs/render-documentation:master
 
-ARG \
-   VERSION="1.6.6"
 
+# to override, use: `docker build --build-arg OUR_IMAGE_VERSION="1.2.3" ...`
+ARG OUR_IMAGE_VERSION=html-v1.6.6
 # flag for apt-get - affects only build time
-ARG \
-   DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_FRONTEND=noninteractive
+ARG DOCKRUN_PREFIX="ddockrun_"
+ARG hack_OUR_IMAGE="t3docs/render-documentation"
+ARG hack_OUR_IMAGE_SHORT="t3rdf"
+ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
 
 ENV \
-   DOCKRUN_PREFIX="dockrun_" \
    HOME="/ALL/userhome" \
-   OUR_IMAGE="t3docs/render-documentation" \
-   OUR_IMAGE_SHORT="t3rdf" \
-   OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full" \
-   SPHINX_CONTRIB_HASH="3fe09d84cbef" \
    TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.2.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.2.0.zip"
-
-#  Versions we use for this 1.6.5:
-#
-#  Sphinx theme      t3SphinxThemeRtd       v3.6.14
-#  Toolchain         RenderDocumentation    Tag v2.2.0.zip
-#  Toolchain tool    TCT                    0.2.0
-#  Python packages   see requirements.txt
-#                    Sphinx                 < 1.6
-#                    recommonmark           0.4.0
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.3-dev" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.3-dev.zip" \
+   OUR_IMAGE="$hack_OUR_IMAGE" \
+   OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT"
 
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
    Description="This image renders TYPO3 documentation." \
-   Vendor="t3docs" Version="$VERSION"
+   Vendor="t3docs" Version="$OUR_IMAGE_VERSION"
 
 # all our sources
 COPY ALL-for-build  /ALL
@@ -81,17 +93,15 @@ RUN \
       /ALL/dummy_webroot \
       /RESULT \
    \
-   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
-        --quiet --output-document /usr/local/bin/check_include_files.py \
-   && chmod +x /usr/local/bin/check_include_files.py \
-   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
-           --quiet --output-document /ALL/Makedir/_htaccess \
-   && wget https://github.com/etobi/Typo3ExtensionUtils/raw/master/bin/t3xutils.phar \
-           --quiet --output-document /usr/local/bin/t3xutils.phar \
-   && chmod +x /usr/local/bin/t3xutils.phar \
-   \
    && COMMENT "Install system packages" \
    && apt-get update \
+   \
+   && COMMENT "for ubuntu:18.04:" \
+   && apt-get install --dry-run -yq --no-install-recommends \
+      wget \
+      python \
+      \
+   && COMMENT "always:" \
    && apt-get install -yq --no-install-recommends \
       less \
       nano \
@@ -107,57 +117,88 @@ RUN \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/* \
    \
-   COMMENT "Install Python packages" \
+   && COMMENT "Provide some special files" \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
+        --quiet --output-document /usr/local/bin/check_include_files.py \
+   && chmod +x /usr/local/bin/check_include_files.py \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
+           --quiet --output-document /ALL/Makedir/_htaccess \
+   && wget https://github.com/etobi/Typo3ExtensionUtils/raw/master/bin/t3xutils.phar \
+           --quiet --output-document /usr/local/bin/t3xutils.phar \
+   && chmod +x /usr/local/bin/t3xutils.phar \
+   \
+   && COMMENT "Install Python packages" \
    && pip install --upgrade pip \
-   && pip install git+https://github.com/TYPO3-Documentation/t3SphinxThemeRtd@v3.6.14 \
+   && pip install https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/v3.6.14.zip \
    && pip install -r /ALL/requirements.txt \
    \
    && COMMENT "Install Sphinx-Extensions" \
-   && COMMENT "doesn't work with apt-cacher: hg clone https://bitbucket.org/xperseguers/sphinx-contrib /ALL/Downloads/sphinx-contrib" \
-   && sh -c "wget -q https://bitbucket.org/xperseguers/sphinx-contrib/get/\${SPHINX_CONTRIB_HASH}.zip -O /tmp/sphinx-contrib-\${SPHINX_CONTRIB_HASH}.zip" \
-   && sh -c "unzip -qq /tmp/sphinx-contrib-\${SPHINX_CONTRIB_HASH}.zip -d /tmp/" \
-   && sh -c "mv /tmp/xperseguers-sphinx-contrib-\${SPHINX_CONTRIB_HASH} /ALL/Downloads/sphinx-contrib" \
+   && pip install https://github.com/TYPO3-Documentation/recommonmark/archive/v2018-04-27.zip \
+   && pip install https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/master.zip \
+   && pip install https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/master.zip \
+   && pip install https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/master.zip \
+   && pip install https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/develop.zip \
+   && pip install https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/master.zip \
+   && pip install https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/master.zip \
+   && pip install https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/develop.zip \
    \
-   && pip install /ALL/Downloads/sphinx-contrib/googlechart \
-   && pip install /ALL/Downloads/sphinx-contrib/googlemaps \
-   && pip install /ALL/Downloads/sphinx-contrib/httpdomain \
-   && pip install /ALL/Downloads/sphinx-contrib/mscgen \
-   && pip install /ALL/Downloads/sphinx-contrib/numfig \
-   && pip install /ALL/Downloads/sphinx-contrib/slide \
-   && pip install /ALL/Downloads/sphinx-contrib/youtube \
-   && rm -rf /ALL/Downloads/sphinx-contrib
-
-RUN \
-   COMMENT "Update TypoScript lexer for highlighting" \
+   && COMMENT "Update TypoScript lexer for highlighting" \
    && COMMENT "usually: /usr/local/lib/python2.7/site-packages/pygments/lexers" \
    && destdir=$(dirname $(python -c "import pygments; print pygments.__file__"))/lexers \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/master/bitbucket-org-birkenfeld-pygments-main/typoscript.py \
       --quiet --output-document $destdir/typoscript.py \
-   && cd $destdir; python _mapping.py
-
-RUN \
-   COMMENT "Install TCT (ToolChainTool), the toolchain runner" \
-   && pip install ${TCT_PIPINSTALL_URL} \
+   && cd $destdir; python _mapping.py \
    \
-   && COMMENT "Provide the toolchain" \
+   && COMMENT "Install TCT (ToolChainTool), the toolchain runner" \
+   && pip install ${TCT_PIPINSTALL_URL}
+
+RUN COMMENT "Provide the toolchain" \
    && wget ${TOOLCHAIN_URL} -qO /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    && unzip /ALL/Downloads/Toolchain_RenderDocumentation.zip -d /ALL/Toolchains \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    \
    && COMMENT "Download latex files" \
-   && git clone https://github.com/TYPO3-Documentation/latex.typo3 \
-                /ALL/Downloads/latex.typo3 \
+   && wget https://github.com/TYPO3-Documentation/latex.typo3/archive/master.zip -qO /tmp/latex.typo3-master.zip \
+   && unzip /tmp/latex.typo3-master.zip -d /tmp \
+   && mv /tmp/latex.typo3-master /ALL/Downloads/latex.typo3 \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
    && rm -rf /tmp/* \
    \
-   && COMMENT "Let's have some debug info" \
-   && echo "debug_info DOCKRUN_PREFIX..: ${DOCKRUN_PREFIX}"  \
-   && echo "debug_info OUR_IMAGE.......: ${OUR_IMAGE}"       \
-   && echo "debug_info OUR_IMAGE_SHORT.: ${OUR_IMAGE_SHORT}" \
-   && echo "debug_info OUR_IMAGE_SLOGAN: ${OUR_IMAGE_SLOGAN}"
-
+   && COMMENT "Memorize the settings in the container" \
+   && echo "export DEBIAN_FRONTEND=\"${DEBIAN_FRONTEND}\""         >> /ALL/Downloads/envvars.sh \
+   && echo "export DOCKRUN_PREFIX=\"${DOCKRUN_PREFIX}\""           >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE=\"${OUR_IMAGE}\""                     >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""         >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_SLOGAN=\"${OUR_IMAGE_SLOGAN}\""       >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_VERSION=\"${OUR_IMAGE_VERSION}\""     >> /ALL/Downloads/envvars.sh \
+   && echo "export SPHINX_CONTRIB_HASH=\"${SPHINX_CONTRIB_HASH}\"" >> /ALL/Downloads/envvars.sh \
+   && echo "export TCT_PIPINSTALL_URL=\"${TCT_PIPINSTALL_URL}\""   >> /ALL/Downloads/envvars.sh \
+   && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""             >> /ALL/Downloads/envvars.sh \
+   \
+   && COMMENT "Let's have some debug info"                          \
+   && echo "debug_info DEBIAN_FRONTEND....: ${DEBIAN_FRONTEND}"     \
+   && echo "debug_info DOCKRUN_PREFIX.....: ${DOCKRUN_PREFIX}"      \
+   && echo "debug_info OUR_IMAGE..........: ${OUR_IMAGE}"           \
+   && echo "debug_info OUR_IMAGE_SHORT....: ${OUR_IMAGE_SHORT}"     \
+   && echo "debug_info OUR_IMAGE_SLOGAN...: ${OUR_IMAGE_SLOGAN}"    \
+   && echo "debug_info OUR_IMAGE_VERSION..: ${OUR_IMAGE_VERSION}"   \
+   && echo "debug_info SPHINX_CONTRIB_HASH: ${SPHINX_CONTRIB_HASH}" \
+   && echo "debug_info TCT_PIPINSTALL_URL.: ${TCT_PIPINSTALL_URL}"  \
+   && echo "debug_info TOOLCHAIN_URL......: ${TOOLCHAIN_URL}"       \
+   \
+   && echo "\n\
+      Versions we use for this $OUR_IMAGE_VERSION:\n\
+      \n\
+      Sphinx theme        t3SphinxThemeRtd       v3.6.14 \n\
+      Toolchain           RenderDocumentation    Tag v2.2.0.zip \n\
+      Toolchain tool      TCT                    0.2.0 \n\
+      Python packages     see requirements.txt   \n\
+                          Sphinx                 \n\
+                          recommonmark           v2018-05-04 \n\
+      TYPO3-Documentation typo3.latex            master \n\
+      "
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
 

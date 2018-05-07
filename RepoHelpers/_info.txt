@@ -1,4 +1,0 @@
-git clone \
-   git@github.com:marble/Toolchain_RenderDocumentation.git \
-   "$PWD"/../ALL-for-RW-mount/Toolchains/RenderDocumentation
-

@@ -17,8 +17,8 @@ This is the official recipe to build the Docker image
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2018-04-29
-:Version:         1.6.6
+:Date:            2018-05-07
+:Version:         html-v1.6.6
 
 
 Contribute
