@@ -4,28 +4,26 @@
 #
 # Usage:
 #     cd InofficialExtras
-#     ./build-the-docker-image.sh
+#     ./build-the-docker-image-html.sh
 # Examples:
 #     cd InofficialExtras
-#     VERSION=html-v1.6.6 ./build-the-docker-image.sh
-#     VERSION=html-v1.6.6 OUR_IMAGE_TAG=latest DOCKRUN_PREFIX="dockrun_" ./build-the-docker-image.sh
-#     VERSION=html-v1.6.6 DOCKRUN_PREFIX="ddockrun_" ./build-the-docker-image.sh
+#     VERSION=v1.6.6-html ./build-the-docker-image.sh
+#     VERSION=v1.6.6-html DOCKRUN_PREFIX="dockrun_" ... ./build-the-docker-image-html.sh
 
-
-# How to find the theme mtime:
-# cd ~/Repositories/github.com/TYPO3-Documentation/t3SphinxThemeRtd
-# git show -s --format=%ci v3.6.14 ➜ 2018-05-04 20:18:58 +0200
-# date "+%s" --date="$(git show -s --format=%ci v3.6.14)" ➜ 1525457938
-# THEME_MTIME=date "+%s" --date="$(git show -s --format=%ci v3.6.14)"
-# # THEME_MTIME ➜ 1525457938
+# REMEMBER: How to find the theme mtime:
+#    cd ~/Repositories/github.com/TYPO3-Documentation/t3SphinxThemeRtd
+#    git show -s --format=%ci v3.6.14 ➜ 2018-05-04 20:18:58 +0200
+#    date "+%s" --date="$(git show -s --format=%ci v3.6.14)" ➜ 1525457938
+#    THEME_MTIME=date "+%s" --date="$(git show -s --format=%ci v3.6.14)"
+#    echo $THEME_MTIME ➜ 1525457938
 #
 
 # variables 1
-VERSION=${VERSION:-"html-v1.6.6"}
+VERSION=${VERSION:-"v1.6.6-html"}
 DEBIAN_FRONTEND=${DEBIAN_FRONTEND:-noninteractive}
-DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"ddockrun_"}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
+DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdh}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdh - TYPO3 render documentation (html)"}
 # variables 2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 # variables 3
@@ -56,7 +54,6 @@ if ((1)); then
    BUILD_END=$(date '+%s')
    BUILD_ELAPSED=$(expr $BUILD_END - $BUILD_START)
 
-   echo "building $OUR_IMAGE in $BUILD_ELAPSED seconds"
    if [ $? -eq 0 ]; then
       echo Success!
       echo "You may now run:"
@@ -65,4 +62,5 @@ if ((1)); then
    else
       echo Failed!
    fi
+   echo "building $OUR_IMAGE in $BUILD_ELAPSED seconds"
 fi

@@ -48,12 +48,13 @@ local DEBUG=\${T3DOCS_DEBUG:-0}
 local cmd="docker run --rm"
 if [[ \$# -eq 0 ]]; then
    local CREATING=0
-elif [[ "\$@" = "/bin/bash" ]]; then
-   cmd="\$cmd --entrypoint /bin/bash -it"
-   local CREATING=0
-else
    cmd="\$cmd --user=\$(id -u):\$(id -g)"
+elif [[ "\$@" = "/bin/bash" ]]; then
+   local CREATING=0
+   cmd="\$cmd --entrypoint /bin/bash -it"
+else
    local CREATING=1
+   cmd="\$cmd --user=\$(id -u):\$(id -g)"
 fi
 
 # PROJECT - read only!
@@ -137,8 +138,9 @@ if ((\$DEBUG)); then; echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 if [[ "\$@" != "/bin/bash" ]]; then
    cmd="\$cmd \$@"
 fi
-
-echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >>"\$RESULT/last-docker-run-command-GENERATED.sh"
+if [[ -w "\$RESULT" ]]; then true
+   echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >"\$RESULT/last-docker-run-command-GENERATED.sh"
+fi
 if ((\$DEBUG)); then
    echo \$cmd | sed "s/-v /\\\\\\\\\\\\n   -v /g"
 fi

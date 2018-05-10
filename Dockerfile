@@ -4,8 +4,6 @@
 # (1) results in ca. 821MB
 FROM python:2
 
-# ((only testing: FROM ubuntu:18.04))
-
 # (2) results in ca. 2.06GB, can create latex pdf
 #FROM t3docs/python2-with-latex
 
@@ -14,54 +12,46 @@ FROM python:2
 
 # ==================================================
 
-# t3rdf means: TYPO3 render documentation full
+# t3rd means: TYPO3 render documentation
 
 # Clean:
-#     docker rmi t3docs/render-documentation
-#     docker rmi t3docs/render-documentation:master
-#     docker rmi t3docs/render-documentation:develop
+#    docker rmi t3docs/render-documentation[:tag]
 # List:
-#     docker image ls
-# Build:
-#     docker build -t t3docs/render-documentation .
-#     docker build -t t3docs/render-documentation:master .
-#     docker build -t t3docs/render-documentation:develop .
-#     Explicit:
-#         docker build --force-rm=true --no-cache=true \
-#             -t t3docs/render-documentation:develop   \
-#             -f Dockerfile . || {
-#                 echo "There was an error building the image."
-#                 exit 1
-#              }
+#    docker image ls | grep t3
+# Build (see build-the-docker-image*.sh):
+#    docker build --force-rm=true --no-cache=true \
+#       -t t3docs/render-documentation[:tag]  . || {
+#             echo "There was an error building the image."
+#             exit 1
+#          }
 # Use:
-#     docker run --rm t3docs/render-documentation
-#     source <(docker run --rm t3docs/render-documentation show-shell-commands)
-#     dockrun_t3rdf
-#     dockrun_t3rdf makehtml
-# Use development:
-#     docker rmi t3docs/render-documentation
-#     docker pull t3docs/render-documentation:develop
+#    docker run --rm t3docs/render-documentation[:tag]
+#    source <(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)
+#    dockrun_t3rdh
+#    dockrun_t3rdh makehtml
+# or
+#    ddockrun_t3rdf
+#    ddockrun_t3rdf makeall
 #
-#     # then rename:
-#     docker tag t3docs/render-documentation:develop t3docs/render-documentation:master
+# Rename example:
+#   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
-
-# to override, use: `docker build --build-arg OUR_IMAGE_VERSION="1.2.3" ...`
-ARG OUR_IMAGE_VERSION=html-v1.6.6
+ARG OUR_IMAGE_VERSION=v1.6.6-html
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
-ARG DOCKRUN_PREFIX="ddockrun_"
+ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation"
-ARG hack_OUR_IMAGE_SHORT="t3rdf"
-ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
+ARG hack_OUR_IMAGE_SHORT="t3rdh"
+ARG OUR_IMAGE_SLOGAN="t3rdh - TYPO3 render documentation (html)"
 
 ENV \
    HOME="/ALL/userhome" \
    TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.3-dev" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.3-dev.zip" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.3.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.3.0.zip" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
-   OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT"
+   OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
+   THEME_MTIME="1525457938"
 
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
@@ -96,7 +86,7 @@ RUN \
    && COMMENT "Install system packages" \
    && apt-get update \
    \
-   && COMMENT "for ubuntu:18.04:" \
+   && COMMENT "for ubuntu:18.04: (unfinished)" \
    && apt-get install --dry-run -yq --no-install-recommends \
       wget \
       python \
@@ -130,6 +120,7 @@ RUN \
    && COMMENT "Install Python packages" \
    && pip install --upgrade pip \
    && pip install https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/v3.6.14.zip \
+   && find /usr/local/lib/python2.7/site-packages/t3SphinxThemeRtd/ -exec touch --no-create --time=mtime --date="$(date --rfc-2822 --date=@$THEME_MTIME)" {} \; \
    && pip install -r /ALL/requirements.txt \
    \
    && COMMENT "Install Sphinx-Extensions" \
@@ -191,7 +182,7 @@ RUN COMMENT "Provide the toolchain" \
    && echo "\n\
       Versions we use for this $OUR_IMAGE_VERSION:\n\
       \n\
-      Sphinx theme        t3SphinxThemeRtd       v3.6.14 \n\
+      Sphinx theme        t3SphinxThemeRtd       v3.6.14  mtime:$THEME_MTIME \n\
       Toolchain           RenderDocumentation    Tag v2.2.0.zip \n\
       Toolchain tool      TCT                    0.2.0 \n\
       Python packages     see requirements.txt   \n\

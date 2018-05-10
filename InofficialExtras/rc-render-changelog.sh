@@ -8,43 +8,46 @@
 # define shortcut 'developer dockrun': ddockrun_t3rdf
 source <(docker run --rm t3docs/render-documentation:html-v1.6.6 show-shell-commands)
 
+# ##################################################
+unset T3DOCS_DEBUG T3DOCS_DUMMY_WEBROOT T3DOCS_MAKEDIR T3DOCS_MENU
+unset T3DOCS_PROJECT T3DOCS_PROJECT T3DOCS_RESULT T3DOCS_RUNDIR T3DOCS_TMP
+unset T3DOCS_TOOLCHAINS
+# ##################################################
 # select project
-T3DOCS_PROJECT=/home/marble/Repositories/github.com/TYPO3-Documentation/TYPO3CMS-Tutorial-SitePackage
-#T3DOCS_PROJECT=/home/marble/Repositories/git.typo3.org/Packages/TYPO3.CMS.git/typo3/sysext/core
-#
+T3DOCS_PROJECT=/home/marble/Repositories/git.typo3.org/Packages/TYPO3.CMS.git/typo3/sysext/core
 T3DOCS_RESULT=/home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED
 T3DOCS_TMP=/home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED
-T3DOCS_DUMMY_WEBROOT=/home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/tmp-GENERATED-dummy_webroot
+# rsync -a $T3DOCS_PROJECT/Documentation-GENERATED-temp $T3DOCS_TMP/
 #developer settings
 T3DOCS_DEBUG=0
 T3DOCS_MENU=/home/marble/Repositories/github.com/t3docs/docker-render-documentation/ALL-for-build/Menu
 T3DOCS_RUNDIR=/home/marble/Repositories/github.com/t3docs/docker-render-documentation/ALL-for-build/Rundir
 T3DOCS_TOOLCHAINS=/home/marble/Repositories/github.com/t3docs/VOLUMES/Toolchains
-#
-# The container internally would start with an empty 'dummy_webroot'.
-# So we empty that here as well.
-# bash -c "rm -rf /home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/tmp-GENERATED-dummy_webroot/*" >/dev/null
-#
 # Make a copy of the Makedir, since it is modified during building
 rsync -a --delete \
    /home/marble/Repositories/github.com/t3docs/docker-render-documentation/ALL-for-build/Makedir/ \
    /home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/tmp-GENERATED-Makedir/
-
 T3DOCS_MAKEDIR=/home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/tmp-GENERATED-Makedir
 
 # Set file modification dates 'mtimes' to allow sphinx caching:
 # Solution: https://github.com/MestreLion/git-tools !!!
+#
+# which git-restore-mtime ➜ /home/marble/bin/git-restore-mtime
+
+# prepare the ChangeLog source
+pushd $T3DOCS_PROJECT >/dev/null
+git checkout master
+git pull
+git-restore-mtime
+popd >/dev/null
 
 # ##################################################
 
-# ddockrun_t3rdf makehtml
-
-# ##################################################
 # how to add what you need:
 
-#ddockrun_t3rdf makehtml \
-#   -c make_singlehtml 1
+ddockrun_t3rdf makehtml
 
+#   -c make_singlehtml 1
 #   -c make_latex 1
 #   -c make_package 1
 #   -c make_pdf 1
@@ -52,7 +55,7 @@ T3DOCS_MAKEDIR=/home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/tmp
 # ##################################################
 # how to deselect what you don't need:
 
-ddockrun_t3rdf makeall
+#ddockrun_t3rdf makeall
 
 #   -c make_latex 0 \
 #   -c make_package 0 \
@@ -76,6 +79,10 @@ docker run --rm --user=1000:1000 \
    t3docs/render-documentation:html-v1.6.6 makehtml
 fi
 
+# ##################################################
+unset T3DOCS_DEBUG T3DOCS_DUMMY_WEBROOT T3DOCS_MAKEDIR T3DOCS_MENU
+unset T3DOCS_PROJECT T3DOCS_PROJECT T3DOCS_RESULT T3DOCS_RUNDIR T3DOCS_TMP
+unset T3DOCS_TOOLCHAINS
 # ##################################################
 
 # Enyjoy!

@@ -10,9 +10,10 @@ export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
 function mm-minimalhelp(){
    cat <<EOT
-$OUR_IMAGE_SLOGAN (v${OUR_IMAGE_VERSION})
+$OUR_IMAGE_SLOGAN (${OUR_IMAGE_VERSION})
 For help:
    docker run --rm $OUR_IMAGE --help
+   ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
 
 ... did you mean '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml'?
 
@@ -102,9 +103,9 @@ then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
 cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
-cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1 $@"
-
-echo $cmd
+cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
+cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
+cmd="$cmd $@"
 eval $cmd
 
 local exitstatus=$?
@@ -116,10 +117,10 @@ then
 fi
 
 if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms ) \
+   && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
    && ( -d /RESULT ) ]]
 then
-rsync -a /ALL/dummy_webroot/typo3cms /RESULT/ --delete
+rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
 exitstatus=$?
 fi
 
@@ -136,9 +137,9 @@ then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
 cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
-cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0 $@"
-
-echo $cmd
+cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
+cmd="$cmd -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0"
+cmd="$cmd $@"
 eval $cmd
 
 local exitstatus=$?
@@ -150,10 +151,10 @@ then
 fi
 
 if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms ) \
+   && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
    && ( -d /RESULT ) ]]
 then
-rsync -a /ALL/dummy_webroot/typo3cms /RESULT/ --delete
+rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
 exitstatus=$?
 fi
 
