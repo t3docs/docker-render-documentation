@@ -19,7 +19,7 @@ This is the official recipe to build the Docker image
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-05-10
-:Version:         v1.6.8-html
+:Version:         v1.6.9-html
 :Capabilites:     html, singlehtml, package
 
 
@@ -50,17 +50,17 @@ Prepare Docker
 
 3. Download the image::
 
-      docker pull t3docs/render-documentation:v1.6.8-html
+      docker pull t3docs/render-documentation:v1.6.9-html
 
 4. Verify::
 
-      docker run --rm t3docs/render-documentation:v1.6.8-html
+      docker run --rm t3docs/render-documentation:v1.6.9-html
 
    You should see::
 
-      t3rdh - TYPO3 render documentation (html) (v1.6.8-html)
+      t3rdh - TYPO3 render documentation (html) (v1.6.9-html)
       For help:
-         docker run --rm t3docs/render-documentation:v1.6.8-html --help
+         docker run --rm t3docs/render-documentation:v1.6.9-html --help
          dockrun_t3rdh --help
 
       ... did you mean 'dockrun_t3rdh makehtml'?
@@ -68,7 +68,7 @@ Prepare Docker
 5. Define some shell commands::
 
       # just show
-      docker run --rm t3docs/render-documentation:v1.6.8-html show-shell-commands
+      docker run --rm t3docs/render-documentation:v1.6.9-html show-shell-commands
 
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation:v1.6.6 show-shell-commands)
@@ -76,7 +76,7 @@ Prepare Docker
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
 
-           docker run --rm t3docs/render-documentation:v1.6.8-html show-shell-commands > tempfile.sh
+           docker run --rm t3docs/render-documentation:v1.6.9-html show-shell-commands > tempfile.sh
            source tempfile.sh
            rm tempfile.sh
 

@@ -4,7 +4,7 @@ source /ALL/Downloads/envvars.sh
 
 # provide defaults
 #1
-VERSION=${VERSION:-"v1.6.8-html"}
+VERSION=${VERSION:-"v1.6.9-html"}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdh}
 OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdh - TYPO3 render documentation (html)"}
