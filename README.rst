@@ -12,13 +12,15 @@ This is the official recipe to build the Docker image
 :Authors:         TYPO3 Documentation Team
 :Repository:      https://github.com/t3docs/docker-render-documentation
 :Docker image:    t3docs/render-documentation,
-                  https://store.docker.com/community/images/t3docs/render-documentation,
                   https://hub.docker.com/r/t3docs/render-documentation/
+:Documentation:   Is being moved to https://github.com/t3docs/t3docs-documentation
+                  and maintained separately
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2018-05-07
-:Version:         html-v1.6.6
+:Date:            2018-05-10
+:Version:         v1.6.6-html
+:Capabilites:     html, singlehtml, package
 
 
 Contribute
@@ -37,7 +39,6 @@ Prepare Docker
 
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
 
-
 2. Verify Docker is working::
 
       docker run --rm hello-world
@@ -47,43 +48,41 @@ Prepare Docker
       Hello from Docker.
       This message shows that ...
 
-
 3. Download the image::
 
-      docker pull t3docs/render-documentation
-
-   **Note:** The first download is rather big (> 2.5 GB) as it now contains
-   LaTeX files for PDF-generation. Most of it should not change often and
-   needs to be downloaded only once.
-
+      docker pull t3docs/render-documentation:v1.6.6-html
 
 4. Verify::
 
-      docker run --rm t3docs/render-documentation
+      docker run --rm t3docs/render-documentation:v1.6.6-html
 
    You should see::
 
+      t3rdh - TYPO3 render documentation (html) (v1.6.6-html)
       For help:
-         docker run --rm t3docs/render-documentation --help
+         docker run --rm t3docs/render-documentation:v1.6.6-html --help
+         dockrun_t3rdh --help
+
+      ... did you mean 'dockrun_t3rdh makehtml'?
 
 5. Define some shell commands::
 
       # just show
-      docker run --rm t3docs/render-documentation show-shell-commands
+      docker run --rm t3docs/render-documentation:v1.6.6-html show-shell-commands
 
       # actually define - no blanks between '<('
-      source <(docker run --rm t3docs/render-documentation show-shell-commands)
+      source <(docker run --rm t3docs/render-documentation:v1.6.6 show-shell-commands)
 
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
 
-           docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
+           docker run --rm t3docs/render-documentation:v1.6.6-html show-shell-commands > tempfile.sh
            source tempfile.sh
            rm tempfile.sh
 
-      # Verify there now is a command to 'TYPO3 render documentation full'::
+      # Verify there now is a command to 'TYPO3 render documentation (html)'::
 
-           dockrun_t3rdf --help
+           dockrun_t3rdh --help
 
 
 Render your documentation
@@ -110,26 +109,22 @@ Render your documentation
 
 2. Do the rendering::
 
-      dockrun_t3rdf makehtml
-
+      dockrun_t3rdh makehtml           # only html
+      dockrun_t3rdh makeall            # html, singlehtml, package
 
 3. Find the results::
 
       # html
-      PROJECT/Documentation-GENERATED-temp/Index.html
+      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/Index.html
 
       # singlehtml (all in one file)
-      PROJECT/Documentation-GENERATED-temp/singlehtml/Index.html
+      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/singlehtml/Index.html
 
       # build information
-      PROJECT/Documentation-GENERATED-temp/_buildinfo/
+      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/_buildinfo/
 
       # Sphinx warnings and errors - should be empty!
-      PROJECT/Documentation-GENERATED-temp/_buildinfo/warnings.txt
-
-      # Sphinx latex files (only if existing and PDF-creation failed)
-      PROJECT/Documentation-GENERATED-temp/_buildinfo/latex/
-
+      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/_buildinfo/warnings.txt
 
 
 Quickstart on Windows
@@ -149,46 +144,86 @@ Advanced
 
 Run control
 -----------
-Do not generate 'singlehtml', 'latex' and 'pdf' off::
+Add what you need::
 
-   dockrun_t3rdf makehtml \
-         -c make_singlehtml 0 \
-         -c make_latex 0 \
+   dockrun_t3rdf makehtml \                 # html is always being built
+         -c make_singlehtml 1 \             # enable singlehtml
+         -c make_package    1               # enable standalone package
 
-Turn 'singlehtml', 'latex' and 'pdf' on::
+Deselect what you don't need:::
 
-   dockrun_t3rdf makehtml \
-         -c make_singlehtml 1 \
-         -c make_latex 1 \
-         -c make_pdf
+   dockrun_t3rdf makeall \                  # html is always being built
+         -c make_singlehtml 0 \             # disable singlehtml
+         -c make_package 0                  # disable standalone package
 
 Specifying folders
 ------------------
 Read through the output of `docker run --rm
-t3docs/render-documentation show-shell-commands` for more information.
+t3docs/render-documentation show-shell-commands` to learn about the details.
 
-*Note:* Use absolute paths. Do not use '/' at the end.
+**ATTENTION:** Use absolute paths. Do not use '/' at the end.
 
-If your source project is not in the current directory you can specify that
-by setting the environment variable `T3DOCS_PROJECT`::
+You can render a project that's located somewhere else. Set the environment
+variable `T3DOCS_PROJECT` accordingly::
 
    T3DOCS_PROJECT=/abs/path/to/project
-   t3dockrun_t3rdf makehtml
+   t3dockrun_t3rdh makehtml
 
-Specify a result folder if you don't want to have the result in the current
-directory. The final output folder
-`$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
+or::
+
+   T3DOCS_PROJECT=/abs/path/to/project  t3dockrun_t3rdh makehtml
+
+Specify a result folder to send the result somewhere else. The final output
+folder `$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
 
    T3DOCS_RESULT=/abs/path/to/result
-   t3dockrun_t3rdf makehtml
+   t3dockrun_t3rdh makehtml
 
 Specify a path to a temp folder if you want to expose all those many
 intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
 will be used::
 
    T3DOCS_TMP=/tmp
-   t3dockrun_t3rdf makehtml
+   t3dockrun_t3rdh makehtml
 
+
+Caching
+=======
+
+Caching information will be generated automatically and stored in
+`$T3DOCS_RESULT/Cache`. Simply leave that folder untouched to make use of
+the caching mechanism. With caching a `makehtml` for the TYPO3 core ChangeLog
+files may take only 15 seconds instead of 20 minutes.
+
+The cache information is built for the `html` output. Other writers like
+`singlehtml` make use of that same caching information and are working very
+fast now. It may not be necessary to turn them off.
+
+Caching and Documentation files of repositories
+===============================================
+
+The caching mechanism takes the file modification times (mtime value) into
+account. Revision control systems like GIT usually don't preserve mtimes.
+
+**Tip:** You may want to look at the https://github.com/MestreLion/git-tools
+Add the script `git-restore-mtime` to your path. Then, for example, do::
+
+   # go to repo
+   cd ~Repositories/git.typo3.org/Packages/TYPO3.CMS.git
+   git-restore-mtime
+
+It only takes a few seconds to set the mtime of more than 12.500 files to the
+date of the most recent commit that changed the file.
+
+Repeat the `git-restore-mtime` procedure after branch switches and checking
+out files in GIT.
+
+What to ignore in GIT
+=====================
+
+**Advice:** Add a line to your *global* GIT ignore file::
+
+   echo "*GENERATED*" >>~/.gitignore_global
 
 
 Finally
