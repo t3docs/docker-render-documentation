@@ -2,13 +2,16 @@
 
 source /ALL/Downloads/envvars.sh
 
-# provide default
-DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-devdockrun_}
-OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
-
-# Attention:
-# Keep the following content in sync with ./shell-commands-to-source.sh
+# provide defaults
+#1
+VERSION=${VERSION:-"v1.6.7-html"}
+DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdh}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdh - TYPO3 render documentation (html)"}
+#2
+OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
+#3
+OUR_IMAGE=${OUR_IMAGE:-"t3docs/render-documentation:$OUR_IMAGE_TAG"}
 
 cat <<EOT
 
