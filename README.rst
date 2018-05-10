@@ -130,12 +130,10 @@ Render your documentation
 Quickstart on Windows
 =====================
 
-((to be contributed))
-
 Please contribute.
 
 The Docker image will run just fine on Windows and do the all the rendering.
-What's missing is the text in this read me file and appropriate helper
+What's missing is the text in this README file and the corresponding helper
 functions.
 
 
@@ -144,13 +142,14 @@ Advanced
 
 Run control
 -----------
-Add what you need::
+
+Select just HTML rendering and add more selectively::
 
    dockrun_t3rdh makehtml \                 # html is always being built
          -c make_singlehtml 1 \             # enable singlehtml
          -c make_package    1               # enable standalone package
 
-Deselect what you don't need:::
+Or select ALL and turn off what you don't need::
 
    dockrun_t3rdh makeall \                  # html is always being built
          -c make_singlehtml 0 \             # disable singlehtml
@@ -192,18 +191,20 @@ Caching
 
 Caching information will be generated automatically and stored in
 `$T3DOCS_RESULT/Cache`. Simply leave that folder untouched to make use of
-the caching mechanism. With caching a `makehtml` for the TYPO3 core ChangeLog
-files may take only 15 seconds instead of 20 minutes.
+the caching mechanism. With caching, for example, a `makehtml` for the TYPO3
+core ChangeLog may take only 15 seconds instead of 20 minutes.
 
-The cache information is built for the `html` output. Other writers like
-`singlehtml` make use of that same caching information and are working very
-fast now. It may not be necessary to turn them off.
+The cache information is built while `html` processing. Other writers like
+`singlehtml` make use of that same caching information and are working rather
+fast. Therefore in general it should not be necessary to turn them off.
 
-Caching and Documentation files of repositories
-===============================================
 
-The caching mechanism takes the file modification times (mtime value) into
-account. Revision control systems like GIT usually don't preserve mtimes.
+Caching for ./Documentation files of a repository
+=================================================
+
+The caching mechanism considers a file to be changed when the file modification
+time (mtime) has changed. Revision control systems like Git usually don't
+preserve file modification times.
 
 **Tip:** You may want to look at the https://github.com/MestreLion/git-tools
 Add the script `git-restore-mtime` to your path. Then, for example, do::
@@ -212,11 +213,13 @@ Add the script `git-restore-mtime` to your path. Then, for example, do::
    cd ~Repositories/git.typo3.org/Packages/TYPO3.CMS.git
    git-restore-mtime
 
-It only takes a few seconds to set the mtime of more than 12.500 files to the
-date of the most recent commit that changed the respective file.
+It only takes a few seconds to set the mtime of more than 12.500 files to a
+constant and meaningful value. Each file's mtime will be set to the value of
+the most recent commit that changed that file.
 
-Repeat the `git-restore-mtime` procedure after branch switches and checking
-out files in GIT.
+Repeat the `git-restore-mtime` procedure after Git operations like branch
+switches and checking out files.
+
 
 What to ignore in GIT
 =====================
