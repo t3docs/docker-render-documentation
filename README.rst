@@ -19,7 +19,7 @@ This is the official recipe to build the Docker image
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-05-10
-:Version:         v1.6.7-html
+:Version:         v1.6.8-html
 :Capabilites:     html, singlehtml, package
 
 
@@ -50,17 +50,17 @@ Prepare Docker
 
 3. Download the image::
 
-      docker pull t3docs/render-documentation:v1.6.7-html
+      docker pull t3docs/render-documentation:v1.6.8-html
 
 4. Verify::
 
-      docker run --rm t3docs/render-documentation:v1.6.7-html
+      docker run --rm t3docs/render-documentation:v1.6.8-html
 
    You should see::
 
-      t3rdh - TYPO3 render documentation (html) (v1.6.7-html)
+      t3rdh - TYPO3 render documentation (html) (v1.6.8-html)
       For help:
-         docker run --rm t3docs/render-documentation:v1.6.7-html --help
+         docker run --rm t3docs/render-documentation:v1.6.8-html --help
          dockrun_t3rdh --help
 
       ... did you mean 'dockrun_t3rdh makehtml'?
@@ -68,7 +68,7 @@ Prepare Docker
 5. Define some shell commands::
 
       # just show
-      docker run --rm t3docs/render-documentation:v1.6.7-html show-shell-commands
+      docker run --rm t3docs/render-documentation:v1.6.8-html show-shell-commands
 
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation:v1.6.6 show-shell-commands)
@@ -76,7 +76,7 @@ Prepare Docker
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
 
-           docker run --rm t3docs/render-documentation:v1.6.7-html show-shell-commands > tempfile.sh
+           docker run --rm t3docs/render-documentation:v1.6.8-html show-shell-commands > tempfile.sh
            source tempfile.sh
            rm tempfile.sh
 
@@ -167,24 +167,24 @@ You can render a project that's located somewhere else. Set the environment
 variable `T3DOCS_PROJECT` accordingly::
 
    T3DOCS_PROJECT=/abs/path/to/project
-   t3dockrun_t3rdh makehtml
+   dockrun_t3rdh makehtml
 
 or::
 
-   T3DOCS_PROJECT=/abs/path/to/project  t3dockrun_t3rdh makehtml
+   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdh makehtml
 
 Specify a result folder to send the result somewhere else. The final output
 folder `$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
 
    T3DOCS_RESULT=/abs/path/to/result
-   t3dockrun_t3rdh makehtml
+   dockrun_t3rdh makehtml
 
 Specify a path to a temp folder if you want to expose all those many
 intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
 will be used::
 
    T3DOCS_TMP=/tmp
-   t3dockrun_t3rdh makehtml
+   dockrun_t3rdh makehtml
 
 
 Caching
@@ -213,7 +213,7 @@ Add the script `git-restore-mtime` to your path. Then, for example, do::
    git-restore-mtime
 
 It only takes a few seconds to set the mtime of more than 12.500 files to the
-date of the most recent commit that changed the file.
+date of the most recent commit that changed the respective file.
 
 Repeat the `git-restore-mtime` procedure after branch switches and checking
 out files in GIT.

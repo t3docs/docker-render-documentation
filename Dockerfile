@@ -36,7 +36,7 @@ FROM python:2
 # Rename example:
 #   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
-ARG OUR_IMAGE_VERSION=v1.6.7-html
+ARG OUR_IMAGE_VERSION=v1.6.8-html
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
@@ -147,6 +147,7 @@ RUN COMMENT "Provide the toolchain" \
    && wget ${TOOLCHAIN_URL} -qO /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    && unzip /ALL/Downloads/Toolchain_RenderDocumentation.zip -d /ALL/Toolchains \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
+   && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
    && COMMENT "Download latex files" \
    && wget https://github.com/TYPO3-Documentation/latex.typo3/archive/master.zip -qO /tmp/latex.typo3-master.zip \
