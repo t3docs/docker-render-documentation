@@ -47,10 +47,12 @@ local DEBUG=\${T3DOCS_DEBUG:-0}
 # start command building
 local cmd="docker run --rm"
 if [[ \$# -eq 0 ]]; then
-   local CREATING=0
+   # note: CREATING=0 leads to root:root permissions (why? to be solved!)
+   local CREATING=1
    cmd="\$cmd --user=\$(id -u):\$(id -g)"
 elif [[ "\$@" = "/bin/bash" ]]; then
-   local CREATING=0
+   # note: CREATING=0 leads to root:root permissions (why? to be solved!)
+   local CREATING=1
    cmd="\$cmd --entrypoint /bin/bash -it"
 else
    local CREATING=1
@@ -71,7 +73,8 @@ local RESULT=\${T3DOCS_RESULT:-\$(pwd)}
 RESULT=\${RESULT}/Documentation-GENERATED-temp
 cmd="\$cmd -v \$RESULT:/RESULT"
 if ((\$CREATING)); then
-   mkdir "\$RESULT" 2>/dev/null
+   if ((\$DEBUG)); then echo creating: mkdir -p "\$RESULT" ; fi
+   mkdir -p "\$RESULT" 2>/dev/null
 fi
 if ((\$DEBUG)); then; echo "RESULT.......: \$RESULT"; fi
 
@@ -81,7 +84,7 @@ local TMP=\${T3DOCS_TMP:-\$(pwd)}
 # force special name to prevent create/delete disasters
 TMP=\${TMP}/tmp-GENERATED-temp
 if ((\$CREATING)) && [[ -n "\${T3DOCS_TMP}" ]]; then
-   mkdir "\$TMP" 2>/dev/null
+   mkdir -p "\$TMP" 2>/dev/null
 fi
 if [[ -d "\${TMP}" ]]; then
    cmd="\$cmd -v \$TMP:/tmp"
