@@ -7,8 +7,8 @@
 #     ./build-the-docker-image-html.sh
 # Examples:
 #     cd InofficialExtras
-#     VERSION=v1.6.9-html ./build-the-docker-image.sh
-#     VERSION=v1.6.9-html DOCKRUN_PREFIX="dockrun_" ... ./build-the-docker-image-html.sh
+#     VERSION=v1.6.9-full ./build-the-docker-image.sh
+#     VERSION=v1.6.9-full DOCKRUN_PREFIX="dockrun_" ... ./build-the-docker-image-html.sh
 
 # REMEMBER: How to find the theme mtime:
 #    cd ~/Repositories/github.com/TYPO3-Documentation/t3SphinxThemeRtd
@@ -19,11 +19,11 @@
 #
 
 # variables 1
-VERSION=${VERSION:-"v1.6.9-html"}
+VERSION=${VERSION:-"v1.6.9-full"}
 DEBIAN_FRONTEND=${DEBIAN_FRONTEND:-noninteractive}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdh}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdh - TYPO3 render documentation (html)"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
 # variables 2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 # variables 3

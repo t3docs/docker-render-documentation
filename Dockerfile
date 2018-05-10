@@ -2,13 +2,13 @@
 
 # ==================================================
 # (1) results in ca. 821MB
-FROM python:2
+# FROM python:2
 
 # (2) results in ca. 2.06GB, can create latex pdf
-#FROM t3docs/python2-with-latex
+# FROM t3docs/python2-with-latex
 
 # (3) results in ca. 2.53 GB, can create latex pdf, can read OpenOffice
-#FROM t3docs/docker-libreoffice-on-python2-with-latex
+FROM t3docs/docker-libreoffice-on-python2-with-latex
 
 # ==================================================
 
@@ -27,8 +27,8 @@ FROM python:2
 # Use:
 #    docker run --rm t3docs/render-documentation[:tag]
 #    source <(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)
-#    dockrun_t3rdh
-#    dockrun_t3rdh makehtml
+#    dockrun_t3rdf
+#    dockrun_t3rdf makehtml
 # or
 #    ddockrun_t3rdf
 #    ddockrun_t3rdf makeall
@@ -36,14 +36,14 @@ FROM python:2
 # Rename example:
 #   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
-ARG OUR_IMAGE_VERSION=v1.6.9-html
+ARG OUR_IMAGE_VERSION=v1.6.9-full
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
-ARG hack_OUR_IMAGE_SHORT="t3rdh"
-ARG OUR_IMAGE_SLOGAN="t3rdh - TYPO3 render documentation (html)"
+ARG hack_OUR_IMAGE_SHORT="t3rdf"
+ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
 
 ENV \
    HOME="/ALL/userhome" \
