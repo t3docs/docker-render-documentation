@@ -36,7 +36,6 @@ Quickstart on Linux
 
 Prepare Docker
 --------------
-
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
 
 2. Verify Docker is working::
@@ -87,7 +86,6 @@ Prepare Docker
 
 Render your documentation
 -------------------------
-
 1. Go to the **start folder** of your PROJECT. It should have a subfolder
    PROJECT/Documentation.
 
@@ -142,7 +140,6 @@ Advanced
 
 Run control
 -----------
-
 Select just HTML rendering and add more selectively::
 
    dockrun_t3rdh makehtml \                 # html is always being built
@@ -184,6 +181,22 @@ will be used::
 
    T3DOCS_TMP=/tmp
    dockrun_t3rdh makehtml
+
+
+Rename to default tag 'latest'
+------------------------------
+If you omit the tag it defaults to 'latest'. So you may want to rename the
+downloaded image to 'latest'::
+
+   # remove
+   docker rmi t3docs/render-documentation:latest
+   # pull
+   docker pull t3docs/render-documentation:v1.6.9-full
+   # rename
+   docker tag t3docs/render-documentation:v1.6.9-full \
+              t3docs/render-documentation:latest
+   # use the generic name without tag, for example in ~/.bashrc
+   source <(docker run --rm t3docs/render-documentation show-shell-commands)
 
 
 Caching
