@@ -21,11 +21,11 @@
 #
 
 # variables 1
-VERSION=${VERSION:-"html-v1.6.6"}
+VERSION=${VERSION:-"v1.6.9-html"}
 DEBIAN_FRONTEND=${DEBIAN_FRONTEND:-noninteractive}
-DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"ddockrun_"}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
+DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdh - TYPO3 render documentation full"}
 # variables 2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 # variables 3

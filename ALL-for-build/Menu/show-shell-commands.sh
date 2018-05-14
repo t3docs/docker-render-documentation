@@ -67,7 +67,7 @@ fi
 # absolute path to existing folder PROJECT or current dir
 local PROJECT=\${T3DOCS_PROJECT:-\$(pwd)}
 cmd="\$cmd -v \$PROJECT:/PROJECT:ro"
-if ((\$DEBUG)); then; echo "PROJECT......: \$PROJECT"; fi
+if ((\$DEBUG)); then echo "PROJECT......: \$PROJECT"; fi
 
 # RESULT
 # absolute path to existing folder RESULT of (RESULT/Documentation-GENERATED-temp)
@@ -79,7 +79,7 @@ if ((\$CREATING)); then
    if ((\$DEBUG)); then echo creating: mkdir -p "\$RESULT" ; fi
    mkdir -p "\$RESULT" 2>/dev/null
 fi
-if ((\$DEBUG)); then; echo "RESULT.......: \$RESULT"; fi
+if ((\$DEBUG)); then echo "RESULT.......: \$RESULT"; fi
 
 # TMP
 # absolute path to existing folder TMP of (TMP/tmp-GENERATED-temp)
@@ -94,7 +94,7 @@ if [[ -d "\${TMP}" ]]; then
    if ((\$CREATING)); then
       /bin/bash -c "rm -rf \$TMP/*"
    fi
-   if ((\$DEBUG)); then; echo "TMP..........: \$TMP"; fi
+   if ((\$DEBUG)); then echo "TMP..........: \$TMP"; fi
 fi
 
 # DUMMY_WEBROOT
@@ -102,7 +102,7 @@ fi
 local DUMMY_WEBROOT=\${T3DOCS_DUMMY_WEBROOT:-\$(pwd)/tmp-GENERATED-dummy_webroot}
 if [ -d "\$DUMMY_WEBROOT" ]; then
    cmd="\$cmd -v \$DUMMY_WEBROOT:/ALL/dummy_webroot"
-   if ((\$DEBUG)); then; echo "DUMMY_WEBROOT: \$DUMMY_WEBROOT"; fi
+   if ((\$DEBUG)); then echo "DUMMY_WEBROOT: \$DUMMY_WEBROOT"; fi
 fi
 
 # MAKEDIR
@@ -110,7 +110,7 @@ fi
 local MAKEDIR=\${T3DOCS_MAKEDIR:-\$(pwd)/tmp-GENERATED-Makedir}
 if [ -d "\$MAKEDIR" ]; then
    cmd="\$cmd -v \$MAKEDIR:/ALL/Makedir"
-   if ((\$DEBUG)); then; echo "MAKEDIR......: \$MAKEDIR"; fi
+   if ((\$DEBUG)); then echo "MAKEDIR......: \$MAKEDIR"; fi
 fi
 
 # MENU
@@ -118,7 +118,7 @@ fi
 local MENU=\${T3DOCS_MENU:-\$(pwd)/tmp-GENERATED-Menu}
 if [ -d "\$MENU" ]; then
    cmd="\$cmd -v \$MENU:/ALL/Menu"
-   if ((\$DEBUG)); then; echo "MENU.........: \$MENU"; fi
+   if ((\$DEBUG)); then echo "MENU.........: \$MENU"; fi
 fi
 
 # RUNDIR
@@ -126,7 +126,7 @@ fi
 local RUNDIR=\${T3DOCS_RUNDIR:-\$(pwd)/tmp-GENERATED-Rundir}
 if [ -d "\$RUNDIR" ]; then
    cmd="\$cmd -v \$RUNDIR:/ALL/Rundir"
-   if ((\$DEBUG)); then; echo "RUNDIR.......: \$RUNDIR"; fi
+   if ((\$DEBUG)); then echo "RUNDIR.......: \$RUNDIR"; fi
 fi
 
 # TOOLCHAINS
@@ -134,11 +134,11 @@ fi
 local TOOLCHAINS=\${T3DOCS_TOOLCHAINS:-\$(pwd)/tmp-GENERATED-Toolchains}
 if [ -d "\$TOOLCHAINS" ]; then
    cmd="\$cmd -v \$TOOLCHAINS:/ALL/Toolchains"
-   if ((\$DEBUG)); then; echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
+   if ((\$DEBUG)); then echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
 fi
 
 cmd="\$cmd $OUR_IMAGE"
-if ((\$DEBUG)); then; echo "OUR_IMAGE....: $OUR_IMAGE"; fi
+if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 
 # add remaining arguments
 if [[ "\$@" != "/bin/bash" ]]; then
