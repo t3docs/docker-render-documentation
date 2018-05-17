@@ -71,7 +71,7 @@ Prepare Docker
       docker run --rm t3docs/render-documentation:v1.6.9-full show-shell-commands
 
       # actually define - no blanks between '<('
-      source <(docker run --rm t3docs/render-documentation:v1.6.6 show-shell-commands)
+      source <(docker run --rm t3docs/render-documentation:v1.6.9-full show-shell-commands)
 
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
