@@ -21,7 +21,7 @@
 #
 
 # variables 1
-VERSION=${VERSION:-"v1.6.9-html"}
+VERSION=${VERSION:-"v1.6.10-dev-html"}
 DEBIAN_FRONTEND=${DEBIAN_FRONTEND:-noninteractive}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}

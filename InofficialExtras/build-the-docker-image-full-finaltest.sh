@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if ((1)); then
-   docker rmi t3docs/render-documentation:v1.6.9-full
+   docker rmi t3docs/render-documentation:v1.6.10-dev-full
 fi
 if ((1)); then
    BUILD_START=$(date '+%s')
@@ -9,7 +9,7 @@ if ((1)); then
       --force-rm=true \
       --no-cache=true \
       -f ../Dockerfile \
-      -t t3docs/render-documentation:v1.6.9-full \
+      -t t3docs/render-documentation:v1.6.10-dev-full \
       ..
    BUILD_END=$(date '+%s')
    BUILD_ELAPSED=$(expr $BUILD_END - $BUILD_START)

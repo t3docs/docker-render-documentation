@@ -19,7 +19,7 @@ This is the official recipe to build the Docker image
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-05-10
-:Version:         v1.6.9-full
+:Version:         v1.6.10-dev-full
 :Capabilites:     html, singlehtml, package, latex, pdf;
                   can read and convert ./doc/manual.sxw
 
@@ -50,17 +50,17 @@ Prepare Docker
 
 3. Download the image::
 
-      docker pull t3docs/render-documentation:v1.6.9-full
+      docker pull t3docs/render-documentation:v1.6.10-dev-full
 
 4. Verify::
 
-      docker run --rm t3docs/render-documentation:v1.6.9-full
+      docker run --rm t3docs/render-documentation:v1.6.10-dev-full
 
    You should see::
 
-      t3rdf - TYPO3 render documentation full (v1.6.9-full)
+      t3rdf - TYPO3 render documentation full (v1.6.10-dev-full)
       For help:
-         docker run --rm t3docs/render-documentation:v1.6.9-full --help
+         docker run --rm t3docs/render-documentation:v1.6.10-dev-full --help
          dockrun_t3rdf --help
 
       ... did you mean 'dockrun_t3rdf makehtml'?
@@ -68,15 +68,15 @@ Prepare Docker
 5. Define some shell commands::
 
       # just show
-      docker run --rm t3docs/render-documentation:v1.6.9-full show-shell-commands
+      docker run --rm t3docs/render-documentation:v1.6.10-dev-full show-shell-commands
 
       # actually define - no blanks between '<('
-      source <(docker run --rm t3docs/render-documentation:v1.6.9-full show-shell-commands)
+      source <(docker run --rm t3docs/render-documentation:v1.6.10-dev-full show-shell-commands)
 
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
 
-           docker run --rm t3docs/render-documentation:v1.6.9-full show-shell-commands > tempfile.sh
+           docker run --rm t3docs/render-documentation:v1.6.10-dev-full show-shell-commands > tempfile.sh
            source tempfile.sh
            rm tempfile.sh
 
@@ -196,9 +196,9 @@ downloaded image to 'latest'::
    # remove
    docker rmi t3docs/render-documentation:latest
    # pull
-   docker pull t3docs/render-documentation:v1.6.9-full
+   docker pull t3docs/render-documentation:v1.6.10-dev-full
    # rename
-   docker tag t3docs/render-documentation:v1.6.9-full \
+   docker tag t3docs/render-documentation:v1.6.10-dev-full \
               t3docs/render-documentation:latest
    # use the generic name without tag, for example in ~/.bashrc
    source <(docker run --rm t3docs/render-documentation show-shell-commands)

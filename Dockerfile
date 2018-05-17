@@ -2,13 +2,13 @@
 
 # ==================================================
 # (1) results in ca. 821MB
-FROM python:2
+#FROM python:2
 
 # (2) results in ca. 2.06GB, can create latex pdf
 # FROM t3docs/python2-with-latex
 
 # (3) results in ca. 2.53 GB, can create latex pdf, can read OpenOffice
-#FROM t3docs/docker-libreoffice-on-python2-with-latex
+FROM t3docs/docker-libreoffice-on-python2-with-latex
 
 # ==================================================
 
@@ -36,7 +36,7 @@ FROM python:2
 # Rename example:
 #   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
-ARG OUR_IMAGE_VERSION=v1.6.9-full
+ARG OUR_IMAGE_VERSION=v1.6.10-dev-full
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
