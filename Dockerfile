@@ -137,7 +137,7 @@ RUN \
    && COMMENT "Update TypoScript lexer for highlighting" \
    && COMMENT "usually: /usr/local/lib/python2.7/site-packages/pygments/lexers" \
    && destdir=$(dirname $(python -c "import pygments; print pygments.__file__"))/lexers \
-   && wget https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/master/bitbucket-org-birkenfeld-pygments-main/typoscript.py \
+   && wget https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.2/typoscript.py \
       --quiet --output-document $destdir/typoscript.py \
    && cd $destdir; python _mapping.py \
    \
