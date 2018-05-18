@@ -153,8 +153,6 @@ fi
 eval "\$cmd"
 }
 
-echo "Tip: Inspect the function:"
-echo "    declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 echo "This function is now defined FOR THIS terminal window:"
 echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 
