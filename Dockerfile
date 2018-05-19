@@ -48,8 +48,11 @@ ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
 ENV \
    HOME="/ALL/userhome" \
    TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
+   TOOLCHAIN_VERSION="v2.3.0" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.3.0" \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.3.0.zip" \
+   TYPOSCRIPT_PY_VERSION="v2.2.3" \
+   TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.3/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    THEME_MTIME="1525457938"
@@ -137,8 +140,7 @@ RUN \
    && COMMENT "Update TypoScript lexer for highlighting" \
    && COMMENT "usually: /usr/local/lib/python2.7/site-packages/pygments/lexers" \
    && destdir=$(dirname $(python -c "import pygments; print pygments.__file__"))/lexers \
-   && wget https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.2/typoscript.py \
-      --quiet --output-document $destdir/typoscript.py \
+   && wget $TYPOSCRIPT_PY_URL --quiet --output-document $destdir/typoscript.py \
    && cd $destdir; python _mapping.py \
    \
    && COMMENT "Install TCT (ToolChainTool), the toolchain runner" \
@@ -171,27 +173,27 @@ RUN COMMENT "Provide the toolchain" \
    && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""             >> /ALL/Downloads/envvars.sh \
    \
    && COMMENT "Let's have some debug info"                          \
-   && echo "debug_info DEBIAN_FRONTEND....: ${DEBIAN_FRONTEND}"     \
-   && echo "debug_info DOCKRUN_PREFIX.....: ${DOCKRUN_PREFIX}"      \
-   && echo "debug_info OUR_IMAGE..........: ${OUR_IMAGE}"           \
-   && echo "debug_info OUR_IMAGE_SHORT....: ${OUR_IMAGE_SHORT}"     \
-   && echo "debug_info OUR_IMAGE_SLOGAN...: ${OUR_IMAGE_SLOGAN}"    \
-   && echo "debug_info OUR_IMAGE_VERSION..: ${OUR_IMAGE_VERSION}"   \
-   && echo "debug_info SPHINX_CONTRIB_HASH: ${SPHINX_CONTRIB_HASH}" \
-   && echo "debug_info TCT_PIPINSTALL_URL.: ${TCT_PIPINSTALL_URL}"  \
-   && echo "debug_info TOOLCHAIN_URL......: ${TOOLCHAIN_URL}"       \
-   \
-   && echo "\n\
-      Versions we use for this $OUR_IMAGE_VERSION:\n\
+   && echo "\
+      debug_info DEBIAN_FRONTEND....: ${DEBIAN_FRONTEND}\n\
+      debug_info DOCKRUN_PREFIX.....: ${DOCKRUN_PREFIX}\n\
+      debug_info OUR_IMAGE..........: ${OUR_IMAGE}\n\
+      debug_info OUR_IMAGE_SHORT....: ${OUR_IMAGE_SHORT}\n\
+      debug_info OUR_IMAGE_SLOGAN...: ${OUR_IMAGE_SLOGAN}\n\
+      debug_info OUR_IMAGE_VERSION..: ${OUR_IMAGE_VERSION}\n\
+      debug_info TCT_PIPINSTALL_URL.: ${TCT_PIPINSTALL_URL}\n\
+      debug_info TOOLCHAIN_URL......: ${TOOLCHAIN_URL}\n\
       \n\
-      Sphinx theme        t3SphinxThemeRtd       v3.6.14  mtime:$THEME_MTIME \n\
-      Toolchain           RenderDocumentation    Tag v2.2.0.zip \n\
-      Toolchain tool      TCT                    0.2.0 \n\
-      Python packages     see requirements.txt   \n\
-                          Sphinx                 \n\
-                          recommonmark           v2018-05-04 \n\
-      TYPO3-Documentation typo3.latex            master \n\
-      "
+      Versions used for $OUR_IMAGE_VERSION:\n\
+      \n\
+      Sphinx theme        t3SphinxThemeRtd       v3.6.14  mtime:$THEME_MTIME\n\
+      Toolchain           RenderDocumentation    $TOOLCHAIN_VERSION\n\
+      Toolchain tool      TCT                    0.2.0\n\
+      Python packages     see requirements.txt\n\
+                          Sphinx\n\
+                          recommonmark           v2018-05-04\n\
+      TYPO3-Documentation typo3.latex            master\n\
+      TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
+   && cat /ALL/Downloads/buildinfo.txt
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
 
