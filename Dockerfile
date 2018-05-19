@@ -51,8 +51,8 @@ ENV \
    TOOLCHAIN_VERSION="v2.3.0" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.3.0" \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.3.0.zip" \
-   TYPOSCRIPT_PY_VERSION="v2.2.3" \
-   TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.3/typoscript.py" \
+   TYPOSCRIPT_PY_VERSION="v2.2.4" \
+   TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    THEME_MTIME="1525457938"
