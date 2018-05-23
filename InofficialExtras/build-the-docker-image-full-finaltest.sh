@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUR_IMAGE_TAG=v1.6.10-dev-full
+OUR_IMAGE_TAG=v1.6.10-full
 EXITCODE=0
 
 if ((1)); then
