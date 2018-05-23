@@ -48,9 +48,9 @@ ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
 ENV \
    HOME="/ALL/userhome" \
    TCT_PIPINSTALL_URL="git+https://github.com/marble/TCT.git@v0.2.0#egg=tct" \
-   TOOLCHAIN_VERSION="v2.3.0" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.3.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.3.0.zip" \
+   TOOLCHAIN_VERSION="v2.3.1" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.3.1" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.3.1.zip" \
    TYPOSCRIPT_PY_VERSION="v2.2.4" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
@@ -153,9 +153,9 @@ RUN COMMENT "Provide the toolchain" \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
    && COMMENT "Download latex files" \
-   && wget https://github.com/TYPO3-Documentation/latex.typo3/archive/master.zip -qO /tmp/latex.typo3-master.zip \
-   && unzip /tmp/latex.typo3-master.zip -d /tmp \
-   && mv /tmp/latex.typo3-master /ALL/Downloads/latex.typo3 \
+   && wget https://github.com/TYPO3-Documentation/latex.typo3/archive/v1.1.0.zip -qO /tmp/latex.typo3-v1.1.0.zip \
+   && unzip /tmp/latex.typo3-v1.1.0.zip -d /tmp \
+   && mv /tmp/latex.typo3-1.1.0 /ALL/Downloads/latex.typo3 \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
@@ -191,7 +191,7 @@ RUN COMMENT "Provide the toolchain" \
       Python packages     see requirements.txt\n\
                           Sphinx\n\
                           recommonmark           v2018-05-04\n\
-      TYPO3-Documentation typo3.latex            master\n\
+      TYPO3-Documentation typo3.latex            v1.1.0\n\
       TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
 
