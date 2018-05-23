@@ -4,7 +4,7 @@ source /ALL/Downloads/envvars.sh
 
 # provide defaults
 #1
-VERSION=${VERSION:-"v1.6.9-full"}
+VERSION=${VERSION:-"v1.6.10-full"}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
 OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
@@ -46,6 +46,9 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 # local DEBUG=\${T3DOCS_DEBUG:-1}
 # set T3DOCS_DEBUG=0 or set T3DOCS_DEBUG=1
 local DEBUG=\${T3DOCS_DEBUG:-0}
+local git_restore_mtime=\$(which git-restore-mtime)
+local exitcode=\$?
+if [[ \$exitcode -ne 0 ]]; then git_restore_mtime=; fi
 
 # start command building
 local cmd="docker run --rm"
@@ -143,6 +146,16 @@ if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 # add remaining arguments
 if [[ "\$@" != "/bin/bash" ]]; then
    cmd="\$cmd \$@"
+   # if script git-restore-mtime exists and '*make*' in args try the command
+   # See README: get 'git-restore-mtime' from https://github.com/MestreLion/git-tools
+   if [[ "\$git_restore_mtime" != "" ]] && [[ \$@ =~ .*make.* ]]; then
+      if ((\$DEBUG)); then
+         echo \$git_restore_mtime
+         \$git_restore_mtime
+      else
+         \$git_restore_mtime 2>/dev/null
+      fi
+   fi
 fi
 if [[ -w "\$RESULT" ]]; then true
    echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >"\$RESULT/last-docker-run-command-GENERATED.sh"
@@ -153,8 +166,6 @@ fi
 eval "\$cmd"
 }
 
-echo "Tip: Inspect the function:"
-echo "    declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 echo "This function is now defined FOR THIS terminal window:"
 echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 

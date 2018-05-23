@@ -33,6 +33,8 @@ Usage:
     Prepare:
         Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the commandline of your system:
             source <(docker run --rm $OUR_IMAGE show-shell-commands)
+        Inspect function:
+            declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
     Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]
             ARGUMENT             DESCRIPTION
@@ -86,7 +88,6 @@ Find the (possible) results. For example:
    ./Documentation-GENERATED-temp/.../singlehtml/Index.html
    ./Documentation-GENERATED-temp/.../_pdf/
    ./Documentation-GENERATED-temp/.../_buildinfo/
-   ./Documentation-GENERATED-temp/.../_buildinfo/latex/
    ./Documentation-GENERATED-temp/.../_buildinfo/warnings.txt
 EOT
 else
