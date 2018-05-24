@@ -20,7 +20,7 @@ This is the official recipe to build the Docker image
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-05-23
-:Version:         v1.6.10-full
+:Version:         v1.6.10-html
 :Capabilites:     html, singlehtml, package, latex, pdf;
                   can read and convert ./doc/manual.sxw
 
@@ -51,39 +51,39 @@ Prepare Docker
 
 3. Download the image::
 
-      docker pull t3docs/render-documentation:v1.6.10-full
+      docker pull t3docs/render-documentation:v1.6.10-html
 
 4. Verify::
 
-      docker run --rm t3docs/render-documentation:v1.6.10-full
+      docker run --rm t3docs/render-documentation:v1.6.10-html
 
    You should see::
 
-      t3rdf - TYPO3 render documentation full (v1.6.10-full)
+      t3rdh - TYPO3 render documentation full (v1.6.10-html)
       For help:
-         docker run --rm t3docs/render-documentation:v1.6.10-full --help
-         dockrun_t3rdf --help
+         docker run --rm t3docs/render-documentation:v1.6.10-html --help
+         dockrun_t3rdh --help
 
-      ... did you mean 'dockrun_t3rdf makehtml'?
+      ... did you mean 'dockrun_t3rdh makehtml'?
 
 5. Define some shell commands::
 
       # just show
-      docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands
+      docker run --rm t3docs/render-documentation:v1.6.10-html show-shell-commands
 
       # actually define - no blanks between '<('
-      source <(docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands)
+      source <(docker run --rm t3docs/render-documentation:v1.6.10-html show-shell-commands)
 
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
 
-           docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands > tempfile.sh
+           docker run --rm t3docs/render-documentation:v1.6.10-html show-shell-commands > tempfile.sh
            source tempfile.sh
            rm tempfile.sh
 
       # Verify there now is a command to 'TYPO3 render documentation full'::
 
-           dockrun_t3rdf --help
+           dockrun_t3rdh --help
 
 
 Render your documentation
@@ -109,8 +109,8 @@ Render your documentation
 
 2. Do the rendering::
 
-      dockrun_t3rdf makehtml           # only html
-      dockrun_t3rdf makeall            # html, singlehtml, package, latex, pdf
+      dockrun_t3rdh makehtml           # only html
+      dockrun_t3rdh makeall            # html, singlehtml, package, latex, pdf
 
 3. Find the results::
 
@@ -144,7 +144,7 @@ Run control
 -----------
 Select just HTML rendering and add more selectively::
 
-   dockrun_t3rdf makehtml \                 # html is always being built
+   dockrun_t3rdh makehtml \                 # html is always being built
          -c make_singlehtml 1 \             # enable singlehtml
          -c make_package    1 \             # enable standalone package
          -c make_latex      1 \             # enable latex + pdf
@@ -152,7 +152,7 @@ Select just HTML rendering and add more selectively::
 
 Or select ALL and turn off what you don't need::
 
-   dockrun_t3rdf makeall \                  # html is always being built
+   dockrun_t3rdh makeall \                  # html is always being built
          -c make_singlehtml 0 \             # disable singlehtml
          -c make_package 0 \                # disable standalone package
          -c make_pdf 0 \                    # disable pdf
@@ -169,24 +169,24 @@ You can render a project that's located somewhere else. Set the environment
 variable `T3DOCS_PROJECT` accordingly::
 
    T3DOCS_PROJECT=/abs/path/to/project
-   dockrun_t3rdf makehtml
+   dockrun_t3rdh makehtml
 
 or::
 
-   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdf makehtml
+   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdh makehtml
 
 Specify a result folder to send the result somewhere else. The final output
 folder `$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
 
    T3DOCS_RESULT=/abs/path/to/result
-   dockrun_t3rdf makehtml
+   dockrun_t3rdh makehtml
 
 Specify a path to a temp folder if you want to expose all those many
 intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
 will be used::
 
    T3DOCS_TMP=/tmp
-   dockrun_t3rdf makehtml
+   dockrun_t3rdh makehtml
 
 
 Rename to default tag 'latest'
@@ -197,9 +197,9 @@ downloaded image to 'latest'::
    # remove
    docker rmi t3docs/render-documentation:latest
    # pull
-   docker pull t3docs/render-documentation:v1.6.10-full
+   docker pull t3docs/render-documentation:v1.6.10-html
    # rename
-   docker tag t3docs/render-documentation:v1.6.10-full \
+   docker tag t3docs/render-documentation:v1.6.10-html \
               t3docs/render-documentation:latest
    # use the generic name without tag, for example in ~/.bashrc
    source <(docker run --rm t3docs/render-documentation show-shell-commands)

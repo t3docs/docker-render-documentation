@@ -5,8 +5,8 @@
 
 # use 'build-the-docker-image.sh' first.
 
-# define shortcut 'developer dockrun': ddockrun_t3rdf
-source <(docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands)
+# define shortcut 'developer dockrun': ddockrun_t3rdh
+source <(docker run --rm t3docs/render-documentation:v1.6.10-html show-shell-commands)
 
 # ##################################################
 unset T3DOCS_DEBUG T3DOCS_DUMMY_WEBROOT T3DOCS_MAKEDIR T3DOCS_MENU
@@ -45,7 +45,7 @@ popd >/dev/null
 
 # how to add what you need:
 
-ddockrun_t3rdf makehtml
+ddockrun_t3rdh makehtml
 
 #   -c make_singlehtml 1
 #   -c make_latex 1
@@ -55,7 +55,7 @@ ddockrun_t3rdf makehtml
 # ##################################################
 # how to deselect what you don't need:
 
-#ddockrun_t3rdf makeall
+#ddockrun_t3rdh makeall
 
 #   -c make_latex 0 \
 #   -c make_package 0 \
@@ -76,7 +76,7 @@ docker run --rm --user=1000:1000 \
    -v /home/marble/Repositories/github.com/t3docs/docker-render-documentation/ALL-for-build/Rundir:/ALL/Rundir \
    -v /home/marble/Repositories/github.com/t3docs/VOLUMES/Toolchains:/ALL/Toolchains \
    -v /home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/Documentation-GENERATED-temp/Cache/site-packages:/usr/local/lib/python2.7/site-packages \
-   t3docs/render-documentation:v1.6.10-full makehtml
+   t3docs/render-documentation:v1.6.10-html makehtml
 fi
 
 # ##################################################

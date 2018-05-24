@@ -4,10 +4,10 @@ source /ALL/Downloads/envvars.sh
 
 # provide defaults
 #1
-VERSION=${VERSION:-"v1.6.10-full"}
+VERSION=${VERSION:-"v1.6.10-html"}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdh}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdh - TYPO3 render documentation full"}
 #2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 #3
@@ -21,7 +21,7 @@ cat <<EOT
 # ATTENTION:
 #     No whitespace between '<('
 
-# the usual worker command like 'dockrun_t3rdf'
+# the usual worker command like 'dockrun_t3rdh'
 function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 
 # Environment variables the USER may find important (on the host!),

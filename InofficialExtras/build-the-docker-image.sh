@@ -7,9 +7,9 @@
 #     ./build-the-docker-image.sh
 # Examples:
 #     cd InofficialExtras
-#     VERSION=v1.6.10-full ./build-the-docker-image.sh
-#     VERSION=v1.6.10-full OUR_IMAGE_TAG=latest DOCKRUN_PREFIX="dockrun_" ./build-the-docker-image.sh
-#     VERSION=v1.6.10-full DOCKRUN_PREFIX="ddockrun_" ./build-the-docker-image.sh
+#     VERSION=v1.6.10-html ./build-the-docker-image.sh
+#     VERSION=v1.6.10-html OUR_IMAGE_TAG=latest DOCKRUN_PREFIX="dockrun_" ./build-the-docker-image.sh
+#     VERSION=v1.6.10-html DOCKRUN_PREFIX="ddockrun_" ./build-the-docker-image.sh
 
 
 # How to find the theme mtime:
