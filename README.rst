@@ -13,14 +13,16 @@ This is the official recipe to build the Docker image
 :Repository:      https://github.com/t3docs/docker-render-documentation
 :Docker image:    t3docs/render-documentation,
                   https://hub.docker.com/r/t3docs/render-documentation/
+:Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
 :Documentation:   Is being moved to https://github.com/t3docs/t3docs-documentation
                   and maintained separately
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2018-05-10
-:Version:         v1.6.9-html
-:Capabilites:     html, singlehtml, package
+:Date:            2018-05-23
+:Version:         v1.6.10-full
+:Capabilites:     html, singlehtml, package, latex, pdf;
+                  can read and convert ./doc/manual.sxw
 
 
 Contribute
@@ -36,7 +38,6 @@ Quickstart on Linux
 
 Prepare Docker
 --------------
-
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
 
 2. Verify Docker is working::
@@ -50,44 +51,43 @@ Prepare Docker
 
 3. Download the image::
 
-      docker pull t3docs/render-documentation:v1.6.9-html
+      docker pull t3docs/render-documentation:v1.6.10-full
 
 4. Verify::
 
-      docker run --rm t3docs/render-documentation:v1.6.9-html
+      docker run --rm t3docs/render-documentation:v1.6.10-full
 
    You should see::
 
-      t3rdh - TYPO3 render documentation (html) (v1.6.9-html)
+      t3rdf - TYPO3 render documentation full (v1.6.10-full)
       For help:
-         docker run --rm t3docs/render-documentation:v1.6.9-html --help
-         dockrun_t3rdh --help
+         docker run --rm t3docs/render-documentation:v1.6.10-full --help
+         dockrun_t3rdf --help
 
-      ... did you mean 'dockrun_t3rdh makehtml'?
+      ... did you mean 'dockrun_t3rdf makehtml'?
 
 5. Define some shell commands::
 
       # just show
-      docker run --rm t3docs/render-documentation:v1.6.9-html show-shell-commands
+      docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands
 
       # actually define - no blanks between '<('
-      source <(docker run --rm t3docs/render-documentation:v1.6.6 show-shell-commands)
+      source <(docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands)
 
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
 
-           docker run --rm t3docs/render-documentation:v1.6.9-html show-shell-commands > tempfile.sh
+           docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands > tempfile.sh
            source tempfile.sh
            rm tempfile.sh
 
-      # Verify there now is a command to 'TYPO3 render documentation (html)'::
+      # Verify there now is a command to 'TYPO3 render documentation full'::
 
-           dockrun_t3rdh --help
+           dockrun_t3rdf --help
 
 
 Render your documentation
 -------------------------
-
 1. Go to the **start folder** of your PROJECT. It should have a subfolder
    PROJECT/Documentation.
 
@@ -109,8 +109,8 @@ Render your documentation
 
 2. Do the rendering::
 
-      dockrun_t3rdh makehtml           # only html
-      dockrun_t3rdh makeall            # html, singlehtml, package
+      dockrun_t3rdf makehtml           # only html
+      dockrun_t3rdf makeall            # html, singlehtml, package, latex, pdf
 
 3. Find the results::
 
@@ -142,18 +142,21 @@ Advanced
 
 Run control
 -----------
-
 Select just HTML rendering and add more selectively::
 
-   dockrun_t3rdh makehtml \                 # html is always being built
+   dockrun_t3rdf makehtml \                 # html is always being built
          -c make_singlehtml 1 \             # enable singlehtml
-         -c make_package    1               # enable standalone package
+         -c make_package    1 \             # enable standalone package
+         -c make_latex      1 \             # enable latex + pdf
+         -c make_pdf        1               # enable pdf - on by default
 
 Or select ALL and turn off what you don't need::
 
-   dockrun_t3rdh makeall \                  # html is always being built
+   dockrun_t3rdf makeall \                  # html is always being built
          -c make_singlehtml 0 \             # disable singlehtml
-         -c make_package 0                  # disable standalone package
+         -c make_package 0 \                # disable standalone package
+         -c make_pdf 0 \                    # disable pdf
+         -c make_latex 0                    # disable latex + pdf
 
 Specifying folders
 ------------------
@@ -166,24 +169,40 @@ You can render a project that's located somewhere else. Set the environment
 variable `T3DOCS_PROJECT` accordingly::
 
    T3DOCS_PROJECT=/abs/path/to/project
-   dockrun_t3rdh makehtml
+   dockrun_t3rdf makehtml
 
 or::
 
-   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdh makehtml
+   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdf makehtml
 
 Specify a result folder to send the result somewhere else. The final output
 folder `$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
 
    T3DOCS_RESULT=/abs/path/to/result
-   dockrun_t3rdh makehtml
+   dockrun_t3rdf makehtml
 
 Specify a path to a temp folder if you want to expose all those many
 intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
 will be used::
 
    T3DOCS_TMP=/tmp
-   dockrun_t3rdh makehtml
+   dockrun_t3rdf makehtml
+
+
+Rename to default tag 'latest'
+------------------------------
+If you omit the tag it defaults to 'latest'. So you may want to rename the
+downloaded image to 'latest'::
+
+   # remove
+   docker rmi t3docs/render-documentation:latest
+   # pull
+   docker pull t3docs/render-documentation:v1.6.10-full
+   # rename
+   docker tag t3docs/render-documentation:v1.6.10-full \
+              t3docs/render-documentation:latest
+   # use the generic name without tag, for example in ~/.bashrc
+   source <(docker run --rm t3docs/render-documentation show-shell-commands)
 
 
 Caching
@@ -219,6 +238,10 @@ the most recent commit that changed that file.
 
 Repeat the `git-restore-mtime` procedure after Git operations like branch
 switches and checking out files.
+
+NEW since version v1.6.10: If you start the container via the `dockrun_...`
+command `git-restore-mtime` will be run automatically if it is an executable
+and can be found.
 
 
 What to ignore in GIT

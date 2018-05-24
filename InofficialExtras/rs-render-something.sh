@@ -6,7 +6,7 @@
 # use 'build-the-docker-image.sh' first.
 
 # define shortcut 'developer dockrun': ddockrun_t3rdf
-source <(docker run --rm t3docs/render-documentation:html-v1.6.6 show-shell-commands)
+source <(docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands)
 
 # select project
 T3DOCS_PROJECT=/home/marble/Repositories/github.com/TYPO3-Documentation/TYPO3CMS-Tutorial-SitePackage
@@ -73,7 +73,7 @@ docker run --rm --user=1000:1000 \
    -v /home/marble/Repositories/github.com/t3docs/docker-render-documentation/ALL-for-build/Rundir:/ALL/Rundir \
    -v /home/marble/Repositories/github.com/t3docs/VOLUMES/Toolchains:/ALL/Toolchains \
    -v /home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/Documentation-GENERATED-temp/Cache/site-packages:/usr/local/lib/python2.7/site-packages \
-   t3docs/render-documentation:html-v1.6.6 makehtml
+   t3docs/render-documentation:v1.6.10-full makehtml
 fi
 
 # ##################################################

@@ -8,6 +8,13 @@ export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
+# export of site-packages requested?
+if [[ -w "/RESULT/Cache/site-packages/EXPORT_TO_HERE" ]]; then true
+   rsync -a --delete \
+      "/usr/local/lib/python2.7/site-packages" \
+      "/RESULT/Cache/"
+fi
+
 function mm-minimalhelp(){
    cat <<EOT
 $OUR_IMAGE_SLOGAN (${OUR_IMAGE_VERSION})
@@ -26,6 +33,8 @@ Usage:
     Prepare:
         Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the commandline of your system:
             source <(docker run --rm $OUR_IMAGE show-shell-commands)
+        Inspect function:
+            declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
     Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]
             ARGUMENT             DESCRIPTION
@@ -79,7 +88,6 @@ Find the (possible) results. For example:
    ./Documentation-GENERATED-temp/.../singlehtml/Index.html
    ./Documentation-GENERATED-temp/.../_pdf/
    ./Documentation-GENERATED-temp/.../_buildinfo/
-   ./Documentation-GENERATED-temp/.../_buildinfo/latex/
    ./Documentation-GENERATED-temp/.../_buildinfo/warnings.txt
 EOT
 else

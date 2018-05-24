@@ -1,5 +1,5 @@
 
-html-v1.6.6
+v1.6.10-full
 
 
 Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.

@@ -4,10 +4,10 @@ source /ALL/Downloads/envvars.sh
 
 # provide defaults
 #1
-VERSION=${VERSION:-"v1.6.9-html"}
+VERSION=${VERSION:-"v1.6.10-full"}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdh}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdh - TYPO3 render documentation (html)"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
 #2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 #3
@@ -46,6 +46,9 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 # local DEBUG=\${T3DOCS_DEBUG:-1}
 # set T3DOCS_DEBUG=0 or set T3DOCS_DEBUG=1
 local DEBUG=\${T3DOCS_DEBUG:-0}
+local git_restore_mtime=\$(which git-restore-mtime)
+local exitcode=\$?
+if [[ \$exitcode -ne 0 ]]; then git_restore_mtime=; fi
 
 # start command building
 local cmd="docker run --rm"
@@ -67,7 +70,7 @@ fi
 # absolute path to existing folder PROJECT or current dir
 local PROJECT=\${T3DOCS_PROJECT:-\$(pwd)}
 cmd="\$cmd -v \$PROJECT:/PROJECT:ro"
-if ((\$DEBUG)); then; echo "PROJECT......: \$PROJECT"; fi
+if ((\$DEBUG)); then echo "PROJECT......: \$PROJECT"; fi
 
 # RESULT
 # absolute path to existing folder RESULT of (RESULT/Documentation-GENERATED-temp)
@@ -79,7 +82,7 @@ if ((\$CREATING)); then
    if ((\$DEBUG)); then echo creating: mkdir -p "\$RESULT" ; fi
    mkdir -p "\$RESULT" 2>/dev/null
 fi
-if ((\$DEBUG)); then; echo "RESULT.......: \$RESULT"; fi
+if ((\$DEBUG)); then echo "RESULT.......: \$RESULT"; fi
 
 # TMP
 # absolute path to existing folder TMP of (TMP/tmp-GENERATED-temp)
@@ -94,7 +97,7 @@ if [[ -d "\${TMP}" ]]; then
    if ((\$CREATING)); then
       /bin/bash -c "rm -rf \$TMP/*"
    fi
-   if ((\$DEBUG)); then; echo "TMP..........: \$TMP"; fi
+   if ((\$DEBUG)); then echo "TMP..........: \$TMP"; fi
 fi
 
 # DUMMY_WEBROOT
@@ -102,7 +105,7 @@ fi
 local DUMMY_WEBROOT=\${T3DOCS_DUMMY_WEBROOT:-\$(pwd)/tmp-GENERATED-dummy_webroot}
 if [ -d "\$DUMMY_WEBROOT" ]; then
    cmd="\$cmd -v \$DUMMY_WEBROOT:/ALL/dummy_webroot"
-   if ((\$DEBUG)); then; echo "DUMMY_WEBROOT: \$DUMMY_WEBROOT"; fi
+   if ((\$DEBUG)); then echo "DUMMY_WEBROOT: \$DUMMY_WEBROOT"; fi
 fi
 
 # MAKEDIR
@@ -110,7 +113,7 @@ fi
 local MAKEDIR=\${T3DOCS_MAKEDIR:-\$(pwd)/tmp-GENERATED-Makedir}
 if [ -d "\$MAKEDIR" ]; then
    cmd="\$cmd -v \$MAKEDIR:/ALL/Makedir"
-   if ((\$DEBUG)); then; echo "MAKEDIR......: \$MAKEDIR"; fi
+   if ((\$DEBUG)); then echo "MAKEDIR......: \$MAKEDIR"; fi
 fi
 
 # MENU
@@ -118,7 +121,7 @@ fi
 local MENU=\${T3DOCS_MENU:-\$(pwd)/tmp-GENERATED-Menu}
 if [ -d "\$MENU" ]; then
    cmd="\$cmd -v \$MENU:/ALL/Menu"
-   if ((\$DEBUG)); then; echo "MENU.........: \$MENU"; fi
+   if ((\$DEBUG)); then echo "MENU.........: \$MENU"; fi
 fi
 
 # RUNDIR
@@ -126,7 +129,7 @@ fi
 local RUNDIR=\${T3DOCS_RUNDIR:-\$(pwd)/tmp-GENERATED-Rundir}
 if [ -d "\$RUNDIR" ]; then
    cmd="\$cmd -v \$RUNDIR:/ALL/Rundir"
-   if ((\$DEBUG)); then; echo "RUNDIR.......: \$RUNDIR"; fi
+   if ((\$DEBUG)); then echo "RUNDIR.......: \$RUNDIR"; fi
 fi
 
 # TOOLCHAINS
@@ -134,15 +137,25 @@ fi
 local TOOLCHAINS=\${T3DOCS_TOOLCHAINS:-\$(pwd)/tmp-GENERATED-Toolchains}
 if [ -d "\$TOOLCHAINS" ]; then
    cmd="\$cmd -v \$TOOLCHAINS:/ALL/Toolchains"
-   if ((\$DEBUG)); then; echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
+   if ((\$DEBUG)); then echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
 fi
 
 cmd="\$cmd $OUR_IMAGE"
-if ((\$DEBUG)); then; echo "OUR_IMAGE....: $OUR_IMAGE"; fi
+if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 
 # add remaining arguments
 if [[ "\$@" != "/bin/bash" ]]; then
    cmd="\$cmd \$@"
+   # if script git-restore-mtime exists and '*make*' in args try the command
+   # See README: get 'git-restore-mtime' from https://github.com/MestreLion/git-tools
+   if [[ "\$git_restore_mtime" != "" ]] && [[ \$@ =~ .*make.* ]]; then
+      if ((\$DEBUG)); then
+         echo \$git_restore_mtime
+         \$git_restore_mtime
+      else
+         \$git_restore_mtime 2>/dev/null
+      fi
+   fi
 fi
 if [[ -w "\$RESULT" ]]; then true
    echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >"\$RESULT/last-docker-run-command-GENERATED.sh"
@@ -153,8 +166,6 @@ fi
 eval "\$cmd"
 }
 
-echo "Tip: Inspect the function:"
-echo "    declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 echo "This function is now defined FOR THIS terminal window:"
 echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 
