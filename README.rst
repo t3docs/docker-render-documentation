@@ -19,10 +19,9 @@ This is the official recipe to build the Docker image
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2018-05-23
+:Date:            2018-05-24
 :Version:         v1.6.10-html
-:Capabilites:     html, singlehtml, package, latex, pdf;
-                  can read and convert ./doc/manual.sxw
+:Capabilites:     html, singlehtml, package
 
 
 Contribute
@@ -110,7 +109,7 @@ Render your documentation
 2. Do the rendering::
 
       dockrun_t3rdh makehtml           # only html
-      dockrun_t3rdh makeall            # html, singlehtml, package, latex, pdf
+      dockrun_t3rdh makeall            # html, singlehtml, package
 
 3. Find the results::
 
@@ -146,17 +145,13 @@ Select just HTML rendering and add more selectively::
 
    dockrun_t3rdh makehtml \                 # html is always being built
          -c make_singlehtml 1 \             # enable singlehtml
-         -c make_package    1 \             # enable standalone package
-         -c make_latex      1 \             # enable latex + pdf
-         -c make_pdf        1               # enable pdf - on by default
+         -c make_package    1               # enable standalone package
 
 Or select ALL and turn off what you don't need::
 
    dockrun_t3rdh makeall \                  # html is always being built
          -c make_singlehtml 0 \             # disable singlehtml
-         -c make_package 0 \                # disable standalone package
-         -c make_pdf 0 \                    # disable pdf
-         -c make_latex 0                    # disable latex + pdf
+         -c make_package 0                  # disable standalone package
 
 Specifying folders
 ------------------
