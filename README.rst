@@ -20,7 +20,7 @@ This is the official recipe to build the Docker image
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-05-23
-:Version:         v1.6.10-full
+:Version:         v1.6.11-full
 :Capabilites:     html, singlehtml, package, latex, pdf;
                   can read and convert ./doc/manual.sxw
 
@@ -51,17 +51,17 @@ Prepare Docker
 
 3. Download the image::
 
-      docker pull t3docs/render-documentation:v1.6.10-full
+      docker pull t3docs/render-documentation
 
 4. Verify::
 
-      docker run --rm t3docs/render-documentation:v1.6.10-full
+      docker run --rm t3docs/render-documentation
 
    You should see::
 
-      t3rdf - TYPO3 render documentation full (v1.6.10-full)
+      t3rdf - TYPO3 render documentation full (v1.6.11-full)
       For help:
-         docker run --rm t3docs/render-documentation:v1.6.10-full --help
+         docker run --rm t3docs/render-documentation --help
          dockrun_t3rdf --help
 
       ... did you mean 'dockrun_t3rdf makehtml'?
@@ -69,15 +69,15 @@ Prepare Docker
 5. Define some shell commands::
 
       # just show
-      docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands
+      docker run --rm t3docs/render-documentation show-shell-commands
 
       # actually define - no blanks between '<('
-      source <(docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands)
+      source <(docker run --rm t3docs/render-documentation show-shell-commands)
 
       # In case line `source <(...)` doesn't work on your OS use these three
         lines::
 
-           docker run --rm t3docs/render-documentation:v1.6.10-full show-shell-commands > tempfile.sh
+           docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
            source tempfile.sh
            rm tempfile.sh
 
@@ -192,14 +192,14 @@ will be used::
 Rename to default tag 'latest'
 ------------------------------
 If you omit the tag it defaults to 'latest'. So you may want to rename the
-downloaded image to 'latest'::
+downloaded image to 'latest' if what you downloaded was not 'latest'::
 
    # remove
    docker rmi t3docs/render-documentation:latest
    # pull
-   docker pull t3docs/render-documentation:v1.6.10-full
+   docker pull t3docs/render-documentation:v1.6.11-full
    # rename
-   docker tag t3docs/render-documentation:v1.6.10-full \
+   docker tag t3docs/render-documentation:v1.6.11-full \
               t3docs/render-documentation:latest
    # use the generic name without tag, for example in ~/.bashrc
    source <(docker run --rm t3docs/render-documentation show-shell-commands)
@@ -239,7 +239,7 @@ the most recent commit that changed that file.
 Repeat the `git-restore-mtime` procedure after Git operations like branch
 switches and checking out files.
 
-NEW since version v1.6.10: If you start the container via the `dockrun_...`
+NEW since version version 1.6.10: If you start the container via the `dockrun_...`
 command `git-restore-mtime` will be run automatically if it is an executable
 and can be found.
 

@@ -7,21 +7,21 @@
 #     ./build-the-docker-image.sh
 # Examples:
 #     cd InofficialExtras
-#     VERSION=v1.6.10-full ./build-the-docker-image.sh
-#     VERSION=v1.6.10-full OUR_IMAGE_TAG=latest DOCKRUN_PREFIX="dockrun_" ./build-the-docker-image.sh
-#     VERSION=v1.6.10-full DOCKRUN_PREFIX="ddockrun_" ./build-the-docker-image.sh
+#     VERSION=v1.6.11-full ./build-the-docker-image.sh
+#     VERSION=v1.6.11-full OUR_IMAGE_TAG=latest DOCKRUN_PREFIX="dockrun_" ./build-the-docker-image.sh
+#     VERSION=v1.6.11-full DOCKRUN_PREFIX="ddockrun_" ./build-the-docker-image.sh
 
 
 # How to find the theme mtime:
 # cd ~/Repositories/github.com/TYPO3-Documentation/t3SphinxThemeRtd
-# git show -s --format=%ci v3.6.14 ➜ 2018-05-04 20:18:58 +0200
-# date "+%s" --date="$(git show -s --format=%ci v3.6.14)" ➜ 1525457938
-# THEME_MTIME=date "+%s" --date="$(git show -s --format=%ci v3.6.14)"
-# # THEME_MTIME ➜ 1525457938
+# git show -s --format=%ci v3.6.15 ➜ 2018-07-04 15:24:13 +0200
+# date "+%s" --date="$(git show -s --format=%ci v3.6.15)" ➜ 1530710653
+# THEME_MTIME=$(date "+%s" --date="$(git show -s --format=%ci v3.6.15)")
+# # THEME_MTIME ➜ 1530710653
 #
 
 # variables 1
-VERSION=${VERSION:-"v1.6.10-dev-html"}
+VERSION=${VERSION:-"v1.6.11-dev-html"}
 DEBIAN_FRONTEND=${DEBIAN_FRONTEND:-noninteractive}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}

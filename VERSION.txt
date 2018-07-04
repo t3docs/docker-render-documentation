@@ -1,5 +1,5 @@
 
-v1.6.10-full
+v1.6.11-full
 
 
 Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.
