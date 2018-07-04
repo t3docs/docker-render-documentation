@@ -1,13 +1,14 @@
 
 Changelog.txt
 
-v1.6.10-full
+v1.6.11-full
    2018-05-23
    - typoscript syntax highlighter should now always succeed
    - improved toolchain
    - PDF generation working again
    - update mtime of repo files automatically if 'git-restore-mtime' is in path
    - as before: uses Sphinx caching
+   - standalone *.zip is much smaller, as most fonts aren't shipped any more
 
 v1.6.9-full
    2018-05-10
