@@ -11,6 +11,7 @@ This is the official recipe to build the Docker image
 
 :Authors:         TYPO3 Documentation Team
 :Repository:      https://github.com/t3docs/docker-render-documentation
+:Branch:          master
 :Docker image:    t3docs/render-documentation,
                   https://hub.docker.com/r/t3docs/render-documentation/
 :Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
@@ -19,8 +20,9 @@ This is the official recipe to build the Docker image
 :Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2018-05-23
-:Version:         v1.6.11-full
+:Date:            2018-07-04
+:Version:         Docker image version 'latest'='v1.6.11-full', from
+                  repository branch 'master'
 :Capabilites:     html, singlehtml, package, latex, pdf;
                   can read and convert ./doc/manual.sxw
 

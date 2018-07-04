@@ -23,6 +23,8 @@ if ((1)); then
       echo "You may now run:"
       echo "   docker run --rm t3docs/render-documentation:${OUR_IMAGE_TAG}"
       echo "   source <(docker run --rm t3docs/render-documentation:${OUR_IMAGE_TAG} show-shell-commands)"
+      echo
+      echo "docker rmi t3docs/render-documentation:latest"
    else
       echo Failed!
    fi
