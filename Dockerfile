@@ -2,13 +2,13 @@
 
 # ==================================================
 # (1) results in ca. 821MB
-#FROM python:2
+FROM python:2
 
 # (2) results in ca. 2.06GB, can create latex pdf
 # FROM t3docs/python2-with-latex
 
 # (3) results in ca. 2.53 GB, can create latex pdf, can read OpenOffice
-FROM t3docs/docker-libreoffice-on-python2-with-latex
+#FROM t3docs/docker-libreoffice-on-python2-with-latex
 
 # ==================================================
 
