@@ -21,7 +21,7 @@ This is the official recipe to build the Docker image
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-07-04
-:Version:         Docker image version 'latest'='v1.6.11-full', from
+:Version:         Docker image version 'latest'='v1.6.11-html', from
                   repository branch 'master'
 :Capabilites:     html, singlehtml, package, latex, pdf;
                   can read and convert ./doc/manual.sxw
@@ -61,7 +61,7 @@ Prepare Docker
 
    You should see::
 
-      t3rdf - TYPO3 render documentation full (v1.6.11-full)
+      t3rdf - TYPO3 render documentation html (v1.6.11-html)
       For help:
          docker run --rm t3docs/render-documentation --help
          dockrun_t3rdf --help
@@ -83,7 +83,7 @@ Prepare Docker
            source tempfile.sh
            rm tempfile.sh
 
-      # Verify there now is a command to 'TYPO3 render documentation full'::
+      # Verify there now is a command to 'TYPO3 render documentation html'::
 
            dockrun_t3rdf --help
 
@@ -199,9 +199,9 @@ downloaded image to 'latest' if what you downloaded was not 'latest'::
    # remove
    docker rmi t3docs/render-documentation:latest
    # pull
-   docker pull t3docs/render-documentation:v1.6.11-full
+   docker pull t3docs/render-documentation:v1.6.11-html
    # rename
-   docker tag t3docs/render-documentation:v1.6.11-full \
+   docker tag t3docs/render-documentation:v1.6.11-html \
               t3docs/render-documentation:latest
    # use the generic name without tag, for example in ~/.bashrc
    source <(docker run --rm t3docs/render-documentation show-shell-commands)

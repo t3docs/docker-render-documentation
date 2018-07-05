@@ -10,7 +10,7 @@
 source <( \
    docker run --rm \
    -v /home/marble/Repositories/github.com/t3docs/docker-render-documentation/ALL-for-build/Menu:/ALL/Menu \
-   t3docs/render-documentation:v1.6.11-full show-shell-commands \
+   t3docs/render-documentation:v1.6.11-html show-shell-commands \
    )
 
 # ##################################################

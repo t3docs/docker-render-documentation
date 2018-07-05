@@ -4,10 +4,10 @@ source /ALL/Downloads/envvars.sh
 
 # provide defaults
 #1
-VERSION=${VERSION:-"v1.6.11-full"}
+VERSION=${VERSION:-"v1.6.11-html"}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation html"}
 #2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 #3

@@ -36,14 +36,14 @@ FROM python:2
 # Rename example:
 #   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
-ARG OUR_IMAGE_VERSION=v1.6.11-full
+ARG OUR_IMAGE_VERSION=v1.6.11-html
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
 ARG hack_OUR_IMAGE_SHORT="t3rdf"
-ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
+ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation html"
 
 ENV \
    HOME="/ALL/userhome" \
