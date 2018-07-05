@@ -5,12 +5,12 @@
 
 # use 'build-the-docker-image.sh' first.
 
-# define shortcuts dockrun_t3rdh, dockrun_t3rdh
-# source <(docker run --rm t3docs/render-documentation:v1.6.10-dev-html show-shell-commands)
+# define shortcuts dockrun_t3rdh, dockrun_t3rdf
+# source <(docker run --rm t3docs/render-documentation:v1.6.11-dev-html show-shell-commands)
 source <( \
    docker run --rm \
    -v /home/marble/Repositories/github.com/t3docs/docker-render-documentation/ALL-for-build/Menu:/ALL/Menu \
-   t3docs/render-documentation:v1.6.10-html show-shell-commands \
+   t3docs/render-documentation:v1.6.11-full show-shell-commands \
    )
 
 # ##################################################
@@ -60,7 +60,7 @@ popd >/dev/null
 
 # ##################################################
 
-dockrun_t3rdh makehtml
+dockrun_t3rdf makehtml
 
 # ##################################################
 unset T3DOCS_DEBUG T3DOCS_DUMMY_WEBROOT T3DOCS_MAKEDIR T3DOCS_MENU

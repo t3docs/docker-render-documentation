@@ -86,6 +86,7 @@ Final exit status: 0 (completed)
 Find the (possible) results. For example:
    ./Documentation-GENERATED-temp/.../Index.html
    ./Documentation-GENERATED-temp/.../singlehtml/Index.html
+   ./Documentation-GENERATED-temp/.../_pdf/
    ./Documentation-GENERATED-temp/.../_buildinfo/
    ./Documentation-GENERATED-temp/.../_buildinfo/warnings.txt
 EOT

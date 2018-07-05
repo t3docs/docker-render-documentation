@@ -2,13 +2,13 @@
 
 # ==================================================
 # (1) results in ca. 821MB
-FROM python:2
+#FROM python:2
 
 # (2) results in ca. 2.06GB, can create latex pdf
 # FROM t3docs/python2-with-latex
 
 # (3) results in ca. 2.53 GB, can create latex pdf, can read OpenOffice
-#FROM t3docs/docker-libreoffice-on-python2-with-latex
+FROM t3docs/docker-libreoffice-on-python2-with-latex
 
 # ==================================================
 
@@ -27,23 +27,23 @@ FROM python:2
 # Use:
 #    docker run --rm t3docs/render-documentation[:tag]
 #    source <(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)
-#    dockrun_t3rdh
-#    dockrun_t3rdh makehtml
+#    dockrun_t3rdf
+#    dockrun_t3rdf makehtml
 # or
-#    ddockrun_t3rdh
-#    ddockrun_t3rdh makeall
+#    ddockrun_t3rdf
+#    ddockrun_t3rdf makeall
 #
 # Rename example:
 #   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
-ARG OUR_IMAGE_VERSION=v1.6.10-html
+ARG OUR_IMAGE_VERSION=v1.6.11-full
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
-ARG hack_OUR_IMAGE_SHORT="t3rdh"
-ARG OUR_IMAGE_SLOGAN="t3rdh - TYPO3 render documentation full"
+ARG hack_OUR_IMAGE_SHORT="t3rdf"
+ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
 
 ENV \
    HOME="/ALL/userhome" \
@@ -55,7 +55,8 @@ ENV \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
-   THEME_MTIME="1525457938"
+   THEME_VERSION="v3.6.15" \
+   THEME_MTIME="1530710653"
 
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
@@ -123,7 +124,7 @@ RUN \
    \
    && COMMENT "Install Python packages" \
    && pip install --upgrade pip \
-   && pip install https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/v3.6.14.zip \
+   && pip install https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/${THEME_VERSION}.zip \
    && find /usr/local/lib/python2.7/site-packages/t3SphinxThemeRtd/ -exec touch --no-create --time=mtime --date="$(date --rfc-2822 --date=@$THEME_MTIME)" {} \; \
    && pip install -r /ALL/requirements.txt \
    \
@@ -185,7 +186,7 @@ RUN COMMENT "Provide the toolchain" \
       \n\
       Versions used for $OUR_IMAGE_VERSION:\n\
       \n\
-      Sphinx theme        t3SphinxThemeRtd       v3.6.14  mtime:$THEME_MTIME\n\
+      Sphinx theme        t3SphinxThemeRtd       $THEME_VERSION  mtime:$THEME_MTIME\n\
       Toolchain           RenderDocumentation    $TOOLCHAIN_VERSION\n\
       Toolchain tool      TCT                    0.2.0\n\
       Python packages     see requirements.txt\n\

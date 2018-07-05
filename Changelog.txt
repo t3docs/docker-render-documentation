@@ -1,11 +1,7 @@
 
 Changelog.txt
 
-v1.6.10-html
-   2018-05-24
-   see v1.6.10-full
-
-v1.6.10-full
+v1.6.11-full
    2018-05-23
    - typoscript syntax highlighter should now always succeed
    - improved toolchain

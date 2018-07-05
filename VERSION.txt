@@ -1,6 +1,8 @@
 
-v1.6.10-html
+v1.6.11-full
 
+
+Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.
 
 Keep version number like above in files:
 
