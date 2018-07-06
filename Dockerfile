@@ -90,13 +90,6 @@ RUN \
    \
    && COMMENT "Install system packages" \
    && apt-get update \
-   \
-   && COMMENT "for ubuntu:18.04: (unfinished)" \
-   && apt-get install --dry-run -yq --no-install-recommends \
-      wget \
-      python \
-      \
-   && COMMENT "always:" \
    && apt-get install -yq --no-install-recommends \
       less \
       nano \
