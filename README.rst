@@ -61,12 +61,12 @@ Prepare Docker
 
    You should see::
 
-      t3rdf - TYPO3 render documentation html (v1.6.11-html)
+      t3rdh - TYPO3 render documentation html (v1.6.11-html)
       For help:
          docker run --rm t3docs/render-documentation --help
-         dockrun_t3rdf --help
+         dockrun_t3rdh --help
 
-      ... did you mean 'dockrun_t3rdf makehtml'?
+      ... did you mean 'dockrun_t3rdh makehtml'?
 
 5. Define some shell commands::
 
@@ -85,7 +85,7 @@ Prepare Docker
 
       # Verify there now is a command to 'TYPO3 render documentation html'::
 
-           dockrun_t3rdf --help
+           dockrun_t3rdh --help
 
 
 Render your documentation
@@ -111,8 +111,8 @@ Render your documentation
 
 2. Do the rendering::
 
-      dockrun_t3rdf makehtml           # only html
-      dockrun_t3rdf makeall            # html, singlehtml, package, latex, pdf
+      dockrun_t3rdh makehtml           # only html
+      dockrun_t3rdh makeall            # html, singlehtml, package, latex, pdf
 
 3. Find the results::
 
@@ -146,7 +146,7 @@ Run control
 -----------
 Select just HTML rendering and add more selectively::
 
-   dockrun_t3rdf makehtml \                 # html is always being built
+   dockrun_t3rdh makehtml \                 # html is always being built
          -c make_singlehtml 1 \             # enable singlehtml
          -c make_package    1 \             # enable standalone package
          -c make_latex      1 \             # enable latex + pdf
@@ -154,7 +154,7 @@ Select just HTML rendering and add more selectively::
 
 Or select ALL and turn off what you don't need::
 
-   dockrun_t3rdf makeall \                  # html is always being built
+   dockrun_t3rdh makeall \                  # html is always being built
          -c make_singlehtml 0 \             # disable singlehtml
          -c make_package 0 \                # disable standalone package
          -c make_pdf 0 \                    # disable pdf
@@ -171,24 +171,24 @@ You can render a project that's located somewhere else. Set the environment
 variable `T3DOCS_PROJECT` accordingly::
 
    T3DOCS_PROJECT=/abs/path/to/project
-   dockrun_t3rdf makehtml
+   dockrun_t3rdh makehtml
 
 or::
 
-   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdf makehtml
+   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdh makehtml
 
 Specify a result folder to send the result somewhere else. The final output
 folder `$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
 
    T3DOCS_RESULT=/abs/path/to/result
-   dockrun_t3rdf makehtml
+   dockrun_t3rdh makehtml
 
 Specify a path to a temp folder if you want to expose all those many
 intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
 will be used::
 
    T3DOCS_TMP=/tmp
-   dockrun_t3rdf makehtml
+   dockrun_t3rdh makehtml
 
 
 Rename to default tag 'latest'

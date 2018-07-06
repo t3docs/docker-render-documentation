@@ -27,11 +27,11 @@ FROM python:2
 # Use:
 #    docker run --rm t3docs/render-documentation[:tag]
 #    source <(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)
-#    dockrun_t3rdf
-#    dockrun_t3rdf makehtml
+#    dockrun_t3rdh
+#    dockrun_t3rdh makehtml
 # or
-#    ddockrun_t3rdf
-#    ddockrun_t3rdf makeall
+#    ddockrun_t3rdh
+#    ddockrun_t3rdh makeall
 #
 # Rename example:
 #   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
@@ -42,8 +42,8 @@ ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
-ARG hack_OUR_IMAGE_SHORT="t3rdf"
-ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation html"
+ARG hack_OUR_IMAGE_SHORT="t3rdh"
+ARG OUR_IMAGE_SLOGAN="t3rdh - TYPO3 render documentation html"
 
 ENV \
    HOME="/ALL/userhome" \
