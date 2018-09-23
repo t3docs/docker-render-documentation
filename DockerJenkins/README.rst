@@ -6,35 +6,6 @@ Jenkins in docker used to render documentation
 .. default-role:: code
 .. highlight:: shell
 
-This is the official recipe to build a Docker image that supports 
-calling die official Docker image t3docs/render-documentation out
-of the running container.
-
-:Authors:         TYPO3 Documentation Team
-:Repository:      https://github.com/t3docs/docker-render-documentation
-:Branch:          master
-:Docker image:    t3docs/render-documentation,
-                  https://hub.docker.com/r/t3docs/render-documentation/
-:Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
-:Documentation:   Is being moved to https://github.com/t3docs/t3docs-documentation
-                  and maintained separately
-:Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
-:See also:        Toolchain 'RenderDocumentation'
-                  https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2018-07-04
-:Version:         Docker image version 'latest'='v1.6.11-full', from
-                  repository branch 'master'
-:Capabilites:     html, singlehtml, package, latex, pdf;
-                  can read and convert ./doc/manual.sxw
-
-
-Contribute
-==========
-
-Please use the `issue tracker
-<https://github.com/t3docs/docker-render-documentation/issues>`__ for
-contributing and reporting.
-
 
 Quickstart on Linux
 ===================
@@ -45,6 +16,7 @@ Prepare Jenkins in Docker
 1. Follow all steps mention in [a Install Docker](../README.rst#prepare-docker)
 
 2. Copy all content of this directory (including all subdirectories) to a location on your docker host
+
     (e.g. /opt/docker/jenkins)
     
 3. Change directory to dockerfiles
@@ -64,11 +36,47 @@ Prepare Jenkins in Docker
 Basic understanding
 -------------------
 
+The main issue that should be addressed when running Jenkin in a Cocker container is
+that  without some preparation you are not able to launch other Docker containers.
+
+A `blog entry of Felix Heppner <https://www.oose.de/blogpost/jenkins-in-docker-und-mit-docker-und-fuer-docker>`__ 
+describes the issue, the concept to solve it and finally a concrete solution how to create a Dockerfile. 
+This concept has been used in the here given implementation.
+
+The core idea is having a shared mount point which is accessible from the host and from insife the Jeniks docker container.
+The upper mentioned solution addresses the issue that you're using different operating system accounts normaly 
+having different UID and GID on both systems.
+
+The here shown implementation uses the directory ``dockermount/external`` as a shared mount.
+Looking from both perspectives this directory has different coordinates:
+
+    * from hosts perspective it's ``<directory where dockerRun.sh resides>/../dockermounts/external``
+    
+    * from Jenkins view it's ``/mnt/external``
+
+This fact must be taken into account when you launch another Docker container from within your Jenkins container.
+If you e.g. do a ``git clone`` in Jenkins to the directory ``/mnt/external`` and you like to get the documentation rendered using the ``t3docs/render-documentation`` image. If you launch the rendering container it takes the perspective of the host.
+So all directories must also being set from this perspective.
 
 
--v "${BASE_DIR}"/external:/mnt/external \
+Modifications to get rendering running
+--------------------------------------
 
+There are two files injected into the standard ``jenkins/jenkins``-image:
 
+1. ``git-restore-mtime``
+    Just to enable caching (see `docker-render-documentation <https://github.com/thucke/docker-render-documentation/tree/renderInDockerJenkins#caching-for-documentation-files-of-a-repository>`__)
+
+2. ``renderT3docsProject.sh``
+    The core script to launch the rendering container. It can be configured by four environment variables. You may inject them into Jenkins context using a plugin or set them just before calling the script (see below)
+    
+    1. ``T3DOCS_EXTERNAL_MOUNT`` (Default: ``/volume1/docker/Jenkins/dockermounts/external``)
+    
+    2. ``T3DOCS_LOCAL_MOUNT`` (Default: ``/mnt/external``)
+    
+    3. ``JENKINS_GIT_DIR`` (Default: ``git``)
+    
+    4. ``T3DOCS_RESULT_DIR`` (Default: ``t3docs``)
 
       
 
