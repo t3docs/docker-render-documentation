@@ -254,6 +254,13 @@ What to ignore in GIT
    echo "*GENERATED*" >>~/.gitignore_global
 
 
+Put Jenkins into Docker and render your documentation
+=====================================================
+   
+[Jenkins in docker used to render documentation](DockerJenkins/README.rst)
+
+
+
 Finally
 =======
 
