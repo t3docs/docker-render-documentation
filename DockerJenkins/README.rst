@@ -50,9 +50,9 @@ having different UID and GID on both systems.
 The here shown implementation uses the directory ``dockermount/external`` as a shared mount.
 Looking from both perspectives this directory has different coordinates:
 
-    * from hosts perspective it's ``<directory where dockerRun.sh resides>/../dockermounts/external``
+* from hosts perspective it's ``<directory where dockerRun.sh resides>/../dockermounts/external``
     
-    * from Jenkins view it's ``/mnt/external``
+* from Jenkins view it's ``/mnt/external``
 
 This fact must be taken into account when you launch another Docker container from within your Jenkins container.
 If you e.g. do a ``git clone`` in Jenkins to the directory ``/mnt/external`` and you like to get the documentation rendered using the ``t3docs/render-documentation`` image. If you launch the rendering container it takes the perspective of the host.
