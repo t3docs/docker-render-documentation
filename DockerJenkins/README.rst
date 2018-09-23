@@ -17,19 +17,19 @@ Prepare Jenkins in Docker
 
 2. Copy all content of this directory (including all subdirectories) to a location on your docker host
 
-    (e.g. /opt/docker/jenkins)
+   (e.g. /opt/docker/jenkins)
     
 3. Change directory to dockerfiles
 
 4. Build the Docker image
 
-    execute buildDockerImage.sh
+   execute buildDockerImage.sh
 
 5. Create the Jenkins container
 
-    execute dockerRun.sh
+   execute dockerRun.sh
     
-    Please do a restart of the Jenkins container after you finished its setup
+   Please do a restart of the Jenkins container after you finished its setup
     
 
 
