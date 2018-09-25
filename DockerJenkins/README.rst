@@ -88,3 +88,8 @@ In the most simple way you only need two steps in your Jenkins job:
    Look a the screenshot for configuration details as an example.
 
 .. image:: ScrnSCMCheckout.png
+
+
+2. Launch ``renderT3docsProject.sh`` in a shell 
+
+.. image:: ScrnExecuteShell.png
