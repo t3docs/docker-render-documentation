@@ -6,10 +6,6 @@ Jenkins in docker used to render documentation
 .. default-role:: code
 .. highlight:: shell
 
-
-Quickstart on Linux
-===================
-
 Prepare Jenkins in Docker
 -------------------------
 
@@ -81,7 +77,14 @@ There are two files injected into the standard ``jenkins/jenkins``-image:
 .. image:: DeploymentDiagram.png
 
 
-Finally
-=======
+Jenkins configuration
+---------------------
 
-Enjoy!
+In the most simple way you only need two steps in your Jenkins job:
+
+1. Do a checkout of your project
+
+   You may just make use of the default Source-Code-Management-plugin.
+   Look a the screenshot for configuration details as an example.
+
+.. image:: ScrnSCMCheckout.png
