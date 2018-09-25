@@ -15,7 +15,7 @@ set -x
 ###################################################################################################################################
 T3DOCS_EXTERNAL_MOUNT=${T3DOCS_EXTERNAL_MOUNT:-/volume1/docker/Jenkins/dockermounts/external}
 T3DOCS_LOCAL_MOUNT=${T3DOCS_LOCAL_MOUNT:-/mnt/external}
-JENKINS_GIT_DIR=${JENKINS_GIT_DIR:-git/TYPO3.ext.th_rating}
+JENKINS_GIT_DIR=${JENKINS_GIT_DIR:-git}
 T3DOCS_RESULT_DIR=${T3DOCS_RESULT_DIR:-t3docs}
 ######################
 
