@@ -78,7 +78,8 @@ There are two files injected into the standard ``jenkins/jenkins``-image:
     
     4. ``T3DOCS_RESULT_DIR`` (Default: ``t3docs``)
 
-      
+.. image:: DeploymentDiagram.png
+
 
 Finally
 =======
