@@ -102,7 +102,6 @@ RUN \
       nano \
       ncdu \
       pandoc \
-      php5-cli \
       rsync \
       tidy \
       unzip \
