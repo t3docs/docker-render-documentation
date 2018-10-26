@@ -1,6 +1,10 @@
 
 Changelog.txt
 
+v1.6.11-html
+   2018-10-26
+   see v1.6.11-full
+
 v1.6.10-html
    2018-05-24
    see v1.6.10-full
