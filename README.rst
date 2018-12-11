@@ -101,7 +101,7 @@ Render your documentation
       wget https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip
 
       # unpack
-      unzip  Public-Info-000-master.zip
+      unzip master.zip
 
       # DO NOT go to the subfolder Public-Info-000-master/Documentation !!!
 
