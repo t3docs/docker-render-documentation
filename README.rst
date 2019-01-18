@@ -35,11 +35,11 @@ Please use the `issue tracker
 contributing and reporting.
 
 
-Quickstart on Linux
-===================
-
 Prepare Docker
---------------
+==============
+
+You must do this only once on your system.
+
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
 
 2. Verify Docker is working::
@@ -51,11 +51,17 @@ Prepare Docker
       Hello from Docker.
       This message shows that ...
 
-3. Download the image::
+Download t3docs Docker Image
+============================
+
+You must do this once on you system. You can repeat any time to get a new version
+of the Docker image.
+
+1. Download t3docs Docker image::
 
       docker pull t3docs/render-documentation
 
-4. Verify::
+2. Optional: Verify::
 
       docker run --rm t3docs/render-documentation
 
@@ -68,10 +74,56 @@ Prepare Docker
 
       ... did you mean 'dockrun_t3rdf makehtml'?
 
-5. Define some shell commands::
+
+Prepare Your Documentation Project
+==================================
+
+To render something, you must have an existing documentation project.
+Once you downloaded, cloned
+or created your documentation project, in order to render, you
+must go to the **start folder** of your PROJECT. **It should have a subfolder
+Documentation**.
+
+To create a project or download an existing project, do one of the following:
+
+1. Clone one of the existing manuals from https://github.com/TYPO3-Documentation
+
+   For example, for the "Getting Started" tutorial::
+
+      git clone https://github.com/TYPO3-Documentation/TYPO3CMS-Tutorial-GettingStarted.git
+      cd TYPO3CMS-Tutorial-GettingStarted
+
+
+2. Or, to render the core documentation (including Changelog)::
+
+      cd typo3/sysext/core
+
+3. Or, to create extension documentation from scratch::
+
+      git clone https://github.com/TYPO3-Documentation/TYPO3CMS-Example-ExtensionManual.git
+      cd TYPO3CMS-Example-ExtensionManual
+
+Quickstart on Linux
+===================
+
+Prerequisites: You have successfully installed Docker, pulled the t3docs/render-documentation
+Docker image and prepared your documentation project, as described in previous
+sections.
+
+Make Function dockrun_t3rdf Available
+-------------------------------------
+
+You will run a shell script from inside the Docker container and thus make the
+function dockrun_t3rdf available in your current terminal.
+
+You must call this once every time you open a new terminal.
+
+1. Optional: Show content of shell script::
 
       # just show
       docker run --rm t3docs/render-documentation show-shell-commands
+
+2. Make function dockrun_t3rdf available in current terminal::
 
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
@@ -83,59 +135,47 @@ Prepare Docker
            source tempfile.sh
            rm tempfile.sh
 
-      # Verify there now is a command to 'TYPO3 render documentation full'::
+3. Verify and show help::
 
-           dockrun_t3rdf --help
+      dockrun_t3rdf --help
 
 
 Render your documentation
 -------------------------
-1. Go to the **start folder** of your PROJECT. It should have a subfolder
-   Documentation.
 
-   You can use this `starter project
-   <https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip>`__
-   as an example::
+1. Do the rendering
 
-      # download
-      wget https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip
-
-      # unpack
-      unzip master.zip
-
-      # DO NOT go to the subfolder Public-Info-000-master/Documentation !!!
-
-      # go to the **start folder** of the PROJECT
-      cd Public-Info-000-master
-
-
-2. Do the rendering
-
-Usually, creating html is sufficient::
+   Usually, creating html is sufficient::
 
       dockrun_t3rdf makehtml           # only html
 
-Or build all::
+   Or build all::
 
       dockrun_t3rdf makeall            # html, singlehtml, ...
 
-3. Find the results::
+2. Find the results::
 
       # html
       Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
 
-The following will not be available, if you built with makehtml, but with makeall::
+   The following will not be available, if you built with makehtml, but with makeall::
 
       # singlehtml (all in one file)
       Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/Index.html
 
-You can find the buildinfo (containing errors and warnings) here::
+   You can find the buildinfo (containing errors and warnings) here::
 
       # build information
       Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/
 
       # Sphinx warnings and errors - should be empty!
       Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt
+
+3. Open the results in your browser
+
+   On Linux, this should usually open the generated Index.html in your browser::
+
+      xdg-open "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
 
 
 Quickstart on Windows
