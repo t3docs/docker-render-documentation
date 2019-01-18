@@ -111,11 +111,11 @@ Render your documentation
 
 2. Do the rendering
 
-Usually, creating html is sufficient::
+   Usually, creating html is sufficient::
 
       dockrun_t3rdf makehtml           # only html
 
-Or build all::
+   Or build all::
 
       dockrun_t3rdf makeall            # html, singlehtml, ...
 
@@ -124,12 +124,12 @@ Or build all::
       # html
       Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
 
-The following will not be available, if you built with makehtml, but with makeall::
+   The following will not be available, if you built with makehtml, but with makeall::
 
       # singlehtml (all in one file)
       Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/Index.html
 
-You can find the buildinfo (containing errors and warnings) here::
+   You can find the buildinfo (containing errors and warnings) here::
 
       # build information
       Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/
