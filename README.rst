@@ -91,7 +91,7 @@ Prepare Docker
 Render your documentation
 -------------------------
 1. Go to the **start folder** of your PROJECT. It should have a subfolder
-   PROJECT/Documentation.
+   Documentation.
 
    You can use this `starter project
    <https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip>`__
@@ -109,24 +109,33 @@ Render your documentation
       cd Public-Info-000-master
 
 
-2. Do the rendering::
+2. Do the rendering
+
+Usually, creating html is sufficient::
 
       dockrun_t3rdf makehtml           # only html
-      dockrun_t3rdf makeall            # html, singlehtml, package, latex, pdf
+
+Or build all::
+
+      dockrun_t3rdf makeall            # html, singlehtml, ...
 
 3. Find the results::
 
       # html
-      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/Index.html
+      Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
+
+The following will not be available, if you built with makehtml, but with makeall::
 
       # singlehtml (all in one file)
-      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/singlehtml/Index.html
+      Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/Index.html
+
+You can find the buildinfo (containing errors and warnings) here::
 
       # build information
-      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/_buildinfo/
+      Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/
 
       # Sphinx warnings and errors - should be empty!
-      PROJECT/Documentation-GENERATED-temp/Result/Project/0.0.0/_buildinfo/warnings.txt
+      Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt
 
 
 Quickstart on Windows
