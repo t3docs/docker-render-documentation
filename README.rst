@@ -34,11 +34,9 @@ Please use the `issue tracker
 contributing and reporting.
 
 
-Quickstart on Linux
-===================
+Setup
+=====
 
-Prepare Docker
---------------
 1. `Install Docker <https://docs.docker.com/engine/installation/>`__
 
 2. Verify Docker is working::
@@ -50,9 +48,10 @@ Prepare Docker
       Hello from Docker.
       This message shows that ...
 
-3. Download the image::
+3. Download the Docker image::
 
       docker pull t3docs/render-documentation
+
 
 4. Verify::
 
@@ -67,7 +66,22 @@ Prepare Docker
 
       ... did you mean 'dockrun_t3rdf makehtml'?
 
-5. Define some shell commands::
+5. Go to your documentation project
+
+   For example, clone an existing manual::
+
+      git clone https://github.com/TYPO3-Documentation/TYPO3CMS-Tutorial-GettingStarted.git
+      cd TYPO3CMS-Tutorial-GettingStarted
+
+   Whatever documentation project you use, you should be in the parent directory
+   of the Documentation directory when you run the following commands.
+
+
+Quickstart on Linux
+===================
+
+
+1. Define some shell commands::
 
       # just show
       docker run --rm t3docs/render-documentation show-shell-commands
@@ -81,30 +95,10 @@ Prepare Docker
          source tempfile.sh
          rm tempfile.sh
 
-      # Verify there now is a command to 'TYPO3 render documentation full'::
+      # Verify that command dockrun_t3rdf is now available::
 
          dockrun_t3rdf --help
 
-
-Render your documentation
--------------------------
-1. Go to the **start folder** of your PROJECT. It should have a subfolder
-   Documentation.
-
-   You can use this `starter project
-   <https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip>`__
-   as an example::
-
-      # download
-      wget https://github.com/T3DocumentationStarter/Public-Info-000/archive/master.zip
-
-      # unpack
-      unzip master.zip
-
-      # DO NOT go to the subfolder Public-Info-000-master/Documentation !!!
-
-      # go to the **start folder** of the PROJECT
-      cd Public-Info-000-master
 
 
 2. Do the rendering::
