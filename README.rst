@@ -97,7 +97,7 @@ Quickstart on Linux
            source tempfile.sh
            rm tempfile.sh
 
-      # Verify executing the command dockrun_t3rdf::
+      # Verify that command dockrun_t3rdf is now available::
 
            dockrun_t3rdf --help
 
