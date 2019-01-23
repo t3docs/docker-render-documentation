@@ -1,4 +1,3 @@
-
 ===========================
 docker-render-documentation
 ===========================
@@ -76,16 +75,15 @@ Prepare Docker
       # actually define - no blanks between '<('
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
 
-      # In case line `source <(...)` doesn't work on your OS use these three
-        lines::
+      # In case line `source <(...)` doesn't work on your OS use these three lines::
 
-           docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
-           source tempfile.sh
-           rm tempfile.sh
+         docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
+         source tempfile.sh
+         rm tempfile.sh
 
       # Verify there now is a command to 'TYPO3 render documentation full'::
 
-           dockrun_t3rdf --help
+         dockrun_t3rdf --help
 
 
 Render your documentation
@@ -164,11 +162,11 @@ The workflow described under Workflow for Linux may also work.
 
 To open the generated file in the browser:
 
-   In standard Windows Cmd terminal::
+In standard Windows Cmd terminal::
 
-      start "Documentation-GENERATED-temp\Result\project\0.0.0\Index.html"
+   start "Documentation-GENERATED-temp\Result\project\0.0.0\Index.html"
 
-   In a terminal, that supports '/' in paths, e.g. PowerShell, Bash Shell, Cygwin::
+In a terminal, that supports '/' in paths, e.g. PowerShell, Bash Shell, Cygwin::
 
       start "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
 
@@ -182,12 +180,12 @@ Quickstart with Docker Compose
 
       version: '2'
       services:
-        t3docmake:
-        image: t3docs/render-documentation:latest
-        volumes:
-        - ./:/PROJECT:ro
-        - ./Documentation-GENERATED-temp:/RESULT
-        command: makehtml
+         t3docmake:
+            image: t3docs/render-documentation:latest
+            volumes:
+            - ./:/PROJECT:ro
+            - ./Documentation-GENERATED-temp:/RESULT
+            command: makehtml
 
 2. Run Docker Compose::
 
