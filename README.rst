@@ -109,26 +109,16 @@ Render your documentation
       cd Public-Info-000-master
 
 
-2. Do the rendering
-
-   Usually, creating html is sufficient::
+2. Do the rendering::
 
       dockrun_t3rdf makehtml           # only html
-
-   Or build all::
-
-      dockrun_t3rdf makeall            # html, singlehtml, ...
 
 3. Find the results::
 
       # html
       Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
 
-   The following will not be available, if you built with makehtml, but with makeall::
-
-      # singlehtml (all in one file)
-      Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/Index.html
-
+   
    You can find the buildinfo (containing errors and warnings) here::
 
       # build information
