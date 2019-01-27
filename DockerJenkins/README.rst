@@ -35,8 +35,8 @@ Basic understanding
 The main issue that should be addressed when running Jenkin in a Docker container is
 that  without some preparation you are not able to launch other Docker containers.
 
-The core idea is having a shared mount point which is accessible from the host and from insife the Jeniks docker container.
-The upper mentioned solution addresses the issue that you're using different operating system accounts normaly 
+The core idea is having a shared mount point which is accessible from the host and from inside the Jeniks docker container.
+The upper mentioned solution addresses the issue that you're using different operating system accounts normally 
 having different UID and GID on both systems.
 
 The here shown implementation uses the directory ``dockermount/external`` as a shared mount.
