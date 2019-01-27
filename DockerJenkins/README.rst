@@ -32,12 +32,8 @@ Prepare Jenkins in Docker
 Basic understanding
 -------------------
 
-The main issue that should be addressed when running Jenkin in a Cocker container is
+The main issue that should be addressed when running Jenkin in a Docker container is
 that  without some preparation you are not able to launch other Docker containers.
-
-A `blog entry of Felix Heppner <https://www.oose.de/blogpost/jenkins-in-docker-und-mit-docker-und-fuer-docker>`__ 
-describes the issue, the concept to solve it and finally a concrete solution how to create a Dockerfile. 
-This concept has been used in the here given implementation.
 
 The core idea is having a shared mount point which is accessible from the host and from insife the Jeniks docker container.
 The upper mentioned solution addresses the issue that you're using different operating system accounts normaly 
