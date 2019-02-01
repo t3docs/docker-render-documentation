@@ -140,6 +140,12 @@ if [ -d "\$TOOLCHAINS" ]; then
    if ((\$DEBUG)); then echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
 fi
 
+# Add current working directory in environment variable HOST_CWD
+# (PWD should be defined in all POSIX compliant shells)
+if [ ! -z "${PWD}" ];then
+    cmd="\$cmd -e HOST_CWD=\$PWD"
+fi
+
 cmd="\$cmd $OUR_IMAGE"
 if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 
