@@ -171,7 +171,7 @@ Quickstart with Docker Compose
 
       version: '2'
       services:
-         t3docmake:
+         html:
             image: t3docs/render-documentation:latest
             volumes:
             - ./:/PROJECT:ro
@@ -183,7 +183,7 @@ Quickstart with Docker Compose
 
 2. Run Docker Compose::
 
-      docker-compose run --rm t3docmake
+      docker-compose run --rm html
 
 
 Advanced
