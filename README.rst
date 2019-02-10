@@ -138,7 +138,7 @@ The instructions for Linux should basically run on Mac. Replace xdg-open with
 open::
 
    source <(docker run --rm t3docs/render-documentation show-shell-commands)
-   dockrun_t3rdf makehtm
+   dockrun_t3rdf makehtml
    open "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
 
 
