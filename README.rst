@@ -14,9 +14,6 @@ This is the official recipe to build the Docker image
 :Docker image:    t3docs/render-documentation,
                   https://hub.docker.com/r/t3docs/render-documentation/
 :Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
-:Documentation:   Is being moved to https://github.com/t3docs/t3docs-documentation
-                  and maintained separately
-:Read more:       https://docs.typo3.org/typo3cms/RenderTYPO3DocumentationGuide/UsingDocker/
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
 :Date:            2018-07-04
