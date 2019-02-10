@@ -75,21 +75,53 @@ function mm-tct() {
    tct $@
 }
 
+#
+# The output path should always be in Documentation-GENERATED-temp/Result/project/0.0.0
+# Ideally, we should use variables RESULT, PROJECT and VERSION but
+# these are not available here
 function tell-about-results() {
 local exitstatus=$1
+local outputdir="Documentation-GENERATED-temp/Result/project/0.0.0"
 if [ $exitstatus -eq 0 ]
 then
    cat <<EOT
 
 Final exit status: 0 (completed)
 
+==================================================
+
 Find the (possible) results. For example:
-   ./Documentation-GENERATED-temp/.../Index.html
-   ./Documentation-GENERATED-temp/.../singlehtml/Index.html
-   ./Documentation-GENERATED-temp/.../_pdf/
-   ./Documentation-GENERATED-temp/.../_buildinfo/
-   ./Documentation-GENERATED-temp/.../_buildinfo/warnings.txt
+
+  html:
+   ./$outputdir/Index.html
+
+  singlehtml:
+   ./$outputdir/singlehtml/Index.html
+
+  pdf:
+   ./$outputdir/_pdf/
+
+  warnings:
+   ./$outputdir/_buildinfo/warnings.txt
 EOT
+
+# environment variable HOST_CWD must be defined: current working directory on host
+# platform
+if [ ! -z "${HOST_CWD}" ];then
+   echo " "
+   echo "Usually, you can open the results using these URLS:"
+   echo "  - html: file://${HOST_CWD}/$outputdir/Index.html"
+   echo "  - warnings: file://${HOST_CWD}/$outputdir/_buildinfo/warnings.txt"
+else
+   echo " "
+   echo "Make environment variable HOST_CWD (current working directory on host) available to see full paths of results!"
+fi
+
+echo " "
+echo "=================================================="
+echo " "
+echo "More information: https://github.com/t3docs/docker-render-documentation/blob/master/README.rst"
+
 else
    cat <<EOT
 
