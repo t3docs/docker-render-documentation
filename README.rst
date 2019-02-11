@@ -22,6 +22,8 @@ This is the official recipe to build the Docker image
 :Capabilites:     html, singlehtml, package, latex, pdf;
                   can read and convert ./doc/manual.sxw
 
+.. contents:: Table of Contents
+   :local:
 
 Help / Contact us
 =================
