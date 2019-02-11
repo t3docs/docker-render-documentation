@@ -37,130 +37,28 @@ Contribute
 For more information see `CONTRIBUTING.rst
 <https://github.com/t3docs/docker-render-documentation/blob/master/CONTRIBUTING.rst>`__
 
+Quickstart on Linux or macOS
+============================
 
-Setup
-=====
-
-1. `Install Docker <https://docs.docker.com/engine/installation/>`__
-
-2. Verify Docker is working::
-
-      docker run --rm hello-world
-
-   You should see::
-
-      Hello from Docker.
-      This message shows that ...
-
-3. Download the Docker image::
-
-      docker pull t3docs/render-documentation
-
-
-4. Verify::
-
-      docker run --rm t3docs/render-documentation
-
-   You should see::
-
-      t3rdf - TYPO3 render documentation full (v1.6.11-full)
-      For help:
-         docker run --rm t3docs/render-documentation --help
-         dockrun_t3rdf --help
-
-      ... did you mean 'dockrun_t3rdf makehtml'?
-
-5. Go to your documentation project
-
-   For example, clone an existing manual::
-
-      git clone https://github.com/TYPO3-Documentation/TYPO3CMS-Tutorial-GettingStarted.git
-      cd TYPO3CMS-Tutorial-GettingStarted
-
-   Whatever documentation project you use, you should be in the parent directory
-   of the Documentation directory when you run the following commands.
-
-
-Quickstart on Linux
-===================
-
-
-1. Define some shell commands::
-
-      # just show
-      docker run --rm t3docs/render-documentation show-shell-commands
-
-      # actually define - no blanks between '<('
-      source <(docker run --rm t3docs/render-documentation show-shell-commands)
-
-      # In case line `source <(...)` doesn't work on your OS use these three lines::
-
-         docker run --rm t3docs/render-documentation show-shell-commands > tempfile.sh
-         source tempfile.sh
-         rm tempfile.sh
-
-      # Verify that command dockrun_t3rdf is now available::
-
-         dockrun_t3rdf --help
-
-
-
-2. Do the rendering::
-
-      dockrun_t3rdf makehtml           # only html
-
-3. Find the results::
-
-      # html
-      Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
-
-   
-   You can find the buildinfo (containing errors and warnings) here::
-
-      # build information
-      Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/
-
-      # Sphinx warnings and errors - should be empty!
-      Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt
-
-
-4. Optional: Open the results in the default browser::
-
-      xdg-open "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
-
-Quickstart on Mac
-=================
-
-The instructions for Linux should basically run on Mac. Replace xdg-open with
-open::
+1. Make the shellcommand available in your shell and load the container if not done already::
 
    source <(docker run --rm t3docs/render-documentation show-shell-commands)
+   
+2. Render your documentation from the root folder of your project ::
+
    dockrun_t3rdf makehtml
-   open "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
-
-
-Alternatively, run with Docker Compose (see below).
+   
+3. open the Documentation under ::
+  
+  "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
 
 Quickstart on Windows
 =====================
 
 For Windows, we recommend to use Docker Compose. See next section.
 
-The workflow described under Workflow for Linux may also work.
-
-To open the generated file in the browser:
-
-In standard Windows Cmd terminal::
-
-   start "Documentation-GENERATED-temp\Result\project\0.0.0\Index.html"
-
-In a terminal, that supports '/' in paths, e.g. PowerShell, Bash Shell, Cygwin::
-
-      start "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
-
-
-Quickstart with Docker Compose
-==============================
+Docker Compose
+==============
 
 1. Create a file docker-compose.yml:
 
