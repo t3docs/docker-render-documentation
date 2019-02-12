@@ -44,13 +44,13 @@ Quickstart on Linux or macOS
 
 1. Make the shellcommand available in your shell and load the container if not done already::
 
-   source <(docker run --rm t3docs/render-documentation show-shell-commands)
+      source <(docker run --rm t3docs/render-documentation show-shell-commands)
    
 2. Render your documentation from the root folder of your project ::
 
-   dockrun_t3rdf makehtml
+      dockrun_t3rdf makehtml
    
-3. open the Documentation under ::
+3. open the Documentation under:
   
   "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
 
