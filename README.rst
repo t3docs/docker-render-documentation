@@ -28,7 +28,7 @@ This is the official recipe to build the Docker image
 Help / Contact us
 =================
 
-See `Help & Support <https://docs.typo3.org/typo3cms/HowToDocument/HowToGetHelp.html>`
+See `Help & Support <https://docs.typo3.org/typo3cms/HowToDocument/HowToGetHelp.html>`__
 in "Writing Documentation" for how to get help or how to contact the documentation team.
 
 If you are looking for general help for TYPO3, please see https://typo3.org/help.
