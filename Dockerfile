@@ -36,8 +36,8 @@ ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
-ARG hack_OUR_IMAGE_SHORT="t3rdf"
-ARG OUR_IMAGE_SLOGAN="t3rdf - TYPO3 render documentation full"
+ARG hack_OUR_IMAGE_SHORT="t3rd"
+ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 
 ENV \
    HOME="/ALL/userhome" \

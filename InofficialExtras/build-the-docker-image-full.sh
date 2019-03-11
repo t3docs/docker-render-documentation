@@ -22,8 +22,8 @@
 VERSION=${VERSION:-"v2.0.0-full"}
 DEBIAN_FRONTEND=${DEBIAN_FRONTEND:-noninteractive}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rd - TYPO3 render documentation full"}
 # variables 2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 # variables 3

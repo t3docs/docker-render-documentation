@@ -47,7 +47,7 @@ Quickstart on Linux or macOS
 
 2. Render your documentation from the root folder of your project ::
 
-      dockrun_t3rdf makehtml
+      dockrun_t3rd makehtml
 
 3. open the Documentation under:
 
@@ -96,24 +96,24 @@ You can render a project that's located somewhere else. Set the environment
 variable `T3DOCS_PROJECT` accordingly::
 
    export T3DOCS_PROJECT=/abs/path/to/project
-   dockrun_t3rdf makehtml
+   dockrun_t3rd makehtml
 
 or::
 
-   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rdf makehtml
+   T3DOCS_PROJECT=/abs/path/to/project  dockrun_t3rd makehtml
 
 Specify a result folder to send the result somewhere else. The final output
 folder `$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
 
    export T3DOCS_RESULT=/abs/path/to/result
-   dockrun_t3rdf makehtml
+   dockrun_t3rd makehtml
 
 Specify a path to a temp folder if you want to expose all those many
 intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
 will be used::
 
    export T3DOCS_TMP=/tmp
-   dockrun_t3rdf makehtml
+   dockrun_t3rd makehtml
 
 
 Rename to default tag 'latest'

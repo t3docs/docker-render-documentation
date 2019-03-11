@@ -5,7 +5,7 @@
 
 # use 'build-the-docker-image.sh' first.
 
-# define shortcut 'developer dockrun': ddockrun_t3rdf
+# define shortcut 'developer dockrun': ddockrun_t3rd
 source <(docker run --rm t3docs/render-documentation:v2.0.0-full show-shell-commands)
 
 # select project
@@ -37,12 +37,12 @@ T3DOCS_MAKEDIR=/home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/tmp
 
 # ##################################################
 
-# ddockrun_t3rdf makehtml
+# ddockrun_t3rd makehtml
 
 # ##################################################
 # how to add what you need:
 
-#ddockrun_t3rdf makehtml \
+#ddockrun_t3rd makehtml \
 #   -c make_singlehtml 1
 
 #   -c make_latex 1
@@ -52,7 +52,7 @@ T3DOCS_MAKEDIR=/home/marble/Repositories/github.com/t3docs/VOLUMES/GENERATED/tmp
 # ##################################################
 # how to deselect what you don't need:
 
-ddockrun_t3rdf makeall
+ddockrun_t3rd makeall
 
 #   -c make_latex 0 \
 #   -c make_package 0 \

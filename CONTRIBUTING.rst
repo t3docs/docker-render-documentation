@@ -56,7 +56,7 @@ If your documentation project does not have a docker-compose.yml file for docker
 you can easily add one, see
 `Quickstart with Docker Compose <https://github.com/t3docs/docker-render-documentation#quickstart-with-docker-compose>`__.
 
-If you use the workflow with source / run and `dockrun_t3rdf makehtml`, then once you
+If you use the workflow with source / run and `dockrun_t3rd makehtml`, then once you
 generated the documentation, you can
 modify the file `Documentation-GENERATED-temp/last-docker-run-command-GENERATED.sh`
 and replace the name / version of the Docker image with your locally built one and execute
