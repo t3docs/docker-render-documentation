@@ -18,17 +18,6 @@ FROM python:2
 #             echo "There was an error building the image."
 #             exit 1
 #          }
-# Use:
-#    docker run --rm t3docs/render-documentation[:tag]
-#    source <(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)
-#    dockrun_t3rdf
-#    dockrun_t3rdf makehtml
-# or
-#    ddockrun_t3rdf
-#    ddockrun_t3rdf makeall
-#
-# Rename example:
-#   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
 ARG OUR_IMAGE_VERSION=v2.0.0
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
