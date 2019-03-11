@@ -2,13 +2,7 @@
 
 # ==================================================
 # (1) results in ca. 821MB
-#FROM python:2
-
-# (2) results in ca. 2.06GB, can create latex pdf
-# FROM t3docs/python2-with-latex
-
-# (3) results in ca. 2.53 GB, can create latex pdf, can read OpenOffice
-FROM t3docs/docker-libreoffice-on-python2-with-latex
+FROM python:2
 
 # ==================================================
 
@@ -98,14 +92,9 @@ RUN \
       \
    && COMMENT "always:" \
    && apt-get install -yq --no-install-recommends \
-      less \
-      nano \
-      ncdu \
       pandoc \
-      php5-cli \
-      rsync \
-      tidy \
       unzip \
+      rsync \
       zip \
    \
    && COMMENT "Try extra cleaning besides /etc/apt/apt.conf.d/docker-clean" \
@@ -192,7 +181,6 @@ RUN COMMENT "Provide the toolchain" \
       Python packages     see requirements.txt\n\
                           Sphinx\n\
                           recommonmark           v2018-05-04\n\
-      TYPO3-Documentation typo3.latex            v1.1.0\n\
       TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
 

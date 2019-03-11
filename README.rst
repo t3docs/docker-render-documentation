@@ -19,8 +19,7 @@ This is the official recipe to build the Docker image
 :Date:            2018-07-04
 :Version:         Docker image version 'latest'='v1.6.11-full', from
                   repository branch 'master'
-:Capabilites:     html, singlehtml, package, latex, pdf;
-                  can read and convert ./doc/manual.sxw
+:Capabilites:     html
 
 .. contents:: Table of Contents
    :local:
@@ -86,24 +85,6 @@ Docker Compose
 Advanced
 ========
 
-Run control
------------
-Select just HTML rendering and add more selectively::
-
-   dockrun_t3rdf makehtml \                 # html is always being built
-         -c make_singlehtml 1 \             # enable singlehtml
-         -c make_package    1 \             # enable standalone package
-         -c make_latex      1 \             # enable latex + pdf
-         -c make_pdf        1               # enable pdf - on by default
-
-Or select ALL and turn off what you don't need::
-
-   dockrun_t3rdf makeall \                  # html is always being built
-         -c make_singlehtml 0 \             # disable singlehtml
-         -c make_package 0 \                # disable standalone package
-         -c make_pdf 0 \                    # disable pdf
-         -c make_latex 0                    # disable latex + pdf
-
 Specifying folders
 ------------------
 Read through the output of `docker run --rm
@@ -158,10 +139,6 @@ Caching information will be generated automatically and stored in
 `$T3DOCS_RESULT/Cache`. Simply leave that folder untouched to make use of
 the caching mechanism. With caching, for example, a `makehtml` for the TYPO3
 core ChangeLog may take only 15 seconds instead of 20 minutes.
-
-The cache information is built while `html` processing. Other writers like
-`singlehtml` make use of that same caching information and are working rather
-fast. Therefore in general it should not be necessary to turn them off.
 
 
 Caching for ./Documentation files of a repository
