@@ -109,9 +109,10 @@ RUN \
            --quiet --output-document /ALL/Makedir/_htaccess \
    && wget https://github.com/etobi/Typo3ExtensionUtils/raw/master/bin/t3xutils.phar \
            --quiet --output-document /usr/local/bin/t3xutils.phar \
-   && chmod +x /usr/local/bin/t3xutils.phar \
-   \
-   && COMMENT "Install Python packages" \
+   && chmod +x /usr/local/bin/t3xutils.phar
+
+RUN \
+   COMMENT "Install Python packages" \
    && pip install --upgrade pip \
    && pip install https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/${THEME_VERSION}.zip \
    && find /usr/local/lib/python2.7/site-packages/t3SphinxThemeRtd/ -exec touch --no-create --time=mtime --date="$(date --rfc-2822 --date=@$THEME_MTIME)" {} \; \
