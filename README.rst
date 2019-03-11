@@ -16,8 +16,8 @@ This is the official recipe to build the Docker image
 :Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
 :See also:        Toolchain 'RenderDocumentation'
                   https://github.com/marble/Toolchain_RenderDocumentation
-:Date:            2018-07-04
-:Version:         Docker image version 'latest'='v1.6.11-full', from
+:Date:            2019-03-11
+:Version:         Docker image version 'latest'='v2.0.0', from
                   repository branch 'master'
 :Capabilites:     html
 
@@ -124,9 +124,9 @@ downloaded image to 'latest' if what you downloaded was not 'latest'::
    # remove
    docker rmi t3docs/render-documentation:latest
    # pull
-   docker pull t3docs/render-documentation:v1.6.11-full
+   docker pull t3docs/render-documentation:v2.0.0
    # rename
-   docker tag t3docs/render-documentation:v1.6.11-full \
+   docker tag t3docs/render-documentation:v2.0.0
               t3docs/render-documentation:latest
    # use the generic name without tag, for example in ~/.bashrc
    source <(docker run --rm t3docs/render-documentation show-shell-commands)

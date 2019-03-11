@@ -30,7 +30,7 @@ FROM python:2
 # Rename example:
 #   docker tag t3docs/render-documentation[:tag1] t3docs/render-documentation[:tag2]
 
-ARG OUR_IMAGE_VERSION=v1.6.11-full
+ARG OUR_IMAGE_VERSION=v2.0.0
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive

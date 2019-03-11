@@ -1,6 +1,14 @@
 
 Changelog.txt
 
+v2.0.0
+   2019-03-11
+   - Remove output other then HTML
+     Therefore only a single tag is provided, which is the version. There is
+     no longer a full or html.
+   - Strip off dependencies to make building of container faster, and to lower
+     the file site of resulting container.
+
 v1.6.11-full
    2018-05-23
    - typoscript syntax highlighter should now always succeed

@@ -1,5 +1,5 @@
 
-v1.6.11-full
+v2.0.0
 
 
 Keep version number like above in files:
