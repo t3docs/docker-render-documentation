@@ -95,7 +95,7 @@ t3docs/render-documentation show-shell-commands` to learn about the details.
 You can render a project that's located somewhere else. Set the environment
 variable `T3DOCS_PROJECT` accordingly::
 
-   T3DOCS_PROJECT=/abs/path/to/project
+   export T3DOCS_PROJECT=/abs/path/to/project
    dockrun_t3rdf makehtml
 
 or::
@@ -105,14 +105,14 @@ or::
 Specify a result folder to send the result somewhere else. The final output
 folder `$T3DOCS_RESULT/Documentation-GENERATED-temp` will be created::
 
-   T3DOCS_RESULT=/abs/path/to/result
+   export T3DOCS_RESULT=/abs/path/to/result
    dockrun_t3rdf makehtml
 
 Specify a path to a temp folder if you want to expose all those many
 intermediate temp files for inspection. `$T3DOCS_RESULT/tmp-GENERATED-temp`
 will be used::
 
-   T3DOCS_TMP=/tmp
+   export T3DOCS_TMP=/tmp
    dockrun_t3rdf makehtml
 
 
