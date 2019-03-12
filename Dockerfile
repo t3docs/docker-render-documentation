@@ -82,8 +82,8 @@ RUN \
    && COMMENT "always:" \
    && apt-get install -yq --no-install-recommends \
       pandoc \
-      unzip \
       rsync \
+      unzip \
       zip \
    \
    && COMMENT "Try extra cleaning besides /etc/apt/apt.conf.d/docker-clean" \
