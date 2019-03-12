@@ -99,9 +99,6 @@ Find the (possible) results. For example:
   singlehtml:
    ./$outputdir/singlehtml/Index.html
 
-  pdf:
-   ./$outputdir/_pdf/
-
   warnings:
    ./$outputdir/_buildinfo/warnings.txt
 EOT
@@ -146,7 +143,7 @@ function mm-makeall() {
 
     cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
     cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-    cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
+    cmd="$cmd -c make_latex 0 -c make_package 1 -c make_pdf 0 -c make_singlehtml 1"
     cmd="$cmd $@"
     eval $cmd
 
