@@ -73,17 +73,11 @@ RUN \
    \
    && COMMENT "Install system packages" \
    && apt-get update \
-   \
-   && COMMENT "for ubuntu:18.04: (unfinished)" \
-   && apt-get install --dry-run -yq --no-install-recommends \
-      wget \
-      python \
-      \
-   && COMMENT "always:" \
    && apt-get install -yq --no-install-recommends \
       pandoc \
       rsync \
       unzip \
+      wget \
       zip \
    \
    && COMMENT "Try extra cleaning besides /etc/apt/apt.conf.d/docker-clean" \
@@ -131,11 +125,6 @@ RUN COMMENT "Provide the toolchain" \
    && unzip /ALL/Downloads/Toolchain_RenderDocumentation.zip -d /ALL/Toolchains \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
-   \
-   && COMMENT "Download latex files" \
-   && wget https://github.com/TYPO3-Documentation/latex.typo3/archive/v1.1.0.zip -qO /tmp/latex.typo3-v1.1.0.zip \
-   && unzip /tmp/latex.typo3-v1.1.0.zip -d /tmp \
-   && mv /tmp/latex.typo3-1.1.0 /ALL/Downloads/latex.typo3 \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
