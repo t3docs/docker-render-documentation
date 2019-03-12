@@ -80,11 +80,12 @@ function mm-tct() {
 # Ideally, we should use variables RESULT, PROJECT and VERSION but
 # these are not available here
 function tell-about-results() {
-local exitstatus=$1
-local outputdir="Documentation-GENERATED-temp/Result/project/0.0.0"
-if [ $exitstatus -eq 0 ]
-then
-   cat <<EOT
+    local exitstatus=$1
+    local outputdir="Documentation-GENERATED-temp/Result/project/0.0.0"
+
+    if [ $exitstatus -eq 0 ]
+    then
+        cat <<EOT
 
 Final exit status: 0 (completed)
 
@@ -105,100 +106,102 @@ Find the (possible) results. For example:
    ./$outputdir/_buildinfo/warnings.txt
 EOT
 
-# environment variable HOST_CWD must be defined: current working directory on host
-# platform
-if [ ! -z "${HOST_CWD}" ];then
-   echo " "
-   echo "Usually, you can open the results using these URLS:"
-   echo "  - html: file://${HOST_CWD}/$outputdir/Index.html"
-   echo "  - warnings: file://${HOST_CWD}/$outputdir/_buildinfo/warnings.txt"
-else
-   echo " "
-   echo "Make environment variable HOST_CWD (current working directory on host) available to see full paths of results!"
-fi
+        # environment variable HOST_CWD must be defined: current working directory on host
+        # platform
+        if [ ! -z "${HOST_CWD}" ];then
+            echo " "
+            echo "Usually, you can open the results using these URLS:"
+            echo "  - html: file://${HOST_CWD}/$outputdir/Index.html"
+            echo "  - warnings: file://${HOST_CWD}/$outputdir/_buildinfo/warnings.txt"
+            else
+            echo " "
+            echo "Make environment variable HOST_CWD (current working directory on host) available to see full paths of results!"
+        fi
 
-echo " "
-echo "=================================================="
-echo " "
-echo "More information: https://github.com/t3docs/docker-render-documentation/blob/master/README.rst"
+        echo " "
+        echo "=================================================="
+        echo " "
+        echo "More information: https://github.com/t3docs/docker-render-documentation/blob/master/README.rst"
 
-else
-   cat <<EOT
+    else
+        cat <<EOT
 
-Final exit status: $exitstatus (aborted)
+    Final exit status: $exitstatus (aborted)
 
-Check for results:
-   ./Documentation-GENERATED-temp/
+    Check for results:
+    ./Documentation-GENERATED-temp/
 EOT
-fi
+    fi
 }
 
 function mm-makeall() {
    local cmd
    shift
 
-# make sure nothing is left over from previous run
-if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
-then
-   rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
-fi
-cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
-cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
-cmd="$cmd $@"
-eval $cmd
+    # make sure nothing is left over from previous run
+    if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
+    then
+        rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
+    fi
 
-local exitstatus=$?
+    cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
+    cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
+    cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
+    cmd="$cmd $@"
+    eval $cmd
 
-# do localizations
-if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
-then
-   source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
-fi
+    local exitstatus=$?
 
-if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
-   && ( -d /RESULT ) ]]
-then
-rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
-exitstatus=$?
-fi
+    # do localizations
+    if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
+    then
+        source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
+    fi
 
-tell-about-results $exitstatus
+    if [[ ( $exitstatus -eq 0 ) \
+        && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
+        && ( -d /RESULT ) ]]
+    then
+        rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
+        exitstatus=$?
+    fi
+
+    tell-about-results $exitstatus
 }
 
 function mm-makehtml() {
    local cmd
    shift
 
-# make sure nothing is left over from previous run
-if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
-then
-   rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
-fi
-cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
-cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-cmd="$cmd -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0"
-cmd="$cmd $@"
-eval $cmd
+    # make sure nothing is left over from previous run
+    if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
+    then
+        rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
+    fi
 
-local exitstatus=$?
+    cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
+    cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
+    cmd="$cmd -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0"
+    cmd="$cmd $@"
+    eval $cmd
 
-# do localizations
-if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
-then
-   source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
-fi
+    local exitstatus=$?
 
-if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
-   && ( -d /RESULT ) ]]
-then
-rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
-exitstatus=$?
-fi
+    # do localizations
+    if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
+    then
+        source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
+    fi
 
-tell-about-results $exitstatus
+    if [[ ( $exitstatus -eq 0 ) \
+        && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
+        && ( -d /RESULT ) ]]
+    then
+        rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
+        exitstatus=$?
+    fi
+
+    tell-about-results $exitstatus
 }
 
 case "$1" in
