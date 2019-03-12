@@ -61,3 +61,25 @@ generated the documentation, you can
 modify the file `Documentation-GENERATED-temp/last-docker-run-command-GENERATED.sh`
 and replace the name / version of the Docker image with your locally built one and execute
 this file to render the documentation with your locally built Docker image.
+
+Use local version of Theme
+==========================
+
+While working on https://github.com/TYPO3-Documentation/t3SphinxThemeRtd you need to
+test those changes. The easiest way is to build the Docker container using the local
+version of the theme. Therefore follow these steps:
+
+#. Copy sub folder `t3SphinxThemeRtd` from the theme to `ALL-for-build/`.
+
+#. Adjust `Dockerfile` to use the local version by changing line::
+
+      && pip install https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/${THEME_VERSION}.zip \
+
+   to::
+
+      && pip install ../t3SphinxThemeRtd/ \
+
+#. Follow above steps to build Docker container.
+
+The generated container should now contain the local theme version instead of the
+official version, which would be downloaded.
