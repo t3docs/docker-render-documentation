@@ -39,12 +39,18 @@ Contribute
 For more information see `CONTRIBUTING.rst
 <https://github.com/t3docs/docker-render-documentation/blob/master/CONTRIBUTING.rst>`__
 
+Quickstart
+==========
+
 Quickstart on Linux or macOS
-============================
+----------------------------
 
 1. Make the shellcommand available in your shell and load the container if not done already::
 
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
+      
+   **Note:** If this command does not work for you, try the Docker Compose method or see
+   Troubleshooting.
    
 2. Render your documentation from the root folder of your project ::
 
@@ -55,14 +61,14 @@ Quickstart on Linux or macOS
   "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
 
 Quickstart on Windows
-=====================
+---------------------
 
 For Windows, we recommend to use Docker Compose. See next section.
 
-Docker Compose
-==============
+Quickstart With Docker Compose
+------------------------------
 
-1. Create a file docker-compose.yml:
+1. Create a file docker-compose.yml, if it does not yet exist:
 
    .. code-block:: yaml
 
@@ -82,6 +88,21 @@ Docker Compose
 
       docker-compose run --rm html
 
+Troubleshooting
+===============
+
+Problems with Source Command
+----------------------------
+
+If this command
+
+   source <(docker run --rm t3docs/render-documentation show-shell-commands)
+   
+does not work for you, try redirecting the output into a temporary file and
+executing it:
+
+   docker run --rm t3docs/render-documentation show-shell-commands > /tmp/run.sh
+   . /tmp/run.sh
 
 Advanced
 ========
