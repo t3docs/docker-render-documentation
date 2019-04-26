@@ -46,11 +46,11 @@ Quickstart on Linux or macOS
 
       source <(docker run --rm t3docs/render-documentation show-shell-commands)
    
-2. Render your documentation from the root folder of your project ::
+2. Render your documentation from the root folder of your project which must contain a :file:`Documentation` directory ::
 
       dockrun_t3rdf makehtml
    
-3. open the Documentation under:
+3. open the rendered documentation under:
   
   "Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
 
@@ -112,7 +112,8 @@ t3docs/render-documentation show-shell-commands` to learn about the details.
 **ATTENTION:** Use absolute paths. Do not use '/' at the end.
 
 You can render a project that's located somewhere else. Set the environment
-variable `T3DOCS_PROJECT` accordingly::
+variable `T3DOCS_PROJECT` accordingly to the root of your project which
+contains a :file:`Documentation` directory::
 
    T3DOCS_PROJECT=/abs/path/to/project
    dockrun_t3rdf makehtml
