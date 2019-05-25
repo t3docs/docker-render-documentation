@@ -6,7 +6,6 @@ How to build the TYPO3 official Docker image `t3docs/render-documentation` for
 rendering TYPO3 documentation.
 
 :Repository:      https://github.com/t3docs/docker-render-documentation
-:Branch:          develop
 :Version:         v2.0.0
 :Capabilites:     html, singlehtml
 :Docker image:    t3docs/render-documentation:v2.0.0,
