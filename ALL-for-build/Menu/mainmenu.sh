@@ -1,19 +1,13 @@
 #!/bin/bash
 # http://www.thegeekstuff.com/2010/07/bash-case-statement/
 
+source "$HOME/.bashrc"
 source /ALL/Downloads/envvars.sh
 
 # provide defaults
 export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
-
-# export of site-packages requested?
-if [[ -w "/RESULT/Cache/site-packages/EXPORT_TO_HERE" ]]; then true
-   rsync -a --delete \
-      "/usr/local/lib/python2.7/site-packages" \
-      "/RESULT/Cache/"
-fi
 
 function mm-minimalhelp(){
    cat <<EOT
@@ -83,12 +77,7 @@ then
 
 Final exit status: 0 (completed)
 
-Find the (possible) results. For example:
-   ./Documentation-GENERATED-temp/.../Index.html
-   ./Documentation-GENERATED-temp/.../singlehtml/Index.html
-   ./Documentation-GENERATED-temp/.../_pdf/
-   ./Documentation-GENERATED-temp/.../_buildinfo/
-   ./Documentation-GENERATED-temp/.../_buildinfo/warnings.txt
+Find the results:
 EOT
 else
    cat <<EOT
@@ -96,9 +85,32 @@ else
 Final exit status: $exitstatus (aborted)
 
 Check for results:
-   ./Documentation-GENERATED-temp/
 EOT
 fi
+if [ -f /RESULT/Result/project/0.0.0/Index.html ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
+fi
+if [ -f /RESULT/Result/project/0.0.0/index.html ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/index.html"
+fi
+if [ -f /RESULT/Result/project/0.0.0/singlehtml ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/"
+fi
+if [ -d /RESULT/Result/project/0.0.0/_buildinfo ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/"
+fi
+if [ -f /RESULT/Result/project/0.0.0/_buildinfo/warnings.txt ];then
+   echo
+   if [ -s /RESULT/Result/project/0.0.0/_buildinfo/warnings.txt ];then
+      echo "\nATTENTION:"
+      echo "   There are Sphinx warnings in"
+      echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt"
+    else
+      echo "Congratulations:"
+      echo "    There are no Sphinx warnings!"
+    fi
+fi
+
 }
 
 function mm-makeall() {

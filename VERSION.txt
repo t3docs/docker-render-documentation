@@ -1,12 +1,9 @@
 
-v1.6.11-html
+v2.0.0
 
-
-Uses the toolchain that knows how to render OpenOffice ./doc/manual.sxw.
 
 Keep version number like above in files:
 
-- ./ALL-for-build/Menu/mainmenu.sh
 - ./Dockerfile
 - ./README.rst
 

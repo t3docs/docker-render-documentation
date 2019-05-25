@@ -1,0 +1,1 @@
+From here we start TCT. Place a tctconfig.cfg here.

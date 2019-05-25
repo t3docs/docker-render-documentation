@@ -1,5 +1,7 @@
 _info.txt
 
+2019-05-23
+
 This folder 'Makedir/' and all files and folders within need to
 be world writable.
 
@@ -8,11 +10,17 @@ The toolchain 'RenderDocumentation' requires this 'makedir' folder.
 The toolchain reads the settings of './buildsettings.sh'
 and expects './conf.py' to exist.
 
-The toolchain creates file './build.checksum' and others
-named './temp_*'.
+The toolchain creates file './build.checksum' and others named './temp_*'.
 
-The Docker-build-process will fetch provide the most recent
-'conf.py'.
+conf-2017-09.py is
+https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2017-09.py
+as of today (2019-05-23). It is here for information and comparison with
+conf.py only. conf.py initially is a copy of conf-2017-09.py but may be updated
+and modified here for the purpose of this Docker image.
+
+_htaccess is
+https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt
+and a fresh download is made at build time.
 
 The toolchain 'RenderDocumentation' is more and more being
 modified to accept all needed parameters from the commandline.

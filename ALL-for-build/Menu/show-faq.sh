@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source "$HOME/.bashrc"
 source /ALL/Downloads/envvars.sh
 
 # provide default

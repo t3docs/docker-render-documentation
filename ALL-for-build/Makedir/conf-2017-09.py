@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# mb, 2015-10-01, 2016-09-14, 2017-07-10, 2018-05-04
+# mb, 2015-10-01, 2016-09-14, 2017-07-10
 
 # This file lives at https://github.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/blob/master/userroot/scripts/bin/conf-2017-09.py
 # Check for a new version!
@@ -163,26 +163,27 @@ if notes['Defaults.cfg exists']:
 # some more preparations
 
 extensions_to_be_loaded = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.coverage',
     'sphinx.ext.extlinks',
     'sphinx.ext.ifconfig',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.todo',
-    'sphinxcontrib.googlechart',
-    'sphinxcontrib.googlemaps',
-    'sphinxcontrib.phpdomain',
-    'sphinxcontrib.slide',
     'sphinxcontrib.t3fieldlisttable',
     'sphinxcontrib.t3tablerows',
     'sphinxcontrib.t3targets',
-    'sphinxcontrib.youtube',
     't3SphinxThemeRtd',
 ]
 
 # Legal extensions will be loaded if requested in Settings.cfg
 legal_extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.coverage',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.todo',
+    'sphinxcontrib.googlechart',
+    'sphinxcontrib.googlemaps',
+    'sphinxcontrib.httpdomain',
+    'sphinxcontrib.numfig',
+    'sphinxcontrib.slide',
+    'sphinxcontrib.youtube',
     # to be extended ...
 ]
 
