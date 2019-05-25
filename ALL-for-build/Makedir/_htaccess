@@ -1,4 +1,4 @@
-Options -Indexes
+Options +Indexes
 
 RewriteEngine On
 
@@ -9,7 +9,7 @@ RewriteRule ^[0-9]+(\.[0-9]+)(\.[0-9]+)*(-dev)?/(.*)$ -  [L]
 RewriteRule ^[0-9]+-dev/(.*)$ -  [L]
 
 # Do not rewrite URLs starting with the provided words
-RewriteRule ^(latest|packages|stable)(.*)$ -  [L]
+RewriteRule ^(latest|master|packages|stable)(.*)$ -  [L]
 
 # still needed?
 RewriteRule ^manuals.json(.*)$ -  [L]

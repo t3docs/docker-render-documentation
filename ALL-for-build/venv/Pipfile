@@ -1,0 +1,29 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+beautifulsoup4 = "*"
+Pillow = "*"
+PyYAML = "*"
+Sphinx = "*"
+pathlib2 = "*"
+pytest = "*"
+recommonmark = "*"
+
+sphinxcontrib-googlechart = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/develop.zip"}
+sphinxcontrib-googlemaps = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/develop.zip"}
+sphinxcontrib-phpdomain = "*"
+sphinxcontrib-slide = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/develop.zip"}
+sphinxcontrib-t3fieldlisttable = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/develop.zip"}
+sphinxcontrib-t3tablerows = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/develop.zip"}
+sphinxcontrib-t3targets = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/develop.zip"}
+sphinxcontrib-youtube = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/master.zip"}
+t3SphinxThemeRtd = {file = "https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/develop.zip"}
+tct = {file = "https://github.com/marble/TCT/archive/develop.zip"}
+
+[requires]
+python_version = "2.7"

@@ -1,13 +1,14 @@
 #!/bin/bash
 
+source "$HOME/.bashrc"
 source /ALL/Downloads/envvars.sh
 
 # provide defaults
 #1
-VERSION=${VERSION:-"v1.6.11-full"}
+VERSION=${VERSION:-"v0.0.0"}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rdf}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rdf - TYPO3 render documentation full"}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rd - TYPO3 render documentation html"}
 #2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 #3
@@ -16,12 +17,12 @@ OUR_IMAGE=${OUR_IMAGE:-"t3docs/render-documentation:$OUR_IMAGE_TAG"}
 cat <<EOT
 
 # NOTE
-# You can 'source' this file directly into the shell of your commandline with:
+# You can 'source' this file directly into the shell at your command line with:
 #     source <(docker run --rm $OUR_IMAGE show-shell-commands)
 # ATTENTION:
 #     No whitespace between '<('
 
-# the usual worker command like 'dockrun_t3rdf'
+# the usual worker command like 'dockrun_t3rd'
 function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 
 # Environment variables the USER may find important (on the host!),
@@ -138,12 +139,6 @@ local TOOLCHAINS=\${T3DOCS_TOOLCHAINS:-\$(pwd)/tmp-GENERATED-Toolchains}
 if [ -d "\$TOOLCHAINS" ]; then
    cmd="\$cmd -v \$TOOLCHAINS:/ALL/Toolchains"
    if ((\$DEBUG)); then echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
-fi
-
-# Add current working directory in environment variable HOST_CWD
-# (PWD should be defined in all POSIX compliant shells)
-if [ ! -z "${PWD}" ];then
-    cmd="\$cmd -e HOST_CWD=\$PWD"
 fi
 
 cmd="\$cmd $OUR_IMAGE"

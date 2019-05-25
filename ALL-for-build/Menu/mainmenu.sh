@@ -1,19 +1,13 @@
 #!/bin/bash
 # http://www.thegeekstuff.com/2010/07/bash-case-statement/
 
+source "$HOME/.bashrc"
 source /ALL/Downloads/envvars.sh
 
 # provide defaults
 export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
-
-# export of site-packages requested?
-if [[ -w "/RESULT/Cache/site-packages/EXPORT_TO_HERE" ]]; then true
-   rsync -a --delete \
-      "/usr/local/lib/python2.7/site-packages" \
-      "/RESULT/Cache/"
-fi
 
 function mm-minimalhelp(){
    cat <<EOT
@@ -75,62 +69,48 @@ function mm-tct() {
    tct $@
 }
 
-#
-# The output path should always be in Documentation-GENERATED-temp/Result/project/0.0.0
-# Ideally, we should use variables RESULT, PROJECT and VERSION but
-# these are not available here
 function tell-about-results() {
 local exitstatus=$1
-local outputdir="Documentation-GENERATED-temp/Result/project/0.0.0"
 if [ $exitstatus -eq 0 ]
 then
    cat <<EOT
 
 Final exit status: 0 (completed)
 
-==================================================
-
-Find the (possible) results. For example:
-
-  html:
-   ./$outputdir/Index.html
-
-  singlehtml:
-   ./$outputdir/singlehtml/Index.html
-
-  pdf:
-   ./$outputdir/_pdf/
-
-  warnings:
-   ./$outputdir/_buildinfo/warnings.txt
+Find the results:
 EOT
-
-# environment variable HOST_CWD must be defined: current working directory on host
-# platform
-if [ ! -z "${HOST_CWD}" ];then
-   echo " "
-   echo "Usually, you can open the results using these URLS:"
-   echo "  - html: file://${HOST_CWD}/$outputdir/Index.html"
-   echo "  - warnings: file://${HOST_CWD}/$outputdir/_buildinfo/warnings.txt"
-else
-   echo " "
-   echo "Make environment variable HOST_CWD (current working directory on host) available to see full paths of results!"
-fi
-
-echo " "
-echo "=================================================="
-echo " "
-echo "More information: https://github.com/t3docs/docker-render-documentation/blob/master/README.rst"
-
 else
    cat <<EOT
 
 Final exit status: $exitstatus (aborted)
 
 Check for results:
-   ./Documentation-GENERATED-temp/
 EOT
 fi
+if [ -f /RESULT/Result/project/0.0.0/Index.html ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
+fi
+if [ -f /RESULT/Result/project/0.0.0/index.html ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/index.html"
+fi
+if [ -f /RESULT/Result/project/0.0.0/singlehtml ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/"
+fi
+if [ -d /RESULT/Result/project/0.0.0/_buildinfo ];then
+   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/"
+fi
+if [ -f /RESULT/Result/project/0.0.0/_buildinfo/warnings.txt ];then
+   echo
+   if [ -s /RESULT/Result/project/0.0.0/_buildinfo/warnings.txt ];then
+      echo "\nATTENTION:"
+      echo "   There are Sphinx warnings in"
+      echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt"
+    else
+      echo "Congratulations:"
+      echo "    There are no Sphinx warnings!"
+    fi
+fi
+
 }
 
 function mm-makeall() {
