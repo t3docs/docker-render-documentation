@@ -1,16 +1,83 @@
-Release v2.0.0 (released May 25, 2019
-=====================================
+Release v2.1.0 (released May 28, 2019)
+======================================
 
-Description
------------
+Enhancements
+------------
 
-* codename 'dockrun_t3rd'
-* complete revamp of branch '1-6'
-* based on Ubuntu:18.04
-* almost migrated to Python3
-* using pipenv as Python packet manager
-* only for html and singlehtml
-* smaller in size (< 850 MB)
+*  `#11: <https://github.com/t3docs/docker-render-documentation/issues/11>`__
+   Again: Improve the output of "Find the results:"
+
+*  `#50 <https://github.com/t3docs/docker-render-documentation/issues/50>`__
+   Now installing specific versions from Pipfile
+
+
+Bugs fixed
+----------
+
+*  `#51: <https://github.com/t3docs/docker-render-documentation/issues/51>`__
+   Sphinx caching is working again. Removed recommonmark parser.
+
+
+Significant internal changes
+----------------------------
+
+*  `#5: <https://github.com/t3docs/docker-render-documentation/issues/55>`__
+   Use /ALL/venv as workdir, remove folder /ALL/Rundir
+
+
+
+Release v2.0.0 (released May 25, 2019)
+======================================
+
+This is a complete revamp of v1.6 of branch '1-6'.
+
+
+Characteristics
+---------------
+
+*  codename 'dockrun_t3rd'
+*  based on image ubuntu:18.04
+*  almost migrated to Python3
+*  using pipenv as Python packet manager
+*  only for html and singlehtml
+*  much smaller in size
+
+
+Enhancements
+------------
+
+*  `#11 <https://github.com/t3docs/docker-render-documentation/issues/11>`__
+   Improve the output of "Find the results:"
+
+*  `#53 <https://github.com/t3docs/docker-render-documentation/issues/53>`__
+   Load `these sphinx extensions
+   <https://github.com/t3docs/docker-render-documentation/blob/8fc0989c0e61cfd55b060b7fbefd138c910d87a3/ALL-for-build/Makedir/conf.py#L165>`__
+   by default
+
+
+
+Features added
+--------------
+
+*  `#20 <https://github.com/t3docs/docker-render-documentation/issues/20>`__
+   sphinxcontrib.phpdomain added
+
+
+Bugs fixed
+----------
+
+*  `#03: <https://github.com/t3docs/docker-render-documentation/issues/3>`__
+   Make sphinxcontrib.googlemaps work
+
+*  `#18: <https://github.com/t3docs/docker-render-documentation/issues/18>`__
+   Make sphinxcontrib.googlemaps work
+
+*  `#31: <https://github.com/t3docs/docker-render-documentation/issues/31>`__
+   Make rendering of standalone README.(rst|md) work
+
+*  `#52: <https://github.com/t3docs/docker-render-documentation/issues/52>`__
+   #52: Make sphinxcontrib.googlechart work
+
 
 
 Previous v1.6 releases (forked May 25, 2019)
@@ -77,7 +144,14 @@ Some recommended headlines:
 | Deprecated
 | Features added
 | Features removed
+| Enhancements
 | Incompatible changes
+| Significant internal changes
 
+Maximum characters per line: 79 (except longlinks)
+
+         1         2         3         4         5         6         7
+
+1234567890123456789012345678901234567890123456789012345678901234567890123456789
 
 End of CHANGES.

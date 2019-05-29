@@ -32,8 +32,11 @@ from pygments.lexers.web import PhpLexer
 lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
 
+# CommonMarkParser turns Sphinx caching off
+# Let's not use it. Instead preprocess with 'pandoc'
 try:
-    from recommonmark.parser import CommonMarkParser
+    # from recommonmark.parser import CommonMarkParser
+    CommonMarkParser = None
 except ImportError:
     CommonMarkParser = None
 

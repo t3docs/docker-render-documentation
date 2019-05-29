@@ -11,7 +11,7 @@ function usage() {
    echo
    echo "Examples:"
    echo "   ./$(basename -- $0) --help"
-   echo "   OUR_IMAGE_TAG=v7.8.9 ./$(basename -- $0)"
+   echo "   OUR_IMAGE_TAG=v77.88.99 ./$(basename -- $0)"
    echo
 }
 
