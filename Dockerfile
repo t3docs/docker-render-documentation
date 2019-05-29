@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=v2.0.0
+ARG OUR_IMAGE_VERSION=v2.1.0
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -13,14 +13,14 @@ ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
-   TOOLCHAIN_VERSION="develop" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
+   TOOLCHAIN_VERSION="2.4.0" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.4.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.4.0.zip" \
    TYPOSCRIPT_PY_VERSION="v2.2.4" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
-   THEME_VERSION="develop" \
+   THEME_VERSION="3.6.16" \
    THEME_MTIME="1530870718"
 
 LABEL \
@@ -80,7 +80,7 @@ RUN \
    && apt-get remove python-pip -y \
    && /usr/local/bin/pip install --upgrade pipenv \
    \
-   && COMMENT "Disable /ALL/venv/Pipfile.lock - it didn't work" \
+   && COMMENT "Disable /ALL/venv/Pipfile.lock - it didn't work reliably" \
    && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
    \
    && COMMENT "Install from /ALL/venv/Pipfile" \
@@ -99,7 +99,8 @@ RUN \
            --quiet --output-document /usr/local/bin/t3xutils.phar \
    && chmod +x /usr/local/bin/t3xutils.phar \
    \
-   && COMMENT "All files of the theme shall have an informative modification time" \
+   && COMMENT "All files of the theme of a given theme version should have the" \
+   && COMMENT "same mtime (last commit) to not turn off Sphinx caching" \
    && python=$(pipenv --venv)/bin/python \
    && destdir=$(dirname $($python -c "import t3SphinxThemeRtd; print t3SphinxThemeRtd.__file__")) \
    && find $destdir -exec touch --no-create --time=mtime --date="$(date --rfc-2822 --date=@$THEME_MTIME)" {} \; \
@@ -135,8 +136,6 @@ RUN \
    && echo "export OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""         >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_SLOGAN=\"${OUR_IMAGE_SLOGAN}\""       >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_VERSION=\"${OUR_IMAGE_VERSION}\""     >> /ALL/Downloads/envvars.sh \
-   && echo "export SPHINX_CONTRIB_HASH=\"${SPHINX_CONTRIB_HASH}\"" >> /ALL/Downloads/envvars.sh \
-   && echo "export TCT_PIPINSTALL_URL=\"${TCT_PIPINSTALL_URL}\""   >> /ALL/Downloads/envvars.sh \
    && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""             >> /ALL/Downloads/envvars.sh \
    \
    && COMMENT "Let's have some debug info" \
@@ -147,19 +146,16 @@ RUN \
       debug_info OUR_IMAGE_SHORT....: ${OUR_IMAGE_SHORT}\n\
       debug_info OUR_IMAGE_SLOGAN...: ${OUR_IMAGE_SLOGAN}\n\
       debug_info OUR_IMAGE_VERSION..: ${OUR_IMAGE_VERSION}\n\
-      debug_info TCT_PIPINSTALL_URL.: ${TCT_PIPINSTALL_URL}\n\
       debug_info TOOLCHAIN_URL......: ${TOOLCHAIN_URL}\n\
       \n\
       Versions used for $OUR_IMAGE_VERSION:\n\
-      ((below - to be fixed))\n\
-      ((Sphinx theme        t3SphinxThemeRtd       $THEME_VERSION  mtime:$THEME_MTIME))\n\
-      ((Toolchain           RenderDocumentation    $TOOLCHAIN_VERSION))\n\
-      ((Toolchain tool      TCT                    0.2.0))\n\
-      ((TYPO3-Documentation typo3.latex            v1.1.0))\n\
-      ((TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION))\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
+      Sphinx theme        t3SphinxThemeRtd       $THEME_VERSION  mtime:$THEME_MTIME\n\
+      Toolchain           RenderDocumentation    $TOOLCHAIN_VERSION\n\
+      Toolchain tool      TCT                    0.3.0\n\
+      TYPO3-Documentation typo3.latex            v1.1.0\n\
+      TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION))\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
 
-WORKDIR /ALL/Rundir
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
 

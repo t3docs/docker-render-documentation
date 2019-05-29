@@ -87,24 +87,18 @@ Final exit status: $exitstatus (aborted)
 Check for results:
 EOT
 fi
-if [ -f /RESULT/Result/project/0.0.0/Index.html ];then
-   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/Index.html"
-fi
-if [ -f /RESULT/Result/project/0.0.0/index.html ];then
-   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/index.html"
-fi
-if [ -f /RESULT/Result/project/0.0.0/singlehtml ];then
-   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/"
-fi
-if [ -d /RESULT/Result/project/0.0.0/_buildinfo ];then
-   echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/"
-fi
-if [ -f /RESULT/Result/project/0.0.0/_buildinfo/warnings.txt ];then
+echo >/RESULT/warning-files.txt
+find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/0\.0\.0/Index\.html$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+find /RESULT/Result -type d -regextype posix-egrep -regex  '.*/0\.0\.0/singlehtml$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+find /RESULT/Result -type d -regextype posix-egrep -regex  '.*/0\.0\.0/_buildinfo$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n" >>/RESULT/warning-files.txt
+
+if [ -f /RESULT/warning-files.txt ];then
    echo
-   if [ -s /RESULT/Result/project/0.0.0/_buildinfo/warnings.txt ];then
-      echo "\nATTENTION:"
-      echo "   There are Sphinx warnings in"
-      echo "   ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt"
+   if [ -s /RESULT/warning-files.txt ];then
+      echo "ATTENTION:"
+      echo "   There are Sphinx warnings!"
     else
       echo "Congratulations:"
       echo "    There are no Sphinx warnings!"
@@ -122,7 +116,7 @@ if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
 then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
-cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
+cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg -v"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
 cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
 cmd="$cmd $@"
@@ -156,7 +150,7 @@ if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
 then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
-cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
+cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg -v"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
 cmd="$cmd -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0"
 cmd="$cmd $@"

@@ -1,0 +1,13 @@
+info.txt about /ALL/venv
+
+
+1. At image build time a Python virtual environment is created here from the
+   Pipfile.
+
+2. When running the container /ALL/venv is the WORKDIR = current dir.
+
+3. It is expected that the TCT config file can be found here as
+   /ALL/venv/tctconfig.cfg
+
+End of info.txt
+

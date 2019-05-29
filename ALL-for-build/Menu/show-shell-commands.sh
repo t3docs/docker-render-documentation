@@ -29,18 +29,18 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 # no slash ('/') at the end,
 # default is the current directory \$(pwd):
 #
-#     T3DOCS_PROJECT=/absolute/path/to/project/start/folder
-#     T3DOCS_RESULT=/absolute/path/to/result/folder
-#     T3DOCS_TMP=/absolute/path/to/temporary/folder
-#     T3DOCS_DUMMY_WEBROOT=/absolute/path/to/output/dummy_webroot/
+#     T3DOCS_PROJECT=/abspathto/MyProjectStartFolder       (readonly)
+#     T3DOCS_RESULT=/abspathto/ResultFolder                (readwrite)
+#     T3DOCS_TMP=/abspathto/TemporaryFolder                (readwrite)
+#     T3DOCS_DUMMY_WEBROOT=/abspathto/dummy_webroot_folder (readwrite)
 #
 # Environment variables only some DEVELOPERS may find important,
 # no slash ('/') at the end,
 #
-#     T3DOCS_MAKEDIR=/absolute/path/to/makedir
-#     T3DOCS_MENU=/absolute/path/to/menu
-#     T3DOCS_RUNDIR=/absolute/path/to/rundir
-#     T3DOCS_TOOLCHAINS=/absolute/path/to/toolchains
+#     T3DOCS_MAKEDIR=/abspathto/MYALL/Makedir
+#     T3DOCS_MENU=/abspathto/MYALL/Menu
+#     T3DOCS_VENV=/abspathto/MYALL/venv
+#     T3DOCS_TOOLCHAINS=/abspathto/MYALL/Toolchains
 
 # Example:
 # local DEBUG=\${T3DOCS_DEBUG:-0}
@@ -125,12 +125,12 @@ if [ -d "\$MENU" ]; then
    if ((\$DEBUG)); then echo "MENU.........: \$MENU"; fi
 fi
 
-# RUNDIR
-# absolute path to existing folder RUNDIR
-local RUNDIR=\${T3DOCS_RUNDIR:-\$(pwd)/tmp-GENERATED-Rundir}
-if [ -d "\$RUNDIR" ]; then
-   cmd="\$cmd -v \$RUNDIR:/ALL/Rundir"
-   if ((\$DEBUG)); then echo "RUNDIR.......: \$RUNDIR"; fi
+# VENV (used to be 'Rundir')
+# absolute path to existing folder VENV
+local VENV=\${T3DOCS_VENV:-\$(pwd)/tmp-GENERATED-venv}
+if [ -d "\$VENV" ]; then
+   cmd="\$cmd -v \$VENV:/ALL/venv"
+   if ((\$DEBUG)); then echo "VENV.........: \$VENV"; fi
 fi
 
 # TOOLCHAINS

@@ -14,16 +14,16 @@ pathlib2 = "*"
 pytest = "*"
 recommonmark = "*"
 
-sphinxcontrib-googlechart = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/develop.zip"}
-sphinxcontrib-googlemaps = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/develop.zip"}
+sphinxcontrib-googlechart = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/t3v0.2.1.zip"}
+sphinxcontrib-googlemaps = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/t3v0.1.1.zip"}
 sphinxcontrib-phpdomain = "*"
-sphinxcontrib-slide = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/develop.zip"}
-sphinxcontrib-t3fieldlisttable = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/develop.zip"}
-sphinxcontrib-t3tablerows = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/develop.zip"}
-sphinxcontrib-t3targets = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/develop.zip"}
-sphinxcontrib-youtube = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/master.zip"}
-t3SphinxThemeRtd = {file = "https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/develop.zip"}
-tct = {file = "https://github.com/marble/TCT/archive/develop.zip"}
+sphinxcontrib-slide = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/t3v0.3.1.zip"}
+sphinxcontrib-t3fieldlisttable = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/v0.3.0.zip"}
+sphinxcontrib-t3tablerows = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.2.0.zip"}
+sphinxcontrib-t3targets = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/v0.2.1.zip"}
+sphinxcontrib-youtube = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/t3v1.0.zip"}
+t3SphinxThemeRtd = {file = "https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/v3.6.16.zip"}
+tct = {file = "https://github.com/marble/TCT/archive/v0.3.0.zip"}
 
 [requires]
 python_version = "2.7"
