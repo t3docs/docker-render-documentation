@@ -116,7 +116,7 @@ if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
 then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
-cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
+cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg -v"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
 cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
 cmd="$cmd $@"
@@ -150,7 +150,7 @@ if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
 then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
-cmd="tct --cfg-file=/ALL/Rundir/tctconfig.cfg -v"
+cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg -v"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
 cmd="$cmd -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0"
 cmd="$cmd $@"
