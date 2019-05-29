@@ -1,4 +1,4 @@
-Release v2.1.0 (released May 28, 2019)
+Release v2.1.0 (released May 29, 2019)
 ======================================
 
 Enhancements
@@ -17,11 +17,17 @@ Bugs fixed
 *  `#51: <https://github.com/t3docs/docker-render-documentation/issues/51>`__
    Sphinx caching is working again. Removed recommonmark parser.
 
+*  `#54: <https://github.com/t3docs/docker-render-documentation/issues/54>`__
+   Have markdown files converted to rst by pandoc.
+
+*  `#58: <https://github.com/t3docs/docker-render-documentation/issues/58>`__
+   Catch YAML parser errors the better way.
+
 
 Significant internal changes
 ----------------------------
 
-*  `#5: <https://github.com/t3docs/docker-render-documentation/issues/55>`__
+*  `#55: <https://github.com/t3docs/docker-render-documentation/issues/55>`__
    Use /ALL/venv as workdir, remove folder /ALL/Rundir
 
 
@@ -37,7 +43,7 @@ Characteristics
 
 *  codename 'dockrun_t3rd'
 *  based on image ubuntu:18.04
-*  almost migrated to Python3
+*  almost migrated to Python 3
 *  using pipenv as Python packet manager
 *  only for html and singlehtml
 *  much smaller in size
@@ -60,23 +66,23 @@ Features added
 --------------
 
 *  `#20 <https://github.com/t3docs/docker-render-documentation/issues/20>`__
-   sphinxcontrib.phpdomain added
+   Add sphinxcontrib.phpdomain
 
 
 Bugs fixed
 ----------
 
 *  `#03: <https://github.com/t3docs/docker-render-documentation/issues/3>`__
-   Make sphinxcontrib.googlemaps work
+   Fix sphinxcontrib.googlemaps
 
 *  `#18: <https://github.com/t3docs/docker-render-documentation/issues/18>`__
-   Make sphinxcontrib.googlemaps work
+   Fix sphinxcontrib.googlemaps
 
 *  `#31: <https://github.com/t3docs/docker-render-documentation/issues/31>`__
-   Make rendering of standalone README.(rst|md) work
+   Fix rendering of standalone README.(rst|md)
 
 *  `#52: <https://github.com/t3docs/docker-render-documentation/issues/52>`__
-   #52: Make sphinxcontrib.googlechart work
+   Fix sphinxcontrib.googlechart
 
 
 
