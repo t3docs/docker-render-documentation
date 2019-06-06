@@ -20,7 +20,7 @@ T3DOCDIR=Documentation
 MASTERDOC=Documentation/Index
 
 # packaging
-PACKAGE_ZIP=1
+PACKAGE_ZIP=0
 PACKAGE_KEY=project
 PACKAGE_LANGUAGE=default
 
