@@ -23,6 +23,7 @@ sphinxcontrib-t3tablerows = {file = "https://github.com/TYPO3-Documentation/sphi
 sphinxcontrib-t3targets = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/v0.2.1.zip"}
 sphinxcontrib-youtube = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/t3v1.0.zip"}
 t3SphinxThemeRtd = {file = "https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/v3.6.16.zip"}
+t3SphinxTools-includecheck = {file = "https://github.com/TYPO3-Documentation/t3SphinxTools_includecheck/archive/v1.0.0.zip"}
 tct = {file = "https://github.com/marble/TCT/archive/v0.3.0.zip"}
 
 [requires]

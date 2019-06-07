@@ -90,7 +90,6 @@ RUN \
    && COMMENT "Provide some special files" \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
            --quiet --output-document /usr/local/bin/check_include_files.py \
-   && chmod +x /usr/local/bin/check_include_files.py \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2017-09.py \
            --quiet --output-document /ALL/Makedir/conf-2017-09.py \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
