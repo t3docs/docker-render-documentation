@@ -1,3 +1,13 @@
+Release v2.2.1 (released June 14, 2019)
+=======================================
+
+Bugfix version
+
+*  Fix logic error (don't always assume singlehtml)
+*  Use TCT v0.4.1 showing ms = milli seconds
+*  Use toolchain v2.5.1
+
+
 Release v2.2.0 (released June 14, 2019)
 =======================================
 

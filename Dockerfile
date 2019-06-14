@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=v2.2.0
+ARG OUR_IMAGE_VERSION=v2.2.1
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -13,9 +13,9 @@ ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
-   TOOLCHAIN_VERSION="2.5.0" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.5.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.5.0.zip" \
+   TOOLCHAIN_VERSION="2.5.1" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.5.1" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.5.1.zip" \
    TYPOSCRIPT_PY_VERSION="v2.2.4" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
