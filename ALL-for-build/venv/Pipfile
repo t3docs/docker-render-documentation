@@ -6,17 +6,17 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-beautifulsoup4 = "*"
 Pillow = "*"
 PyYAML = "*"
 Sphinx = "*"
+beautifulsoup4 = "*"
+lxml = "*"
 pathlib2 = "*"
 pytest = "*"
 recommonmark = "*"
-
+sphinxcontrib-phpdomain = "*"
 sphinxcontrib-googlechart = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/t3v0.2.1.zip"}
 sphinxcontrib-googlemaps = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/t3v0.1.1.zip"}
-sphinxcontrib-phpdomain = "*"
 sphinxcontrib-slide = {file = "https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/t3v0.3.1.zip"}
 sphinxcontrib-t3fieldlisttable = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/v0.3.0.zip"}
 sphinxcontrib-t3tablerows = {file = "https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.2.0.zip"}
