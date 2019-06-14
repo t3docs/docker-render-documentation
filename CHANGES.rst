@@ -1,3 +1,38 @@
+Release v2.2.0 (released June 14, 2019)
+=======================================
+
+Enhancements
+------------
+
+*  Issues #63, #64 done in toolchain
+*  Finetuned output of mainmenu.sh
+*  Allow 'T3DOCS_DRY_RUN=1 dockrun_t3rd makehtml'
+*  Allow 'dockrun_t3rd export-ALL' to copy the container internals to the host
+
+
+Use toolchain RenderDocumentation v2.5.0
+-----------------------------------------
+
+*  Don't offer docs/manual.sxw as possibility
+*  Solve `issue #64 of t3docs/docker-render-documentation
+   <https://github.com/t3docs/docker-render-documentation/issues/64>`__
+   "Weird appearance of README" rendering
+*  Collect sitemap files `issue #63 of t3docs/docker-render-documentation
+   <https://github.com/t3docs/docker-render-documentation/issues/63>`__
+*  Postprocess html files: prettify, sanitize neutralize javascript links
+   `issue #67 of t3docs/docker-render-documentation
+   <https://github.com/t3docs/docker-render-documentation/issues/67>`__
+*  Signal 'has_neutralized_links' in _builtinfo/results.json
+
+
+Security fixes
+--------------
+
+*  Disable raw-directive `issue #65 of t3docs/docker-render-documentation
+   <https://github.com/t3docs/docker-render-documentation/issues/65>`__
+*  Issues #67 done in toolchain
+
+
 Release v2.1.0 (released May 29, 2019)
 ======================================
 

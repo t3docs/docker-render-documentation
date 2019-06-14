@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=v2.1.0
-ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
+ARG OUR_IMAGE_VERSION=v2.2.0
+ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
@@ -14,8 +14,8 @@ ENV \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
    TOOLCHAIN_VERSION="2.4.0" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.4.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.4.0.zip" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.5.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.5.0.zip" \
    TYPOSCRIPT_PY_VERSION="v2.2.4" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
@@ -81,6 +81,7 @@ RUN \
    && /usr/local/bin/pip install --upgrade pipenv \
    \
    && COMMENT "Disable /ALL/venv/Pipfile.lock - it didn't work reliably" \
+   && rm -f Pipfile.lock.DISABLED \
    && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
    \
    && COMMENT "Install from /ALL/venv/Pipfile" \
@@ -90,7 +91,6 @@ RUN \
    && COMMENT "Provide some special files" \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
            --quiet --output-document /usr/local/bin/check_include_files.py \
-   && chmod +x /usr/local/bin/check_include_files.py \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/conf-2017-09.py \
            --quiet --output-document /ALL/Makedir/conf-2017-09.py \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
@@ -120,7 +120,7 @@ RUN \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
-   && COMMENT "Download latex files" \
+   && COMMENT "Download latex files, since we can still render Latex without drawbacks" \
    && wget https://github.com/TYPO3-Documentation/latex.typo3/archive/v1.1.0.zip -qO /tmp/latex.typo3-v1.1.0.zip \
    && unzip /tmp/latex.typo3-v1.1.0.zip -d /tmp \
    && mv /tmp/latex.typo3-1.1.0 /ALL/Downloads/latex.typo3 \
@@ -135,6 +135,7 @@ RUN \
    && echo "export OUR_IMAGE=\"${OUR_IMAGE}\""                     >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""         >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_SLOGAN=\"${OUR_IMAGE_SLOGAN}\""       >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_TAG=\"${OUR_IMAGE_TAG}\""             >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_VERSION=\"${OUR_IMAGE_VERSION}\""     >> /ALL/Downloads/envvars.sh \
    && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""             >> /ALL/Downloads/envvars.sh \
    \
@@ -145,6 +146,7 @@ RUN \
       debug_info OUR_IMAGE..........: ${OUR_IMAGE}\n\
       debug_info OUR_IMAGE_SHORT....: ${OUR_IMAGE_SHORT}\n\
       debug_info OUR_IMAGE_SLOGAN...: ${OUR_IMAGE_SLOGAN}\n\
+      debug_info OUR_IMAGE_TAG......: ${OUR_IMAGE_TAG}\n\
       debug_info OUR_IMAGE_VERSION..: ${OUR_IMAGE_VERSION}\n\
       debug_info TOOLCHAIN_URL......: ${TOOLCHAIN_URL}\n\
       \n\
@@ -153,7 +155,7 @@ RUN \
       Toolchain           RenderDocumentation    $TOOLCHAIN_VERSION\n\
       Toolchain tool      TCT                    0.3.0\n\
       TYPO3-Documentation typo3.latex            v1.1.0\n\
-      TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION))\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
+      TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
 
 

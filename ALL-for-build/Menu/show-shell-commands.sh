@@ -41,12 +41,11 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 #     T3DOCS_MENU=/abspathto/MYALL/Menu
 #     T3DOCS_VENV=/abspathto/MYALL/venv
 #     T3DOCS_TOOLCHAINS=/abspathto/MYALL/Toolchains
+#     T3DOCS_DEBUG=0         (0 or 1, talk to stdout)
+#     T3DOCS_DRY_RUN=0       (0 or 1, don't really execute)
 
-# Example:
-# local DEBUG=\${T3DOCS_DEBUG:-0}
-# local DEBUG=\${T3DOCS_DEBUG:-1}
-# set T3DOCS_DEBUG=0 or set T3DOCS_DEBUG=1
 local DEBUG=\${T3DOCS_DEBUG:-0}
+local DRY_RUN=\${T3DOCS_DRY_RUN:-0}
 local git_restore_mtime=\$(which git-restore-mtime)
 local exitcode=\$?
 if [[ \$exitcode -ne 0 ]]; then git_restore_mtime=; fi
@@ -54,13 +53,15 @@ if [[ \$exitcode -ne 0 ]]; then git_restore_mtime=; fi
 # start command building
 local cmd="docker run --rm"
 if [[ \$# -eq 0 ]]; then
-   # note: CREATING=0 leads to root:root permissions (why? to be solved!)
+   # create folders on host? (e.g. Documentation-GENERATED-temp)
    local CREATING=1
    cmd="\$cmd --user=\$(id -u):\$(id -g)"
 elif [[ "\$@" = "/bin/bash" ]]; then
-   # note: CREATING=0 leads to root:root permissions (why? to be solved!)
    local CREATING=1
    cmd="\$cmd --entrypoint /bin/bash -it"
+elif [[ "\$@" = "export-ALL" ]]; then
+   local CREATING=1
+   cmd="\$cmd --entrypoint /bin/bash"
 else
    local CREATING=1
    cmd="\$cmd --user=\$(id -u):\$(id -g)"
@@ -145,7 +146,14 @@ cmd="\$cmd $OUR_IMAGE"
 if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 
 # add remaining arguments
-if [[ "\$@" != "/bin/bash" ]]; then
+if [[ "\$@" = "/bin/bash" ]]; then
+   true "do nothing here"
+elif [[ "\$@" = "export-ALL" ]]; then
+   cmd="\$cmd -c \"rsync -a --chown=\$(id -u):\$(id -g) /ALL/ /RESULT/ALL-exported\""
+   echo The export will go to:
+   echo "   \$RESULT/ALL-exported"
+
+else
    cmd="\$cmd \$@"
    # if script git-restore-mtime exists and '*make*' in args try the command
    # See README: get 'git-restore-mtime' from https://github.com/MestreLion/git-tools
@@ -161,10 +169,12 @@ fi
 if [[ -w "\$RESULT" ]]; then true
    echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >"\$RESULT/last-docker-run-command-GENERATED.sh"
 fi
-if ((\$DEBUG)); then
+if ((\$DEBUG || \$DRY_RUN)); then
    echo \$cmd | sed "s/-v /\\\\\\\\\\\\n   -v /g"
 fi
-eval "\$cmd"
+if [[ "\$DRY_RUN" = "0" ]]; then
+   eval "\$cmd"
+fi
 }
 
 echo "This function is now defined FOR THIS terminal window:"
