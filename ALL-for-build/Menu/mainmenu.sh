@@ -11,7 +11,7 @@ export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
 function mm-minimalhelp(){
    cat <<EOT
-$OUR_IMAGE_SLOGAN (${OUR_IMAGE_VERSION})
+$OUR_IMAGE_SLOGAN (${OUR_IMAGE_TAG})
 For help:
    docker run --rm $OUR_IMAGE --help
    ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
@@ -36,17 +36,21 @@ Usage:
             makeall              Run for production - create ALL
             makehtml             Run for production - create only HTML
             tct                  Run TCT, the toolchain runner
-            show-howto           Show howto
-            show-faq             Show questions and answers
             show-shell-commands  Show useful shell commands and functions
             /bin/bash            Enter the container's Bash shell
+            show-howto           Show howto (not totally up to date)
+            show-faq             Show questions and answers (not totally up to date)
 
     Examples:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT show-faq
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
-        ...
+
+    Only in this short form:
+        # Copy /ALL to /RESULT/ALL-exported
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT export-ALL
+
 
 End of usage.
 EOT
@@ -77,35 +81,36 @@ then
 
 Final exit status: 0 (completed)
 
-Find the results:
 EOT
 else
    cat <<EOT
 
 Final exit status: $exitstatus (aborted)
 
-Check for results:
 EOT
 fi
-echo >/RESULT/warning-files.txt
-find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/0\.0\.0/Index\.html$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
-find /RESULT/Result -type d -regextype posix-egrep -regex  '.*/0\.0\.0/singlehtml$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
-find /RESULT/Result -type d -regextype posix-egrep -regex  '.*/0\.0\.0/_buildinfo$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
-find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
-find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n" >>/RESULT/warning-files.txt
+if [ -d "/RESULT/Result" ]; then
+   echo -n >/RESULT/warning-files.txt
+   echo Check for results:
+   find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/0\.0\.0/Index\.html$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+   find /RESULT/Result -type f -regextype posix-egrep -iregex  '.*/0\.0\.0/singlehtml/Index\.html$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+   find /RESULT/Result -type d -regextype posix-egrep -regex  '.*/0\.0\.0/_buildinfo$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+   find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+   find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n" >>/RESULT/warning-files.txt
 
-if [ -f /RESULT/warning-files.txt ];then
-   echo
-   if [ -s /RESULT/warning-files.txt ];then
-      echo "ATTENTION:"
-      echo "   There are Sphinx warnings!"
-   else
-      echo "Congratulations:"
-      echo "    There are no Sphinx warnings!"
+   if [ -f /RESULT/warning-files.txt ];then
+      echo
+      if [ -s /RESULT/warning-files.txt ];then
+         echo "ATTENTION:"
+         echo "   There are Sphinx warnings!"
+      else
+         echo "Congratulations:"
+         echo "    There are no Sphinx warnings!"
+         rm -f /RESULT/warning-files.txt
+      fi
+      echo
    fi
-   echo
 fi
-
 }
 
 function mm-makeall() {
@@ -117,7 +122,7 @@ if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
 then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
-cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg -v"
+cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
 cmd="$cmd -c make_latex 1 -c make_package 0 -c make_pdf 0 -c make_singlehtml 1"
 cmd="$cmd $@"
