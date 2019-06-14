@@ -13,7 +13,7 @@ ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
-   TOOLCHAIN_VERSION="2.4.0" \
+   TOOLCHAIN_VERSION="2.5.0" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.5.0" \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.5.0.zip" \
    TYPOSCRIPT_PY_VERSION="v2.2.4" \
