@@ -41,12 +41,11 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 #     T3DOCS_MENU=/abspathto/MYALL/Menu
 #     T3DOCS_VENV=/abspathto/MYALL/venv
 #     T3DOCS_TOOLCHAINS=/abspathto/MYALL/Toolchains
+#     T3DOCS_DEBUG=0         (0 or 1, talk to stdout)
+#     T3DOCS_DRY_RUN=0       (0 or 1, don't really execute)
 
-# Example:
-# local DEBUG=\${T3DOCS_DEBUG:-0}
-# local DEBUG=\${T3DOCS_DEBUG:-1}
-# set T3DOCS_DEBUG=0 or set T3DOCS_DEBUG=1
 local DEBUG=\${T3DOCS_DEBUG:-0}
+local DRY_RUN=\${T3DOCS_DRY_RUN:-0}
 local git_restore_mtime=\$(which git-restore-mtime)
 local exitcode=\$?
 if [[ \$exitcode -ne 0 ]]; then git_restore_mtime=; fi
@@ -161,10 +160,12 @@ fi
 if [[ -w "\$RESULT" ]]; then true
    echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >"\$RESULT/last-docker-run-command-GENERATED.sh"
 fi
-if ((\$DEBUG)); then
+if ((\$DEBUG || \$DRY_RUN)); then
    echo \$cmd | sed "s/-v /\\\\\\\\\\\\n   -v /g"
 fi
-eval "\$cmd"
+if [[ "\$DRY_RUN" = "0" ]]; then
+   eval "\$cmd"
+fi
 }
 
 echo "This function is now defined FOR THIS terminal window:"
