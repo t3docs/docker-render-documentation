@@ -1,7 +1,21 @@
 Release v2.2.2 (to be released)
 ===============================
 
-...
+Bugs fixed
+----------
+
+*  Solve `issue #72 of container
+   <https://github.com/t3docs/docker-render-documentation/issues/72>`__
+   "Sphinx directive 'slide' not working". Explained `here
+   <https://github.com/TYPO3-Documentation/sphinx-contrib-slide>`__.
+
+Features added
+--------------
+
+*  The `.. slide::` directive can now embed "Google documents" and "Google
+   spreadsheets" as well. Explained `here
+   <https://github.com/TYPO3-Documentation/sphinx-contrib-slide>`__.
+
 
 Release v2.2.1 (released June 14, 2019)
 =======================================
