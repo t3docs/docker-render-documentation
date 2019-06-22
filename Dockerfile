@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=v2.2.1
+ARG OUR_IMAGE_VERSION=v2.2.2
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
