@@ -1,10 +1,11 @@
-
-v2.2.4
+v2.2.5
 
 
 Keep version number like above in files:
 
-- ./Dockerfile
-- ./README.rst
+*  First line in this file
+*  Dockerfile
+*  README.rst
+*  CHANGES.rst
 
 End of text.

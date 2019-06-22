@@ -1,5 +1,11 @@
-Release v2.2.4 (released June 22, 2019
-======================================
+Release v2.2.5 (released June 22, 2019)
+=======================================
+
+* Build again, make sphinx-contrib-slide-t3v1.0.1.zip available
+
+
+Release v2.2.4 (released June 22, 2019)
+=======================================
 
 Bugs fixed
 ----------
@@ -190,7 +196,7 @@ Info
 
 
 Release v1.6.9-full (released May 10, 2018)
-============================================
+===========================================
 
 ...
 
