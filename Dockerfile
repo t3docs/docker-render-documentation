@@ -13,9 +13,9 @@ ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
-   TOOLCHAIN_VERSION="2.5.1" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.5.1" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.5.1.zip" \
+   TOOLCHAIN_VERSION="2.6.0" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.6.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.6.0.zip" \
    TYPOSCRIPT_PY_VERSION="v2.2.4" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
@@ -59,6 +59,7 @@ RUN \
    \
    && COMMENT "What the toolchains needs" \
    && apt-get install -yq --no-install-recommends \
+      moreutils \
       pandoc \
       rsync \
       tidy \

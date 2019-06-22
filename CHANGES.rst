@@ -16,6 +16,16 @@ Features added
    spreadsheets" as well. Explained `here
    <https://github.com/TYPO3-Documentation/sphinx-contrib-slide>`__.
 
+Use toolchain v2.6.0
+--------------------
+
+| ffbd087 Dump info to stdout if there are forbidden include files
+| f68ebf0 Dump warnings.txt to stdout if not in _buildinfo
+| 4606616 Add rel="nofollow noopener" to external + foreign links
+| ee6533e Return sitemap-files in .txt format and not .json as result
+| ec9fb21 Provide sitemap-files as .txt file too
+| 4d65da1 v2.6.0 Set new version number
+
 
 Release v2.2.1 (released June 14, 2019)
 =======================================
