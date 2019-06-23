@@ -1,3 +1,9 @@
+Release v2.2.6 (released June 23, 2019)
+=======================================
+
+* Use bugfixed toolchain v2.6.1
+
+
 Release v2.2.5 (released June 22, 2019)
 =======================================
 
