@@ -9,5 +9,9 @@ info.txt about /ALL/venv
 3. It is expected that the TCT config file can be found here as
    /ALL/venv/tctconfig.cfg
 
+4. 'pipenv' documentation can be found at https://docs.pipenv.org/en/latest/
+   Example to run pipenv: `PIPENV_VENV_IN_PROJECT=1 pipenv install`
+
+
 End of info.txt
 
