@@ -152,13 +152,14 @@ then
    source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
 
-if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
-   && ( -d /RESULT ) ]]
-then
-rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
-exitstatus=$?
-fi
+# is now handled in toolchain using '-c resultdir ...'
+#if [[ ( $exitstatus -eq 0 ) \
+#   && ( -d /ALL/dumy_webroot/typo3cms/drafts/project ) \
+#   && ( -d /RESULT ) ]]
+#then
+#rsync -a /ALL/dumy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
+#exitstatus=$?
+#fi
 
 tell-about-results $exitstatus
 }
@@ -186,13 +187,14 @@ then
    source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
 
-if [[ ( $exitstatus -eq 0 ) \
-   && ( -d /ALL/dummy_webroot/typo3cms/drafts/project ) \
-   && ( -d /RESULT ) ]]
-then
-rsync -a /ALL/dummy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
-exitstatus=$?
-fi
+# is now handled in toolchain using '-c resultdir ...'
+#if [[ ( $exitstatus -eq 0 ) \
+#   && ( -d /ALL/dumy_webroot/typo3cms/drafts/project ) \
+#   && ( -d /RESULT ) ]]
+#then
+#rsync -a /ALL/dumy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
+#exitstatus=$?
+#fi
 
 tell-about-results $exitstatus
 }

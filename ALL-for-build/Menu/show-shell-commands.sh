@@ -32,7 +32,6 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 #     T3DOCS_PROJECT=/abspathto/MyProjectStartFolder       (readonly)
 #     T3DOCS_RESULT=/abspathto/ResultFolder                (readwrite)
 #     T3DOCS_TMP=/abspathto/TemporaryFolder                (readwrite)
-#     T3DOCS_DUMMY_WEBROOT=/abspathto/dummy_webroot_folder (readwrite)
 #
 # Environment variables only some DEVELOPERS may find important,
 # no slash ('/') at the end,
@@ -100,14 +99,6 @@ if [[ -d "\${TMP}" ]]; then
       /bin/bash -c "rm -rf \$TMP/*"
    fi
    if ((\$DEBUG)); then echo "TMP..........: \$TMP"; fi
-fi
-
-# DUMMY_WEBROOT
-# absolute path to existing folder DUMMY_WEBROOT
-local DUMMY_WEBROOT=\${T3DOCS_DUMMY_WEBROOT:-\$(pwd)/tmp-GENERATED-dummy_webroot}
-if [ -d "\$DUMMY_WEBROOT" ]; then
-   cmd="\$cmd -v \$DUMMY_WEBROOT:/ALL/dummy_webroot"
-   if ((\$DEBUG)); then echo "DUMMY_WEBROOT: \$DUMMY_WEBROOT"; fi
 fi
 
 # MAKEDIR
