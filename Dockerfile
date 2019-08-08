@@ -143,23 +143,24 @@ RUN \
    && echo "export OUR_IMAGE_VERSION=\"${OUR_IMAGE_VERSION}\""     >> /ALL/Downloads/envvars.sh \
    && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""             >> /ALL/Downloads/envvars.sh \
    \
-   && COMMENT "Let's have some debug info" \
+   && COMMENT "Let\'s have some debug info ('::' as separator)" \
    && echo "\
-      debug_info DEBIAN_FRONTEND....: ${DEBIAN_FRONTEND}\n\
-      debug_info DOCKRUN_PREFIX.....: ${DOCKRUN_PREFIX}\n\
-      debug_info OUR_IMAGE..........: ${OUR_IMAGE}\n\
-      debug_info OUR_IMAGE_SHORT....: ${OUR_IMAGE_SHORT}\n\
-      debug_info OUR_IMAGE_SLOGAN...: ${OUR_IMAGE_SLOGAN}\n\
-      debug_info OUR_IMAGE_TAG......: ${OUR_IMAGE_TAG}\n\
-      debug_info OUR_IMAGE_VERSION..: ${OUR_IMAGE_VERSION}\n\
-      debug_info TOOLCHAIN_URL......: ${TOOLCHAIN_URL}\n\
-      \n\
       Versions used for $OUR_IMAGE_VERSION:\n\
-      Sphinx theme        t3SphinxThemeRtd       $THEME_VERSION  mtime:$THEME_MTIME\n\
-      Toolchain           RenderDocumentation    $TOOLCHAIN_VERSION\n\
-      Toolchain tool      TCT                    0.3.0\n\
-      TYPO3-Documentation typo3.latex            v1.1.0\n\
-      TypoScript lexer    typoscript.py          $TYPOSCRIPT_PY_VERSION\n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
+      Sphinx theme        :: t3SphinxThemeRtd    :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
+      Toolchain           :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
+      Toolchain tool      :: TCT                 :: 0.3.0\n\
+      TYPO3-Documentation :: typo3.latex         :: v1.1.0\n\
+      TypoScript lexer    :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
+      \n\
+      DEBIAN_FRONTEND     :: ${DEBIAN_FRONTEND}\n\
+      DOCKRUN_PREFIX      :: ${DOCKRUN_PREFIX}\n\
+      OUR_IMAGE           :: ${OUR_IMAGE}\n\
+      OUR_IMAGE_SHORT     :: ${OUR_IMAGE_SHORT}\n\
+      OUR_IMAGE_SLOGAN    :: ${OUR_IMAGE_SLOGAN}\n\
+      OUR_IMAGE_TAG       :: ${OUR_IMAGE_TAG}\n\
+      OUR_IMAGE_VERSION   :: ${OUR_IMAGE_VERSION}\n\
+      TOOLCHAIN_URL       :: ${TOOLCHAIN_URL}\n\
+      \n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
 
 
