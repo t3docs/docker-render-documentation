@@ -140,7 +140,7 @@ if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 if [[ "\$@" = "/bin/bash" ]]; then
    true "do nothing here"
 elif [[ "\$@" = "export-ALL" ]]; then
-   cmd="\$cmd -c \"rsync -a --chown=\$(id -u):\$(id -g) /ALL/ /RESULT/ALL-exported\""
+   cmd="\$cmd -c \"rsync -a --delete --chown=\$(id -u):\$(id -g) /ALL/ /RESULT/ALL-exported\""
    echo The export will go to:
    echo "   \$RESULT/ALL-exported"
 
