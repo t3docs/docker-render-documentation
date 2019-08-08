@@ -9,6 +9,8 @@ ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
 ARG hack_OUR_IMAGE_SHORT="t3rd"
 ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 
+# requires toolchain version >= 2.7.0, since /ALL/dummy_webroot is gone
+
 ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
@@ -129,7 +131,7 @@ RUN \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
-   && rm -rf /tmp/* \
+   && rm -rf /tmp/* $HOME/.cache \
    \
    && COMMENT "Memorize the settings in the container" \
    && echo "export DEBIAN_FRONTEND=\"${DEBIAN_FRONTEND}\""         >> /ALL/Downloads/envvars.sh \
