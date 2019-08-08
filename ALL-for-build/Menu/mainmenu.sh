@@ -9,6 +9,16 @@ export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
+function mm-bashcmd() {
+   local cmd
+   shift
+   cmd="/bin/bash -c"
+   cmd="$cmd \"$@\""
+   eval $cmd
+   local exitstatus=$?
+   tell-about-results $exitstatus
+}
+
 function mm-minimalhelp(){
    cat <<EOT
 $OUR_IMAGE_SLOGAN (${OUR_IMAGE_TAG})
@@ -28,11 +38,13 @@ Usage:
         Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the commandline of your system:
             source <(docker run --rm $OUR_IMAGE show-shell-commands)
         Inspect function:
-            declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
+            declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}
     Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]
             ARGUMENT             DESCRIPTION
             --help               Show this menu
+            --version            Show buildinfo.txt of this container
+            bashcmd              Run a bash command in the container
             makeall              Run for production - create ALL
             makehtml             Run for production - create only HTML
             tct                  Run TCT, the toolchain runner
@@ -54,6 +66,10 @@ Usage:
 
 End of usage.
 EOT
+}
+
+function mm-version() {
+   cat /ALL/Downloads/buildinfo.txt
 }
 
 function mm-show-howto() {
@@ -183,6 +199,8 @@ tell-about-results $exitstatus
 
 case "$1" in
 --help)              mm-usage $@ ;;
+--version)           mm-version $@ ;;
+bashcmd)             mm-bashcmd $@ ;;
 makeall)             mm-makeall $@ ;;
 makehtml)            mm-makehtml $@ ;;
 show-shell-commands) mm-show-shell-commands $@ ;;
