@@ -51,7 +51,6 @@ RUN \
    && COMMENT "Make sure other users can write" \
    && chmod -R o+w \
       /ALL/Makedir \
-      /ALL/dummy_webroot \
       /RESULT \
    \
    && COMMENT "Install and upgrade system packages" \
