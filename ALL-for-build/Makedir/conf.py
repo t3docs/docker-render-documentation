@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# mb, 2015-10-01, 2016-09-14, 2017-07-10, 2018-05-04, 2019-06-06
+# mb, 2015-10-01, 2016-09-14, 2017-07-10, 2018-05-04, 2019-07-31
 
 # Generic conf.py for ALL TYPO3 projects.
 # This file lives at https://github.com/t3docs/docker-render-documentation/blob/master/ALL-for-build/Makedir/conf.py
@@ -16,8 +16,8 @@
 
 import codecs
 import ConfigParser
+import json
 import os
-import pprint
 import t3SphinxThemeRtd
 
 # enable highlighting for PHP code not between <?php ... ?> by default
@@ -395,10 +395,17 @@ for k in ['f1', 'f1name', 'o', 'contents',
         del G[k]
 del k
 
-settingsLogFile = logdirabspath + '/Settings.pprinted.txt'
-
-if 1 and 'dump resulting settings to file':
-    f2 = codecs.open(settingsLogFile, 'w', 'utf-8')
-    pprint.pprint(globals(), stream=f2)
-    f2.close()
-    del f2
+if 1 and 'dump resulting settings as json':
+    settingsDumpJsonFile = logdirabspath + '/Settings.dump.json'
+    D = {}
+    for k, v in globals().items():
+        if k in ['k', 'D', 'v']:
+            continue
+        try:
+            json.dumps(globals()[k])
+            D[k] = v
+        except:
+            pass
+    with codecs.open(settingsDumpJsonFile, 'w', 'utf-8') as f2:
+        json.dump(D, f2, indent=4, sort_keys=True)
+    del D, k, v
