@@ -107,7 +107,7 @@ EOT
 fi
 if [ -d "/RESULT/Result" ]; then
    echo -n >/RESULT/warning-files.txt
-   echo Check for results:
+   echo Find the results:
    find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/0\.0\.0/Index\.html$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
    find /RESULT/Result -type f -regextype posix-egrep -iregex  '.*/0\.0\.0/singlehtml/Index\.html$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
    find /RESULT/Result -type d -regextype posix-egrep -regex  '.*/0\.0\.0/_buildinfo$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
