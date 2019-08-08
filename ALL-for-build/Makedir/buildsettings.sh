@@ -9,7 +9,7 @@ GITDIR=/PROJECT
 PROJECT=project
 VERSION=0.0.0
 LOCALIZATION=default
-BUILDDIR=typo3cms/project/0.0.0
+BUILDDIR=project/0.0.0
 
 # More specs
 GITBRANCH=master
