@@ -18,7 +18,7 @@ ENV \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
-   THEME_MTIME="1530870718"
+   THEME_MTIME="1530870718" \
    THEME_VERSION="3.6.16" \
    TOOLCHAIN_TOOL_VERSION="1.0.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
@@ -26,7 +26,7 @@ ENV \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
    TOOLCHAIN_VERSION="2.7.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
-   TYPOSCRIPT_PY_VERSION="v2.2.4" \
+   TYPOSCRIPT_PY_VERSION="v2.2.4"
 
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
