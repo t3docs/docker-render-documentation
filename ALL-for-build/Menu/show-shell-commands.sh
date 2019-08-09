@@ -158,7 +158,7 @@ else
    fi
 fi
 if [[ -w "\$RESULT" ]]; then true
-   echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >"\$RESULT/last-docker-run-command-GENERATED.sh"
+   echo "\$cmd" | sed "s/-v /\\\\\\\\\\\\n   -v /g" >"\$RESULT/last-docker-run-command-GENERATED.sh.txt"
 fi
 if ((\$DEBUG || \$DRY_RUN)); then
    echo \$cmd | sed "s/-v /\\\\\\\\\\\\n   -v /g"
