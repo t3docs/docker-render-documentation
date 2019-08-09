@@ -15,16 +15,18 @@ ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
-   TOOLCHAIN_VERSION="2.7.0" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.7.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.7.0.zip" \
-   TYPOSCRIPT_PY_VERSION="v2.2.4" \
-   TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
-   THEME_VERSION="3.6.16" \
    THEME_MTIME="1530870718"
+   THEME_VERSION="3.6.16" \
+   TOOLCHAIN_TOOL_VERSION="1.0.0" \
+   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
+   TOOLCHAIN_VERSION="2.7.0" \
+   TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
+   TYPOSCRIPT_PY_VERSION="v2.2.4" \
 
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
@@ -147,7 +149,7 @@ RUN \
       Versions used for $OUR_IMAGE_VERSION:\n\
       Sphinx theme        :: t3SphinxThemeRtd    :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
       Toolchain           :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
-      Toolchain tool      :: TCT                 :: 0.3.0\n\
+      Toolchain tool      :: TCT                 :: $TOOLCHAIN_TOOL_VERSION\n\
       TYPO3-Documentation :: typo3.latex         :: v1.1.0\n\
       TypoScript lexer    :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
       \n\
@@ -158,6 +160,7 @@ RUN \
       OUR_IMAGE_SLOGAN    :: ${OUR_IMAGE_SLOGAN}\n\
       OUR_IMAGE_TAG       :: ${OUR_IMAGE_TAG}\n\
       OUR_IMAGE_VERSION   :: ${OUR_IMAGE_VERSION}\n\
+      TOOLCHAIN_TOOL_URL  :: ${TOOLCHAIN_TOOL_URL}\n\
       TOOLCHAIN_URL       :: ${TOOLCHAIN_URL}\n\
       \n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
