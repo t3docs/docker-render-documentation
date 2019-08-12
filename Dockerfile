@@ -125,11 +125,6 @@ RUN \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
-   && COMMENT "Download latex files, since we can still render Latex without drawbacks" \
-   && wget https://github.com/TYPO3-Documentation/latex.typo3/archive/v1.1.0.zip -qO /tmp/latex.typo3-v1.1.0.zip \
-   && unzip /tmp/latex.typo3-v1.1.0.zip -d /tmp \
-   && mv /tmp/latex.typo3-1.1.0 /ALL/Downloads/latex.typo3 \
-   \
    && COMMENT "Final cleanup" \
    && apt-get clean \
    && rm -rf /tmp/* $HOME/.cache \
