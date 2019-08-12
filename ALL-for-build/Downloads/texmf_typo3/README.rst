@@ -9,13 +9,18 @@ https://github.com/TYPO3-Documentation/latex.typo3
 It was created on Ubuntu 18.04 with `texlive` installed::
 
    # Linux, Ubuntu 18.04
-   apt-get install
+   apt-get install \
+      latexmk \
+      texlive \
+      texlive-fonts-recommended \
+      texlive-latex-extra \
+      texlive-latex-recommended
 
 
 The build recipe of this folder `texmf_typo3`
 =============================================
 
-1. Download https://github.com/TYPO3-Documentation/latex.typo3/archive/master.zip
+1. Download https://github.com/TYPO3-Documentation/latex.typo3/archive/v1.1.0.zip
 
 2. Unpack and cd to `latex.typo3/font/`
 
@@ -26,6 +31,7 @@ The build recipe of this folder `texmf_typo3`
 
 5. Rename `texmf` to `texmf_typo3` and add this README, et voilà: This should
    be what we have here and is part of the Docker build.
+
 
 Usage
 =====
@@ -44,3 +50,5 @@ to find this stuff. You can do this like so::
    # subfolder and run make to build the PDF(s)
    TEXINPUTS=::texmf_typo3  make
 
+
+End of README.
