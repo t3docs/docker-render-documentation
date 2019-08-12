@@ -1,0 +1,22 @@
+\ProvidesFile{t1typo3share.fd}[Font definitions for T1/typo3share.]
+
+\DeclareFontFamily{T1}{typo3share}{}
+
+\DeclareFontShape{T1}{typo3share}{m}{n}{<-> typo3sharer8t}{}
+\DeclareFontShape{T1}{typo3share}{m}{sc}{<-> typo3shareb8t}{}
+\DeclareFontShape{T1}{typo3share}{m}{sl}{<-> typo3sharero8t}{}
+\DeclareFontShape{T1}{typo3share}{m}{it}{<-> typo3shareri8t}{}
+\DeclareFontShape{T1}{typo3share}{b}{n}{<-> typo3shareb8t}{}
+\DeclareFontShape{T1}{typo3share}{b}{sc}{<-> typo3shareb8t}{}
+\DeclareFontShape{T1}{typo3share}{b}{sl}{<-> typo3sharebo8t}{}
+\DeclareFontShape{T1}{typo3share}{b}{it}{<-> typo3sharebi8t}{}
+\DeclareFontShape{T1}{typo3share}{sb}{n}{<->ssub * typo3share/b/n}{}
+\DeclareFontShape{T1}{typo3share}{sb}{sc}{<->ssub * typo3share/b/sc}{}
+\DeclareFontShape{T1}{typo3share}{sb}{sl}{<->ssub * typo3share/b/sl}{}
+\DeclareFontShape{T1}{typo3share}{sb}{it}{<->ssub * typo3share/b/it}{}
+\DeclareFontShape{T1}{typo3share}{bx}{n}{<->ssub * typo3share/b/n}{}
+\DeclareFontShape{T1}{typo3share}{bx}{sc}{<->ssub * typo3share/b/sc}{}
+\DeclareFontShape{T1}{typo3share}{bx}{sl}{<->ssub * typo3share/b/sl}{}
+\DeclareFontShape{T1}{typo3share}{bx}{it}{<->ssub * typo3share/b/it}{}
+
+\endinput
