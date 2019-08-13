@@ -1,10 +1,10 @@
 
-===========
-texmf_typo3
-===========
+=======================================
+About folder ALL/Downloads/texmf\_typo3
+=======================================
 
 This is a (hopefully) ready to run version of
-https://github.com/TYPO3-Documentation/latex.typo3
+https://github.com/TYPO3-Documentation/latex.typo3.
 
 It was created on Ubuntu 18.04 with `texlive` installed::
 
