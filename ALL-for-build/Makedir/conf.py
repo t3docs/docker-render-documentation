@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 
-# mb, 2015-10-01, 2016-09-14, 2017-07-10, 2018-05-04, 2019-07-31
-
-# Generic conf.py for ALL TYPO3 projects.
-# This file lives at https://github.com/t3docs/docker-render-documentation/blob/master/ALL-for-build/Makedir/conf.py
-
-# We have these sources of settings:
+# We have these sources of settings. Higher numbers take precedence.
+# ATTENTION: Settings.json can do almost everything
 #
-# (1) Hardcoded settings in this conf.py file            (maintained by admin)
-# (2) Settings from MAKEDIR/buildsettings.sh             (maintained by admin)
-# (3) Settings from MAKEDIR/Defaults.cfg                 (maintained by admin)
-# (4) User's settings from ./Documentation/Settings.cfg  (maintained by user)
-# (5) Some more hardcoded overrides in this conf.py file (maintained by admin)
-# (6) Final word is in MAKEDIR/Overrides.cfg             (maintained by admin)
+# (1) MAKEDIR/buildsettings.sh                            (buildtime)
+# (2) Hardcoded settings from this conf.py file           (buildtime)
+# (3) Settings from MAKEDIR/Defaults.cfg                  (buildtime)
+# (4) User settings from ./Documentation/Settings.cfg     (user)
+# (5) More hardcoded settings from this conf.py file      (buildtime)
+# (6) Settings from MAKEDIR/Overrides.cfg                 (buildtime)
+# (7) Settings from Settings.json                         (operator at runtime)
 
 import codecs
 import ConfigParser
 import json
 import os
 import t3SphinxThemeRtd
+
+from os.path import exists as ospe, isabs, join as ospj, normpath, \
+    split as ospsplit
 
 # enable highlighting for PHP code not between <?php ... ?> by default
 from sphinx.highlighting import lexers
@@ -40,18 +40,18 @@ if CommonMarkParser:
     source_suffix = ['.rst', '.md']
 else:
     source_suffix = ['.rst']
-
-# a dictionary to take notes while we do this processing
-notes = {}
-
-# settings from Overrides.cfg
-OVERRIDES = {}
-
-
-# PART 1: preparations
-
+#
+#
+#
+#
+# preparations
+#
 # the dictionary of variables of this module 'conf.py'
 G = globals()
+# where we merge the various settings
+US = user_settings = {}
+# a dictionary to take notes while within conf.py
+notes = {}
 
 class WithSection:
 
@@ -66,13 +66,17 @@ class WithSection:
             return '[' + self.sectionname + ']\n'
         else:
             return self.fp.readline()
-
-# get from 'buildsettings.sh'
-# ConfigParser needs a section. Let's invent one.
+#
+#
+#
+#
+# (1) MAKEDIR/buildsettings.sh
+#
 section = 'build'
 config = ConfigParser.RawConfigParser()
 f1name = 'buildsettings.sh'
 with codecs.open(f1name, 'r', 'utf-8') as f1:
+    # ConfigParser needs a section. We don't have it. Let's invent one.
     config.readfp(WithSection(f1, section))
 
 # Required:
@@ -87,91 +91,51 @@ try:
 except:
     import inspect
     confpyabspath = os.path.abspath(inspect.getfile(inspect.currentframe()))
+confpyabspath = normpath(confpyabspath)
+confpyfolder = ospsplit(confpyabspath)[0]
 
-if os.path.isabs(MASTERDOC):
-    masterdocabspath = os.path.normpath(MASTERDOC)
+if isabs(MASTERDOC):
+    masterdocabspath = normpath(MASTERDOC)
 else:
-    masterdocabspath = os.path.normpath(os.path.join(confpyabspath, '..', MASTERDOC))
+    masterdocabspath = normpath(ospj(confpyfolder, MASTERDOC))
 
-if os.path.isabs(LOGDIR):
-    logdirabspath = LOGDIR
+if isabs(LOGDIR):
+    logdirabspath = normpath(LOGDIR)
 else:
-    logdirabspath = os.path.abspath(LOGDIR)
-logdirabspath = os.path.normpath(logdirabspath)
+    logdirabspath = normpath(ospj(confpyfolder, LOGDIR))
 
 # the absolute path to ./Documentation/
-projectabspath = os.path.normpath(os.path.join(masterdocabspath, '..'))
-
+projectabspath = ospsplit(masterdocabspath)[0]
 # the absolute path to Documentation/Settings.cfg
 settingsabspath = projectabspath + '/' + 'Settings.cfg'
-notes['Settings.cfg exists'] = os.path.exists(settingsabspath)
+defaultsabspath = ospj(confpyfolder, 'Defaults.cfg')
+overridesabspath = ospj(confpyfolder, 'Overrides.cfg')
+settingsjsonabspath = ospj(confpyfolder, 'Settings.json')
 
-defaultsabspath = os.path.normpath(os.path.join(confpyabspath, '..', 'Defaults.cfg'))
-notes['Defaults.cfg exists'] = os.path.exists(defaultsabspath)
+def firstNotNone(*args):
+    for a in args:
+        if a is not None:
+            return a
+    return None
 
-overridesabspath = os.path.normpath(os.path.join(confpyabspath, '..', 'Overrides.cfg'))
-notes['Overrides.cfg exists'] = os.path.exists(overridesabspath)
-
-# user settings
-US = {}
-
-# Documentation/Settings.cfg
-# read user settings and keep them in normal dictionary US
-if notes['Settings.cfg exists']:
+def merge_settings_file(fpath, D, notes):
+    if not ospe(fpath):
+        return
+    notes[os.path.split(fpath)[1]] = fpath
     config = ConfigParser.RawConfigParser()
-    config.readfp(codecs.open(settingsabspath, 'r', 'utf-8'))
+    config.readfp(codecs.open(fpath, 'r', 'utf-8'))
     for s in config.sections():
-        US[s] = {}
+        D[s] = D.get(s, {})
         for o in config.options(s):
-            US[s][o] = config.get(s, o)
-
-# If MAKEDIR/Defaults.cfg exists:
-# Get defaults for settings that ARE NOT in Settings.cfg
-if notes['Defaults.cfg exists']:
-    config = ConfigParser.RawConfigParser()
-    config.readfp(codecs.open(defaultsabspath, 'r', 'utf-8'))
-    for s in config.sections():
-        US[s] = US.get(s, {})
-        for o in config.options(s):
-            if not US[s].has_key(o):
-                US[s][o] = config.get(s, o)
-
-extensions_to_be_loaded = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.coverage',
-    'sphinx.ext.extlinks',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.todo',
-    'sphinxcontrib.googlechart',
-    'sphinxcontrib.googlemaps',
-    'sphinxcontrib.phpdomain',
-    'sphinxcontrib.slide',
-    'sphinxcontrib.t3fieldlisttable',
-    'sphinxcontrib.t3tablerows',
-    'sphinxcontrib.t3targets',
-    'sphinxcontrib.youtube',
-    't3SphinxThemeRtd',
-]
-
-# Legal extensions will be loaded if requested in Settings.cfg
-legal_extensions = [
-    # to be extended ...
-]
-
-# Extensions to be loaded are legal of course. Just be clear.
-for e in extensions_to_be_loaded:
-    if not e in legal_extensions:
-        legal_extensions.append(e)
-
-
-# PART 2: provide defaults - before applying user settings
-
-# 'first class' defaults first: not derived from others
-
+            D[s][o] = config.get(s, o)
+#
+#
+#
+#
+# (2) Hardcoded settings in this conf.py file
+#
 project     = u"The Project's Title"
-copyright   = u'Since 1990 By The Authors And Copyright Holders'
+copyright   = u'Since ever by authors and copyright holders'
 t3shortname = u't3shortname'
 t3author    = u'The Author(s)'
 description = u'This is project \'' + project + '\''
@@ -200,10 +164,38 @@ html_use_opensearch = '' # like: 'https://docs.typo3.org/typo3cms/TyposcriptRefe
 highlight_language = 'php'
 html_use_smartypants = False
 language = None
-master_doc = os.path.splitext(os.path.split(masterdocabspath)[1])[0]
+master_doc = os.path.splitext(ospsplit(masterdocabspath)[1])[0]
 pygments_style = 'sphinx'
 todo_include_todos = False
 
+extensions_to_be_loaded = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.coverage',
+    'sphinx.ext.extlinks',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.todo',
+    'sphinxcontrib.googlechart',
+    'sphinxcontrib.googlemaps',
+    'sphinxcontrib.phpdomain',
+    'sphinxcontrib.slide',
+    'sphinxcontrib.t3fieldlisttable',
+    'sphinxcontrib.t3tablerows',
+    'sphinxcontrib.t3targets',
+    'sphinxcontrib.youtube',
+    't3SphinxThemeRtd',
+]
+
+# Legal extensions will be loaded if requested in Settings.cfg or Overrides.cfg
+legal_extensions = [
+    # to be extended ...
+]
+
+# Extensions to be loaded are legal of course. Just be clear.
+for e in extensions_to_be_loaded:
+    if not e in legal_extensions:
+        legal_extensions.append(e)
 
 # make a copy (!)
 extensions = extensions_to_be_loaded[:]
@@ -214,188 +206,220 @@ extlinks['issue' ] = ('https://forge.typo3.org/issues/%s', 'Issue #')
 extlinks['review'] = ('https://review.typo3.org/%s', 'Review #')
 
 intersphinx_mapping = {}
+#
+#
+#
+#
+# (3) Settings from MAKEDIR/Defaults.cfg
+merge_settings_file(defaultsabspath, US, notes)
+#
+#
+#
+#
+# (4) User settings from ./Documentation/Settings.cfg
+merge_settings_file(settingsabspath, US, notes)
+#
+#
+#
+#
+# (5) More hardcoded settings in this conf.py file
+#
+us_general = US['general'] = US.get('general', {})
 
+us_general['exclude_patterns'] = ['_make']
+us_general['html_last_updated_fmt'] = '%b %d, %Y %H:%M'
+us_general['html_static_path'] = []
+us_general['html_theme_path'] = [t3SphinxThemeRtd.get_html_theme_path()]
+us_general['templates_path'] = []
+us_general['today_fmt'] = '%Y-%m-%d %H:%M'
 
-# PART 3: apply user settings
+# 'published' means in the following context: Available under that name in the
+# GlobalContext of Jinja2 templating. Example: if 'show_copyright' is said to
+# be published it can be used in the Jinja2 template like:
+#     {{ show_copyright }}
 
+us_html_theme_options = US['html_theme_options'] = US.get('html_theme_options',
+                                                          {})
+
+# no, not rendering for the server by default
+us_html_theme_options['docstypo3org'] = False
+
+# 'html_show_copyright' is published as 'show_copyright'
+us_general['html_show_copyright'] = True
+
+# published as 'theme_show_copyright'
+us_html_theme_options['show_copyright'] = True
+
+# published as 'theme_show_last_updated
+us_html_theme_options['show_last_updated'] = True
+
+# published as 'theme_show_revision'
+us_html_theme_options['show_revision'] = True
+
+# published as 'show_source'
+us_general['html_show_sourcelink'] = True
+
+# published as 'theme_show_sourcelink'
+us_html_theme_options['show_sourcelink'] = True
+
+# published as 'show_sphinx'
+us_general['html_show_sphinx'] = True
+
+# published as 'theme_show_sphinx'
+us_html_theme_options['show_sphinx'] = True
+
+# published as 'use_opensearch' (set above already)
+# html_use_opensearch = html_use_opensearch
+# '' is published as 'theme_use_opensearch
+# no trailing slash!
+
+# DISABLED here for now
+if 1:
+    us_html_theme_options['use_opensearch'] = False
+else:
+    # old mess - to be fixed somewhen
+    # ? html_use_opensearch = html_theme_options['use_opensearch']
+    if not 'use_opensearch' in html_theme_options:
+        html_theme_options['use_opensearch'] = ''
+    elif type(html_theme_options['use_opensearch']) in [type(''), type(u'')]:
+        html_theme_options['use_opensearch'] = html_theme_options['use_opensearch'].rstrip('/')
+#
+#
+#
+#
+# (6) Settings in MAKEDIR/Overrides.cfg
+merge_settings_file(overridesabspath, US, notes)
+#
+#
+#
+#
 def updateModuleGlobals(GLOBALS, US):
-    if US.has_key('general'):
+    if 'general' in US:
         GLOBALS.update(US['general'])
 
     # allow comma separated values like: .rst,.md
     if type(GLOBALS['source_suffix']) in [type(''), type(u'')]:
-        GLOBALS['source_suffix'] = GLOBALS['source_suffix'].split(',')
+        GLOBALS['source_suffix'] = [v.strip() for v in
+                                    GLOBALS['source_suffix'].split(',')]
 
-    # add extensions from user settings if legal
-    if US.has_key('extensions'):
-        for k, e in US['extensions'].items():
-            if not e in GLOBALS['extensions']:
-                if (e in legal_extensions) or (US is OVERRIDES):
-                    GLOBALS['extensions'].append(e)
+    for k, e in US.get('extensions', {}).items():
+        if not e in GLOBALS['extensions']:
+            if e in legal_extensions:
+                GLOBALS['extensions'].append(e)
 
-    if US.has_key('extlinks'):
-        for k, v in US['extlinks'].items():
-            # untested!
-            # we expect:
-            #     forge = https://forge.typo3.org/issues/%s | forge:
-            GLOBALS['extlinks'][k] = (v.split('|')[0].strip(), v.split('|')[1].strip())
+    for k, v in US.get('extlinks', {}).items():
+        # untested! but seems to work
+        # we expect:
+        #     forge = https://forge.typo3.org/issues/%s | forge:
+        GLOBALS['extlinks'][k] = (v.split('|')[0].strip(),
+                                  v.split('|')[1].strip())
 
-    if US.has_key('intersphinx_mapping'):
-        for k, v in US['intersphinx_mapping'].items():
-            GLOBALS['intersphinx_mapping'][k] = (v, None)
+    for k, v in US.get('intersphinx_mapping', {}).items():
+        GLOBALS['intersphinx_mapping'][k] = (v, None)
 
-    if US.has_key('html_theme_options'):
-        for k, v in US['html_theme_options'].items():
-            GLOBALS['html_theme_options'][k] = v
+    for k, v in US.get('html_theme_options', {}).items():
+        GLOBALS['html_theme_options'][k] = v
 
+    # derive default settings for the other builders from the values we
+    # already have
     LD = US.get('latex_documents', {})
     GLOBALS['latex_documents'] = [(
-        LD.get('source_start_file') if LD.get('source_start_file') else  master_doc,
-        LD.get('target_name')       if 0                           else  'PROJECT' + '.tex',
-        LD.get('title')             if LD.get('title')             else  project,
-        LD.get('author')            if LD.get('author')            else  t3author,
-        LD.get('documentclass')     if 0                           else 'manual'
+        firstNotNone(LD.get('source_start_file'), GLOBALS['master_doc']),
+        firstNotNone(LD.get('target_name')      , 'PROJECT.tex'),
+        firstNotNone(LD.get('title')            , GLOBALS['project']),
+        firstNotNone(LD.get('author')           , GLOBALS['t3author']),
+        firstNotNone(LD.get('documentclass')    , 'manual')
     )]
-
     LE = US.get('latex_elements', {})
     GLOBALS['latex_elements'] = {
-        'papersize': LE.get('papersize') if 0 else 'a4paper',
-        'pointsize': LE.get('pointsize') if 0 else '10pt',
-        'preamble' : LE.get('preamble' ) if 0 else '\\usepackage{typo3}',
+        'papersize': firstNotNone(LE.get('papersize'), 'a4paper'),
+        'pointsize': firstNotNone(LE.get('pointsize'), '10pt'),
+        'preamble' : firstNotNone(LE.get('preamble' ), '%%\\usepackage{typo3}'),
         # for more see: http://sphinx-doc.org/config.html#confval-latex_elements
     }
-
     MP = US.get('man_pages', {})
     GLOBALS['man_pages'] = [(
-        MP.get('source_start_file') if MP.get('source_start_file') else  master_doc,
-        MP.get('name')              if MP.get('name')              else  project,
-        MP.get('description')       if MP.get('description')       else  description,
-        [ MP.get('authors')         if MP.get('authors')           else  t3author ],
-        MP.get('manual_section')    if MP.get('manual_section')    else  1
+        firstNotNone(MP.get('source_start_file'), GLOBALS['master_doc']),
+        firstNotNone(MP.get('name')             , GLOBALS['project']),
+        firstNotNone(MP.get('description')      , GLOBALS['description']),
+        [firstNotNone(MP.get('authors')         , GLOBALS['t3author'])],
+        firstNotNone(MP.get('manual_section')   , 1)
     )]
-
     TD = US.get('texinfo_documents', {})
     GLOBALS['texinfo_documents'] =[(
-        TD.get('source_start_file') if TD.get('source_start_file') else master_doc,
-        TD.get('target_name')       if TD.get('target_name')       else t3shortname,
-        TD.get('title')             if TD.get('title')             else project,
-        TD.get('author')            if TD.get('author')            else t3author,
-        TD.get('dir_menu_entry')    if TD.get('dir_menu_entry')    else project,
-        TD.get('description')       if TD.get('description')       else description,
-        TD.get('category')          if TD.get('category')          else 'Miscellaneous'
+        firstNotNone(TD.get('source_start_file'), GLOBALS['master_doc']),
+        firstNotNone(TD.get('target_name')      , GLOBALS['t3shortname']),
+        firstNotNone(TD.get('title')            , GLOBALS['project']),
+        firstNotNone(TD.get('author')           , GLOBALS['t3author']),
+        firstNotNone(TD.get('dir_menu_entry')   , GLOBALS['project']),
+        firstNotNone(TD.get('description')      , GLOBALS['description']),
+        firstNotNone(TD.get('category')         , 'Miscellaneous'),
     )]
     return
 
 # NOW!
 # This is where the magic happens! We update this module's globals()
 # with the user settings US. That has the same effect as if the
-# settings had been part of this conf.py
+# settings had been directly written to this conf.py
 
 updateModuleGlobals(G, US)
 
 
 # define if not existing
 
-if not G.has_key('epub_author')      : epub_author    = t3author
-if not G.has_key('epub_copyright')   : epub_copyright = copyright
-if not G.has_key('epub_publisher')   : epub_publisher = t3author
-if not G.has_key('epub_title')       : epub_title     = project
-if not G.has_key('htmlhelp_basename'): htmlhelp_basename = t3shortname
+if not 'epub_author'       in G: epub_author       = t3author
+if not 'epub_copyright'    in G: epub_copyright    = copyright
+if not 'epub_publisher'    in G: epub_publisher    = t3author
+if not 'epub_title'        in G: epub_title        = project
 
-
-# PART 4: Overrides from 'conf.py'
-
-# Now we set some overrides
-
-exclude_patterns = ['_make']
-html_last_updated_fmt = '%b %d, %Y %H:%M'
-html_static_path = []
-html_theme_path = [ t3SphinxThemeRtd.get_html_theme_path() ]
-templates_path = []
-today_fmt = '%Y-%m-%d %H:%M'
-
-
-# IMPORTANT SWITCH: Rendering for our server!
-html_theme_options['docstypo3org'] = True
-
-
-# 'published' means in the following context: Available under that
-# name in the GlobalContext of Jinja2 templating. Example: if
-# 'show_copyright' is in the published it can be used in the Jinja2
-# template like:
-#     {{ show_copyright }}
-
-# 'html_show_copyright' is published as 'show_copyright'
-html_show_copyright = True
-
-# published as 'theme_show_copyright'
-html_theme_options['show_copyright'] = True
-
-# published as 'theme_show_last_updated
-html_theme_options['show_last_updated'] = True
-
-# published as 'theme_show_revision'
-html_theme_options['show_revision'] = True
-
-# published as 'show_source'
-html_show_sourcelink = True
-
-# published as 'theme_show_sourcelink'
-html_theme_options['show_sourcelink'] = True
-
-# published as 'show_sphinx'
-html_show_sphinx = True
-
-# published as 'theme_show_sphinx'
-html_theme_options['show_sphinx'] = True
-
-
-# published as 'use_opensearch' (set above already)
-# html_use_opensearch = html_use_opensearch
-# '' is published as 'theme_use_opensearch
-# no trailing slash!
-if not html_theme_options.has_key('use_opensearch'):
-    html_theme_options['use_opensearch'] = ''
-elif type(html_theme_options['use_opensearch']) in [type(''), type(u'')]:
-    html_theme_options['use_opensearch'] = html_theme_options['use_opensearch'].rstrip('/')
-
-# ? html_use_opensearch = html_theme_options['use_opensearch']
-
-# PART 5: Finally: Overrides.cfg has the last word
+if not 'htmlhelp_basename' in G: htmlhelp_basename = t3shortname
 #
-# .. attention::
 #
-#    This file is under control of the admin. Make sure its
-#    contents makes sense!
 #
-# If MAKEDIR/Overrides.cfg exists:
-# Set all settings thereby overriding existing ones.
-# So the admin has the last word
+#
+# (7) Settings from Settings.json
+#
+# Now: Everything can be overriden. Use at you own risk!
+#
+if ospe(settingsjsonabspath):
+    with codecs.open(settingsjsonabspath, 'r', 'utf-8') as f1:
+        D = json.load(f1)
+    # ATTENTION:
+    # everything you have in the "general": {k:v} section of Settings.json
+    # is treated as if you had written 'k = v' here in conf.py
+    globals().update(D.get('general', {}))
 
-if notes['Overrides.cfg exists']:
-    config = ConfigParser.RawConfigParser()
-    config.readfp(codecs.open(overridesabspath, 'r', 'utf-8'))
-    for s in config.sections():
-        OVERRIDES[s] = OVERRIDES.get(s, {})
-        for o in config.options(s):
-            OVERRIDES[s][o] = config.get(s, o)
+    # extensions are now ADDED
+    for e in D.get('extensions', []):
+        if not e in extensions:
+            extensions.append(e)
 
+    # extlinks are merged (added or updated)
+    extlinks.update(D.get('extlinks', {}))
 
-# AGAIN!
-# Let the magic happen. This time we apply 'overrides' to the module's globals()
-updateModuleGlobals(G, OVERRIDES)
+    # html_theme_options are merged (added or updated)
+    html_theme_options.update(D.get('html_theme_options', {}))
+
+    # intersphinx_mapping is merged (added or updated)
+    intersphinx_mapping.update(D.get('intersphinx_mapping', {}))
+
+    # ATTENTION:
+    # settings.json is totally in you hand. No sanity checks are made here.
+
 
 # As other modules of Sphinx check the values of conf.py let's do
 # a bit of housekeeping und remove helper vars that aren't needed any more.
 
-for k in ['f1', 'f1name', 'o', 'contents',
-    'extensions_to_be_loaded', 'section', 'legal_extensions',
-    'config', 'US', 'item', 's', 'v', 'e', 'notes']:
+for k in ['f1', 'f1name', 'o', 'contents', 'D', 'extensions_to_be_loaded',
+          'section', 'legal_extensions', 'config', 'US', 'item', 's', 'v', 'e',
+          'user_settings', 'WithSection']:
     if k in G:
         del G[k]
-del k
+del k, G
 
 if 1 and 'dump resulting settings as json':
+    # This dumpy is important, as the Docker container refers to it to report
+    # back what happened during the build.
     settingsDumpJsonFile = logdirabspath + '/Settings.dump.json'
     D = {}
     for k, v in globals().items():
@@ -408,4 +432,7 @@ if 1 and 'dump resulting settings as json':
             pass
     with codecs.open(settingsDumpJsonFile, 'w', 'utf-8') as f2:
         json.dump(D, f2, indent=4, sort_keys=True)
-    del D, k, v
+    del D
+
+if 'notes' in globals():
+    del notes
