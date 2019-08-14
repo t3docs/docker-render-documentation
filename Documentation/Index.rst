@@ -4,9 +4,13 @@
 
 .. _start:
 
-===========================
-Docker Render Documentation
-===========================
+===================
+documentation-draft
+===================
+
+------------------------------------------------------------
+Manual for docker container that renders TYPO3 documentation
+------------------------------------------------------------
 
 :Version:
    |release|
@@ -15,22 +19,19 @@ Docker Render Documentation
    en
 
 :Authors:
-   Your name
+   TYPO3 documentation team
 
-:Email:
-   you@domain.tld
-
+:Main caretaker:
+   Martin Bless <martin.bless@typo3.org>`_
+   
 :License:
-   This extension documentation is published under the
-   `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`__ (Creative Commons)
-   license
+   This extension documentation is published under the `CC BY-NC-SA 4.0`_ (Creative Commons) license
 
+.. _CC BY-NC-SA 4.0: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 **TYPO3**
 
-   The content of this document is related to TYPO3 CMS,
-   a GNU/GPL CMS/Framework available from `typo3.org
-   <https://typo3.org/>`_ .
+   The content of this document is related to TYPO3 CMS, a GNU/GPL CMS/Framework available from https://typo3.org/.
 
 
 **Sitemap:**
@@ -43,4 +44,3 @@ Docker Render Documentation
    :globl:
 
    *
-
