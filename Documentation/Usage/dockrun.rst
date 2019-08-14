@@ -59,6 +59,8 @@ Show minimal help::
 
    ... did you mean 'dockrun_t3rd makehtml'?
 
+   ➜  ~
+
 
 --help
 ------
@@ -100,6 +102,7 @@ Show help synopsis::
 
    End of usage.
 
+   ➜  ~
 
 
 --version
@@ -125,6 +128,8 @@ Show help synopsis::
    TOOLCHAIN_TOOL_URL  :: https://github.com/marble/TCT/archive/develop.zip
    TOOLCHAIN_URL       :: https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip
 
+   ➜  ~
+
 
 bashcmd
 -------
@@ -137,6 +142,8 @@ activated::
 
    Final exit status: 0 (completed)
 
+   ➜  ~
+
 
 ::
 
@@ -144,6 +151,8 @@ activated::
    /ALL/venv
 
    Final exit status: 0 (completed)
+
+   ➜  ~
 
 
 ::
@@ -158,6 +167,8 @@ activated::
    venv
 
    Final exit status: 0 (completed)
+
+   ➜  ~
 
 
 makeall
@@ -247,6 +258,7 @@ The result
    Congratulations:
        There are no Sphinx warnings!
 
+   ➜  ~
 
 
 
@@ -338,6 +350,9 @@ The result
        There are no Sphinx warnings!
 
 
+   ➜  ~
+
+
 Plus singlehtml
 ~~~~~~~~~~~~~~~
 
@@ -363,6 +378,8 @@ Plus singlehtml
 
    Congratulations:
        There are no Sphinx warnings!
+
+   ➜  ~
 
 
 tct
@@ -405,6 +422,7 @@ TCT is the "Tool Chain Tool", a toolchain runner. TCT is a world of its own::
      list    List available toolchains.
      run     Run a toolchain.
 
+   ➜  ~
 
 
 show-shell-commands
@@ -437,6 +455,7 @@ show-shell-commands
    echo "This function is now defined FOR THIS terminal window:"
    echo "    dockrun_t3rd"
 
+   ➜  ~
 
 
 The purpose of this command is ...
@@ -452,6 +471,7 @@ Open a BASH shell inside the container AS ROOT USER::
    Pipfile  Pipfile.lock  Pipfile.lock.DISABLED  info.txt	tctconfig.cfg
    (venv) root@a97a070cface:/ALL/venv# exit
 
+   ➜  ~
 
 This is a shortcut for::
 
@@ -480,6 +500,7 @@ ToDo: Make `show-howto` up to date
    Experts: Quickstart for the impatient
    =====================================
 
+   ➜  ~
 
 
 show-faq
@@ -504,6 +525,9 @@ command::
    ➜  project dockrun_t3rd export-ALL
    The export will go to:
       /home/marble/project/Documentation-GENERATED-temp/ALL-exported
+
+   ➜  ~
+
 
 The result
 ~~~~~~~~~~
@@ -591,3 +615,5 @@ The result
    └── README.rst
 
    75 directories, 163 files
+
+   ➜  ~

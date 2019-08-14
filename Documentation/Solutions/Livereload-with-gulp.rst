@@ -129,3 +129,6 @@ Run gulp invisible using 'screen' (`manpage <https://www.mankier.com/1/screen>`_
    : 1558001108:0;screen -dmS drd gulp
    : 1558102159:0;screen -r
    : 1558346526:0;screen -dmS t3docs gulp
+
+
+Install the livereload extensions for Firefox and Chrome.

@@ -18,6 +18,7 @@ Helpers while in draft status:
 :Public draft:  https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
 :Private draft: http://symlinked.local.mbless.de/docker-render-documentation-draft/
 :Buildinfo:     `_buildinfo <_buildinfo>`_
+:Rendered:      |today|
 
 ..
 
@@ -39,7 +40,8 @@ Helpers while in draft status:
 
 **TYPO3**
 
-   The content of this document is related to TYPO3 CMS, a GNU/GPL CMS/Framework available from https://typo3.org/.
+   The content of this document is related to TYPO3 CMS, a GNU/GPL
+   CMS/Framework available from https://typo3.org/.
 
 
 **Sitemap:**
