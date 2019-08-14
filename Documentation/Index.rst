@@ -22,7 +22,7 @@ Evolving manual for docker container that renders TYPO3 documentation
    TYPO3 documentation team
 
 :Main caretaker:
-   Martin Bless <martin.bless@typo3.org>`_
+   Martin Bless <martin.bless@typo3.org>
    
 :License:
    This extension documentation is published under the `CC BY-NC-SA 4.0`_ (Creative Commons) license
