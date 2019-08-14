@@ -1,6 +1,9 @@
 .. include:: ../Includes.txt
 .. highlight:: text
 
+
+.. _dockrun_t3rd-commands:
+
 =======================
 'dockrun_t3rd' commands
 =======================

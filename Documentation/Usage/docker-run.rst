@@ -17,6 +17,11 @@ Navigate this page:
 Basics
 ======
 
+`docker run` is how you start. Commands can soon become long and complicated.
+To overcome this a helper command `dockrun_t3rd` is available (Linux, Mac).
+Read about that in :ref:`dockrun_t3rd-commands`.
+
+
 Use `docker run`. This will initially download the image. For each run a copy
 of the image is made and run as a container. To remove those copies right away
 after usage add the `--rm` option. Play with these commands::
