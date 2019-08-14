@@ -94,3 +94,38 @@ Find some info:
 
 * https://github.com/gulpjs/gulp-cli
 * https://nodejs.org/dist/latest-v11.x/docs/api/
+
+Run gulp::
+
+   cd gulp-livereload
+   gulp usage
+   gulp --help
+   gulp build
+   gulp watch
+
+Run gulp invisible using 'screen' (`manpage <https://www.mankier.com/1/screen>`__)::
+
+   screen -dmS t3docs gulp
+
+   # detach from screen with ctrl+A,D
+   screen -r
+
+   # kill: 1557825792:0;screen -X -S 9023 quit
+
+   # something useful in this history?
+   : 1557825827:0;screen -S diaryblog gulp
+   : 1557825930:0;screen -S diaryblog
+   : 1557826053:0;screen -S diaryblog -d -m gulp
+   : 1557826062:0;screen -ls
+   : 1557826153:0;echo screen -S diaryblog -d -m gulp >>1source-me-for-screen-gulp.sh
+   : 1557826160:0;cat 1source-me-for-screen-gulp.sh
+   : 1557910323:0;screen
+   : 1557910332:0;screen -a
+   : 1557910424:0;which screen
+   : 1557942671:0;screen --version
+   : 1557943119:0;screen -r t3docs
+   : 1557943191:0;screen --help
+   : 1557943196:0;man screen
+   : 1558001108:0;screen -dmS drd gulp
+   : 1558102159:0;screen -r
+   : 1558346526:0;screen -dmS t3docs gulp

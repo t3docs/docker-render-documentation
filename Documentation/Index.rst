@@ -25,9 +25,8 @@ Evolving manual for docker container that renders TYPO3 documentation
    Martin Bless <martin.bless@typo3.org>
 
 :License:
-   This extension documentation is published under the `CC BY-NC-SA 4.0`_ (Creative Commons) license
-
-.. _CC BY-NC-SA 4.0: https://creativecommons.org/licenses/by-nc-sa/4.0/
+   This extension documentation is published under the Creative Commons license
+   `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`__.
 
 **TYPO3**
 
@@ -41,6 +40,7 @@ Evolving manual for docker container that renders TYPO3 documentation
 
 Available pages in this manual:
 
+.. rst-class:: compact-list
 .. toctree::
    :glob:
    :titlesonly:
