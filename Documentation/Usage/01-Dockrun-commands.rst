@@ -20,6 +20,26 @@ Navigate this page:
 dockrun_t3rd
 ============
 
+The `dockrun_t3rd` command is available for Linux and Mac. It is a function
+defined in the shell. To define it run::
+
+   source <(docker run --rm t3docs/render-documentation:v2.3.0-local \
+            show-shell-commands)
+
+If that doesn't work use the long form::
+
+   docker run --rm \
+      t3docs/render-documentation:v2.3.0-local >docker-shell-commands.sh
+   source docker-shell-commands.sh
+
+This should show::
+
+   This function is now defined FOR THIS terminal window:
+    dockrun_t3rd
+
+
+
+
 Without arguments
 -----------------
 

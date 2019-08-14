@@ -52,5 +52,6 @@ Available pages in this manual:
    :glob:
    :titlesonly:
 
+   Usage/Index
    *
 
