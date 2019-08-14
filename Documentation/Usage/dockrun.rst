@@ -177,14 +177,15 @@ activated::
 makeall
 -------
 
-We assume a project at /home/marble/project and cd into that project::
+We assume a project at /home/marble/project and cd into that project. A
+minimal project can be created like this::
 
    mkdir ~/project
    cd ~/project
-   echo A dummy documentation  > README.rst
-   echo ===================== >> README.rst
-   echo                       >> README.rst
-   echo Hello world, this is my infamous documentation. > README.rst
+   echo 'My dummy project'  > README.rst
+   echo '================' >> README.rst
+   echo                    >> README.rst
+   echo 'Hello world, this is my splendid documentation.' >> README.rst
 
 Build everything from that documentation::
 
