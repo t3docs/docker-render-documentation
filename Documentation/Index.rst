@@ -8,9 +8,9 @@
 documentation-draft
 ===================
 
-------------------------------------------------------------
-Manual for docker container that renders TYPO3 documentation
-------------------------------------------------------------
+---------------------------------------------------------------------
+Evolving manual for docker container that renders TYPO3 documentation
+---------------------------------------------------------------------
 
 :Version:
    |release|
