@@ -1,5 +1,5 @@
-.. include:: Includes.txt
-.. highlight:: shell
+.. include:: ../Includes.txt
+.. highlight:: text
 
 =======================
 'dockrun_t3rd' commands
@@ -29,15 +29,21 @@ defined in the shell. To define it run::
 If that doesn't work use the long form::
 
    docker run --rm \
-      t3docs/render-documentation:v2.3.0-local >docker-shell-commands.sh
-   source docker-shell-commands.sh
+      t3docs/render-documentation:v2.3.0-local >~/.docker-shell-commands.sh
+   source ~/.docker-shell-commands.sh
 
 This should show::
 
    This function is now defined FOR THIS terminal window:
     dockrun_t3rd
 
+Consider adding a line to the startup file of your shell. Common ones are
+:file:`~/.bashrc` or :file:`~/.zshrc`::
 
+   source ~/.docker-shell-commands.sh
+
+Afterwards the `dockrun_t3rd` should automatically be  available in every
+shell you open.
 
 
 Without arguments
@@ -56,6 +62,7 @@ Show minimal help::
 
 --help
 ------
+
 
 Show help synopsis::
 

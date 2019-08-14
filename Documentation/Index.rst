@@ -12,15 +12,17 @@ documentation-draft
 Evolving manual for docker container that renders TYPO3 documentation
 ---------------------------------------------------------------------
 
-Currently:
+Helpers while in draft status:
 
-:Github:       https://github.com/t3docs/docker-render-documentation/tree/documentation-draft
-:Public draft: https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+:Github:        https://github.com/t3docs/docker-render-documentation/tree/documentation-draft
+:Public draft:  https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+:Private draft: http://symlinked.local.mbless.de/docker-render-documentation-draft/
+:Buildinfo:     `_buildinfo <_buildinfo>`_
 
 ..
 
-:Container version:
-   2.3.0
+:Container:
+   Version 2.3.0
 
 :Language:
    en
@@ -53,5 +55,7 @@ Available pages in this manual:
    :titlesonly:
 
    Usage/Index
+   Explained/Index
+   Solutions/Index
    *
 

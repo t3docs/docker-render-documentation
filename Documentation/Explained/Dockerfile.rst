@@ -1,9 +1,9 @@
-.. include:: Includes.txt
+.. include:: ../Includes.txt
 
 
-====================
+==========
 Dockerfile
-====================
+==========
 
 Explain what's inside the container ...
 
