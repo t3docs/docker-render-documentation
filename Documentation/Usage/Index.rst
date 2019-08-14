@@ -7,12 +7,13 @@
 Usage
 =====
 
-Available pages in this chapter:
+Pages in this chapter:
 
 .. rst-class:: compact-list
 .. toctree::
    :glob:
    :titlesonly:
 
+   quickstart
    *
 

@@ -49,6 +49,9 @@ Afterwards the `dockrun_t3rd` should automatically be  available in every
 shell you open.
 
 
+It is a convenience function with this functionality: ...
+
+
 Without arguments
 -----------------
 

@@ -3,11 +3,11 @@
 
 
 
-=====
-Usage
-=====
+=========
+Solutions
+=========
 
-Available pages in this chapter:
+Pages in this chapter:
 
 .. rst-class:: compact-list
 .. toctree::
