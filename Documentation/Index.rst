@@ -21,6 +21,12 @@ Helpers while in draft status:
 :Buildinfo:     `_buildinfo <_buildinfo>`_
 :Rendered:      |today|
 
+.. tip::
+
+   Development builds are available now.
+
+   Try `docker run --rm t3docs/render-documentation:develop`
+
 ..
 
 :Container:
