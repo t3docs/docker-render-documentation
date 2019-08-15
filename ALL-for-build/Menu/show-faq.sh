@@ -12,6 +12,18 @@ cat <<EOT
 
 FAQ
 ===
+
+
+ATTENTION:
+
+Currently this file is not up to date.
+Better see
+https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+
+
+
+
+
 Assume we are speaking of our container as '${OUR_IMAGE}' with
 the shortname '${OUR_IMAGE_SHORT}'.
 
@@ -59,4 +71,12 @@ A: # list volumes
 
 
 End of document.
+
+ATTENTION:
+
+Currently this file is not up to date.
+Better see
+https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+
+
 EOT
