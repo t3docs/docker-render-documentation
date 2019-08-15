@@ -23,9 +23,27 @@ Helpers while in draft status:
 
 .. tip::
 
-   Development builds are available now.
+   Development builds are available now::
 
-   Try `docker run --rm t3docs/render-documentation:develop`
+      # always try this update pull
+      docker pull t3docs/render-documentation:develop
+
+      # see what real tag is shown, for example v2.3.0-develop
+      docker run --rm t3docs/render-documentation:develop
+
+      # remove existing one
+      docker rmi t3docs/render-documentation:v2.3.0-develop
+
+      # rename to create the proper tag
+      docker tag t3docs/render-documentation:develop v2.3.0-develop
+
+      # define dockrun_t3rd
+      source <(docker run --rm t3docs/render-documentation:develop)
+
+      # use it
+      dockrun_t3rd
+
+
 
 ..
 
