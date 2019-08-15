@@ -37,7 +37,7 @@ Run again, using the cache of the first run::
    cd ~/Repositories/git.typo3.org/Packages/TYPO3.CMS.git/typo3/sysext/core
    dockrun_t3rd  makeall
 
-Takes only seconds::
+Takes only seconds:
 
-
+   ...
 

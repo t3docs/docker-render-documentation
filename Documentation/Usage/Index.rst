@@ -18,5 +18,4 @@ Pages in this chapter:
    dockrun
    docker-run
    caching
-   *
 

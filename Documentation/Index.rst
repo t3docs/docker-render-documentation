@@ -35,10 +35,17 @@ Helpers while in draft status:
       docker rmi t3docs/render-documentation:v2.3.0-develop
 
       # rename to create the proper tag
-      docker tag t3docs/render-documentation:develop v2.3.0-develop
+      docker tag t3docs/render-documentation:develop \
+                 t3docs/render-documentation:v2.3.0-develop
 
-      # define dockrun_t3rd
-      source <(docker run --rm t3docs/render-documentation:develop)
+      # save shell commands
+      docker run --rm \
+         t3docs/render-documentation:v2.3.0-develop \
+         show-shell-commands \
+         > ~/.docker-shell-commands.sh
+
+      # define dockrun_t3rd. Add this line to ~/.bashrc?
+      source ~/.docker-shell-commands.sh
 
       # use it
       dockrun_t3rd
