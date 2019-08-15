@@ -19,6 +19,7 @@ function mm-bashcmd() {
    tell-about-results $exitstatus
 }
 
+
 function mm-minimalhelp(){
    cat <<EOT
 $OUR_IMAGE_SLOGAN (${OUR_IMAGE_TAG})
@@ -30,6 +31,7 @@ For help:
 
 EOT
 }
+
 
 function mm-usage() {
    cat <<EOT
@@ -46,7 +48,9 @@ Usage:
             --version            Show buildinfo.txt of this container
             bashcmd              Run a bash command in the container
             makeall              Run for production - create ALL
+            makeall-no-cache     like makeall, but remove previous cache
             makehtml             Run for production - create only HTML
+            makehtml-no-cache    like makehtml, but remove previous cache
             tct                  Run TCT, the toolchain runner
             show-shell-commands  Show useful shell commands and functions
             /bin/bash            Enter the container's Bash shell
@@ -68,26 +72,32 @@ End of usage.
 EOT
 }
 
+
 function mm-version() {
    cat /ALL/Downloads/buildinfo.txt
 }
+
 
 function mm-show-howto() {
    $(dirname $0)/show-howto.sh
 }
 
+
 function mm-show-faq() {
    $(dirname $0)/show-faq.sh
 }
+
 
 function mm-show-shell-commands() {
    $(dirname $0)/show-shell-commands.sh
 }
 
+
 function mm-tct() {
    shift
    tct $@
 }
+
 
 function tell-about-results() {
 local exitstatus=$1
@@ -131,6 +141,7 @@ if [ -d "/RESULT/Result" ]; then
 fi
 }
 
+
 function mm-makeall() {
    local cmd
    shift
@@ -166,6 +177,15 @@ fi
 tell-about-results $exitstatus
 }
 
+
+function mm-makeall-no-cache() {
+   if [ -d "/RESULT/Cache" ]; then
+      rm -rf /RESULT/Cache
+   fi
+   mm-makeall $@
+}
+
+
 function mm-makehtml() {
    local cmd
    shift
@@ -175,9 +195,9 @@ if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
 then
    rm -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
-cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg -v"
+cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-cmd="$cmd -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0"
+cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
 cmd="$cmd $@"
 eval $cmd
 
@@ -189,24 +209,35 @@ then
    source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
 
-# is now handled in toolchain using '-c resultdir ...'
-#if [[ ( $exitstatus -eq 0 ) \
-#   && ( -d /ALL/dumy_webroot/typo3cms/drafts/project ) \
-#   && ( -d /RESULT ) ]]
-#then
-#rsync -a /ALL/dumy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
-#exitstatus=$?
-#fi
+# # is now handled in toolchain using '-c resultdir ...'
+# if [[ ( $exitstatus -eq 0 ) \
+#    && ( -d /ALL/dumy_webroot/typo3cms/drafts/project ) \
+#    && ( -d /RESULT ) ]]
+# then
+# rsync -a /ALL/dumy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
+# exitstatus=$?
+# fi
 
 tell-about-results $exitstatus
 }
+
+
+function mm-makehtml-no-cache() {
+   if [ -d "/RESULT/Cache" ]; then
+      rm -rf /RESULT/Cache
+   fi
+   mm-makehtml $@
+}
+
 
 case "$1" in
 --help)              mm-usage $@ ;;
 --version)           mm-version $@ ;;
 bashcmd)             mm-bashcmd $@ ;;
 makeall)             mm-makeall $@ ;;
+makeall-no-cache)    mm-makeall-no-cache $@ ;;
 makehtml)            mm-makehtml $@ ;;
+makehtml-no-cache)   mm-makehtml-no-cache $@ ;;
 show-shell-commands) mm-show-shell-commands $@ ;;
 show-faq)            mm-show-faq $@ ;;
 show-howto)          mm-show-howto $@ ;;
