@@ -5,7 +5,7 @@
 .. _dockrun_t3rd-commands:
 
 =======================
-'dockrun_t3rd' commands
+Using 'dockrun_t3rd'
 =======================
 
 Collecting examples.

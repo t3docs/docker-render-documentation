@@ -58,6 +58,6 @@ Available pages in this manual:
 
    Usage/Index
    Explained/Index
+   Development/Index
    Solutions/Index
    *
-
