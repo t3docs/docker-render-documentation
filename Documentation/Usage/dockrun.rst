@@ -88,7 +88,9 @@ Show help synopsis::
                --version            Show buildinfo.txt of this container
                bashcmd              Run a bash command in the container
                makeall              Run for production - create ALL
+               makeall-no-cache     like makeall, but remove previous cache
                makehtml             Run for production - create only HTML
+               makehtml-no-cache    like makehtml, but remove previous cache
                tct                  Run TCT, the toolchain runner
                show-shell-commands  Show useful shell commands and functions
                /bin/bash            Enter the container's Bash shell
@@ -212,6 +214,13 @@ To not build a package you can deselect them like so::
 
    dockrun_t3rd  makeall  -c make_latex 0  -c make_package 0
 
+The intermediate output of Sphinx will be cached in the result directory as
+Documentation-GENERATED-temp/Cache. It will be reused on the next run and can
+speed up things considerably. If you make structural changes to you manual,
+for example by adding new pages, the menus in the output may not be consistent
+as only updated files are written. Better use `makeall-no-cache` in such
+situations.
+
 
 The result
 ~~~~~~~~~~
@@ -270,6 +279,13 @@ The result
 
 
 
+makeall-no-cache
+----------------
+
+This command will remove the cache of a previous prior to running `makeall`. In
+effect this means that a complete rebuild is done.
+
+
 makehtml
 --------
 
@@ -303,6 +319,15 @@ you can tell that this was the actual docker command::
 
 At the moment the container cannot build a pdf or a package. In case you
 selected them these steps are simply skipped.
+
+The intermediate output of Sphinx will be cached in the result directory as
+Documentation-GENERATED-temp/Cache. It will be reused on the next run and can
+speed up things considerably. If you make structural changes to you manual,
+for example by adding new pages, the menus in the output may not be consistent
+as only updated files are written. Better use `makehtml-no-cache` in such
+situations.
+
+
 
 
 The result
@@ -387,6 +412,14 @@ Plus singlehtml
        There are no Sphinx warnings!
 
    ➜  ~
+
+
+makehtml-no-cache
+-----------------
+
+This command will remove the cache of a previous prior to running `makeall`. In
+effect this means that a complete rebuild is done.
+
 
 
 tct
