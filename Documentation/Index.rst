@@ -17,6 +17,7 @@ Helpers while in draft status:
 :Github:        https://github.com/t3docs/docker-render-documentation/tree/documentation-draft
 :Public draft:  https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
 :Private draft: http://symlinked.local.mbless.de/docker-render-documentation-draft/
+:Docker tags:   https://hub.docker.com/r/t3docs/render-documentation/tags/
 :Buildinfo:     `_buildinfo <_buildinfo>`_
 :Rendered:      |today|
 
