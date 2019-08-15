@@ -61,7 +61,9 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml-no-cache
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT bashcmd 'ls -la /ALL'
 
     Only in this short form:
         # Copy /ALL to /RESULT/ALL-exported
