@@ -37,7 +37,7 @@ Run the build repeatedly::
     source docker-shell-commands.sh
     cd ..
     mkdir -p tmp-GENERATED-logs
-    dockrun_t3rd makehtml >tmp-GENERATED-logs/dockrun_t3rd-makehtml.log.txt
+    dockrun_t3rd makehtml-no-cache >tmp-GENERATED-logs/dockrun_t3rd-makehtml.log.txt
 
 
 Use this as :file:`gulpfile.js`::
