@@ -12,6 +12,16 @@ cat <<EOT
 Howto
 --------------------------------------------------
 
+
+ATTENTION:
+
+Currently this file is not up to date.
+Better see
+https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+
+
+
+
 Experts: Quickstart for the impatient
 =====================================
 
@@ -150,16 +160,19 @@ Fetch the docker image (= our executable):
 
    docker pull t3docs/render-documentation
 
-Run the container in developer mode.
-Look for `devdockrun_$OUR_IMAGE_SHORT` and `devdockbash_$OUR_IMAGE_SHORT`
-in the shell commands:
-
-   dockrun_$OUR_IMAGE_SHORT show-shell-commands
-
 
 ==================================================
 Finally
 --------------------------------------------------
 
 Have fun!
+
+
+ATTENTION:
+
+Currently this file is not up to date.
+Better see
+https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+
+
 EOT
