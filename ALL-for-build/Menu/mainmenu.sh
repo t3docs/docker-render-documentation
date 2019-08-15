@@ -29,6 +29,9 @@ For help:
 
 ... did you mean '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml'?
 
+See manual (draft) at
+https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+
 EOT
 }
 
