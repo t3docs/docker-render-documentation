@@ -57,7 +57,8 @@ Available pages in this manual:
    :titlesonly:
 
    Usage/Index
-   Explained/Index
+   Building/Index
+   Explanation/Index
    Development/Index
    Solutions/Index
    *

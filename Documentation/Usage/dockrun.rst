@@ -101,7 +101,9 @@ Show help synopsis::
            dockrun_t3rd
            dockrun_t3rd --help
            dockrun_t3rd makehtml
+           dockrun_t3rd makehtml-no-cache
            dockrun_t3rd /bin/bash
+           dockrun_t3rd bashcmd 'ls -la /ALL'
 
        Only in this short form:
            # Copy /ALL to /RESULT/ALL-exported

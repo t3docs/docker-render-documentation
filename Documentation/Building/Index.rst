@@ -3,9 +3,9 @@
 
 
 
-=====
-Usage
-=====
+========
+Building
+========
 
 Pages in this chapter:
 
@@ -15,8 +15,5 @@ Pages in this chapter:
    :titlesonly:
 
    quickstart
-   dockrun
-   docker-run
-   caching
    *
 
