@@ -90,6 +90,7 @@ Available pages in this manual:
    :titlesonly:
 
    Usage/Index
+   Rendering/Index
    Building/Index
    Explanation/Index
    Development/Index

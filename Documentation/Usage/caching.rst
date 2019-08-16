@@ -68,7 +68,7 @@ Remove all previous cache and build all::
 
 
 
-Followup run using the cache
+follow-up run using the cache
 ----------------------------
 
 Run again, using the cache of the first run::

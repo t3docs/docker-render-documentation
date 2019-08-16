@@ -208,8 +208,8 @@ you can tell that this was the actual docker command::
       makeall
 
 `makeall` stands for make_html + make_singlehtml + make_latex + make_pdf +
-make_package. At the moment the container cannot build a pdf or a package. So
-this simply won't happen. Building of html is always done, this can't be
+make_package. If the container is not able to build a specific output this
+won't happen, but you can still select it.Building of html is always done, this can't be
 deselected.
 
 To not build a package you can deselect them like so::
