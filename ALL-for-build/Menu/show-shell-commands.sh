@@ -36,6 +36,7 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 # Environment variables only some DEVELOPERS may find important,
 # no slash ('/') at the end,
 #
+#     T3DOCS_USERHOME=/abspathto/MYALL/userhome
 #     T3DOCS_MAKEDIR=/abspathto/MYALL/Makedir
 #     T3DOCS_MENU=/abspathto/MYALL/Menu
 #     T3DOCS_VENV=/abspathto/MYALL/venv
@@ -99,6 +100,14 @@ if [[ -d "\${TMP}" ]]; then
       /bin/bash -c "rm -rf \$TMP/*"
    fi
    if ((\$DEBUG)); then echo "TMP..........: \$TMP"; fi
+fi
+
+# USERHOME
+# absolute path to existing folder 'userhome'
+local USERHOME=\${T3DOCS_USERHOME:-\$(pwd)/tmp-GENERATED-userhome}
+if [ -d "\$USERHOME" ]; then
+   cmd="\$cmd -v \$USERHOME:/ALL/userhome"
+   if ((\$DEBUG)); then echo "USERHOME......: \$USERHOME"; fi
 fi
 
 # MAKEDIR
