@@ -412,7 +412,8 @@ if ospe(settingsjsonabspath):
 
 for k in ['f1', 'f1name', 'o', 'contents', 'D', 'extensions_to_be_loaded',
           'section', 'legal_extensions', 'config', 'US', 'item', 's', 'v', 'e',
-          'user_settings', 'WithSection']:
+          'user_settings', 'WithSection', 'us_html_theme_options',
+          'us_general']:
     if k in G:
         del G[k]
 del k, G
