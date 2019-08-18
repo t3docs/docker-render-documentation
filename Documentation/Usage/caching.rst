@@ -25,6 +25,16 @@ How does caching work?
 
 …
 
+Caching can speed up 'html' building very much (factor 100 or so). If there are
+many output files they don't have to be rewritten.
+
+'makehtml-no-cache' removes existing cache data prior to working but always
+recreates it during the 'html' build. The same is true for 'makeall-no-cache'.
+
+The other builders always try to reuse the html-cache. They usually have to
+rewrite all their output so the time needed for writing doesn't change.
+
+
 
 Working with repositories
 =========================
@@ -51,10 +61,16 @@ It's a tool packaged into Debian.
 Example: sysext:core
 ====================
 
-First run without cache
------------------------
+What is shown below:
 
-For example, takes "1912.13 seconds". That is about 32 minutes.
+* An initial `makeall` "took 1914.98 seconds". That is about 32 minutes.
+* A second run using the cache "took 125.35 seconds". That is about 2 minutes.
+* A second run with just `makehtml` "took 11.83 seconds" - let's say 12 seconds.
+
+
+Initial 'makeall' without cache (32 minutes)
+--------------------------------------------
+
 
 Remove all previous cache and build all::
 
@@ -71,18 +87,17 @@ Remove all previous cache and build all::
    [...]
 
 
-
    ==================================================
       18-Make-and-build/40-Html/run_40-Make-html.py
-      exitcode:   0       1790675 ms
+      exitcode:   0       1793583 ms
 
    ==================================================
       18-Make-and-build/41-Singlehtml/run_41-Make-singlehtml.py
-      exitcode:   0         17568 ms
+      exitcode:   0         17814 ms
 
    ==================================================
       18-Make-and-build/42-Latex/run_42-Make-Latex.py
-      exitcode:   0         61933 ms
+      exitcode:   0         62932 ms
 
 
    [...]
@@ -90,7 +105,7 @@ Remove all previous cache and build all::
 
    ==================================================
       22-Assemble-results/run_13-Create-package.py
-      exitcode:   0         30334 ms
+      exitcode:   0         29509 ms
 
 
    [...]
@@ -101,34 +116,98 @@ Remove all previous cache and build all::
 
    project : 0.0.0 : Makedir
       makedir /ALL/Makedir
-      2019-08-16 20:24:52 892541,  took: 1912.13 seconds,  toolchain: RenderDocumentation
-      REBUILD_NEEDED because of change,  age 434996.9 of 168.0 hours,  18124.9 of 7.0 days
+      2019-08-18 17:20:14 065035,  took: 1914.98 seconds,  toolchain: RenderDocumentation
+      REBUILD_NEEDED because of change,  age 435041.9 of 168.0 hours,  18126.7 of 7.0 days
       OK: buildinfo, html, package, singlehtml
 
-      exitcode:   0            41 ms
+      exitcode:   0            42 ms
 
    ==================================================
 
 
-follow-up run using the cache
-----------------------------
+   [...]
 
-Run again, using the cache of the first run::
 
-   cd ~/Repositories/git.typo3.org/Packages/TYPO3.CMS.git/typo3/sysext/core
-   dockrun_t3rd  makeall
+   Find the results:
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/Index.html
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt
+     ./Documentation-GENERATED-temp/Result/latex/run-make.sh
+     ./Documentation-GENERATED-temp/Result/package/package.zip
 
-Takes only seconds:
 
-   ...
 
-To summarize:
+Second run 'makeall' using the cache (2 minutes)
+------------------------------------------------
 
-Caching can speed up 'html' building very much (factor 100 or so). If there are
-many output files they don't have to be rewritten.
+"took: 125.35 seconds", that is about 2 minutes (not 32)!
 
-'makehtml-no-cache' removes existing cache data prior to working but always
-recreates it during the 'html' build. The same is true for 'makeall-no-cache'.
+Render all using the cache::
 
-The other builders always try to reuse the html-cache. They usually have to
-rewrite all their output so the time needed for writing doesn't change.
+   ➜  core git:(master) dockrun_t3rd  makeall
+
+   ==================================================
+   10-Toolchain-actions/run_01-Start-with-everything.py
+   exitcode:   0            41 ms
+
+
+   [...]
+
+
+   ==================================================
+      18-Make-and-build/40-Html/run_40-Make-html.py
+      exitcode:   0          4836 ms
+
+   ==================================================
+      18-Make-and-build/41-Singlehtml/run_41-Make-singlehtml.py
+      exitcode:   0         17560 ms
+
+   ==================================================
+      18-Make-and-build/42-Latex/run_42-Make-Latex.py
+      exitcode:   0         62567 ms
+
+
+   [...]
+
+
+   ==================================================
+      22-Assemble-results/run_13-Create-package.py
+      exitcode:   0         31088 ms
+
+
+   [...]
+
+
+   ==================================================
+      90-Finish/run_10-Say-goodbye.py
+
+   project : 0.0.0 : Makedir
+      makedir /ALL/Makedir
+      2019-08-18 20:20:46 671706,  took: 125.35 seconds,  toolchain: RenderDocumentation
+      REBUILD_NEEDED because of change,  age 435044.4 of 168.0 hours,  18126.8 of 7.0 days
+      OK: buildinfo, html, package, singlehtml
+
+      exitcode:   0            45 ms
+
+   ==================================================
+
+
+   [...]
+
+
+   Find the results:
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/singlehtml/Index.html
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo
+     ./Documentation-GENERATED-temp/Result/project/0.0.0/_buildinfo/warnings.txt
+     ./Documentation-GENERATED-temp/Result/latex/run-make.sh
+     ./Documentation-GENERATED-temp/Result/package/package.zip
+
+
+Second run 'makehtml' using the cache (12 seconds)
+--------------------------------------------------
+
+...
+
+

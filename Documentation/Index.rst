@@ -86,6 +86,14 @@ Helpers while in draft status:
 
    :ref:`sitemap`
 
+.. tip::
+
+   * much smaller image
+   * caching works
+   * can create html, singlehtml, latex, package
+   * all sphinx extensions included and working
+   * security improved: xss prevented when rendering for the server
+   * security improved: raw-directive disabled
 
 Available pages in this manual:
 
