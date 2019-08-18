@@ -16,6 +16,12 @@ Verify you have Docker installed::
    ➜  ~
 
 
+Go to a project. Go to the top folder of your project, NOT `project/Documentation`,
+if you have that::
+
+   cd ~/project
+
+
 If you don't have a project, create a minimal one with just a README file in a
 new folder::
 
@@ -29,12 +35,6 @@ new folder::
    echo 'Hello world, this is my splendid documentation.' >> README.rst
 
 
-Go to the start folder of your project - NOT the project/Documentation
-subfolder, if you have that::
-
-   cd ~/project
-
-
 For Linux or Mac: Make your life easier and define the `dockrun_t3rd`
 function::
 
@@ -42,12 +42,25 @@ function::
             show-shell-commands)
 
 
+If that fails, use the long version::
+
+   # create a folder to keep things
+   mkdir -p ~/.dockrun/dockrun_t3rd
+   docker run --rm t3docs/render-documentation:v2.3.0 \
+      show-shell-commands > mkdir -p ~/.dockrun/dockrun_t3rd/shell-commands.sh
+
+   # define the dockrun_t3rd function
+   # Add this line to your `.bashrc` or `.zshrc` or ...?
+   source ~/.dockrun/dockrun_t3rd/shell-commands.sh
+
 Go to the project and run the rendering::
 
    cd ~/project
 
    dockrun_t3rd  makehtml
 
+
+((words!))
 
 Without `dockrun_t3rd` the procedure would be the following. Written in a
 Windows compatible style this will work on Windows as well::
