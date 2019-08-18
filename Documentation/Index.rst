@@ -4,13 +4,16 @@
 
 .. _start:
 
-===================
-documentation-draft
-===================
+==============================================
+Documentation Rendering with Sphinx and Docker
+==============================================
 
----------------------------------------------------------------------
-Evolving manual for docker container that renders TYPO3 documentation
----------------------------------------------------------------------
+
+-----
+
+DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
+
+-----
 
 Helpers while in draft status:
 
@@ -21,6 +24,8 @@ Helpers while in draft status:
 :Autobuilds:    https://cloud.docker.com/u/t3docs/repository/docker/t3docs/render-documentation/builds
 :Buildinfo:     `_buildinfo <_buildinfo>`_
 :Rendered:      |today|
+
+-----
 
 .. tip::
 
@@ -53,7 +58,7 @@ Helpers while in draft status:
 
 
 
-..
+-----
 
 :Container:
    Version 2.3.0
@@ -90,6 +95,7 @@ Available pages in this manual:
    :titlesonly:
 
    Usage/Index
+   Structures/Index
    Rendering/Index
    Building/Index
    Explanation/Index

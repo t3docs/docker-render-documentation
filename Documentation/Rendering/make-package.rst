@@ -22,3 +22,5 @@ Smaller, as most font files are removed and css for "no fonts" is used.
 Piwik calls are removed.
 
 Security settings are not affected by just selecting 'make_package'.
+
+`.doctrees` are excluded.

@@ -17,3 +17,4 @@ Pages in this chapter:
    make-html
    make-singlehtml
    make-package
+   run-parameters
