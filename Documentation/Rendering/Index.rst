@@ -17,4 +17,6 @@ Pages in this chapter:
    make-html
    make-singlehtml
    make-package
+   make-latex
+   make-pdf
    run-parameters

@@ -22,8 +22,7 @@ if you have that::
    cd ~/project
 
 
-If you don't have a project, create a minimal one with just a README file in a
-new folder::
+If you don't have a project, create a minimal one with just a README file::
 
    mkdir ~/project
 
