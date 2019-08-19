@@ -12,4 +12,7 @@ Examples::
    dockrun_t3rd  makehtml
 
 
+
+.. todo:: Render multilanguage manuals.
+
 ...

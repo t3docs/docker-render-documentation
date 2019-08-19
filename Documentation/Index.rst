@@ -98,6 +98,8 @@ Helpers while in draft status:
 
 .. tip::
 
+   **Highlights**
+
    * much smaller image
    * caching works
    * can create html, singlehtml, latex, package
@@ -106,11 +108,7 @@ Helpers while in draft status:
    * security improved: raw-directive disabled
 
 
-.. todo::
-
-   Not yet working:
-
-   * Rendering of multilanguage manual
+.. todolist::
 
 
 Available pages in this manual:
