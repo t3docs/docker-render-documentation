@@ -13,5 +13,6 @@ Pages in this chapter:
    :glob:
    :titlesonly:
 
+   roadmap
    *
 

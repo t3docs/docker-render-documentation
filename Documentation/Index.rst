@@ -75,15 +75,20 @@ Helpers while in draft status:
    This extension documentation is published under the Creative Commons license
    `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`__.
 
+-----
+
 **TYPO3**
 
    The content of this document is related to TYPO3 CMS, a GNU/GPL
    CMS/Framework available from https://typo3.org/.
 
+-----
 
 **Sitemap**
 
    :ref:`sitemap`
+
+-----
 
 .. tip::
 
@@ -96,8 +101,17 @@ Helpers while in draft status:
    * security improved: xss prevented when rendering for the server
    * security improved: raw-directive disabled
 
+-----
 
 .. todolist::
+
+-----
+
+**Roadmap**
+
+:ref:`roadmap`
+
+-----
 
 
 **Available pages**
