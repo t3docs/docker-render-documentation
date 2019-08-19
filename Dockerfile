@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=v2.3.0-develop
+ARG OUR_IMAGE_VERSION=v2.3.0
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -20,11 +20,11 @@ ENV \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
    THEME_MTIME="1530870718" \
    THEME_VERSION="3.6.16" \
-   TOOLCHAIN_TOOL_VERSION="1.0.0" \
-   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
-   TOOLCHAIN_VERSION="2.7.1-dev" \
+   TOOLCHAIN_TOOL_VERSION="v1.0.0" \
+   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/v1.0.0.zip" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.7.1" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.7.1.zip" \
+   TOOLCHAIN_VERSION="2.7.1" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
@@ -140,6 +140,7 @@ RUN \
    \
    && COMMENT "Let\'s have some debug info ('::' as separator)" \
    && echo "\
+      $OUR_IMAGE_VERSION\n\
       Versions used for $OUR_IMAGE_VERSION:\n\
       Sphinx theme        :: t3SphinxThemeRtd    :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
       Toolchain           :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
@@ -147,7 +148,6 @@ RUN \
       TYPO3-Documentation :: typo3.latex         :: v1.1.0\n\
       TypoScript lexer    :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
       \n\
-      DEBIAN_FRONTEND     :: ${DEBIAN_FRONTEND}\n\
       DOCKRUN_PREFIX      :: ${DOCKRUN_PREFIX}\n\
       OUR_IMAGE           :: ${OUR_IMAGE}\n\
       OUR_IMAGE_SHORT     :: ${OUR_IMAGE_SHORT}\n\

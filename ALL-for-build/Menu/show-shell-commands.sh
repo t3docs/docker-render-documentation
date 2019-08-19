@@ -177,7 +177,7 @@ if [[ "\$DRY_RUN" = "0" ]]; then
 fi
 }
 
-echo "This function is now defined FOR THIS terminal window:"
+echo "This function is now defined FOR THIS terminal window to run ${OUR_IMAGE_VERSION}:"
 echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 
 EOT
