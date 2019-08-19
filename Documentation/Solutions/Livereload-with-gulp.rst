@@ -5,6 +5,8 @@
 Livereload with gulp
 ====================
 
+((WIP. Put this in a subfolder of your project like 'project/gulp-livereload'))
+
 Run yarn once::
 
    yarn add gulp
@@ -22,22 +24,23 @@ Update .gitignore::
 
 Create shell script::
 
-   #!/bin/bash
+   #!/bin/bashdocker-shell-commands.sh
 
    docker run --rm \
       t3docs/render-documentation:v2.3.0 \
       show-shell-commands \
-      > docker-shell-commands.sh
+      > ~/.dockrun/dockrun_t3rd/shell-commands.sh
 
 
 Run the build repeatedly::
 
     #!/bin/bash
 
-    source docker-shell-commands.sh
+    source ~/.dockrun/dockrun_t3rd/shell-commands.sh
     cd ..
     mkdir -p tmp-GENERATED-logs
-    dockrun_t3rd makehtml-no-cache >tmp-GENERATED-logs/dockrun_t3rd-makehtml.log.txt
+    dockrun_t3rd  makehtml-no-cache \
+       > tmp-GENERATED-logs/dockrun_t3rd-makehtml.log.txt
 
 
 Use this as :file:`gulpfile.js`::
@@ -66,6 +69,8 @@ Use this as :file:`gulpfile.js`::
 
    function build(cb) {
      console.log('building ...');
+     // to do: get rid of this specific path specification
+     // node: we need the rel->abs path function. Which one is it?
      execSync('/home/marble/Repositories/github.com/t3docs/t3docs-documentation/gulp-livereload-NOT_VERSIONED/4-run-the-build-repeatedly.sh');
      cb();
    }
@@ -104,6 +109,8 @@ Run gulp::
    gulp watch
 
 Run gulp invisible using 'screen' (`manpage <https://www.mankier.com/1/screen>`__)::
+
+   ((clean up and explain the following))
 
    screen -dmS t3docs gulp
 

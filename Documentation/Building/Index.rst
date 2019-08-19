@@ -14,5 +14,6 @@ Pages in this chapter:
    :glob:
    :titlesonly:
 
+   automated-builds
    *
 

@@ -10,7 +10,7 @@ Using 'dockrun_t3rd'
 
 Collecting examples.
 
-Navigate this page:
+Within this page:
 
 .. contents::
    :class: compact-list
