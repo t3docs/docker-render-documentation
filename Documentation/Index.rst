@@ -8,6 +8,16 @@
 Documentation Rendering with Sphinx and Docker
 ==============================================
 
+--------------------------------------
+Manual for t3docs/render-documentation
+--------------------------------------
+
+t3docs/render-documentation is the TYPO3 Docker container that can be used to
+render documentation for all TYPO3 projects. It can be used wherever Docker is
+running.
+
+The container is used to do the "official rendering" for manuals shown on
+https://docs.typo3.org.
 
 -----
 
@@ -94,6 +104,14 @@ Helpers while in draft status:
    * all sphinx extensions included and working
    * security improved: xss prevented when rendering for the server
    * security improved: raw-directive disabled
+
+
+.. todo::
+
+   Not yet working:
+
+   * Rendering of multilanguage manual
+
 
 Available pages in this manual:
 

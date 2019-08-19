@@ -35,17 +35,13 @@ a "section".
    {
       "Overrides_cfg": {
          "comment": "data in this section goes into conf.py"
-         }
       },
-
       "tctconfig": {
          "comment": "data in this section controls how the toolchain behaves"
       },
-
       "buildsettings_sh": {
          "comment": "Data in the section can override the 16 settings that used to be in MAKEDIR/buildsettings.sh"
       }
-
    }
 
 ((to be continued))
