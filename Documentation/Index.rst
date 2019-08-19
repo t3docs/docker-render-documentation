@@ -54,6 +54,7 @@ Helpers while in draft status:
 :Docker tags:   https://hub.docker.com/r/t3docs/render-documentation/tags/
 :Autobuilds:    https://cloud.docker.com/u/t3docs/repository/docker/t3docs/render-documentation/builds
 :Buildinfo:     `_buildinfo <_buildinfo>`_
+:In one file:   `singlehtml <singlehtml>`__
 :Rendered:      |today|
 
 -----
