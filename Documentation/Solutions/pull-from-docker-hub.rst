@@ -127,6 +127,18 @@ Example run::
    INFO:root:SUCCESS. Final exitcode=0
    ➜  ~
 
+Another example run::
+
+   ➜  ~ my-update-dockrun_t3rd-develop.py
+   INFO:root:Try update of: t3docs/render-documentation:develop
+   INFO:root:Success: Downloaded newer image.
+   INFO:root:Found destination tag: t3docs/render-documentation:v2.4.0-dev
+   INFO:root:Remove if exists: t3docs/render-documentation:v2.4.0-dev
+   INFO:root:Create t3docs/render-documentation:v2.4.0-dev from t3docs/render-documentation:develop
+   INFO:root:Write /home/marble/.dockrun/dockrun_t3rd/shell-commands.sh
+   INFO:root:SUCCESS. Final exitcode=0
+   ➜  ~
+
 
 .. highlight:: shell
 

@@ -92,3 +92,49 @@ https://github.com/readthedocs/sphinx_rtd_theme/archive/0.4.3.zip
    ➜  ~
 
 
+Recorded
+========
+
+::
+
+   cd
+   dockrun_t3rd export-ALL
+   mkdir -p ~/.dockrun/dockrun_t3rd
+   sudo chown -R $(id -u):$(id -g) ~/.dockrun
+   rsync -av --delete Documentation-GENERATED-temp/ALL-exported/userhome \
+      ~/.dockrun/dockrun_t3rd/
+   sudo chown -R $(id -u):$(id -g) ~/.dockrun
+
+::
+
+   ➜  ~ T3DOCS_USERHOME=/home/marble/.dockrun/dockrun_t3rd/userhome
+   ➜  ~ T3DOCS_DEBUG=1
+   ➜  ~ dockrun_t3rd /bin/bash
+   PROJECT......: /home/marble
+   creating: mkdir -p /home/marble/Documentation-GENERATED-temp
+   RESULT.......: /home/marble/Documentation-GENERATED-temp
+   USERHOME......: /home/marble/.dockrun/dockrun_t3rd/userhome
+   OUR_IMAGE....: t3docs/render-documentation:v2.3.0
+   docker run --rm --entrypoint /bin/bash -it \
+      -v /home/marble:/PROJECT:ro \
+      -v /home/marble/Documentation-GENERATED-temp:/RESULT \
+      -v /home/marble/.dockrun/dockrun_t3rd/userhome:/ALL/userhome t3docs/render-documentation:v2.3.0
+   (venv) root@5d80788d1bde:/ALL/venv# pipenv install ablog
+   Installing ablog...
+   Adding ablog to Pipfile's [packages]...
+   ✔ Installation Succeeded
+   Pipfile.lock (88c8ac) out of date, updating to (a323a5)...
+   Locking [dev-packages] dependencies...
+   Locking [packages] dependencies...
+   ✔ Success!
+   Updated Pipfile.lock (88c8ac)!
+   Installing dependencies from Pipfile.lock (88c8ac)...
+     🐍   ▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉ 60/60 — 00:00:16
+   (venv) root@5d80788d1bde:/ALL/venv# exit
+   exit
+
+   ➜  ~ sudo chown -R $(id -u):$(id -g) $T3DOCS_USERHOME
+
+   ➜  ~
+
+

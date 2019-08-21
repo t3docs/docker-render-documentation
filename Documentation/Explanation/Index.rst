@@ -7,7 +7,7 @@
 Explanations
 =======================
 
-Pages in this chapter:
+Pages:
 
 .. rst-class:: compact-list
 .. toctree::

@@ -4,18 +4,18 @@
 
 .. _start:
 
-=====================================================
-Docker Container für Documentation Rendering and more
-=====================================================
+============================================================
+Docker Container v2.3.0 for Documentation Rendering and more
+============================================================
 
 --------------------------------------
-Comprehensive manual
+A comprehensive manual
 --------------------------------------
 
 **About this manual**
 
-((That container is a beast, it has lots of knowledge built in, offering lots
-of feature. I you'd only know what and how...
+((This container is a beast, it has lots of knowledge built in, offers lots
+of features. I you'd only know what and how. This manual is there to help.
 
 t3docs/render-documentation is the TYPO3 Docker container, for local and server
 used, requires (only) Docker, has lots of built in knowledge. The manual
@@ -117,7 +117,7 @@ Helpers while in draft status:
 -----
 
 
-**Available pages**
+**Pages**
 
 .. rst-class:: compact-list
 .. toctree::
@@ -129,6 +129,7 @@ Helpers while in draft status:
    Rendering/Index
    Building/Index
    Explanation/Index
+   Inspection/Index
    Development/Index
    Solutions/Index
    *
