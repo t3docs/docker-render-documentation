@@ -2,6 +2,7 @@ Release v2.4.0 (to be released)
 ===============================
 
 * Add 'dockrun_t3rd  /usr/bin/bash'
+* Use Toolchain v2.8-dev from branch 'develop'
 
 
 Release v2.3.0 (August 19, 2019)

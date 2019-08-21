@@ -22,9 +22,9 @@ ENV \
    THEME_VERSION="3.6.16" \
    TOOLCHAIN_TOOL_VERSION="v1.0.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/v1.0.0.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.7.1" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.7.1.zip" \
-   TOOLCHAIN_VERSION="2.7.1" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
+   TOOLCHAIN_VERSION="2.8-dev" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
