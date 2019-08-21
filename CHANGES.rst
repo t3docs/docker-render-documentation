@@ -1,5 +1,11 @@
-Release v2.3.0 (to be released)
+Release v2.4.0 (to be released)
 ===============================
+
+…
+
+
+Release v2.3.0 (August 19, 2019)
+================================
 
 * Use toolchain >= v2.7.1
 
