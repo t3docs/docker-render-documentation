@@ -68,9 +68,15 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT bashcmd 'ls -la /ALL'
 
-    Only in this short form:
+    Convenience calls, only in this short form with '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT':
         # Copy /ALL to /RESULT/ALL-exported
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT export-ALL
+
+        # Enter the container's Bash shell as user
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT  /usr/bin/bash
+
+        # Enter the container's Bash shell as superuser
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT  /bin/bash
 
 
 End of usage.

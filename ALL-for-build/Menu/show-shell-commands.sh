@@ -59,6 +59,10 @@ if [[ \$# -eq 0 ]]; then
 elif [[ "\$@" = "/bin/bash" ]]; then
    local CREATING=1
    cmd="\$cmd --entrypoint /bin/bash -it"
+elif [[ "\$@" = "/usr/bin/bash" ]]; then
+   local CREATING=1
+   cmd="\$cmd --user=\$(id -u):\$(id -g)"
+   cmd="\$cmd --entrypoint /bin/bash -it"
 elif [[ "\$@" = "export-ALL" ]]; then
    local CREATING=1
    cmd="\$cmd --entrypoint /bin/bash"
@@ -147,6 +151,8 @@ if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 
 # add remaining arguments
 if [[ "\$@" = "/bin/bash" ]]; then
+   true "do nothing here"
+elif [[ "\$@" = "/usr/bin/bash" ]]; then
    true "do nothing here"
 elif [[ "\$@" = "export-ALL" ]]; then
    cmd="\$cmd -c \"rsync -a --delete --chown=\$(id -u):\$(id -g) /ALL/ /RESULT/ALL-exported\""

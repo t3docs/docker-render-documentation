@@ -1,7 +1,7 @@
 Release v2.4.0 (to be released)
 ===============================
 
-…
+* Add 'dockrun_t3rd  /usr/bin/bash'
 
 
 Release v2.3.0 (August 19, 2019)
