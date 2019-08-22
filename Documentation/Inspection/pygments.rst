@@ -44,6 +44,7 @@ TypoScript lexer available? ::
        TypoScript (filenames *.ts, *.txt)
 
    ➜  ~
+
 **List more:**
 The -L option lists lexers, formatters, styles or filters - set
 `which` to the thing you want to list (for example "styles"), or omit it to

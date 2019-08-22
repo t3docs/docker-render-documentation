@@ -105,7 +105,7 @@ Recorded
       ~/.dockrun/dockrun_t3rd/
    sudo chown -R $(id -u):$(id -g) ~/.dockrun
 
-::
+.. code-block:: text
 
    ➜  ~ T3DOCS_USERHOME=/home/marble/.dockrun/dockrun_t3rd/userhome
    ➜  ~ T3DOCS_DEBUG=1

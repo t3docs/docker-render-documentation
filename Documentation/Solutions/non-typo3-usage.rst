@@ -65,6 +65,12 @@ The whole process looks like this::
    ➜  ~
 
 
+.. tip::
+
+   In container version 'develop' (v2.4-dev) there is a new shortcut for this::
+
+      # enter the container's Bash shell with user permissions
+      dockrun_t3rd  /usr/bin/bash
 
 
 
@@ -81,7 +87,9 @@ Quickstart your own plain Sphinx project
       > Project name: Demo
       > Author name(s): Demo Author
 
-   For all other questions just press ENTER.
+**For all other questions just press ENTER.**
+
+.. highlight:: text
 
 4. Show what Sphinx has to offer for your new project::
 

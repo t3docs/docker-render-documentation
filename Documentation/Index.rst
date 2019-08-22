@@ -49,8 +49,28 @@ DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
 
 -----
 
+.. _operating-systems:
+
+**Operating systems**
+
+For Linux, Mac and Windows.
+
+At its core Docker is a Linux solution. `Docker Machine
+<https://docs.docker.com/machine/overview/>`__ has come to make it run on Mac
+and Windows as well. The container will run just the same on Linux, Mac and
+Windows.
+
+However, most of this manual is written from the perspective of a Linux user
+when it comes to the "How to use the container."
+
+If you are a Windows user and can help porting the solutions to Windows
+procedures please contribute your commands and scripts and so on.
+
+-----
+
 Helpers while in draft status:
 
+:Describing:    Container version v2.3.0
 :Github:        https://github.com/t3docs/docker-render-documentation/tree/documentation-draft
 :Public draft:  https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
 :Private draft: http://symlinked.local.mbless.de/docker-render-documentation-draft/
@@ -62,18 +82,9 @@ Helpers while in draft status:
 
 -----
 
-:Container:
-   Version 2.3.0
-
-:Language:
-   en
-
-:Authors:
-   TYPO3 documentation team
-
-:Main caretaker:
-   Martin Bless <martin.bless@typo3.org>
-
+:Author:          TYPO3 documentation team
+:Initial author:  Martin Bless <martin.bless@typo3.org>
+:Main caretaker:  Martin Bless <martin.bless@typo3.org>
 :License:
    This extension documentation is published under the Creative Commons license
    `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`__.
