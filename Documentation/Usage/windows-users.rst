@@ -62,6 +62,10 @@ PowerShell:
        Invoke-Expression $cmd
    }
 
+Linux version
+-------------
+
+
 The above PowerShell script was coded to achieve something like this::
 
    #01 cd /home/marble/Repositories/github.com/TYPO3-Documentation/TYPO3CMS-Reference-Typoscript
@@ -90,3 +94,41 @@ which expands to::
    #09   makehtml \
    #10   -c make_latex 0 \
    #11   -c make_singlehtml 0
+
+What the lines mean:
+
+#01
+   Go to the top folder of your project (not the `project/Documentation`
+   subfolder.
+
+#03
+   Run Docker from the commandline with `run` action.
+
+#04
+   --rm: Remove the container (= writable copy of the read-only image) right
+   after it has finished. Otherwise each run leaves a copy.
+
+#05
+  --user: Set user permissions. Otherwise all generated files would be own by
+  the superuser.
+
+#06
+   -v: Read-only volume mapping to the project. Must be the complete and
+   absolute path.
+
+#07
+   -v: Writable volume mapping to the result folder, usually
+   `Documentation-GENERATED-temp`.
+
+#08
+   The container that is to be run.
+
+#09
+   Action `makehtml` tells the container what it should do.
+
+#10
+   Pass option `make_latex=0` to the toolchain that the container will run.
+
+#11
+   Pass option `make_singlehtml=0` to the toolchain that the container will
+   run.
