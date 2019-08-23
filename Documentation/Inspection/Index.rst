@@ -14,5 +14,6 @@ Pages:
    :glob:
    :titlesonly:
 
+   what-is-installed
    *
 

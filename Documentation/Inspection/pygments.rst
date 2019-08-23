@@ -1,13 +1,16 @@
 .. include:: ../Includes.txt
 
 
-===========================
-Pygments
-===========================
+===================
+Syntax highlighting
+===================
 
 Pygments does syntax highlighting.
 
 http://pygments.org/
+
+What lexers are available? Find the answer with the list command below and use
+that name in the `.. code-block:: LANGUAGE NAME` directive.
 
 In Sphinx the Python `pygments` package is used for syntax highlighting in
 **code blocks**.
@@ -57,3 +60,17 @@ list everything::
    dockrun_t3rd  bashcmd  "pygmentize -L"
 
 
+Example: Bash lexer?
+--------------------
+
+What's the name of the Bash lexer? ::
+
+   ➜  ~ dockrun_t3rd bashcmd  pygmentize -L lexers | grep -i bash
+   * bash, sh, ksh, zsh, shell:
+       Bash (filenames *.sh, *.ksh, *.bash, *.ebuild, *.eclass, *.exheres-0, *.exlib, *.zsh, .bashrc, bashrc, .bash_*, bash_*, zshrc, .zshrc, PKGBUILD)
+       Bash Session (filenames *.sh-session, *.shell-session)
+
+   ➜  ~
+
+This means that `bash`, `sh`, `ksh`, `zsh`, `shell` are all synonyms for the
+same lexer. So `shell` may be a good and self-explaining choice.
