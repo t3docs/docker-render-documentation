@@ -38,7 +38,7 @@ Tested for Linux and Mac
    PROJECT.typo3.tex and does some replacements.
 
 
-3. Run `run-make.sh` (very fast)::
+3. Run `run-make.sh` (rather fast)::
 
       Documentation-GENERATED-temp/Result/latex/run-make.sh
 
