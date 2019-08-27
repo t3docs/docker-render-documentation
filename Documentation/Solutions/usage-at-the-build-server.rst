@@ -25,19 +25,23 @@ On this page:
 
 
 
-Today is 26. August 2019
+Today is 27. August 2019
 ========================
 
-In the context of this text "now", "currently" and "today" refer to this date.
+"now", "currently" and "today" refers to this date in the context of this page.
 
-To do now: Update to v2.3.0
-===========================
 
-Now **v2.3.0 is ready for use** and should replace v2.2.6.
+Done: Updated to v2.3.0
+=======================
+
+**v2.3.0** is now active and replaced v2.2.6.
 
 
 How to update the Docker render container
 =========================================
+
+For example: Update v2.2.6 to v2.3.0
+------------------------------------
 
 1. Find server idle time or pause normal rendering new jobs.
 
@@ -131,9 +135,11 @@ v2.3.0
 
    Released 19. August 2019
 
-   Should now replace v2.2.6
+   Active since 27. August 2019.
 
-   Should be a "drop in" replacement.
+   Was a "drop in" replacement.
+
+   All manuals known to Intercept_ have been rerendered.
 
 
 v2.2.6
@@ -141,10 +147,9 @@ v2.2.6
 
    Is currently in use.
 
-   All manuals Intercept is aware of had been rerendered
-   by v2.2.6.
+   All manuals known to Intercept_ had been rerendered.
 
-   Replace v1.6.11-html
+   Replaced v1.6.11-html
 
    This should have been a "drop in" replacement but didn't work initially
    due to a wrong environment variable in the script.
@@ -156,3 +161,4 @@ v1.6.11-html
    First version that was used in the automated rendering process.
 
 
+End of history.
