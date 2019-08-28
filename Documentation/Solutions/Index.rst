@@ -14,5 +14,6 @@ Pages:
    :glob:
    :titlesonly:
 
+   Livereload/Index
    *
 

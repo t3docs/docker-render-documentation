@@ -1,11 +1,15 @@
-.. include:: ../Includes.txt
+.. include:: ../../Includes.txt
 
 
-====================
-Livereload with gulp
-====================
+===========================
+Livereload using Gulp (WIP)
+===========================
 
-((WIP. Put this in a subfolder of your project like 'project/gulp-livereload'))
+.. admonition:: WIP - work in progress
+
+   The procdures on this page work, but you may find you have to adapt
+   something for your usecase, for example an absolute path.
+
 
 Run yarn once::
 
