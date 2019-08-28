@@ -141,7 +141,12 @@ everything in just one file.
 
 
 
-If you restart the script browser usually automatically reconnect again:
+Observations
+============
 
-.. figure:: ../files/261.png
-   :class:: with-shadow
+It seems, the browsers automatically reconnect if you restart the livereload
+script:
+
+.. figure:: files/261.png
+   :class: with-shadow
+
