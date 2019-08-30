@@ -24,42 +24,78 @@ to Windows.
 A start to rewrite the 'dockrun_t3rd' script for PowerShell?
 ============================================================
 
-Susanne Moog contributed this script. It may serve as a starter for a more
-advanced script that mimics the bahaviour of 'dockrun_t3rd' on windows.
-Susanne wrote:
-
-   As a Windows user you will want to have something like this in your
-   `$PROFILE`. Start the PowerShell and run `Generate-TYPO3-Documentation`.
-   Works very well, and you have autocompletion :-)
+If you are using Windows and Powershell, you can add the following
+function to your $PROFILE (use for example "code $PROFILE" to edit the file):
 
 PowerShell:
 
 .. code-block:: powershell
+   :linenos:
 
+   <#
+   .SYNOPSIS
+       Generate TYPO3 HTML Documentation from rst files.
+   .DESCRIPTION
+       Runs docker to generate TYPO3 documentation.
+   .PARAMETER SourcePath
+       The path to the Documentation folder - uses current directory if none given.
+   .PARAMETER TargetPath
+       The output path (will be created if it does not exist). Uses "Documentation-GENERATED-temp" 
+       as fallback.
+   .PARAMETER Latex
+       Disables/Enables Latex output.
+   .PARAMETER SingleHtml
+       Disables/Enables generation of single HTML file.
+   .PARAMETER Cache
+       Removes and recreates target path before running if 0 is given. Default: 1 
+   .PARAMETER Help
+       Show help for this command.
+   .EXAMPLE
+       C:\PS> Generate-TYPO3-Documentation -SingleHtml 1 -Cache 0
+   .NOTES
+       Author: Susanne Moog
+       Date:   August 28, 2019    
+   #>
    Function Generate-TYPO3-Documentation(
        [String]
-       $SourcePath,
+       $SourcePath, 
        [String]
        $TargetPath,
        [Boolean]
-       $Latex,
+       $Latex ,
        [Boolean]
-       $SingleHtml
+       $SingleHtml,
+       [Boolean]
+       $Cache = 1,
+       [Switch]
+       $Help
    ) {
-
-       if ([String]::IsNullOrEmpty($SourcePath)) {
-           $SourcePath = $PWD;
+       if ($Help) {
+           Get-Help $($MYINVOCATION.InvocationName)
        }
+       else {
+           if ([String]::IsNullOrEmpty($SourcePath)) {
+               $SourcePath = $PWD;
+           }
 
-       if ([String]::IsNullOrEmpty($TargetPath)) {
-           $TargetPath = "$($PWD)\Documentation-GENERATED-temp\"
+           if ([String]::IsNullOrEmpty($TargetPath)) {
+               $TargetPath = "$($PWD)\Documentation-GENERATED-temp\"
+           }
+
+           If ($Cache -And (test-path $TargetPath)) {
+               Remove-Item -Recurse -Force $TargetPath
+           }
+
+           If (!(test-path $TargetPath)) {
+               New-Item -ItemType Directory -Force -Path $TargetPath
+           }
+
+           $cmd = "docker run --rm -v $($SourcePath):/PROJECT/:ro -v $($TargetPath):/RESULT/ " + 
+           "t3docs/render-documentation makehtml -c make_latex $([int]$Latex)" +
+           " -c make_singlehtml $([int]$SingleHtml);"
+
+           Invoke-Expression $cmd
        }
-
-       $cmd = "docker run --rm -v $($SourcePath):/PROJECT/:ro -v $($TargetPath):/RESULT/ " +
-              "t3docs/render-documentation makehtml -c make_latex $([int]$Latex)" +
-              " -c make_singlehtml $([int]$SingleHtml);"
-
-       Invoke-Expression $cmd
    }
 
 Linux version
