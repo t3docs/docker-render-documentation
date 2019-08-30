@@ -85,10 +85,10 @@ and Windows as well. The container will run just the same on Linux, Mac and
 Windows.
 
 However, most of this manual is written from the perspective of a Linux user
-when it comes to the "How to use the container."
+when it comes to "How to use the container."
 
-If you are a Windows user and can help porting the solutions to Windows
-procedures please contribute your commands and scripts and so on.
+If you are on Windows and can help to port the solutions to Windows - you are
+welcome. Very much!
 
 -----
 
@@ -107,7 +107,7 @@ procedures please contribute your commands and scripts and so on.
 
 .. tip::
 
-   **Highlights**
+   **Highlights of v2.3.0**
 
    * much smaller image
    * caching works

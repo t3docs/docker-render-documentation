@@ -13,21 +13,19 @@ Windows users
       :depth: 3
       :backlinks: top
 
-Linux, Mac, Windows: Please read the short chapter about :ref:`operating
+About Linux, Mac, Windows: Please read the short chapter about :ref:`operating
 systems <operating-systems>`.
 
-**Windows users, please contribute!**
-Please help and contribute how you port measures and procedure of this manual
-to Windows.
+**Windows users, please contribute!** Please help and contribute how you port
+measures and procedure of this manual to Windows.
 
 
-A start to rewrite the 'dockrun_t3rd' script for PowerShell?
-============================================================
+A start to rewrite the 'dockrun_t3rd' script for PowerShell
+===========================================================
 
 If you are using Windows and Powershell, you can add the following
-function to your $PROFILE (use for example "code $PROFILE" to edit the file):
-
-PowerShell:
+function to your $PROFILE. For example, you can use `code $PROFILE` to edit the
+file. This is code for the PowerShell:
 
 .. code-block:: powershell
    :linenos:
@@ -40,25 +38,25 @@ PowerShell:
    .PARAMETER SourcePath
        The path to the Documentation folder - uses current directory if none given.
    .PARAMETER TargetPath
-       The output path (will be created if it does not exist). Uses "Documentation-GENERATED-temp" 
+       The output path (will be created if it does not exist). Uses "Documentation-GENERATED-temp"
        as fallback.
    .PARAMETER Latex
        Disables/Enables Latex output.
    .PARAMETER SingleHtml
        Disables/Enables generation of single HTML file.
    .PARAMETER Cache
-       Removes and recreates target path before running if 0 is given. Default: 1 
+       Removes and recreates target path before running if 0 is given. Default: 1
    .PARAMETER Help
        Show help for this command.
    .EXAMPLE
        C:\PS> Generate-TYPO3-Documentation -SingleHtml 1 -Cache 0
    .NOTES
        Author: Susanne Moog
-       Date:   August 28, 2019    
+       Date:   August 28, 2019
    #>
    Function Generate-TYPO3-Documentation(
        [String]
-       $SourcePath, 
+       $SourcePath,
        [String]
        $TargetPath,
        [Boolean]
@@ -90,7 +88,7 @@ PowerShell:
                New-Item -ItemType Directory -Force -Path $TargetPath
            }
 
-           $cmd = "docker run --rm -v $($SourcePath):/PROJECT/:ro -v $($TargetPath):/RESULT/ " + 
+           $cmd = "docker run --rm -v $($SourcePath):/PROJECT/:ro -v $($TargetPath):/RESULT/ " +
            "t3docs/render-documentation makehtml -c make_latex $([int]$Latex)" +
            " -c make_singlehtml $([int]$SingleHtml);"
 
@@ -98,13 +96,13 @@ PowerShell:
        }
    }
 
+
 Linux version
 -------------
 
+The script was coded to achieve something like this::
 
-The above PowerShell script was coded to achieve something like this::
-
-   #01 cd /home/marble/Repositories/github.com/TYPO3-Documentation/TYPO3CMS-Reference-Typoscript
+   #01 cd ~/Repositories/github.com/TYPO3-Documentation/TYPO3CMS-Reference-Typoscript
    #02
    #03 docker run \
    #04   --rm \
@@ -119,7 +117,7 @@ The above PowerShell script was coded to achieve something like this::
 
 which expands to::
 
-   #01 cd /home/marble/Repositories/github.com/TYPO3-Documentation/TYPO3CMS-Reference-Typoscript
+   #01 cd ~/Repositories/github.com/TYPO3-Documentation/TYPO3CMS-Reference-Typoscript
    #02
    #03 docker run \
    #04   --rm \
