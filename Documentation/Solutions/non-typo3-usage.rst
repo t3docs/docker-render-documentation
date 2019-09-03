@@ -5,7 +5,7 @@
 Non TYPO3 usage
 ======================================
 
-Within this page:
+On this page:
 
 .. contents::
    :class: compact-list

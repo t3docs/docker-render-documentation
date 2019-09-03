@@ -124,7 +124,23 @@ Here is an example `results.json` file:
    }
 
 
+.. highlight:: shell
 
+Check specifics of all rendered manuals::
+
+   # command
+   find -name results.json -exec grep -i 'has_neutralized_links": [^0]' {} +
+
+   # findings
+   #01 ./m/typo3/reference-typoscript/6.2/en-us/_buildinfo/results.json:  "has_neutralized_links": 1,
+   #02 ./m/typo3/reference-typoscript/7.6/en-us/_buildinfo/results.json:  "has_neutralized_links": 1,
+   #03 ./other/typo3/view-helper-reference/8.7/en-us/_buildinfo/results.json:  "has_neutralized_links": 1,
+
+   …
+
+Investigation of #01 and #02: The html contains `<a href="data:cols …` which
+is detected as a possible threat. But, in the context of the TypoScript manual
+it has the purpose to link to the 'cols' property of the 'data' object.
 
 
 Container history

@@ -47,6 +47,7 @@ Helpers while in draft status:
 :Autobuilds:    https://cloud.docker.com/u/t3docs/repository/docker/t3docs/render-documentation/builds
 :Github:        https://github.com/t3docs/docker-render-documentation/tree/develop
 :Buildinfo:     `_buildinfo <_buildinfo>`_
+:Intercept:     `recent actions <https://intercept.typo3.com/admin/docs/deployments?docs_deployment_filter[search]=&docs_deployment_filter[type]=&docs_deployment_filter[status]=4&docs_deployment_filter[trigger]=>`__
 :In one file:   `singlehtml <singlehtml>`__
 :Rendered:      |today|
 
