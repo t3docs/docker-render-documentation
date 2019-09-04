@@ -9,7 +9,7 @@ DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT �
 DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
 DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
 
-On this page:
+**On this page:**
 
 .. contents::
    :class: compact-list
@@ -384,8 +384,8 @@ v2.3.0, critical section in conf.py:
        # settings.json is totally in you hand. No sanity checks are made here.
 
 
-Plan, idea
-----------
+jobfile.json in v2.4 - plan, idea
+=================================
 
 DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
 DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •

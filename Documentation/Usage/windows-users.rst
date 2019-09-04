@@ -5,7 +5,7 @@
 Windows users
 ==================
 
-.. On this page:
+.. **On this page:**
 
    .. contents::
       :class: compact-list
