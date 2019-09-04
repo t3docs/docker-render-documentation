@@ -16,6 +16,13 @@ DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
 
 -----
 
+\| :ref:`sitemap`
+\| `Index <genindex.html>`__
+\|
+
+-----
+
+
 .. admonition:: Latest release - recommended for use
 
    **TYPO3 docker container for documentation rendering**
@@ -49,6 +56,7 @@ Helpers while in draft status:
 :Buildinfo:     `_buildinfo <_buildinfo>`_
 :Intercept:     `recent actions <https://intercept.typo3.com/admin/docs/deployments?docs_deployment_filter[search]=&docs_deployment_filter[type]=&docs_deployment_filter[status]=4&docs_deployment_filter[trigger]=>`__
 :In one file:   `singlehtml <singlehtml>`__
+:Sphinx docs:   `index directive <https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-index>`__
 :Rendered:      |today|
 
 -----
@@ -145,4 +153,5 @@ welcome. Very much!
    Inspection/Index
    Development/Index
    Solutions/Index
-   *
+   Targets
+   Sitemap

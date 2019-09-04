@@ -153,7 +153,7 @@ everything in just one file::
 
    source ~/.zshrc
 
-   dockrun_t3rd  makehtml  -c make_singlehtml 0  -c jobfile /PROJECT/Documentation/jobfile.json
+   dockrun_t3rd  makehtml  -c jobfile /PROJECT/Documentation/jobfile.json
 
    """
 
@@ -248,8 +248,8 @@ script:
    :class: with-shadow
 
 
-Triggering more than once
--------------------------
+Debounce the trigger
+--------------------
 
 Using pyinotify on Linux:
 
@@ -259,3 +259,30 @@ JetBrains uses temp filenames like :file:`filename___jb_tmp___`. We ignore
 these by means of our ignore function in the
 :ref:`my-build-watch-and-livereload-script`.
 
+
+Add start command to PhpStorm or PyCharm
+========================================
+
+Tested with Ubuntu 18.04, PyCharm 2019.2, PhpStorm 2019.2.
+
+In the JetBrains IDEs you can define external tools in the settings.
+
+1. In the settings add an external tool:
+
+   .. figure:: files/272.png
+      :class: with-shadow
+
+2. Fill in the form:
+
+   .. figure:: files/273.png
+      :class: with-shadow
+
+3. In the projects tree right click on the top folder and select the external
+   tool you created.
+
+4. See my-build-watch-and-livereload pop up:
+
+   .. figure:: files/274.png
+      :class: with-shadow
+
+5. Press CTRL+C in the terminal window to stop watching. The window closes.

@@ -5,7 +5,7 @@
 What is installed?
 ==================
 
-Examples using 'bashcmd'.
+Examples using `bashcmd`.
 All examples just display text.
 
 

@@ -1,7 +1,7 @@
 .. include:: Includes.txt
 
 
-Link Targets
+Link targets
 ============
 
 If you want to link to this manual you can make use of the following labels.

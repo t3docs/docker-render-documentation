@@ -1,1 +1,9 @@
-{}
+{
+   "Overrides_cfg": {
+   },
+   "tctconfig": {
+     "make_singlehtml": 1
+   },
+   "buildsettings_sh": {
+   }
+}
