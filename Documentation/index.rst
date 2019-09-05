@@ -53,7 +53,7 @@ Helpers while in draft status:
 :Docker tags:   https://hub.docker.com/r/t3docs/render-documentation/tags/
 :Autobuilds:    https://cloud.docker.com/u/t3docs/repository/docker/t3docs/render-documentation/builds
 :Github:        https://github.com/t3docs/docker-render-documentation/tree/develop
-:Buildinfo:     `_buildinfo <_buildinfo>`_
+:Buildinfo:     `_buildinfo <_buildinfo>`__ • `warnings.txt <_buildinfo/warnings.txt>`__ • `results.json <_buildinfo/results.json>`__
 :Intercept:     `recent actions <https://intercept.typo3.com/admin/docs/deployments?docs_deployment_filter[search]=&docs_deployment_filter[type]=&docs_deployment_filter[status]=4&docs_deployment_filter[trigger]=>`__
 :In one file:   `singlehtml <singlehtml>`__
 :Sphinx docs:   `index directive <https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-index>`__

@@ -42,7 +42,7 @@ everything in just one file::
    #! /usr/bin/env python3
    # coding: utf-8
    #
-   # my-build-watch-and-livereload.py
+   # my-build-watch-and-livereload.py, mb, 2019-09-05 12:21
    #
    # MIT license
    #
@@ -92,10 +92,43 @@ everything in just one file::
    from os.path import exists as ospe, join as ospj
    from subprocess import PIPE, run
 
-   # put `*GENERATED*` into your (global) .gitignore file
+   # Tip: Add line `*GENERATED*` to your (global?!) .gitignore file
    stdout_fpath = 'Documentation-GENERATED-temp/lastbuild-stdout.txt'
    stderr_fpath = 'Documentation-GENERATED-temp/lastbuild-stderr.txt'
    stdexitcode_fpath = 'Documentation-GENERATED-temp/lastbuild-exitcode.txt'
+
+   # server params
+   # def serve(self, port=5500, liveport=None, host=None, root=None, debug=None,
+   #           open_url=False, restart_delay=2, open_url_delay=None,
+   #           live_css=True):
+
+   # port - for serving
+   s1 = s_port = 8080
+
+   # liveport - default is 35729
+   s2 = s_liveport = 35729
+
+   # host - domain for serving
+   s3 = s_host = 'localhost'
+
+   # root - our webroot folder
+   s4 = s_webroot = 'Documentation-GENERATED-temp/Result/project/0.0.0'
+
+   # debug - Automatic restart when script changes?
+   s5 = s_debug = None
+
+   # open_url - DEPRECATED
+   s6 = s_open_url = False
+
+   # restart_delay
+   s7 = s_restart_delay = 2
+
+   # automatically open browser from $BROWSER once
+   s8 = s_open_url_delay = 2.0   # 2 seconds
+
+   # 9. live_css
+   s9 = s_live_css = True
+
 
    # memory
    M = {}
@@ -153,7 +186,7 @@ everything in just one file::
 
    source ~/.zshrc
 
-   dockrun_t3rd  makehtml  -c jobfile /PROJECT/Documentation/jobfile.json
+   dockrun_t3rd  makehtml  -c make_singlehtml 0  -c jobfile /PROJECT/Documentation/jobfile.json
 
    """
 
@@ -203,23 +236,8 @@ everything in just one file::
        server = Server()
        server.watch('README.*', rebuild, ignore=myignore)
        server.watch('Documentation', rebuild, ignore=myignore)
-       server.serve(
-           # 35729 is the default port
-           liveport=35729,
-           # the webroot folder
-           root='Documentation-GENERATED-temp/Result/project/0.0.0',
-           # domain for serving
-           host='localhost',
-           # port for serving
-           port=8080,
-           # automatically open browser window initially (5 for seconds, None for None)
-           # open_url_delay=None,
-           # debug? See documentation. False is the default. Automatic
-           # restart when this script is changed?
-           # debug=False,
-           #
-           # restart_delay=2
-           )
+       server.serve(s1, s2, s3, s4, s5, s6, s7, s8, s9)
+
 
    # Press CTRL+C in the terminal window to abort watching and serving.
 
@@ -232,7 +250,7 @@ everything in just one file::
 The above script expects a :file:`project/Documentation/jobfile.json` file
 which may - almost - be empty::
 
-   {}
+{}
 
 
 Observations
@@ -277,7 +295,7 @@ In the JetBrains IDEs you can define external tools in the settings.
    .. figure:: files/273.png
       :class: with-shadow
 
-3. In the projects tree right click on the top folder and select the external
+3. In the project tree **right click** on the top folder and select the external
    tool you created.
 
 4. See my-build-watch-and-livereload pop up:
@@ -286,3 +304,44 @@ In the JetBrains IDEs you can define external tools in the settings.
       :class: with-shadow
 
 5. Press CTRL+C in the terminal window to stop watching. The window closes.
+
+
+Unfinished developments
+=======================
+
+Tornado web server
+------------------
+
+*  `Python Tornado web framework <http://www.tornadoweb.org/>`__
+   - is used by Livereload
+
+      Tornado is a Python web framework and asynchronous networking library,
+      originally developed at FriendFeed. By using non-blocking network I/O,
+      Tornado can scale to tens of thousands of open connections, making it
+      ideal for long polling, WebSockets, and other applications that require a
+      long-lived connection to each user.
+
+
+Goal: Allow Index.html as default
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. highlight:: python
+
+Do it somehow like this? From `stackoverflow
+<https://stackoverflow.com/questions/14385048/is-there-a-better-way-to-handle-index-html-with-tornado:>`__::
+
+   import os
+   import tornado.ioloop
+   import tornado.web
+
+   root = os.path.dirname(__file__)
+   port = 9999
+
+   application = tornado.web.Application([
+       (r"/(.*)", tornado.web.StaticFileHandler, {"path": root, "default_filename": "index.html"})
+   ])
+
+   if __name__ == '__main__':
+       application.listen(port)
+       tornado.ioloop.IOLoop.instance().start()
+

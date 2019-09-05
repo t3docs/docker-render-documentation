@@ -26,7 +26,7 @@ What is Livereload_?
 
 *  Livereload_ documentation and start page
 
-*  `Livereload at Github <https://github.com/lepture>`_
+*  `python-livereload at Github <https://github.com/lepture>`_
 
 *  Livereload_ is packaged into `Debian <https://www.debian.org/>`_ and other
    distributions
@@ -37,7 +37,6 @@ What is Livereload_?
 
 *  `Livereload website <http://livereload.com/>`_, "a happy land where
    browsers don't need a Refresh button"
-
 
 
 *Without* Livereload_
