@@ -32,6 +32,7 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 #     T3DOCS_PROJECT=/abspathto/MyProjectStartFolder       (readonly)
 #     T3DOCS_RESULT=/abspathto/ResultFolder                (readwrite)
 #     T3DOCS_TMP=/abspathto/TemporaryFolder                (readwrite)
+#     T3DOCS_THEMES=/abspathto/MySphinxThemes              (readonly)
 #
 # Environment variables only some DEVELOPERS may find important,
 # no slash ('/') at the end,
@@ -136,6 +137,14 @@ local VENV=\${T3DOCS_VENV:-\$(pwd)/tmp-GENERATED-venv}
 if [ -d "\$VENV" ]; then
    cmd="\$cmd -v \$VENV:/ALL/venv"
    if ((\$DEBUG)); then echo "VENV.........: \$VENV"; fi
+fi
+
+# THEMES
+# absolute path to a folder containing Sphinx themes
+local THEMES=\${T3DOCS_THEMES:-\$(pwd)/tmp-GENERATED-Themes}
+if [ -d "\$THEMES" ]; then
+   cmd="\$cmd -v \$THEMES:/THEMES"
+   if ((\$DEBUG)); then echo "THEMES.......: \$THEMES"; fi
 fi
 
 # TOOLCHAINS
