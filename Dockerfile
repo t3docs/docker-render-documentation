@@ -44,6 +44,7 @@ RUN \
    && COMMENT "Garantee folders" \
    && mkdir /PROJECT \
    && mkdir /RESULT \
+   && mkdir /THEMES \
    \
    && COMMENT "Avoid GIT bug" \
    && cp /ALL/global-gitconfig.cfg /root/.gitconfig \
