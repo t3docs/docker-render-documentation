@@ -47,17 +47,13 @@ Provide the theme
           destdir=$projectdir/tmp-GENERATED-Themes
           mkdir -p $dest_dir
 
-       Copy::
+       Copy *themedir* into the folder::
 
           cp -r $theme_dir $dest_dir
 
-       or symlink::
-
-          ln -s $theme_dir  $dest_dir/sphinx_rtd_theme
-
-       the *themedir* into the folder. You may thereby give the theme another
-       name. The folder name of the desired theme is what you have to specify
-       later as a parameter.
+       You may then rename the folder that holds your theme to a name you like.
+       It is that folder name that you will have to mention later in the
+       configuration of your rendering.
 
 
 Select and use the theme
