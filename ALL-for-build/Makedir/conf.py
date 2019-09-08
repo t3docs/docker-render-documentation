@@ -229,7 +229,8 @@ us_general = US['general'] = US.get('general', {})
 us_general['exclude_patterns'] = ['_make']
 us_general['html_last_updated_fmt'] = '%b %d, %Y %H:%M'
 us_general['html_static_path'] = []
-us_general['html_theme_path'] = [t3SphinxThemeRtd.get_html_theme_path()]
+us_general['html_theme_path'] = ['_themes',
+                                 t3SphinxThemeRtd.get_html_theme_path()]
 us_general['templates_path'] = []
 us_general['today_fmt'] = '%Y-%m-%d %H:%M'
 
