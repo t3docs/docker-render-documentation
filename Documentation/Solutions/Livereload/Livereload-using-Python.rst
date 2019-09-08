@@ -186,7 +186,7 @@ everything in just one file::
 
    source ~/.zshrc
 
-   dockrun_t3rd  makehtml  -c make_singlehtml 0  -c jobfile /PROJECT/Documentation/jobfile.json
+   dockrun_t3rd  makehtml  -c jobfile /PROJECT/Documentation/jobfile.json
 
    """
 
@@ -312,7 +312,7 @@ Unfinished developments
 Tornado web server
 ------------------
 
-*  `Python Tornado web framework <http://www.tornadoweb.org/>`__
+•  `Python Tornado web framework <http://www.tornadoweb.org/>`__
    - is used by Livereload
 
       Tornado is a Python web framework and asynchronous networking library,
@@ -320,6 +320,8 @@ Tornado web server
       Tornado can scale to tens of thousands of open connections, making it
       ideal for long polling, WebSockets, and other applications that require a
       long-lived connection to each user.
+
+•  `Tornado user guide <https://www.tornadoweb.org/en/stable/guide.html>`__
 
 
 Goal: Allow Index.html as default
@@ -345,3 +347,7 @@ Do it somehow like this? From `stackoverflow
        application.listen(port)
        tornado.ioloop.IOLoop.instance().start()
 
+Investigations:
+
+•  https://stackoverflow.com/questions/14385048/is-there-a-better-way-to-handle-index-html-with-tornado/27891339#27891339
+•  https://stackoverflow.com/questions/36121365/default-file-in-tornados-staticfilehandler

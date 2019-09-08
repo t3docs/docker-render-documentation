@@ -23,6 +23,8 @@ Collecting examples.
 dockrun_t3rd
 ============
 
+*Note:* Replace 'v2.3.0-local' in the following with whatever you have.
+
 The `dockrun_t3rd` command is available for Linux and Mac. It is a function
 defined in the shell. To define it run::
 
@@ -75,10 +77,11 @@ Show minimal help::
 Show help synopsis::
 
    ➜  ~ dockrun_t3rd --help
+
    Usage:
        Prepare:
            Define function 'dockrun_t3rd' on the commandline of your system:
-               source <(docker run --rm t3docs/render-documentation:v2.3.0-local show-shell-commands)
+               source <(docker run --rm t3docs/render-documentation:v2.4.0-dev show-shell-commands)
            Inspect function:
                declare -f dockrun_t3rd
        Usage:
@@ -87,28 +90,27 @@ Show help synopsis::
                --help               Show this menu
                --version            Show buildinfo.txt of this container
                bashcmd              Run a bash command in the container
+               export-ALL           Copy /ALL to /RESULT/ALL-exported
                makeall              Run for production - create ALL
                makeall-no-cache     like makeall, but remove previous cache
                makehtml             Run for production - create only HTML
                makehtml-no-cache    like makehtml, but remove previous cache
                tct                  Run TCT, the toolchain runner
                show-shell-commands  Show useful shell commands and functions
-               /bin/bash            Enter the container's Bash shell
                show-howto           Show howto (not totally up to date)
                show-faq             Show questions and answers (not totally up to date)
+               /bin/bash            Enter the container's Bash shell as superuser
+               /usr/bin/bash        Enter the container's Bash shell as normal user
 
        Examples:
            dockrun_t3rd
            dockrun_t3rd --help
-           dockrun_t3rd makehtml
-           dockrun_t3rd makehtml-no-cache
-           dockrun_t3rd /bin/bash
-           dockrun_t3rd bashcmd 'ls -la /ALL'
-
-       Only in this short form:
-           # Copy /ALL to /RESULT/ALL-exported
            dockrun_t3rd export-ALL
-
+           dockrun_t3rd makeall-no-cache
+           dockrun_t3rd makehtml
+           dockrun_t3rd /bin/bash
+           dockrun_t3rd /user/bin/bash
+           dockrun_t3rd bashcmd 'ls -la /ALL'
 
    End of usage.
 
