@@ -49,35 +49,28 @@ Usage:
             ARGUMENT             DESCRIPTION
             --help               Show this menu
             --version            Show buildinfo.txt of this container
-            bashcmd              Run a bash command in the container
-            makeall              Run for production - create ALL
-            makeall-no-cache     like makeall, but remove previous cache
-            makehtml             Run for production - create only HTML
-            makehtml-no-cache    like makehtml, but remove previous cache
-            tct                  Run TCT, the toolchain runner
+            makeall              Create all output formats
+            makeall-no-cache     Remove cache first, then create all
+            makehtml             Create HTML output
+            makehtml-no-cache    Remove cache first, then build HTML
             show-shell-commands  Show useful shell commands and functions
-            /bin/bash            Enter the container's Bash shell
             show-howto           Show howto (not totally up to date)
             show-faq             Show questions and answers (not totally up to date)
+            bashcmd              Run a bash command in the container
+            /bin/bash            Enter the container's Bash shell as superuser
+            /usr/bin/bash        Enter the container's Bash shell as normal user
+            export-ALL           Copy /ALL to /RESULT/ALL-exported
+            tct                  Run TCT, the toolchain runner
 
     Examples:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml-no-cache
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT bashcmd 'ls -la /ALL'
-
-    Convenience calls, only in this short form with '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT':
-        # Copy /ALL to /RESULT/ALL-exported
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT export-ALL
-
-        # Enter the container's Bash shell as user
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT  /usr/bin/bash
-
-        # Enter the container's Bash shell as superuser
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT  /bin/bash
-
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makeall-no-cache
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT bashcmd 'ls -la /ALL'
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /usr/bin/bash
 
 End of usage.
 EOT
