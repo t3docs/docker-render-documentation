@@ -347,7 +347,9 @@ Do it somehow like this? From `stackoverflow
        application.listen(port)
        tornado.ioloop.IOLoop.instance().start()
 
-Investigations:
+
+Hot spots of investigations:
 
 •  https://stackoverflow.com/questions/14385048/is-there-a-better-way-to-handle-index-html-with-tornado/27891339#27891339
 •  https://stackoverflow.com/questions/36121365/default-file-in-tornados-staticfilehandler
+•  https://github.com/imom0/SimpleTornadoServer/blob/master/SimpleTornadoServer.py - directory listing
