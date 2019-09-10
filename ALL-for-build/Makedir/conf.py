@@ -443,6 +443,7 @@ if 'notes' in globals():
 def setup(app):
     from sphinx.domains.python import PyField
     from sphinx.util.docfields import Field
+    from sphinx.locale import _
 
     app.add_object_type(
         'confval',
