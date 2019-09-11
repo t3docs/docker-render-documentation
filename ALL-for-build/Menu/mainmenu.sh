@@ -127,9 +127,8 @@ if [ -d "/RESULT/Result" ]; then
    find /RESULT/Result -type d -regextype posix-egrep -regex  '.*/0\.0\.0/_buildinfo$'  -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
    find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
    find /RESULT/Result -type f -regextype posix-egrep -regex  '.*/_buildinfo/warnings\.txt$' \! -empty -printf "  ./Documentation-GENERATED-temp/Result/%P\\n" >>/RESULT/warning-files.txt
-   find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/latex/run-make\.sh$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
-   find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/package/package\.zip$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
-
+   find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/latex.*/run-make\.sh$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
+   find /RESULT/Result -type f -regextype posix-egrep -iregex '.*/package/package.*\.zip$' -printf "  ./Documentation-GENERATED-temp/Result/%P\\n"
 
    if [ -f /RESULT/warning-files.txt ];then
       echo
