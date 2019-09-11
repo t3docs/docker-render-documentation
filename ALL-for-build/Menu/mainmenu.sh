@@ -202,7 +202,6 @@ then
 fi
 cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-cmd="$cmd -c make_latex 0 -c make_package 0 -c make_pdf 0 -c make_singlehtml 0"
 cmd="$cmd $@"
 eval $cmd
 
