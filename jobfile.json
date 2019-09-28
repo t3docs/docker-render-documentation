@@ -1,0 +1,38 @@
+{
+  "Overrides_cfg": {
+    "general": {
+      "html_theme": "t3SphinxThemeRtd",
+      "keep_warnings": 0,
+      "nitpicky": false,
+      "nitpick_ignore": [["py:class", "type"]],
+      "project_DISABLED": "",
+      "release_DISABLED": "1.0.0",
+      "rst_epilog": "",
+      "rst_prolog_DISABLED": "\n.. This is 'Includes.txt'. It is included at the very top of each and\n   every ReST source file in THIS documentation project (= manual).\n\n.. role:: aspect (emphasis)\n.. role:: html(code)\n.. role:: js(code)\n.. role:: php(code)\n.. role:: typoscript(code)\n.. role:: ts(typoscript)\n   :class: typoscript\n\n.. highlight:: php\n.. default-role:: code\n",
+      "version_DISABLED": "1.0",
+      "zzz": 0
+    }
+  },
+  "tctconfig": {
+     "activateLocalSphinxDebugging": 0,
+     "disable_include_files_check": 1,
+     "force_rebuild_needed": 1,
+     "make_html": 1,
+     "make_latex": 0,
+     "make_pdf": 0,
+     "make_singlehtml": 0,
+     "rebuild_needed": 1,
+     "replace_static_in_html": 0,
+     "reveal_exitcodes": 1,
+     "reveal_milestones": 1,
+     "talk": 1,
+     "try_pdf_build_from_published_latex": 1
+   },
+  "dockrun_t3rd": {
+     "comment": "set action to makehtml, makehtml-no-cache, makeall, makeall-no-cache",
+     "action": "makehtml",
+     "jobfile_option": " -c jobfile /PROJECT/Documentation/jobfile.json"
+   }
+}
+
+
