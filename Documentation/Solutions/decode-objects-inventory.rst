@@ -10,8 +10,6 @@ Decode Sphinx Crossreferencing Inventories 'objects.inv'
    :depth: 3
    :local:
 
-See also: `TYPO3CMS-Guide-HowToDocument/issues/110
-<https://github.com/TYPO3-Documentation/TYPO3CMS-Guide-HowToDocument/issues/110>`__
 
 What is this about?
 ===================
@@ -153,3 +151,10 @@ target page is used as link text in the created link:
 
 .. figure:: files/decode-01.png
    :class: with-shadow
+
+
+See also
+========
+
+`TYPO3CMS-Guide-HowToDocument/issues/110
+<https://github.com/TYPO3-Documentation/TYPO3CMS-Guide-HowToDocument/issues/110>`__
