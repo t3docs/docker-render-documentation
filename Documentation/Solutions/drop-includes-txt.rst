@@ -1,8 +1,8 @@
-.. include:: ../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 ======================================
-Drop the usual Includes.txt file
+Drop the usual Includes.rst.txt file
 ======================================
 
 **This page:**
@@ -42,11 +42,11 @@ Method 3: Define in jobfile.json
 
 Works for local renderings with the Docker container. No path adjustment.
 
-Consider a common includes file :file:`Includes.txt` with the following content:
+Consider a common includes file :file:`Includes.rst.txt` with the following content:
 
 .. code-block:: rst
 
-   .. This is 'Includes.txt'. It is included at the very top of each and
+   .. This is 'Includes.rst.txt'. It is included at the very top of each and
       every ReST source file in THIS documentation project (= manual).
 
    .. role:: aspect (emphasis)

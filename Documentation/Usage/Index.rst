@@ -1,11 +1,11 @@
 
-.. include:: ../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 
-=====
-Usage
-=====
+==================
+Usage (Linux, Mac)
+==================
 
 
 Pages:

@@ -1,18 +1,16 @@
-
 .. include:: /Includes.rst.txt
 
+==================
+Usage (Windows)
+==================
 
-
-=======================
-Explanations
-=======================
-
-Pages:
-
+.. rubric:: Pages
 .. rst-class:: compact-list
 .. toctree::
    :glob:
    :titlesonly:
 
+   */Index
    *
+
 

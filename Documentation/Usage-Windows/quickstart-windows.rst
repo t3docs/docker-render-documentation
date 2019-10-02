@@ -1,14 +1,24 @@
 .. include:: /Includes.rst.txt
-.. highlight:: text
+.. _quickstart-windows:
 
+====================
+Quickstart (Windows)
+====================
 
-.. _quickstart:
+For Windows.
 
-==========
-Quickstart
-==========
+How to get TYPO3 documentation rendering going on Windows using the Docker
+container.
 
-For Linux and Mac.
+----
+
+.. contents:: This page
+   :backlinks: top
+   :class: compact-list
+   :depth: 3
+   :local:
+
+----
 
 Verify you have Docker installed::
 

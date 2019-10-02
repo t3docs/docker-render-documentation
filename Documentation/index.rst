@@ -1,5 +1,4 @@
-
-.. include:: Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _start:
@@ -146,6 +145,7 @@ welcome. Very much!
    :titlesonly:
 
    Usage/Index
+   Usage-Windows/Index
    Structures/Index
    Rendering/Index
    Building/Index
