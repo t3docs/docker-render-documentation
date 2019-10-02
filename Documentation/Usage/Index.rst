@@ -20,6 +20,7 @@ Pages:
    docker-run
    caching
    windows-users
+   gitlab-ci
    *
 
 

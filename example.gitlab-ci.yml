@@ -1,0 +1,38 @@
+stages:
+  - docs
+  - deploy
+
+docu-build:
+  stage: docs
+  image:
+    name: t3docs/render-documentation:v2.3.0
+    entrypoint: [""]
+  before_script:
+    # Copy the content of the current folder to /PROJECT
+    # This is needed, because the path is hardcoded and cannot be configured in v2.3.0
+    - cp -a ${CI_PROJECT_DIR}/. /PROJECT
+    # If you set -c resultdir to some path, but you need to make sure the folder exists beforehand
+    - mkdir -p ${CI_PROJECT_DIR}/Documentation-GENERATED-temp
+    # Alternatively, symlink the /RESULT to somewhere inside the ${CI_PROJECT_DIR} since Gitlab
+    # will not accept artiacts from outside of this path
+#    - ln -s /RESULT ${CI_PROJECT_DIR}/Documentation-built
+  script:
+    # Make sure to be in /ALL/venv, else this will not work!
+    - cd /ALL/venv
+    # Run the script without cache and set the resultdir to Documentation-GENERATED-temp
+    - /ALL/Menu/mainmenu.sh makehtml-no-cache -c resultdir ${CI_PROJECT_DIR}/Documentation-GENERATED-temp
+  rules:
+    - changes:
+        - Documentation
+      when: always
+    - when: never
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/Documentation-GENERATED-temp
+deploy:
+  image: cabag/rsync
+  stage: deploy
+  dependencies:
+    - docu-build
+  script:
+    - echo "Deploy content..."
