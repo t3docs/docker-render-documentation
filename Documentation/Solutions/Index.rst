@@ -7,7 +7,6 @@
 Solutions
 =========
 
-Pages:
 
 .. rst-class:: compact-list
 .. toctree::
