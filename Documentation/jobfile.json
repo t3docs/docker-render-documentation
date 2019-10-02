@@ -2,6 +2,7 @@
    "Overrides_cfg": {
    },
    "tctconfig": {
+     "disable_include_files_check": 1,
      "make_singlehtml": 1
    },
    "buildsettings_sh": {

@@ -137,12 +137,10 @@ welcome. Very much!
 -----
 
 
-**Pages**
+.. rubric:: Contents
 
 .. rst-class:: compact-list
 .. toctree::
-   :glob:
-   :titlesonly:
 
    Usage/Index
    Usage-Windows/Index
@@ -155,3 +153,5 @@ welcome. Very much!
    Solutions/Index
    Targets
    Sitemap
+   genindex
+
