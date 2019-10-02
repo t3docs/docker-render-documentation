@@ -108,8 +108,8 @@ What's going on here? Explanation:
    is located in the root path of a manual.
 
 
-About nventories
-================
+About inventories
+=================
 
 Watch out: There are at least two lists of labels. One is for `:doc:…` linking
 and one is for `:ref:…`linking.
