@@ -1,4 +1,4 @@
-.. include:: /Includes.rst.txt
+.. include:: ../Includes.rst.txt
 
 ========================================================
 Decode Sphinx Crossreferencing Inventories 'objects.inv'
