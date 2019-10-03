@@ -15,7 +15,7 @@ docu-build:
     - mkdir -p ${CI_PROJECT_DIR}/Documentation-GENERATED-temp
     # Alternatively, symlink the /RESULT to somewhere inside the ${CI_PROJECT_DIR} since Gitlab
     # will not accept artiacts from outside of this path
-#    - ln -s /RESULT ${CI_PROJECT_DIR}/Documentation-built
+    #    - ln -s /RESULT ${CI_PROJECT_DIR}/Documentation-built
   script:
     # Make sure to be in /ALL/venv, else this will not work!
     - cd /ALL/venv

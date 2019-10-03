@@ -14,5 +14,6 @@ Solutions
    :titlesonly:
 
    Livereload/Index
+   gitlab-ci/Index
    *
 

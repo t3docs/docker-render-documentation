@@ -151,6 +151,7 @@ welcome. Very much!
    Inspection/Index
    Development/Index
    Solutions/Index
+   Glossary
    Targets
    Sitemap
    genindex
