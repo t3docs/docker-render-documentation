@@ -61,7 +61,7 @@ on how you can change the default script to your needs.
    .. code-block:: yaml
 
       docu:
-        stage: docs
+        stage: test
         image:
           name: t3docs/render-documentation:v2.3.0
           entrypoint: [""]
