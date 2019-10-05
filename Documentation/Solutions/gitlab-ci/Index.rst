@@ -382,3 +382,26 @@ Extensive
         }
      }
 
+
+
+"Edit on GitLab" button with the sphinx_rtd_theme
+=================================================
+
+Have something like this in your :file:`jobfile.json` file:
+
+.. code-block: json
+
+   {
+     "Overrides_cfg": {
+       "general": {
+         "html_theme": "sphinx_rtd_theme",
+         "html_context": {
+           "display_gitlab": true,
+           "gitlab_host": "gitlab.com",
+           "gitlab_user":"GITLAB_USER",
+           "gitlab_repo": "GITLAB_HOST",
+           "theme_vcs_pageview_mode": "edit",
+           "gitlab_version": "master/",
+           "conf_py_path": "Documentation/"
+         },
+   }
