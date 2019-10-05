@@ -389,7 +389,7 @@ Extensive
 
 Have something like this in your :file:`jobfile.json` file:
 
-.. code-block: json
+.. code-block:: json
 
    {
      "Overrides_cfg": {
