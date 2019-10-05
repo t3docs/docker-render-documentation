@@ -405,3 +405,9 @@ Have something like this in your :file:`jobfile.json` file:
            "conf_py_path": "Documentation/"
          },
    }
+
+The corresponding html template looks like this:
+
+.. code-block:: jinja
+
+   <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
