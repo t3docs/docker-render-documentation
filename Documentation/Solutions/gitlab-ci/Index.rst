@@ -383,6 +383,7 @@ Extensive
      }
 
 
+.. index:: sphinx_rtd_theme; Edit on GitLab button
 
 "Edit on GitLab" button with the sphinx_rtd_theme
 =================================================
@@ -411,3 +412,47 @@ The corresponding html template looks like this:
 .. code-block:: jinja
 
    <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
+
+
+.. index:: sphinx_rtd_theme; your own logo, sphinx_rtd_theme; your own css
+
+Your own logo and css with the sphinx_rtd_theme
+===============================================
+
+To configure your own logo with the ReadTheDocs theme you need to know the
+relative path from `conf.py` to the logo. Suppose your file structure looks
+like this:
+
+.. code-block:: text
+
+   MyProject
+   └── Documentation
+       ├── jobfile.json
+       ├── Index.rst
+       └── _static
+           ├── my-logo.svg
+           └── css
+               └── my-styles.css
+
+
+The relative path we are looking for is a constant and reflects some of the
+internals of the container. This constant, which is the relative path to go
+from the :file:`conf.py` folder to the documentation start is
+:file:`../TheProject/Documentation`. So to use :file:`my-logo.png` and
+:file:`my-styles.css` you would write the following in :file:`jobfile.json`.
+To make it a bit more complete project, release and version are shown as well:
+
+.. code-block:: json
+
+   {
+     "Overrides_cfg": {
+       "general": {
+         "html_theme": "sphinx_rtd_theme",
+         "html_logo": "../TheProject/Documentation/_static/my-logo.svg",
+         "html_css_files": ["css/my-styles.css"],
+         "html_static_path": ["../TheProject/Documentation/_static"],
+         "project": "MyProject",
+         "release": "1.0.0",
+         "version": "1.0",
+       }
+     },

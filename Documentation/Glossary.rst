@@ -8,6 +8,12 @@ Glossary
 
 .. glossary::
 
+   Docker
+      "Docker provides a way to run applications securely isolated in a
+      container, packaged with all its dependencies and libraries."
+
+      Installation: Get Docker from https://docs.docker.com/install/
+
    dockrun
       Docker commands can be very long and complicated. To make things easier
       we sometimes use helper scripts like "t3rd" (T3 render documentation.
