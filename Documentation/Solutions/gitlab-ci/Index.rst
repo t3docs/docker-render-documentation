@@ -400,7 +400,7 @@ Have something like this in your :file:`jobfile.json` file:
            "display_gitlab": true,
            "gitlab_host": "gitlab.com",
            "gitlab_user":"GITLAB_USER",
-           "gitlab_repo": "GITLAB_HOST",
+           "gitlab_repo": "GITLAB_REPO",
            "theme_vcs_pageview_mode": "edit",
            "gitlab_version": "master/",
            "conf_py_path": "Documentation/"
