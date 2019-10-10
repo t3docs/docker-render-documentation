@@ -388,6 +388,16 @@ Extensive
 "Edit on GitLab" button with the sphinx_rtd_theme
 =================================================
 
+The corresponding html template looks like this:
+
+.. code-block:: jinja
+
+   <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
+
+
+Edit a single file
+------------------
+
 Have something like this in your :file:`jobfile.json` file:
 
 .. code-block:: json
@@ -407,11 +417,28 @@ Have something like this in your :file:`jobfile.json` file:
          },
    }
 
-The corresponding html template looks like this:
 
-.. code-block:: jinja
+Edit the file in GitLab WEB Ide
+-------------------------------
 
-   <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
+Have something like this in your :file:`jobfile.json` file:
+
+.. code-block:: json
+
+   {
+     "Overrides_cfg": {
+       "general": {
+         "html_theme": "sphinx_rtd_theme",
+         "html_context": {
+           "display_gitlab": true,
+           "gitlab_host": "gitlab.com",
+           "gitlab_user":"-/ide/project/GITLAB_USER",
+           "gitlab_repo": "GITLAB_REPO",
+           "theme_vcs_pageview_mode": "edit",
+           "gitlab_version": "master/-/",
+           "conf_py_path": "Documentation/"
+         },
+   }
 
 
 .. index:: sphinx_rtd_theme; your own logo, sphinx_rtd_theme; your own css
