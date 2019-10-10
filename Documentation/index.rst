@@ -52,7 +52,7 @@ Helpers while in draft status:
 :Autobuilds:    `Docker cloud autobuilds <https://cloud.docker.com/u/t3docs/repository/docker/t3docs/render-documentation/builds>`__
 :Github:        https://github.com/t3docs/docker-render-documentation/tree/develop
 :Buildinfo:     `_buildinfo <_buildinfo>`__ • `warnings.txt <_buildinfo/warnings.txt>`__ • `results.json <_buildinfo/results.json>`__
-:Intercept:     \• `t3docs <https://intercept.typo3.com/admin/docs/deployments?docs_deployment_filter%5Bsearch%5D=t3docs&docs_deployment_filter%5Btype%5D=&docs_deployment_filter%5Bstatus%5D=&docs_deployment_filter%5Btrigger%5D=&docs_deployment_filter>`__
+:Intercept:     \• `t3docs <https://intercept.typo3.com/admin/docs/deployments?docs_deployment_filter%5Bsearch%5D=t3docs&docs_deployment_filter%5Btype%5D=&docs_deployment_filter%5Bstatus%5D=&docs_deployment_filter%5Btrigger%5D=>`__
                 \• `recent actions <https://intercept.typo3.com/admin/docs/deployments?docs_deployment_filter[search]=&docs_deployment_filter[type]=&docs_deployment_filter[status]=4&docs_deployment_filter[trigger]=>`__
                 \•
 :In one file:   `singlehtml <singlehtml>`__
