@@ -134,8 +134,8 @@ After `run-make.sh`::
    ➜  project
 
 
-Using Docker container having texlive
-=====================================
+Using texlive Docker container
+==============================
 
 Using thomasweise/docker-texlive-full::
 
