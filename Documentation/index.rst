@@ -7,7 +7,7 @@ Docker Container v2.3.0 for Documentation Rendering and more
 ============================================================
 
 --------------------------------------
-A comprehensive manual
+Comprehensive manual
 --------------------------------------
 
 DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
