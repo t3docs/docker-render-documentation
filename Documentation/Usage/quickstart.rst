@@ -7,7 +7,7 @@
 Quickstart
 ==========
 
-For Linux and Mac.
+This page is for Linux and Mac.
 
 Verify you have Docker installed::
 
@@ -68,16 +68,36 @@ Tip: On most Linuxes you can source the shell commands directly
 without and intermediate file like so. This has been reported to
 not work for Macs::
 
-   source <(docker run --rm t3docs/render-documentation:v2.3.0-local \
-            show-shell-commands)
+   source <(docker run --rm t3docs/render-documentation:v2.3.0-local show-shell-commands)
 
 Go to the project and run the rendering::
 
    cd ~/project
 
    dockrun_t3rd  makehtml
+   
    # or
+   
    dockrun_t3rd  makeall
+
+Ask the container for help::
+
+   ➜  ~ dockrun_t3rd 
+   t3rd - TYPO3 render documentation (v2.4.0-dev)
+   For help:
+      docker run --rm t3docs/render-documentation:v2.4.0-dev --help
+      dockrun_t3rd --help
+
+   ... did you mean 'dockrun_t3rd makehtml'?
+
+   See manual (draft) at
+   https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
+
+   ➜  ~ dockrun_t3rd --help
+      # lots of lines ...
+      
+   ➜  ~ 
+
 
 
 Using plain Docker commands
