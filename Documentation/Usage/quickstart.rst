@@ -39,8 +39,8 @@ If you don't have a project, create a minimal one with just a README file::
 Using dockrun_t3rd, the handy helper function
 =============================================
 
-This function makes your life much easier, so make sure to give it
-a try and use it!
+This function makes your life much easier, so please give it
+a try and start using it!
 
 Create a place to store a shell file to. We recommend
 `.dockrun/dockrun_t3rd` in your home directory. Create a `shell-commands.sh`
