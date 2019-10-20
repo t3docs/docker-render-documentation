@@ -13,7 +13,7 @@ For Linux and Mac.
 Verify you have Docker installed::
 
    ➜  ~ docker --version
-   Docker version 19.03.1, build 74b1e89
+   Docker version 19.03.4, build 9013bf583a
 
    ➜  ~
 
