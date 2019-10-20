@@ -64,9 +64,9 @@ or ZSH startup file. How it can be done::
    echo 'source ~/.dockrun/dockrun_t3rd/shell-commands.sh' >> ~/.zshrc
 
 
-Tip: On most Linuxes you can source the shell commands directly
+*Tip:* On most Linuxes you can source the shell commands directly
 without and intermediate file like so. This has been reported to
-not work for Macs::
+not work on Macs::
 
    source <(docker run --rm t3docs/render-documentation:v2.3.0-local show-shell-commands)
 
@@ -83,6 +83,7 @@ Go to the project and run the rendering::
 Ask the container for help::
 
    ➜  ~ dockrun_t3rd 
+
    t3rd - TYPO3 render documentation (v2.4.0-dev)
    For help:
       docker run --rm t3docs/render-documentation:v2.4.0-dev --help
@@ -93,9 +94,11 @@ Ask the container for help::
    See manual (draft) at
    https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
 
+
    ➜  ~ dockrun_t3rd --help
       # lots of lines ...
-      
+   
+   
    ➜  ~ 
 
 
