@@ -34,8 +34,12 @@ If you don't have a project, create a minimal one with just a README file::
    echo                    >> README.rst
    echo 'Hello world, this is my splendid documentation.' >> README.rst
 
-Using 'dockrun_t3rd', the handy helper function
-===============================================
+
+Using dockrun_t3rd, the handy helper function
+=============================================
+
+This function makes your life much easier, so make sure to give it
+a try and use it!
 
 Create a place to store a shell file to. We recommend
 `.dockrun/dockrun_t3rd` in your home directory. Create a `shell-commands.sh`
@@ -66,8 +70,6 @@ not work for Macs::
    source <(docker run --rm t3docs/render-documentation:v2.3.0-local \
             show-shell-commands)
 
-
-
 Go to the project and run the rendering::
 
    cd ~/project
@@ -80,8 +82,9 @@ Go to the project and run the rendering::
 Using plain Docker commands
 ===========================
 
-You need to replace the project path `/home/marble/project`
-with the real absolute path of your project::
+*Attention:* You need to replace the project path 
+`/home/marble/project` with the real absolute path 
+of your project::
 
    # Go to the project
    cd ~/project
@@ -89,7 +92,7 @@ with the real absolute path of your project::
    # Create result folder
    mkdir Documentation-GENERATED-temp
 
-   # Run the image
+   # Run the rendering
    docker \
       run --rm --user=$(id -u):$(id -g) \
       -v /home/marble/project:/PROJECT:ro \
