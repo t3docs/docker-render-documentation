@@ -17,8 +17,8 @@ Verify you have Docker installed::
    ➜  ~
 
 
-Go to a project. Go to the top folder of your project, NOT `project/Documentation`,
-if you have that::
+Go to a project. Go to the top folder of your project, DO NOT 
+go to `project/Documentation`, if you have that::
 
    cd ~/project
 
