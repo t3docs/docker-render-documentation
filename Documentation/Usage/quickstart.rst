@@ -97,11 +97,15 @@ with the real absolute path of your project::
       t3docs/render-documentation:v2.3.0 \
       makehtml
 
-.. attention:: Map the project in readonly mode (:ro)!
+.. attention::
 
-Note that the project is mapped into the container as /PROJECT in readonly mode.
+   Make sure you map PROJECT in readonly mode. This will protect
+   your files from being damaged in case something is going wrong
+   inside the container.
+
+Note that the project is mapped into the container as /PROJECT:ro
+which means readonly mode.
 The result folder is mapped to /RESULT in readwrite mode. `--rm` means that
 the container is to be removed right after it has been run. This will not
 affect the downloaded docker image. With `--user=` we make sure that the
 created output files do belong to the actual user and not to the super user.
-
