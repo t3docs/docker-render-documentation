@@ -24,23 +24,29 @@ if you have that::
    cd ~/project
 
 
-If you don't have a project, create a minimal one with just a README file::
+You don't have a project at hand? Create a minimal one with just one
+file named :file:`README.rst`::
 
+   # create project folder
    mkdir ~/project
 
+   # go to there
    cd ~/project
 
+   # Type a headline and a sentence to that file
    echo 'My dummy project'  > README.rst
    echo '================' >> README.rst
    echo                    >> README.rst
    echo 'Hello world, this is my splendid documentation.' >> README.rst
 
 
-Using dockrun_t3rd, the handy helper function
-=============================================
+Build HTML using 'dockrun_t3rd'
+===============================
 
-This function makes your life much easier, so please give it
-a try and start using it!
+'dockrun_t3rd' is just a handy helper function to run the 
+Docker command for t3rd, that is: TYPO3 render documentation.
+This function can make your life much easier, so please give it
+a try!
 
 Create a place to store a shell file to. We recommend
 `.dockrun/dockrun_t3rd` in your home directory. Create a `shell-commands.sh`
@@ -103,8 +109,8 @@ Ask the container for help::
 
 
 
-Using plain Docker commands
-===========================
+Build HTML with plain Docker commands
+=====================================
 
 *Attention:* You need to replace the project path 
 `/home/marble/project` with the real absolute path 
