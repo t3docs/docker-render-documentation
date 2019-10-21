@@ -72,12 +72,14 @@ Helper links while in draft status:
 
 **About this manual**
 
+Everything about the container: How it works, how it's developed,
+how it is built and ways of using it.
+
 This container is a beast, it has lots of features and lots of knowledge 
 built in. This manual hopefully helps to access the features.
 
-((t3docs/render-documentation is the TYPO3 Docker container, for local and server
-used, requires (only) Docker, has lots of built in knowledge.  To answer
-questions: How does it work? capabilities, simple and advanced usage))
+The container is used for rendering the official TYPO3 documentation
+on the docs server.
 
 -----
 
