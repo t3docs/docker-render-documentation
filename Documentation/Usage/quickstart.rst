@@ -137,7 +137,7 @@ whatever is valid in your case::
 
    Make sure you map PROJECT in readonly mode. This will protect your files
    from being damaged in case something is going wrong with the complex
-   machinery inside the container. It shouldn't happen. But who would garantee?
+   machinery inside the container. It shouldn't happen. But who knows?
 
 About the Docker command: Note that the project is mapped as /PROJECT:ro which
 means **readonly mode**. Results are created in /RESULT, so this folder is
