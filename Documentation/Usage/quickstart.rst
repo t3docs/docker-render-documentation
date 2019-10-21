@@ -52,7 +52,7 @@ This function can make your life much easier, so please give it
 a try!
 
 1. Create a place to store a shell file to. We recommend
-   `.dockrun/dockrun_t3rd` in your home directory. Create a `shell-commands.sh`
+   :file:`.dockrun/dockrun_t3rd` in your home directory. Create a :file:`shell-commands.sh`
    file there that can afterwards be used to define a helper function. To do that
    import that file in a shell session by means of the `source` command.
    To always do that automatically, add an appropriate line to your BASH
@@ -116,7 +116,7 @@ a try!
 Build HTML with plain Docker commands
 =====================================
 
-*Attention:* You need to replace the project path `/home/marble/project` with
+*Attention:* You need to replace the project path :file:`/home/marble/project` with
 whatever is valid in your case::
 
    # Go to the project
