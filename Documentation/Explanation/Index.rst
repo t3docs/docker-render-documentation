@@ -14,5 +14,7 @@ Pages:
    :glob:
    :titlesonly:
 
+   */Index
    *
+
 
