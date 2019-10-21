@@ -2,7 +2,12 @@ Release v2.4.0 (to be released)
 ===============================
 
 * Add 'dockrun_t3rd  /usr/bin/bash'
-* Use Toolchain v2.8-dev from branch 'develop'
+* Use Toolchain v2.8.0
+* Use TCT v1.1.0
+* Account for /THEMES mapping
+* Add 'ablog' to Pipfile
+* 6ff41f3 List localizations in 'Find the results'
+* 8785da4 Add directive and textrole 'confval' in conf.py
 
 
 Release v2.3.0 (August 19, 2019)
