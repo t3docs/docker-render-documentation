@@ -9,6 +9,9 @@ Quickstart
 
 This page is for Linux and Mac.
 
+Preparations
+============
+
 Verify you have Docker installed::
 
    ➜  ~ docker --version
