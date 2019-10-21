@@ -14,10 +14,7 @@ the status of the various automation jobs.
 This document is about how the docker container is used on the build server
 and how updates are done.
 
-
-**On this page:**
-
-.. contents::
+.. contents:: This page
    :class: compact-list
    :local:
    :depth: 3
@@ -25,25 +22,28 @@ and how updates are done.
 
 
 
-Today is 27. August 2019
-========================
+Today is 21. October 2019
+=========================
 
 "now", "currently" and "today" refers to this date in the context of this page.
 
 
-Done: Updated to v2.3.0
-=======================
+Released today: version v2.4.0
+==============================
 
-**v2.3.0** is now active and replaced v2.2.6.
+**v2.4.0** is now active and replaces v2.3.0
 
 
-How to update the Docker render container
-=========================================
+Update from v2.3.0 to current v2.4.0
+====================================
 
-For example: Update v2.2.6 to v2.3.0
+How to update the Docker render container.
+
+
+For example: Update v2.3.0 to v2.4.0
 ------------------------------------
 
-1. Find server idle time or pause normal rendering new jobs.
+1. Find server idle time or pause scheduling of new rendering jobs.
 
 2. Update the rendering script. This should be something like
    'Render documentation' of type
@@ -51,23 +51,28 @@ For example: Update v2.2.6 to v2.3.0
 
    Do a "find & replace" operation::
 
-      # find........:  t3docs/render-documentation:v2.2.6
-      # replace with:  t3docs/render-documentation:v2.3.0
+      # find........:  t3docs/render-documentation:v2.3.0
+      # replace with:  t3docs/render-documentation:v2.4.0
 
 3. Trigger a sample rendering.
 
 4. Check the result and the log output to verify that rendering and deployment
    succeeded.
 
-5. In case of error: revert to v2.2.6 and contact the documentation team.
+5. In case of error: revert to v2.3.0 and contact the documentation team.
 
 6. In case of success: Trigger rerendering of all known manuals.
 
 7. Resume normal job processing.
 
+**Note:** With v2.4.0 there is NO NEED to rerender all manuals.
 
-Extended check
---------------
+
+Update from v2.2.6 to past v2.3.0
+=================================
+
+Extended check after updating to v2.3.0
+---------------------------------------
 
 After building have a look at the `results.json` file in the BUILDINFO.
 
@@ -145,6 +150,18 @@ it has the purpose to link to the 'cols' property of the 'data' object.
 
 Container history
 =================
+
+v2.4.0
+   t3docs/render-documentation:v2.4.0
+
+   Released 21. October 2019
+
+   To become active.
+
+   Should be a "drop in" replacement.
+
+   There is NO NEED to rerender all manuals.
+
 
 v2.3.0
    t3docs/render-documentation:v2.3.0
