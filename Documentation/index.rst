@@ -3,7 +3,7 @@
 .. _start:
 
 ============================================================
-Docker Container v2.3.0 for Documentation Rendering and more
+Docker Container v2.4.0 for Documentation Rendering and more
 ============================================================
 
 --------------------------------------
@@ -25,12 +25,12 @@ DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
 
    **TYPO3 docker container for documentation rendering**
 
-   RELEASED August 19, 2019: v2.3.0
+   RELEASED October 21, 2019: v2.4.0
 
    Pull and run::
 
-      docker pull t3docs/render-documentation:v2.3.0
-      docker run --rm t3docs/render-documentation:v2.3.0
+      docker pull t3docs/render-documentation:v2.4.0
+      docker run --rm t3docs/render-documentation:v2.4.0
 
 
    **NEW:** `Documentation about the container
@@ -42,9 +42,9 @@ DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
 
 -----
 
-Helpers while in draft status:
+Helper links while in draft status:
 
-:Describing:    \• Container version v2.4-dev
+:Describing:    \• Container version v2.5-dev
 :Github:        \• `Github documentation-draft <https://github.com/t3docs/docker-render-documentation/tree/documentation-draft>`__
 :Public draft:  \• https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
 :Private draft: \• `symlinked.local.mbless.de <http://symlinked.local.mbless.de/docker-render-documentation-draft/>`__
@@ -72,12 +72,11 @@ Helpers while in draft status:
 
 **About this manual**
 
-((This container is a beast, it has lots of knowledge built in, offers lots
-of features. I you'd only know what and how. This manual is there to help.
+This container is a beast, it has lots of features and lots of knowledge 
+built in. This manual hopefully helps to access the features.
 
-t3docs/render-documentation is the TYPO3 Docker container, for local and server
-used, requires (only) Docker, has lots of built in knowledge. The manual
-((soll Zugang geben)) to the various aspects of the container. To answer
+((t3docs/render-documentation is the TYPO3 Docker container, for local and server
+used, requires (only) Docker, has lots of built in knowledge.  To answer
 questions: How does it work? capabilities, simple and advanced usage))
 
 -----
@@ -116,6 +115,18 @@ welcome. Very much!
 
 .. tip::
 
+   **Highlights of v2.4.0**
+   
+   * new: powerful :file:`jobfile.json` can configure everything
+   * new: 'confval' directive and textroles
+   * new: 'include' and 'literalinclude' can access every file of the project,
+     not just those in ./Documentation/
+   * new: use absolute paths for includes, like `.. include:: /Includes.rst.txt`
+   * new: use your own custom Sphinx theme
+   * fixed: rendering of localized manuals
+   
+.. note::
+
    **Highlights of v2.3.0**
 
    •  much smaller image
@@ -139,7 +150,6 @@ welcome. Very much!
 
 
 .. rubric:: Contents
-
 .. rst-class:: compact-list
 .. toctree::
 
