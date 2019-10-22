@@ -4,7 +4,7 @@
 .. _About-docutils:
 
 ==================================
-About Docutils: The Basics of ReST
+About Docutils: The basics of ReST
 ==================================
 
 Docutils lays the foundation of the ReST markup language and provides
@@ -37,7 +37,7 @@ A reading that organizes information
    *Note:* "reStructuredText" is ONE word, not two!
 
 
-User Documentation
+User documentation
 ------------------
 
 •  `A ReStructuredText Primer
@@ -64,7 +64,7 @@ User Documentation
    text only; 1 page for syntax, 1 page directive & role reference
 
 
-Reference Documentation
+Reference documentation
 -----------------------
 
 •  `An Introduction to reStructuredText
@@ -98,7 +98,7 @@ Reference Documentation
    the reference reStructuredText parser.
 
 
-Developer Documentation
+Developer documentation
 -----------------------
 
 •  `A Record of reStructuredText Syntax Alternatives
@@ -108,8 +108,8 @@ Developer Documentation
    <http://docutils.sourceforge.net/docs/dev/rst/problems.html>`_
 
 
-How-To's
---------
+Howtos
+------
 
 •  `Creating reStructuredText Directives
    <http://docutils.sourceforge.net/docs/howto/rst-directives.html>`_

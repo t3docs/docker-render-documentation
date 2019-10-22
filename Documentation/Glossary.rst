@@ -1,4 +1,4 @@
-.. include:: Includes.txt
+.. include:: Includes.rst.txt
 .. index:: Glossary
 .. _Glossary:
 
@@ -15,7 +15,14 @@ Glossary
       Installation: Get Docker from https://docs.docker.com/install/
 
    Docutils
-      ...
+      See http://docutils.sourceforge.net/rst.html and
+      chapter :ref:`About-docutils`.
+
+         reStructuredText is an easy-to-read, what-you-see-is-what-you-get
+         plaintext markup syntax and parser system. It is useful for in-line
+         program documentation (such as Python docstrings), for quickly creating
+         simple web pages, and for standalone documents…
+
 
    dockrun
       Docker commands can be very long and complicated. To make things easier

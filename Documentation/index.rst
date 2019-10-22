@@ -75,7 +75,7 @@ Helper links while in draft status:
 Everything about the container: How it works, how it's developed,
 how it is built and ways of using it.
 
-This container is a beast, it has lots of features and lots of knowledge 
+This container is a beast, it has lots of features and lots of knowledge
 built in. This manual hopefully helps to access the features.
 
 The container is used for rendering the official TYPO3 documentation
@@ -118,15 +118,16 @@ welcome. Very much!
 .. tip::
 
    **Highlights of v2.4.0**
-   
+
    * new: powerful :file:`jobfile.json` can configure everything
    * new: 'confval' directive and textroles
    * new: 'include' and 'literalinclude' can access every file of the project,
-     not just those in ./Documentation/
-   * new: use absolute paths for includes, like `.. include:: /Includes.rst.txt`
+     not just those in ./Documentation/ :ref:`(read more) <about-includes>`
+   * new: use absolute paths for includes, like
+     `.. include:: /Includes.rst.txt` :ref:`(read more) <about-includes>`
    * new: use your own custom Sphinx theme
    * fixed: rendering of localized manuals
-   
+
 .. note::
 
    **Highlights of v2.3.0**

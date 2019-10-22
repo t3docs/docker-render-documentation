@@ -13,6 +13,8 @@ Examples::
 
 
 
-.. todo:: Render multilanguage manuals.
+.. versionadded:: v2.4.0
+   Localized manuals are working again.
 
-...
+
+…
