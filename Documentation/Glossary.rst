@@ -14,6 +14,9 @@ Glossary
 
       Installation: Get Docker from https://docs.docker.com/install/
 
+   Docutils
+      ...
+
    dockrun
       Docker commands can be very long and complicated. To make things easier
       we sometimes use helper scripts like "t3rd" (T3 render documentation.
@@ -30,6 +33,9 @@ Glossary
    RenderDocumentation
       This is the specific :term:`toolchain` that we are using.
 
+   ReST
+      :ref:`reStructuredText <about-docutils>` is the markup language used.
+
    TCT
       This is the toolchain runner that we are using. The original name was
       "tool chain tool", hence the abbreviation TCT.
@@ -38,3 +44,6 @@ Glossary
       This is the name of a folder that resides in the Toolchains_Starting
       folder. The toolchain is an arbitrary structure of files and subfolders
       holding executables that have a name starting with `run_`.
+
+
+.. tip:  use the 'term' role to reference terms, like :term:`TCT`
