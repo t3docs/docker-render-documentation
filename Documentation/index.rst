@@ -122,7 +122,8 @@ welcome. Very much!
    * new: powerful :file:`jobfile.json` can configure everything
    * new: 'confval' directive and textroles
    * new: 'include' and 'literalinclude' can access every file of the project,
-     not just those in ./Documentation/ :ref:`(read more) <about-includes>`
+     not just those in ./Documentation/ :ref:`(read more)
+     <specify-documentation-files>`
    * new: use absolute paths for includes, like
      `.. include:: /Includes.rst.txt` :ref:`(read more) <about-includes>`
    * new: use your own custom Sphinx theme
