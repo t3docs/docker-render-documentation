@@ -66,20 +66,16 @@ Use local version of Theme
 ==========================
 
 While working on https://github.com/TYPO3-Documentation/t3SphinxThemeRtd you need to
-test those changes. The easiest way is to build the Docker container using the local
-version of the theme. Therefore follow these steps:
+test those changes.
 
-#. Copy sub folder `t3SphinxThemeRtd` from the theme to `ALL-for-build/`.
+In order to do so, run the Container and add another volume, in order to overwrite
+the included theme. The additional volume looks like:
 
-#. Adjust `Dockerfile` to use the local version by changing line::
+   -v /home/daniels/Projects/typo3/docs/t3SphinxThemeRtd/t3SphinxThemeRtd:/ALL/userhome/.local/share/virtualenvs/venv-y0waPz_e/lib/python2.7/site-packages/t3SphinxThemeRtd:ro \
 
-      && pip install https://github.com/TYPO3-Documentation/t3SphinxThemeRtd/archive/${THEME_VERSION}.zip \
+The left side it the full absolute path to the theme. The right one is the absolute
+path to the installed theme within the container.
 
-   to::
-
-      && pip install ../t3SphinxThemeRtd/ \
-
-#. Follow above steps to build Docker container.
-
-The generated container should now contain the local theme version instead of the
-official version, which would be downloaded.
+NOTE that `venv-y0waPz_e` might be different for each build version of the container.
+In order to get the working path, start the container and attach to it, and look up
+the concrete path.
