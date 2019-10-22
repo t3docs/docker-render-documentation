@@ -4,10 +4,10 @@
 
 
 =======================
-Explanations
+Explaining
 =======================
 
-Pages:
+.. rubric:: Contents
 
 .. rst-class:: compact-list
 .. toctree::
@@ -16,5 +16,3 @@ Pages:
 
    */Index
    *
-
-
