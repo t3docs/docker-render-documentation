@@ -199,5 +199,9 @@ v1.6.11-html
 
    First version that was used in the automated rendering process.
 
+Tickets
+=======
+
+https://jira.typo3.com/servicedesk/customer/portal/3/TE-123
 
 End of history.
