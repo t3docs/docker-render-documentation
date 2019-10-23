@@ -5,7 +5,7 @@
 Pull and use 'develop' from Docker hub
 ======================================
 
-It can be a bit ((mühsam)) to watch Docker hub for a new build of the
+It can be a bit laborious to watch Docker hub for a new build of the
 container and put that into work. This script helps.
 
 Pull and or update `t3docs/render-documentation:develop`, find out, what tag
