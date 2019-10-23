@@ -21,6 +21,8 @@ and how updates are done.
    :backlinks: top
 
 
+:Jira: Report `Docs Rendering Issues <https://jira.typo3.com/servicedesk/customer/portal/3/create/128>`__ here
+
 
 Today is 21. October 2019
 =========================
