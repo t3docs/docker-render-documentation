@@ -11,6 +11,8 @@ There is an `Intercept
 <https://intercept.typo3.com/admin/docs/deployments>`_ machine that reveals
 the status of the various automation jobs.
 
+----
+
 This document is about how the docker container is used on the build server
 and how updates are done.
 
@@ -20,9 +22,11 @@ and how updates are done.
    :depth: 3
    :backlinks: top
 
+----
 
 :Jira: Report `Docs Rendering Issues <https://jira.typo3.com/servicedesk/customer/portal/3/create/128>`__ here
 
+----
 
 Today is 21. October 2019
 =========================
