@@ -1,13 +1,15 @@
 .. include:: ../Includes.rst.txt
 
 
-=====================
-Run parameters v2.3.0
-=====================
+==============
+Run parameters
+==============
 
    DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
    DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
    DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
+
+.. versionadded:: v2.3.0
 
 .. index:: jobfile_json
 
