@@ -37,7 +37,7 @@ Clone theme for development::
    git clone https://github.com/typo3-documentation/t3SphinxThemeRtd
 
 
-Use npm, yarn, grunt, … to prepare build and to run a build. For example::
+Use npm, yarn, grunt, … to provide all resources and to run a build. For example::
 
    cd ~/Repositories/github.com/typo3-documentation/t3SphinxThemeRtd
 
