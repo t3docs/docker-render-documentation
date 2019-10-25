@@ -20,7 +20,7 @@ the new theme.
 Prepare theme for development
 =============================
 
-Create a local folder to hold themes. Let's name that folder :file:`THEMES`::
+Create a local folder to hold themes. Let's name that folder :file:`~/THEMES`::
 
    mkdir ~/THEMES
 
