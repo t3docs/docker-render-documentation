@@ -126,7 +126,8 @@ welcome. Very much!
      <specify-documentation-files>`
    * new: use absolute paths for includes, like
      `.. include:: /Includes.rst.txt` :ref:`(read more) <about-includes>`
-   * new: use your own custom Sphinx theme
+   * new: use your own custom Sphinx theme or do :ref:`theme development
+     <theme-development>`
    * fixed: rendering of localized manuals
 
 .. note::
