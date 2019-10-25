@@ -7,7 +7,7 @@ Theme development
 =================
 
 The following shows how to clone our theme for development, how to make it
-available to our Docker render container and how to render documentation using
+available in our Docker render container and how to render documentation using
 the new theme.
 
 .. contents:: This page
