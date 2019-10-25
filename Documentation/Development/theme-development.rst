@@ -49,6 +49,21 @@ Use npm, yarn, grunt, … to provide all resources and to run a build. For examp
 
    # At this point a new version of the theme should have been built
 
+Example::
+
+   ➜  t3SphinxThemeRtd git:(feature/abc) ✗ grunt
+   Running "clean:build" (clean) task
+
+   Running "clean:fonts" (clean) task
+   Cleaning t3SphinxThemeRtd/static/fonts...OK
+
+   Running "copy:fonts" (copy) task
+   Copied 40 files
+
+   Running "sass:build" (sass) task
+
+   Done, without errors.
+
 
 Copy the new build to the THEMES folder, thereby giving it a name that is not
 in the list of available themes so far::
