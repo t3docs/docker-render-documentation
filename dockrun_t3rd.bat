@@ -5,7 +5,7 @@ rem Author: Martin.Bless@mbless.de
 rem License: MIT (feel free, use on your own risk, cite me)
 rem
 rem Save this script as:  %home%\dockrun_t3rd.bat
-rem Run it like:          %home%\dockrun.bat [ARGS] <ENTER>'
+rem Run it like:          %home%\dockrun_t3rd.bat [ARGS] <ENTER>'
 rem
 rem Learn from https://en.wikibooks.org/wiki/Windows_Batch_Scripting
 rem
