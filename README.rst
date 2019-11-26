@@ -11,9 +11,10 @@ rendering TYPO3 documentation.
 :Docker image:    t3docs/render-documentation:latest
                   https://hub.docker.com/r/t3docs/render-documentation/
 :Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
-:Documented at:   https://github.com/t3docs/t3docs-documentation
 :Authors:         TYPO3 Documentation Team
 :Main caretaker:  Martin Bless <martin.bless@typo3.org>
+
+.. :Documented at:   https://github.com/t3docs/t3docs-documentation
 
 
 Documentation
