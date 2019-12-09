@@ -4,6 +4,10 @@ Release v2.5.0-dev (to be released)
 * Use develop.zip of Sphinx extension t3targets to fix
   https://github.com/t3docs/docker-render-documentation/issues/80 Line numbers
   point to *.txt instead of *.rst.txt
+  Fixed with `b0d6a7
+  <https://github.com/t3docs/docker-render-documentation/commit/b0d6a7e743f437461fa571061fcb0963a9003589>`
+  and
+  https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/releases/tag/v0.3.0
 
 * Use develop.zip of t3SphinxThemeRtd
 
