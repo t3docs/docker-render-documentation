@@ -19,7 +19,7 @@ ENV \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
    THEME_MTIME="1530870718" \
-   THEME_VERSION="3.6.16" \
+   THEME_VERSION="develop (>3.6.16)" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
