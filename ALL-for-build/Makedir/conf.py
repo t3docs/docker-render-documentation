@@ -15,7 +15,7 @@ import codecs
 import ConfigParser
 import json
 import os
-import t3SphinxThemeRtd
+import sphinx_typo3_theme
 
 from os.path import exists as ospe, isabs, join as ospj, normpath, \
     split as ospsplit
@@ -143,15 +143,15 @@ description = u'This is project \'' + project + '\''
 version = '0.0'
 release = '0.0.0'
 
-html_theme = 't3SphinxThemeRtd'
-pygments_style = 'sphinx'
+html_theme = 'sphinx_typo3_theme'
+pygments_style = 'none'
 
 html_theme_options = {}
 html_theme_options['github_branch']        = ''  # 'master'
 html_theme_options['github_commit_hash']   = ''  # 'a2e479886bfa7e866dbb5bfd6aad77355f567db0'
 html_theme_options['github_repository']    = ''  # 'TYPO3-Documentation/TYPO3CMS-Reference-Typoscript'
 html_theme_options['path_to_documentation_dir'] = ''  # 'Documentation' or e.g. 'typo3/sysext/form/Documentation'
-html_theme_options['github_revision_msg']  = ''  # '<a href="https://github.com/TYPO3-Documentation/t3SphinxThemeRtd' + '/commit/' +'a2e479886bfa7e866dbb5bfd6aad77355f567db0' + '" target="_blank">' + 'a2e47988' + '</a>'
+html_theme_options['github_revision_msg']  = ''  # '<a href="https://github.com/TYPO3-Documentation/EXAMPLE' + '/commit/' +'a2e479886bfa7e866dbb5bfd6aad77355f567db0' + '" target="_blank">' + 'a2e47988' + '</a>'
 html_theme_options['github_sphinx_locale'] = ''  # ?
 html_theme_options['project_contact']      = ''  # 'mailto:documentation@typo3.org'
 html_theme_options['project_discussions']  = ''  # 'http://lists.typo3.org/cgi-bin/mailman/listinfo/typo3-project-documentation'
@@ -165,7 +165,6 @@ highlight_language = 'php'
 html_use_smartypants = False
 language = None
 master_doc = os.path.splitext(ospsplit(masterdocabspath)[1])[0]
-pygments_style = 'sphinx'
 todo_include_todos = False
 
 extensions_to_be_loaded = [
@@ -176,6 +175,7 @@ extensions_to_be_loaded = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     'sphinx.ext.todo',
+    'sphinx_typo3_theme',
     'sphinxcontrib.googlechart',
     'sphinxcontrib.googlemaps',
     'sphinxcontrib.phpdomain',
@@ -184,7 +184,6 @@ extensions_to_be_loaded = [
     'sphinxcontrib.t3tablerows',
     'sphinxcontrib.t3targets',
     'sphinxcontrib.youtube',
-    't3SphinxThemeRtd',
 ]
 
 # Legal extensions will be loaded if requested in Settings.cfg or Overrides.cfg
@@ -230,7 +229,7 @@ us_general['exclude_patterns'] = ['_make']
 us_general['html_last_updated_fmt'] = '%b %d, %Y %H:%M'
 us_general['html_static_path'] = []
 us_general['html_theme_path'] = ['_themes',
-                                 t3SphinxThemeRtd.get_html_theme_path()]
+                                 sphinx_typo3_theme.get_html_theme_path()]
 us_general['templates_path'] = []
 us_general['today_fmt'] = '%Y-%m-%d %H:%M'
 
@@ -439,7 +438,8 @@ if 1 and 'dump resulting settings as json':
 if 'notes' in globals():
     del notes
 
-# Extensions to theme docs
+
+# From Sphinx "Extensions to theme docs"
 def setup(app):
     from sphinx.domains.python import PyField
     from sphinx.util.docfields import Field
