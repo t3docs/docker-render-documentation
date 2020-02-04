@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=2.5.0-dev
+ARG OUR_IMAGE_VERSION=v2.5.0-dev
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -18,8 +18,9 @@ ENV \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
-   THEME_MTIME="1530870718" \
-   THEME_VERSION="develop (>3.6.16)" \
+   THEME_MTIME="1580809898" \
+   THEME_NAME="sphinx_typo3_theme" \
+   THEME_VERSION="develop (>4.0.2)" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
@@ -87,11 +88,14 @@ RUN \
    && apt-get remove python-pip -y \
    && /usr/local/bin/pip install --upgrade pipenv \
    \
-   && COMMENT "Disable /ALL/venv/Pipfile.lock - it didn't work reliably" \
+   && echo "Empty /ALL/venv/.venv" \
+   && rm -rf /ALL/venv/.venv/.gitkeep \
+   \
+   && echo "Disable /ALL/venv/Pipfile.lock - it didn't work reliably" \
    && rm -f Pipfile.lock.DISABLED \
    && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
    \
-   && COMMENT "Install from /ALL/venv/Pipfile" \
+   && echo "Install from /ALL/venv/Pipfile" \
    && pipenv install \
    && echo source $(pipenv --venv)/bin/activate >>$HOME/.bashrc \
    \
@@ -107,7 +111,10 @@ RUN \
    && COMMENT "All files of the theme of a given theme version should have the" \
    && COMMENT "same mtime (last commit) to not turn off Sphinx caching" \
    && python=$(pipenv --venv)/bin/python \
-   && destdir=$(dirname $($python -c "import t3SphinxThemeRtd; print t3SphinxThemeRtd.__file__")) \
+   && destdir=$(dirname $($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.__file__")) \
+   && THEME_MTIME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_mtime()") \
+   && THEME_NAME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_name()") \
+   && THEME_VERSION=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.__version__") \
    && find $destdir -exec touch --no-create --time=mtime --date="$(date --rfc-2822 --date=@$THEME_MTIME)" {} \; \
    \
    && COMMENT "Update TypoScript lexer for highlighting. It comes with Sphinx" \
@@ -143,7 +150,7 @@ RUN \
    && echo "\
       $OUR_IMAGE_VERSION\n\
       Versions used for $OUR_IMAGE_VERSION:\n\
-      Sphinx theme        :: t3SphinxThemeRtd    :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
+      Sphinx theme        :: $THEME_NAME  :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
       Toolchain           :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
       Toolchain tool      :: TCT                 :: $TOOLCHAIN_TOOL_VERSION\n\
       TYPO3-Documentation :: typo3.latex         :: v1.1.0\n\
