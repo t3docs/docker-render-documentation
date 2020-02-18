@@ -155,6 +155,14 @@ if [ -d "\$TOOLCHAINS" ]; then
    if ((\$DEBUG)); then echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
 fi
 
+# WHEELS
+# absolute path to a folder containing Python wheel packages
+local WHEELS=\${T3DOCS_WHEELS:-\$(pwd)/tmp-GENERATED-Wheels}
+if [ -d "\$WHEELS" ]; then
+   cmd="\$cmd -v \$WHEELS:/WHEELS"
+   if ((\$DEBUG)); then echo "WHEELS.......: \$WHEELS"; fi
+fi
+
 cmd="\$cmd $OUR_IMAGE"
 if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 

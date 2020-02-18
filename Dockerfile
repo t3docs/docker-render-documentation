@@ -46,6 +46,7 @@ RUN \
    && mkdir /PROJECT \
    && mkdir /RESULT \
    && mkdir /THEMES \
+   && mkdir /WHEELS \
    \
    && COMMENT "Avoid GIT bug" \
    && cp /ALL/global-gitconfig.cfg /root/.gitconfig \
