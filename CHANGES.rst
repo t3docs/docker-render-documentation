@@ -1,5 +1,5 @@
-Release v2.5.0-dev (to be released)
-===================================
+Release v2.5.0 (Feb 25, 2020)
+=============================
 
 * Use develop.zip of Sphinx extension t3targets to fix
   https://github.com/t3docs/docker-render-documentation/issues/80 Line numbers
@@ -9,7 +9,11 @@ Release v2.5.0-dev (to be released)
   and
   https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/releases/tag/v0.3.0
 
-* Use develop.zip of t3SphinxThemeRtd
+* Use sphinx_typo3_theme from PyPi
+* Use toolchain v2.9.0
+* Add T3DOCS_WHEELS folder. If it contains Python wheel packages, those get
+  installed within the container prior to rendering. So this is an easy way to
+  extra install Python packages prior to rendering.
 
 
 

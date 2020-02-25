@@ -1,6 +1,7 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=v2.5.0-dev
+# ARG OUR_IMAGE_VERSION=v2.5.0
+ARG OUR_IMAGE_VERSION=latest
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -23,9 +24,9 @@ ENV \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
-   TOOLCHAIN_VERSION="develop (2.9.0-dev)" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-master" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/master.zip" \
+   TOOLCHAIN_VERSION="master (2.9.0)" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
