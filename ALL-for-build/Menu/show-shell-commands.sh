@@ -155,6 +155,14 @@ if [ -d "\$TOOLCHAINS" ]; then
    if ((\$DEBUG)); then echo "TOOLCHAINS...: \$TOOLCHAINS"; fi
 fi
 
+# WHEELS
+# absolute path to a folder containing Python wheel packages
+local WHEELS=\${T3DOCS_WHEELS:-\$(pwd)/tmp-GENERATED-Wheels}
+if [ -d "\$WHEELS" ]; then
+   cmd="\$cmd -v \$WHEELS:/WHEELS"
+   if ((\$DEBUG)); then echo "WHEELS.......: \$WHEELS"; fi
+fi
+
 cmd="\$cmd $OUR_IMAGE"
 if ((\$DEBUG)); then echo "OUR_IMAGE....: $OUR_IMAGE"; fi
 
@@ -192,7 +200,7 @@ if [[ "\$DRY_RUN" = "0" ]]; then
 fi
 }
 
-echo "This function is now defined FOR THIS terminal window to run ${OUR_IMAGE_VERSION}:"
+echo "This function is now defined FOR THIS terminal window to run ${OUR_IMAGE_TAG}:"
 echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 
 EOT

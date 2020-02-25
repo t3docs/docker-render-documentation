@@ -9,6 +9,12 @@ export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
+
+function install-wheels(){
+   find /WHEELS -type f -name *.whl | xargs pip install --upgrade
+}
+
+
 function mm-bashcmd() {
    local cmd
    shift
@@ -99,6 +105,7 @@ function mm-show-shell-commands() {
 
 function mm-tct() {
    shift
+   install-wheels
    tct $@
 }
 
@@ -149,6 +156,7 @@ fi
 function mm-makeall() {
    local cmd
    shift
+   install-wheels
 
 # make sure nothing is left over from previous run
 if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]
@@ -193,6 +201,7 @@ function mm-makeall-no-cache() {
 function mm-makehtml() {
    local cmd
    shift
+   install-wheels
 
 # make sure nothing is left over from previous run
 if [[ -f /tmp/RenderDocumentation/Todo/ALL.source-me.sh ]]

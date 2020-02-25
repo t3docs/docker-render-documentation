@@ -1,3 +1,18 @@
+Release v2.5.0-dev (to be released)
+===================================
+
+* Use develop.zip of Sphinx extension t3targets to fix
+  https://github.com/t3docs/docker-render-documentation/issues/80 Line numbers
+  point to *.txt instead of *.rst.txt
+  Fixed with `b0d6a7
+  <https://github.com/t3docs/docker-render-documentation/commit/b0d6a7e743f437461fa571061fcb0963a9003589>`
+  and
+  https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/releases/tag/v0.3.0
+
+* Use develop.zip of t3SphinxThemeRtd
+
+
+
 Release v2.4.0 (Oct 21, 2019)
 =============================
 
@@ -10,10 +25,12 @@ Release v2.4.0 (Oct 21, 2019)
 * 8785da4 Add directive and textrole 'confval' in conf.py
 
 
+
 Release v2.3.0 (August 19, 2019)
 ================================
 
 * Use toolchain >= v2.7.1
+
 
 
 Release v2.2.6 (released June 23, 2019)
@@ -22,10 +39,12 @@ Release v2.2.6 (released June 23, 2019)
 * Use bugfixed toolchain v2.6.1
 
 
+
 Release v2.2.5 (released June 22, 2019)
 =======================================
 
 * Build again, make sphinx-contrib-slide-t3v1.0.1.zip available
+
 
 
 Release v2.2.4 (released June 22, 2019)
@@ -57,6 +76,7 @@ Use toolchain v2.6.0
 | 4d65da1 v2.6.0 Set new version number
 
 
+
 Release v2.2.1 (released June 14, 2019)
 =======================================
 
@@ -65,6 +85,7 @@ Bugfix version
 *  Fix logic error (don't always assume singlehtml)
 *  Use TCT v0.4.1 showing ms = milli seconds
 *  Use toolchain v2.5.1
+
 
 
 Release v2.2.0 (released June 14, 2019)
@@ -100,6 +121,7 @@ Security fixes
 *  Disable raw-directive `issue #65 of t3docs/docker-render-documentation
    <https://github.com/t3docs/docker-render-documentation/issues/65>`__
 *  Issues #67 done in toolchain
+
 
 
 Release v2.1.0 (released May 29, 2019)
@@ -197,6 +219,7 @@ Maintained in branch `1-6
 <https://github.com/t3docs/docker-render-documentation/tree/1-6>` __
 
 
+
 Release v1.6.11-html (released May 23, 2018)
 ============================================
 
@@ -219,16 +242,19 @@ Info
 * standalone *.zip is much smaller, as most fonts aren't shipped any more
 
 
+
 Release v1.6.9-full (released May 10, 2018)
 ===========================================
 
 ...
 
 
+
 Release v1.6.6 (released May 2, 2018)
 =====================================
 
 ...
+
 
 
 Release v1.6.4 (released Nov 16, 2017)
@@ -238,10 +264,12 @@ Release v1.6.4 (released Nov 16, 2017)
 * Use toolchain RenderDocumentation v2.2.0
 
 
+
 Release v0.6.3 (released at the beginning of time)
 ==================================================
 
 ...
+
 
 
 Contributing here
