@@ -18,9 +18,9 @@ ENV \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
-   THEME_MTIME="1580809898" \
-   THEME_NAME="sphinx_typo3_theme" \
-   THEME_VERSION="develop (>4.0.2)" \
+   THEME_MTIME="1580000000" \
+   THEME_NAME="unknown" \
+   THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
