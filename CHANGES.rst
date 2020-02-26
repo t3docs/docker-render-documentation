@@ -1,3 +1,9 @@
+Release v2.5.1 (Feb 26, 2020)
+=============================
+
+* Use toolchain v2.9.1: Fix static files
+
+
 Release v2.5.0 (Feb 25, 2020)
 =============================
 
