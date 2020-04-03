@@ -1,6 +1,6 @@
 @echo OFF
 
-rem dockrun_t3rd.bat, mb, 2019-09-27, 2019-09-28
+rem dockrun_t3rd.bat, mb, 2019-09-27, 2020-04-03
 rem Author: Martin.Bless@mbless.de
 rem License: MIT (feel free, use on your own risk, cite me)
 rem
@@ -25,7 +25,7 @@ if not exist %TMP% (
 )
 
 if x%T3DOCS_OURIMAGE%x == xx (
-   set T3DOCS_OURIMAGE=t3docs/render-documentation:v2.3.0
+   set T3DOCS_OURIMAGE=t3docs/render-documentation:v2.5.1
 )
 
 if not exist %RESULT% (
