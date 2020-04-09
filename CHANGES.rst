@@ -1,3 +1,10 @@
+Release v2.6-dev
+================
+
+* Use toolchain v1.10-dev, allowing option '-c allow_unsafe 1' to skip time
+  consuming html postprocessing
+
+
 Release v2.5.1 (Feb 26, 2020)
 =============================
 

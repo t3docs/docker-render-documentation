@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ARG OUR_IMAGE_VERSION=v2.6.0
+ARG OUR_IMAGE_VERSION=v2.6-dev
 # ARG OUR_IMAGE_VERSION=latest
 # ARG OUR_IMAGE_VERSION=develop
 ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
@@ -27,7 +27,7 @@ ENV \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
-   TOOLCHAIN_VERSION="develop (2.10)" \
+   TOOLCHAIN_VERSION="2.10-dev" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
