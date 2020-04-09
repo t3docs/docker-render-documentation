@@ -3,7 +3,7 @@
 .. _start:
 
 ============================================================
-Docker Container v2.4.0 for Documentation Rendering and more
+Docker Container v2.5.1 for Documentation Rendering and more
 ============================================================
 
 --------------------------------------
@@ -25,12 +25,12 @@ DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
 
    **TYPO3 docker container for documentation rendering**
 
-   RELEASED October 21, 2019: v2.4.0
+   RELEASED February 26, 2020: v2.5.1
 
    Pull and run::
 
-      docker pull t3docs/render-documentation:v2.4.0
-      docker run --rm t3docs/render-documentation:v2.4.0
+      docker pull t3docs/render-documentation:v2.5.1
+      docker run --rm t3docs/render-documentation:v2.5.1
 
 
    **NEW:** `Documentation about the container
@@ -44,7 +44,7 @@ DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
 
 Helper links while in draft status:
 
-:Describing:    \• Container version v2.5-dev
+:Describing:    \• Container version v2.6-dev (branches develop, latest)
 :Github:        \• `Github documentation-draft <https://github.com/t3docs/docker-render-documentation/tree/documentation-draft>`__
 :Public draft:  \• https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
 :Private draft: \• `symlinked.local.mbless.de <http://symlinked.local.mbless.de/docker-render-documentation-draft/>`__
@@ -116,6 +116,19 @@ welcome. Very much!
 -----
 
 .. tip::
+
+   **Highlights of v2.6-dev**
+
+   * `dockrun_t3rd makehtml -c allow_unsafe 1` to skip the extensive and time consuming
+     html postprocessing
+   
+.. note::
+
+   **Highlights of v2.5.1**
+
+   * ...
+
+.. note::
 
    **Highlights of v2.4.0**
 
