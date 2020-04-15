@@ -10,6 +10,12 @@ Security
 
 2. The `.. raw::` directive is always turned off.
 
+   You can use the `allow_unsafe` parameter for your local builds to allow raw commands
+
+   .. code-block:: bash
+      
+      dockrun_t3rd makehtml  -c allow_unsafe 1
+
 3. XSS is possible if not rendering for the server
 
    This is controlled by the html_theme_option['docstypo3'] = ''; # empty!
