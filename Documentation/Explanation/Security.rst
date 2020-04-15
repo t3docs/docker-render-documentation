@@ -23,11 +23,18 @@ Security
 
       This `link <javascript:alert("hello word")>`__ executes Javascript
 
-4. XSS is not possible when the rendering of the container is targeted at the
+4. XSS is not possible when the rendering of the container is targeted to the
    server. This is controlled by the html_theme_option['docstypo3'] = 'somevalue';
 
    If this is the case postprocessing of all generated html files will be done
    that sanitized the html tags and replaces offensive values to '#' or ''.
+
+.. versionadded:: > 2.5.1
+
+   Since NEWER versions than 2.5.1 these four checks can be turned off by setting
+   option `allow_unsafe = 1`. Example::
+
+      dockrun_t3rd makehtml  -c allow_unsafe 1
 
 
 Run
