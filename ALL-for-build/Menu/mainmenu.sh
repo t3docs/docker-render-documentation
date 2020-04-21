@@ -28,7 +28,7 @@ function mm-bashcmd() {
 
 function mm-minimalhelp(){
    cat <<EOT
-$OUR_IMAGE_SLOGAN (${OUR_IMAGE_TAG})
+$OUR_IMAGE_SLOGAN (${OUR_IMAGE_TAG}, ${OUR_IMAGE_VERSION})
 For help:
    docker run --rm $OUR_IMAGE --help
    ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help

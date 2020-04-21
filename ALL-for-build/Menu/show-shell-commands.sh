@@ -8,7 +8,7 @@ source /ALL/Downloads/envvars.sh
 VERSION=${VERSION:-"v0.0.0"}
 DOCKRUN_PREFIX=${DOCKRUN_PREFIX:-"dockrun_"}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
-OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rd - TYPO3 render documentation html"}
+OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rd - TYPO3 render documentation"}
 #2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 #3
@@ -21,6 +21,9 @@ cat <<EOT
 #     source <(docker run --rm $OUR_IMAGE show-shell-commands)
 # ATTENTION:
 #     No whitespace between '<('
+# Or, if that fails:
+#     docker run --rm $OUR_IMAGE show-shell-commands >shell-commands.sh
+#     source shell-commands.sh
 
 # the usual worker command like 'dockrun_t3rd'
 function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {

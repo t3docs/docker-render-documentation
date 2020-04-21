@@ -1,9 +1,22 @@
 FROM ubuntu:18.04
-
+# Reflect the development progress. Set to the release number or something
+# like vX.Y-dev
 ARG OUR_IMAGE_VERSION=v2.6-dev
-# ARG OUR_IMAGE_VERSION=latest
-# ARG OUR_IMAGE_VERSION=develop
-ARG OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-$OUR_IMAGE_VERSION}
+#
+### Select tag. Is 'latest' or 'develop' or '<RELEASE_VERSION>'
+#
+# Uncomment next line for a release
+# ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
+#
+# Uncomment next line in branch master
+# ARG OUR_IMAGE_TAG=latest
+#
+# Uncomment next line in branch develop
+ARG OUR_IMAGE_TAG=develop
+#
+# AFTER pushing a release: Do a FOLLOW-UP push with tag 'latest' or 'develop'
+# depending on where you pushed the release.
+#
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
