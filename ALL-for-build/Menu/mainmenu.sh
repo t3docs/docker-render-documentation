@@ -48,7 +48,10 @@ Usage:
     Prepare:
         Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the commandline of your system:
             source <(docker run --rm $OUR_IMAGE show-shell-commands)
-        Inspect function:
+        Or, if that fails, use the long form:
+            docker run --rm $OUR_IMAGE show-shell-commands >shell-commands.sh
+            source shell-commands.sh
+        That makes a function defined. To inspect that:
             declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}
     Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]
