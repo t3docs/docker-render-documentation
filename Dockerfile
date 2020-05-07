@@ -85,6 +85,7 @@ RUN \
    \
    && COMMENT "What the toolchains needs" \
    && apt-get install -yq --no-install-recommends \
+      git \
       moreutils \
       pandoc \
       rsync \
@@ -106,7 +107,7 @@ RUN \
    && COMMENT "Python stuff" \
    && /usr/bin/pip install --upgrade pip \
    && apt-get remove python-pip -y \
-   && /usr/local/bin/pip install --upgrade pipenv \
+   && /usr/local/bin/pip install --upgrade virtualenv \
    \
    && echo "Empty /ALL/venv/.venv" \
    && rm -rf /ALL/venv/.venv/.gitkeep \
@@ -115,13 +116,12 @@ RUN \
    && rm -f Pipfile.lock.DISABLED \
    && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
    \
-   && echo "Install from /ALL/venv/Pipfile" \
-   && pipenv install -vvv \
-   && echo source $(pipenv --venv)/bin/activate >>$HOME/.bashrc \
+   && virtualenv .venv \
+   && .venv/bin/pip install -r requirements.txt \
+   && find . \
+   && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT "Provide some special files" \
-   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/bin/check_include_files.py \
-           --quiet --output-document /usr/local/bin/check_include_files.py \
    && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
            --quiet --output-document /ALL/Makedir/_htaccess \
    && wget https://github.com/etobi/Typo3ExtensionUtils/raw/master/bin/t3xutils.phar \
@@ -130,7 +130,7 @@ RUN \
    \
    && COMMENT "All files of the theme of a given theme version should have the" \
    && COMMENT "same mtime (last commit) to not turn off Sphinx caching" \
-   && python=$(pipenv --venv)/bin/python \
+   && python=$(pwd)/.venv/bin/python \
    && destdir=$(dirname $($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.__file__")) \
    && THEME_MTIME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_mtime()") \
    && THEME_NAME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_name()") \
@@ -140,7 +140,6 @@ RUN \
    && COMMENT "Update TypoScript lexer for highlighting. It comes with Sphinx" \
    && COMMENT "but isn't up to date there. So we use it from our own repo." \
    && COMMENT "usually: /usr/local/lib/python2.7/site-packages/pygments/lexers" \
-   && python=$(pipenv --venv)/bin/python \
    && destdir=$(dirname $($python -c "import pygments; print pygments.__file__"))/lexers \
    && rm $destdir/typoscript.* \
    && wget $TYPOSCRIPT_PY_URL --quiet --output-document $destdir/typoscript.py \
