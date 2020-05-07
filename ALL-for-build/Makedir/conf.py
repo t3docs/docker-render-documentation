@@ -176,6 +176,7 @@ extensions_to_be_loaded = [
     'sphinx.ext.mathjax',
     'sphinx.ext.todo',
     'sphinx_typo3_theme',
+    'sphinxcontrib.gitloginfo',
     'sphinxcontrib.googlechart',
     'sphinxcontrib.googlemaps',
     'sphinxcontrib.phpdomain',
