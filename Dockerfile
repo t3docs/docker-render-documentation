@@ -118,7 +118,6 @@ RUN \
    \
    && virtualenv .venv \
    && .venv/bin/pip install -r requirements.txt \
-   && find . \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT "Provide some special files" \
@@ -127,6 +126,8 @@ RUN \
    && wget https://github.com/etobi/Typo3ExtensionUtils/raw/master/bin/t3xutils.phar \
            --quiet --output-document /usr/local/bin/t3xutils.phar \
    && chmod +x /usr/local/bin/t3xutils.phar \
+   \
+   && bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
    \
    && COMMENT "All files of the theme of a given theme version should have the" \
    && COMMENT "same mtime (last commit) to not turn off Sphinx caching" \
