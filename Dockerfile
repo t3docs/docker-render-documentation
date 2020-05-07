@@ -33,7 +33,11 @@ ENV \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
-   THEME_MTIME="1580000000" \
+   PIP_NO_CACHE_DIR_xxx=1 \
+   PIP_CACHE_DIR_xxx="" \
+   PIP_DISABLE_PIP_VERSION_CHECK_xxx=1 \
+   PIP_NO_PYTHON_VERSION_WARNING=1 \
+   THEME_MTIME="1580001000" \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
@@ -112,7 +116,7 @@ RUN \
    && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
    \
    && echo "Install from /ALL/venv/Pipfile" \
-   && pipenv install \
+   && pipenv install -vvv \
    && echo source $(pipenv --venv)/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT "Provide some special files" \
@@ -140,6 +144,7 @@ RUN \
    && destdir=$(dirname $($python -c "import pygments; print pygments.__file__"))/lexers \
    && rm $destdir/typoscript.* \
    && wget $TYPOSCRIPT_PY_URL --quiet --output-document $destdir/typoscript.py \
+   && echo curdir=$(pwd); cd $destdir; $python _mapping.py; cd $curdir \
    && curdir=$(pwd); cd $destdir; $python _mapping.py; cd $curdir \
    \
    && COMMENT "Provide the toolchain" \
