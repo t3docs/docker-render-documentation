@@ -1,5 +1,16 @@
 info.txt about /ALL/venv and /ALL/venv/.venv
 
+2020-05-07
+==========
+
+As of today we'll stop using 'pipenv' as it's not really actively being
+maintained.
+
+
+Before 2020-05-07
+=================
+
+We were thinking the following:
 
 1. At image build time a Python virtual environment is created here from the
    Pipfile.
