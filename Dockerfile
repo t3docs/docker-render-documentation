@@ -37,16 +37,22 @@ ENV \
    PIP_CACHE_DIR_xxx="" \
    PIP_DISABLE_PIP_VERSION_CHECK_xxx=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1580001000" \
+   THEME_MTIME="1588954791" \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
-   TOOLCHAIN_VERSION="2.10-dev" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.10.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.10.0.zip" \
+   TOOLCHAIN_VERSION="2.10.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
+
+# Notation:
+#  TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop"
+#  TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip"
+#  TOOLCHAIN_VERSION="2.10-dev"
+
 
 LABEL \
    Maintainer="TYPO3 Documentation Team" \
@@ -127,7 +133,7 @@ RUN \
            --quiet --output-document /usr/local/bin/t3xutils.phar \
    && chmod +x /usr/local/bin/t3xutils.phar \
    \
-   && bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
+   && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
    \
    && COMMENT "All files of the theme of a given theme version should have the" \
    && COMMENT "same mtime (last commit) to not turn off Sphinx caching" \
