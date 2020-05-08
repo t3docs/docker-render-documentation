@@ -11,7 +11,7 @@ export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
 
 function install-wheels(){
-   find /WHEELS -type f -name *.whl | xargs --no-run-if-empty pip --no-cache-dir install --upgrade 2>/dev/null
+   find /WHEELS -type f -name *.whl | xargs --no-run-if-empty pip --no-cache-dir install --force 2>/dev/null
 }
 
 
