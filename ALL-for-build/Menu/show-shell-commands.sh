@@ -40,11 +40,12 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 # Environment variables only some DEVELOPERS may find important,
 # no slash ('/') at the end,
 #
-#     T3DOCS_USERHOME=/abspathto/MYALL/userhome
 #     T3DOCS_MAKEDIR=/abspathto/MYALL/Makedir
 #     T3DOCS_MENU=/abspathto/MYALL/Menu
-#     T3DOCS_VENV=/abspathto/MYALL/venv
 #     T3DOCS_TOOLCHAINS=/abspathto/MYALL/Toolchains
+#     T3DOCS_USERHOME=/abspathto/MYALL/userhome
+#     T3DOCS_VENV=/abspathto/MYALL/venv
+#     T3DOCS_WHEELS=/abspathto/WheelsFolder
 #     T3DOCS_DEBUG=0         (0 or 1, talk to stdout)
 #     T3DOCS_DRY_RUN=0       (0 or 1, don't really execute)
 
