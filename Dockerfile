@@ -44,7 +44,7 @@ ENV \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.10.1" \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.10.1.zip" \
-   TOOLCHAIN_VERSION="2.10.0" \
+   TOOLCHAIN_VERSION="2.10.1" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
