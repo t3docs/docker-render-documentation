@@ -1,7 +1,7 @@
 Release v2.6-dev
 ================
 
-* Use toolchain v1.10-dev, allowing option '-c allow_unsafe 1' to skip time
+* Use toolchain v2.10.1, allowing option '-c allow_unsafe 1' to skip time
   consuming html postprocessing
 
 
