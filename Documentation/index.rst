@@ -143,6 +143,7 @@ available from https://typo3.org/.
      `sphinx-build -v -v -v …`
 
    Bug fixes:
+
    * Theme: Remove false warnings about illegal theme options
    * Toolchain: Remove pip warnings about 'Cache dir not writable'.
 
