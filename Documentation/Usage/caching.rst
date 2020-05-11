@@ -17,13 +17,14 @@ Navigate this page:
 2020-05-11, container v2.6.0
 ############################
 
-How to quickly render 'sysext:core', the TYPO3 CMS changelog.
+How to quickly render 'sysext:core', the TYPO3 CMS changelog
+============================================================
 
-Use `git-restore-mtime` set the file mtime to the date of their last commit.
+Use `git_restore_mtime` set the file mtime to the date of their last commit.
 This garantees stable file times which are required by Sphinx to enable
 caching. It is a commandline program and may require the `--force` option or
 an empty workdir. It is a good idea to run that program when the workdir is
-clean.
+clean. See `git_restore_mtime --help`.
 
 Do the initial rendering. Initial means, either remove the cache
 `:file:`Documentation-GENERATED-temp/Cache` manually or use the
