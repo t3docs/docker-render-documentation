@@ -13,6 +13,32 @@ Navigate this page:
    :backlinks: top
 
 
+################
+As of 2020-05-11
+################
+
+Container v2.6.0
+
+========== =================================== ======== ==================
+Run        Command                             Seconds  Minutes
+========== =================================== ======== ==================
+initial    `dockrun_t3rd makehtml-no-cache`     2,730   ≈ 45.5 min
+follow-up  `dockrun_t3rd makehtml`                719   ≈ 12.0 min
+
+initial    `dockrun_t3rd makehtml-no-cache \\`  2,049   ≈ 34.2 min
+           `   -c allow_unsafe 1`
+follow-up  `dockrun_t3rd makehtml \\`              25   **≈ 24.5 sec**
+           `   -c allow_unsafe 1`
+========== =================================== ======== ==================
+
+
+
+
+################
+As of 2019-10-25
+################
+
+
 Why?
 ====
 
