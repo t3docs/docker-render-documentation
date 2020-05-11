@@ -147,6 +147,10 @@ available from https://typo3.org/.
    * Theme: Remove false warnings about illegal theme options
    * Toolchain: Remove pip warnings about 'Cache dir not writable'.
 
+   Beauty:
+
+   * Generated html code is looking much nicer!
+
 
 .. note::
 
