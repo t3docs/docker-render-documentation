@@ -4,6 +4,6 @@
   "description": "Render TYPO3 Documentation the official way using Docker",
   "license": "CC-BY-NC-SA-4.0",
   "require": {
-    "typo3/cms-core": "^9.5"
+    "typo3/cms-core": "^10.0"
   }
 }
