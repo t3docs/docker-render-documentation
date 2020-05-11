@@ -1,9 +1,9 @@
-.. include:: Includes.rst.txt
+.. include:: /Includes.rst.txt
 
 .. _start:
 
 ============================================================
-Docker Container v2.5.1 for Documentation Rendering and more
+Docker container v2.6.0 for documentation rendering and more
 ============================================================
 
 --------------------------------------
@@ -14,23 +14,26 @@ DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
 
 -----
 
-\| :ref:`sitemap`
-\| `Index <genindex.html>`__
-\|
-
------
-
 
 .. admonition:: Latest release - recommended for use
 
    **TYPO3 docker container for documentation rendering**
 
-   RELEASED February 26, 2020: v2.5.1
+   RELEASED May 11, 2020: v2.6.0
 
    Pull and run::
 
-      docker pull t3docs/render-documentation:v2.5.1
-      docker run --rm t3docs/render-documentation:v2.5.1
+      docker pull t3docs/render-documentation:v2.6.0
+      docker run --rm t3docs/render-documentation:v2.6.0
+
+   or, as of today, the 'latest' version. ::
+
+      docker pull t3docs/render-documentation
+      docker run --rm t3docs/render-documentation
+
+   The latest version is intended to always be a "good" and working version.
+   It may reflect a more advanced development state in between the latest
+   released version and the next version.
 
 
    **NEW:** `Documentation about the container
@@ -63,7 +66,7 @@ Helper links while in draft status:
 
 :Author:          TYPO3 documentation team
 :Initial author:  Martin Bless <martin.bless@typo3.org>
-:Main caretaker:  Martin Bless <martin.bless@typo3.org>
+:Maintainer:      Martin Bless <martin.bless@typo3.org>
 :License:
    This extension documentation is published under the Creative Commons license
    `CC BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`__.
@@ -117,16 +120,51 @@ welcome. Very much!
 
 .. tip::
 
-   **Highlights of v2.6-dev**
+   **Highlights of v2.6.0**
 
-   * `dockrun_t3rd makehtml -c allow_unsafe 1` to skip the extensive and time consuming
-     html postprocessing
-   
+   Using `sphinx_typo3_theme v2.4.0`, `sphinxcontrib.gitloginfo v1.0.0` (new),
+   toolchain `RenderDocumentation v2.10.1`.
+
+   * Toolchain: FINAL_EXIT_CODE should now be trustworthy and either have
+     value `0` (success) or value `255` (failure). `0` means, the toolchain
+     came to an end and at least the step "build html" was successful.
+     `255` indicates a failure where either the toolchain didn't come to normal
+     end or html wasn't built.
+
+   * Theme: 'last modified' date appears in page html head section if
+     available.
+
+   * Theme: 'Last updated' in the page footer with a link to the latest commit.
+
+   * Theme: Search result pages with highlighted search text show a link to
+     deselect the hightlighting.
+
+   * Theme: The intra page menu is now appended to the left menu column to fix
+     the - so called - "missing third menu level" issue.
+
+   * Theme: The logo is now defineable in the theme configuration file
+     `theme.conf`.
+
+   * Toolchain: `dockrun_t3rd makehtml -c allow_unsafe 1` to skip the extensive
+     and time consuming html postprocessing, to skip file include checks and to
+     allow the reST 'raw' directive.
+
+   * Toolchain: `dockrun_t3rd makehtml -c sphinxVerboseLevel n'. With `n=3`
+     the Sphinx build will be started with three times `-v`. This would mean
+     `sphinx-build -v -v -v …`
+
+   Bug fixes:
+   * Theme: Remove false warnings about illegal theme options
+   * Toolchain: Remove pip warnings about 'Cache dir not writable'.
+
+
 .. note::
 
    **Highlights of v2.5.1**
 
-   * ...
+   * `dockrun_t3rd makehtml -c remove_docutils_conf 1` to allow the reST 'raw'
+     directive
+
 
 .. note::
 
