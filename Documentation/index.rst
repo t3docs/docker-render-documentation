@@ -10,12 +10,7 @@ Docker container v2.6.0 for documentation rendering and more
 Comprehensive manual
 --------------------------------------
 
-DRAFT
-
------
-
-
-.. admonition:: Latest release - recommended for use
+.. tip:: Latest release - recommended for use
 
    **TYPO3 docker container for documentation rendering**
 
@@ -107,18 +102,12 @@ welcome. Very much!
 
 **TYPO3**
 
-   The content of this document is related to TYPO3 CMS, a GNU/GPL
-   CMS/Framework available from https://typo3.org/.
+The content of this document is related to TYPO3 CMS, a GNU/GPL CMS/Framework
+available from https://typo3.org/.
 
 -----
 
-**Sitemap**
-
-   :ref:`sitemap`
-
------
-
-.. tip::
+.. note::
 
    **Highlights of v2.6.0**
 

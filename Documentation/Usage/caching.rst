@@ -1,8 +1,8 @@
 .. include:: ../Includes.rst.txt
 
-==================
-Caching
-==================
+=================
+SPEED and caching
+=================
 
 Navigate this page:
 
@@ -13,29 +13,71 @@ Navigate this page:
    :backlinks: top
 
 
+############################
+2020-05-11, container v2.6.0
+############################
+
+How to quickly render 'sysext:core', the TYPO3 CMS changelog.
+
+Use `git-restore-mtime` set the file mtime to the date of their last commit.
+This garantees stable file times which are required by Sphinx to enable
+caching. It is a commandline program and may require the `--force` option or
+an empty workdir. It is a good idea to run that program when the workdir is
+clean.
+
+Do the initial rendering. Initial means, either remove the cache
+`:file:`Documentation-GENERATED-temp/Cache` manually or use the
+`makehtml-no-cache` action.
+
+A follow-up rendering is considerably faster. Note that Sphinx is checking
+for several theme options whether the follow-up rendering has the same options.
+If not, Sphinx caching is disabled and you end up whith the initial rendering
+again.
+
+*Example:*
+
+Render locally for personal use
+
+`dockrun makehtml-no-cache -c allow_unsafe 1`
+   Took 2,049 seconds ≈ 34.2 minutes for the initial run.
+
+`dockrun_t3rd makehtml -c allow_unsafe 1`
+   Took 25 seconds (!) for the follow-up run.
+
+*Example:*
+
+Process everything as on Bamboo
+
+`dockrun makehtml-no-cache`
+   Took 2,730 seconds ≈ 45.5 minutes for the initial run.
+
+`dockrun_t3rd makehtml`
+   Took 719 seconds ≈ 12.0 minutes for the follow-up run.
+   This is due mostly to the html postprocessing.
+
+
+.. attention::
+
+   Pitfall!
+
+   Caching does not work when selected theme options change. If you do::
+
+      # initial run
+      dockrun makehtml-no-cache
+
+      # follow-up run
+      dockrun_t3rd makehtml -c allow_unsafe 1
+
+   then the follow-up doesn't use the cache because the Sphinx rendering
+   options are different.
+
+
+
+
+
+
 ################
-As of 2020-05-11
-################
-
-Container v2.6.0
-
-========== =================================== ======== ==================
-Run        Command                             Seconds  Minutes
-========== =================================== ======== ==================
-initial    `dockrun_t3rd makehtml-no-cache`     2,730   ≈ 45.5 min
-follow-up  `dockrun_t3rd makehtml`                719   ≈ 12.0 min
-
-initial    `dockrun_t3rd makehtml-no-cache \\`  2,049   ≈ 34.2 min
-           `   -c allow_unsafe 1`
-follow-up  `dockrun_t3rd makehtml \\`              25   **≈ 24.5 sec**
-           `   -c allow_unsafe 1`
-========== =================================== ======== ==================
-
-
-
-
-################
-As of 2019-10-25
+2019-10-25
 ################
 
 
@@ -71,7 +113,7 @@ Sphinx checks mtimes to decide about validity of cache data.
 
 Cure::
 
-      # if script git-restore-mtime exists and '*make*' in args try the command
+   # if script git-restore-mtime exists and '*make*' in args try the command
    # See README: get 'git-restore-mtime' from https://github.com/MestreLion/git-tools
    if [[ "$git_restore_mtime" != "" ]] && [[ $@ =~ .*make.* ]]; then
       if (($DEBUG)); then
@@ -82,7 +124,7 @@ Cure::
       fi
    fi
 
-It's a tool packaged into Debian.
+It's a tool packaged into Debian. Run `git_restore_mtime --help`.
 
 Example: sysext:core
 ====================
