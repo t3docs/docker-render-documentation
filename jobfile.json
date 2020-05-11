@@ -1,7 +1,7 @@
 {
   "Overrides_cfg": {
     "general": {
-      "html_theme": "t3SphinxThemeRtd",
+      "html_theme": "sphinx_typo3_theme",
       "keep_warnings": 0,
       "nitpicky": false,
       "nitpick_ignore": [["py:class", "type"]],
@@ -15,6 +15,7 @@
   },
   "tctconfig": {
      "activateLocalSphinxDebugging": 0,
+     "allow_unsafe": 1,
      "disable_include_files_check": 1,
      "force_rebuild_needed": 1,
      "make_html": 1,
@@ -22,9 +23,11 @@
      "make_pdf": 0,
      "make_singlehtml": 0,
      "rebuild_needed": 1,
+     "remove_docutils_conf": 1,
      "replace_static_in_html": 0,
      "reveal_exitcodes": 1,
      "reveal_milestones": 1,
+     "sphinxVerboseLevel": 3,
      "talk": 1,
      "try_pdf_build_from_published_latex": 1
    },

@@ -10,7 +10,7 @@ Docker container v2.6.0 for documentation rendering and more
 Comprehensive manual
 --------------------------------------
 
-DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT + DRAFT
+DRAFT
 
 -----
 
