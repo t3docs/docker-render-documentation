@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.6.0
+ARG OUR_IMAGE_VERSION=v2.7-dev
 #
 ### Select tag. Is 'latest' or 'develop' or '<RELEASE_VERSION>'
 #
@@ -9,11 +9,11 @@ ARG OUR_IMAGE_VERSION=v2.6.0
 # ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
 #
 # Uncomment next line in branch master
-ARG OUR_IMAGE_TAG=latest
+# ARG OUR_IMAGE_TAG=latest
 #
 # Uncomment next line in branch develop
-# ARG OUR_IMAGE_TAG=develop
-# ARG OUR_IMAGE_TAG=v2.6.0
+ARG OUR_IMAGE_TAG=develop
+# ARG OUR_IMAGE_TAG=v2.7-dev
 #
 # AFTER pushing a release: Do a FOLLOW-UP push with tag 'latest' or 'develop'
 # depending on where you pushed the release.
