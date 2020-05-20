@@ -160,6 +160,8 @@ RUN \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
+   && chmod -R +rw /ALL/venv \
+   \
    && COMMENT "Final cleanup" \
    && apt-get clean \
    && rm -rf /tmp/* $HOME/.cache \
