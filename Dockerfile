@@ -79,11 +79,6 @@ RUN \
    && cp /ALL/global-gitconfig.cfg /.gitconfig \
    && chmod 666 /.gitconfig \
    \
-   && COMMENT "Make sure other users can write" \
-   && chmod -R o+w \
-      /ALL/Makedir \
-      /RESULT \
-   \
    && COMMENT "Install and upgrade system packages" \
    && apt-get update \
    && apt-get upgrade -qy \
@@ -160,11 +155,16 @@ RUN \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
-   && chmod -R +rw /ALL/venv \
-   \
    && COMMENT "Final cleanup" \
    && apt-get clean \
    && rm -rf /tmp/* $HOME/.cache \
+   \
+   && COMMENT "Make sure other users can write" \
+   && chmod -R a+w \
+      /ALL/Makedir \
+      /ALL/userhome \
+      /ALL/venv \
+      /RESULT \
    \
    && COMMENT "Memorize the settings in the container" \
    && echo "export DEBIAN_FRONTEND=\"${DEBIAN_FRONTEND}\""         >> /ALL/Downloads/envvars.sh \
