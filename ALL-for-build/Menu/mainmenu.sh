@@ -11,8 +11,8 @@ export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
 
 function install-wheels(){
-   find /WHEELS -type f -name *.whl | xargs --no-run-if-empty pip --disable-pip-version-check install --force --no-cache-dir
-   pip freeze
+   find /WHEELS -type f -name "*.whl" | xargs --no-run-if-empty pip --disable-pip-version-check install --force --no-cache-dir
+   find /WHEELS/ -name "*.whl" -exec pip freeze \; -quit
 }
 
 
