@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.7-dev
+ARG OUR_IMAGE_VERSION=v2.6.1
 #
 ### Select tag. Is 'latest' or 'develop' or '<RELEASE_VERSION>'
 #
