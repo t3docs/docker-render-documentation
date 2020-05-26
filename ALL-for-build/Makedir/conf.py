@@ -457,7 +457,7 @@ def setup(app):
                 label=_('Type'),
                 has_arg=False,
                 names=('type',),
-                bodyrolename='class'
+                bodyrolename='class'  # TODO: Fix this line!
             ),
             Field(
                 'default',
