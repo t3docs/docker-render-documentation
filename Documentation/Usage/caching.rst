@@ -14,8 +14,28 @@ Navigate this page:
 
 
 ############################
-2020-05-11, container v2.6.0
+2020-05-26, container v2.6.1
 ############################
+
+Rendering times example
+=======================
+
+For 'sysext:core', the TYPO3 CMS changelog. Machine: Ubuntu 18.04 with SSD.
+Read the following chapter for explanation. Follow-up runs are making use of
+the Sphinx cache.
+
+========== ================== ============= =========== =========== =========
+run        what               allow_unsafe  seconds     minutes     remarks
+========== ================== ============= =========== =========== =========
+initial    makehtml-no-cache  0 (false)     2,730       45.5
+follow-up  makehtml           0 (false)       719       12.0        mostly due to html post-processing
+initial    makehtml-no-cache  1 (true)      2,049       34.2        no postprocessing
+follow-up  makehtml           1 (true)      **25 (!)**   < 1.0 (!)
+\          \+singlehtml                     +20
+\          \+latex                          +60
+\          \+package                        +37
+========== ================== ============= =========== =========== =========
+
 
 How to quickly render 'sysext:core', the TYPO3 CMS changelog
 ============================================================
@@ -37,16 +57,6 @@ again.
 
 *Example:*
 
-Render locally for personal use
-
-`dockrun makehtml-no-cache -c allow_unsafe 1`
-   Took 2,049 seconds ≈ 34.2 minutes for the initial run.
-
-`dockrun_t3rd makehtml -c allow_unsafe 1`
-   Took 25 seconds (!) for the follow-up run.
-
-*Example:*
-
 Process everything as on Bamboo
 
 `dockrun makehtml-no-cache`
@@ -55,6 +65,16 @@ Process everything as on Bamboo
 `dockrun_t3rd makehtml`
    Took 719 seconds ≈ 12.0 minutes for the follow-up run.
    This is due mostly to the html postprocessing.
+
+*Example:*
+
+Render locally for personal use
+
+`dockrun makehtml-no-cache -c allow_unsafe 1`
+   Took 2,049 seconds ≈ 34.2 minutes for the initial run.
+
+`dockrun_t3rd makehtml -c allow_unsafe 1`
+   Took 25 seconds (!) for the follow-up run.
 
 
 .. attention::

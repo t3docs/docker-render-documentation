@@ -3,7 +3,7 @@
 .. _start:
 
 ============================================================
-Docker container v2.6.0 for documentation rendering and more
+Docker container v2.6.1 for documentation rendering and more
 ============================================================
 
 --------------------------------------
@@ -14,12 +14,12 @@ Comprehensive manual
 
    **TYPO3 docker container for documentation rendering**
 
-   RELEASED May 11, 2020: v2.6.0
+   RELEASED May 26, 2020: v2.6.1
 
    Pull and run::
 
-      docker pull t3docs/render-documentation:v2.6.0
-      docker run --rm t3docs/render-documentation:v2.6.0
+      docker pull t3docs/render-documentation:v2.6.1
+      docker run --rm t3docs/render-documentation:v2.6.1
 
    or, as of today, the 'latest' version. ::
 
@@ -42,7 +42,7 @@ Comprehensive manual
 
 Helper links while in draft status:
 
-:Describing:    \• Container version v2.6-dev (branches develop, latest)
+:Describing:    \• Container version >=v2.6.1
 :Github:        \• `Github documentation-draft <https://github.com/t3docs/docker-render-documentation/tree/documentation-draft>`__
 :Public draft:  \• https://docs.typo3.org/m/typo3/t3docs-docker-render-documentation/draft/en-us/
 :Private draft: \• `symlinked.local.mbless.de <http://symlinked.local.mbless.de/docker-render-documentation-draft/>`__
@@ -109,9 +109,19 @@ available from https://typo3.org/.
 
 .. note::
 
+   **Highlights of v2.6.1**
+
+   * With `sphinx_typo3_theme v4.2.1` there now is a headline "PAGE CONTENTS"
+     above the menu of intra-page links.
+
+   * Bugfix: If the container finds Python packages in wheel format in
+     `/WHEELS` these will be installed on the fly before rendering. This now
+     works. Thus, for example, a new package with the theme may easily be
+     tested.
+
    **Highlights of v2.6.0**
 
-   Using `sphinx_typo3_theme v2.4.0`, `sphinxcontrib.gitloginfo v1.0.0` (new),
+   Using `sphinx_typo3_theme v4.2.0`, `sphinxcontrib.gitloginfo v1.0.0` (new),
    toolchain `RenderDocumentation v2.10.1`.
 
    * Toolchain: FINAL_EXIT_CODE should now be trustworthy and either have
