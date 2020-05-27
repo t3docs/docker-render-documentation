@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 # like vX.Y-dev
 ARG OUR_IMAGE_VERSION=v2.6.1
 ### Select tag. Is 'latest' or 'develop' or '<RELEASE_VERSION>'
-ARG OUR_IMAGE_TAG=v2.6.1
+ARG OUR_IMAGE_TAG=latest
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
