@@ -1,4 +1,5 @@
 .. include:: /Includes.rst.txt
+.. highlight:: shell
 
 
 =========================
@@ -21,6 +22,67 @@ and how updates are done.
    :local:
    :depth: 3
    :backlinks: top
+
+
+Updating to v2.6.1
+==================
+
+:Jira: `Please deploy new Docker docs rendering container v2.6.1
+       <https://jira.typo3.com/servicedesk/customer/portal/2/T3GFEED-2>`__
+
+Step one
+--------
+
+Can be done right away and is independent from step two.
+
+① A new documentation rendering container is available and should be used in
+Bamboo plans. New: `docker pull t3docs/render-documentation:v2.6.1`.
+Currently we are using `v2.5.1`. So please change that to `v2.6.1`. This change
+is ready to go and should work for all manuals.
+
+② This should be working fine and be a drop in replacement. Reverting to
+v2.5.1 is always possible though.
+
+③ Once it works all manuals should be re-rendered.
+
+Step two
+--------
+
+Update in plans requested:
+
+The footer of new renderings now shows a "Last updated" date for files that
+live in a Git repository. The container will query `git log` automatically if
+the root of the repository is mapped as `PROJECT` into the container. If,
+however, for example, the repository is `TYPO3CMS.git` and the PROJECT is
+`typo3/sysext/core` then the container cannot query Git as the complete
+repository is not mapped into the container. To make things work the following
+has to be done:
+
+1. Make this script available: `git-restore-mtime-modified.py
+   <https://github.com/marble/Toolchain_RenderDocumentation/blob/master/16-Convert-and-fix-and-check/git-restore-mtime/git-restore-mtime-modified.py>`_
+
+2. Insert code BEFORE the line with the `docker run ...` call::
+
+      # go to the project
+      cd PROJECT
+
+      # run the script
+      python git-restore-mtime-modified.py --test --destfile-gitloginfo=.gitloginfo-GENERATED.json .
+
+   Note the single dot at the end which denotes the current directory!
+
+   *Explanation:*
+   `--test` means that file mtimes are not really to be changed as the script
+   would usually do. It doesn't hurt but is of no use either. As result an
+   outfile :file:`PROJECT/.gitloginfo-GENERATED.json` should exist with
+   information extracted from `git log`. The container with the toolchain will
+   then automatically make use of that information. The Bamboo plan does not
+   have to check for success. The script will only write the result file on
+   success, and the container will only use it if it's available and in proper
+   shape.
+
+Thank you for all!
+
 
 ----
 

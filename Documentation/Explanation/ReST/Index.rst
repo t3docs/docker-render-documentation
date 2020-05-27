@@ -1,7 +1,5 @@
-
-.. include:: /Includes.rst.txt
-
-
+.. include:: ../../Includes.rst.txt
+.. _Writing ReST for Sphinx:
 
 =======================
 Writing ReST for Sphinx
