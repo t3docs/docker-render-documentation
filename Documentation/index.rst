@@ -14,7 +14,7 @@ Comprehensive manual
 
    **TYPO3 docker container for documentation rendering**
 
-   RELEASED May 26, 2020: v2.6.1
+   RELEASED May 27, 2020: v2.6.1
 
    Pull and run::
 
@@ -209,7 +209,7 @@ available from https://typo3.org/.
 -----
 
 
-.. rubric:: Contents
+.. rubric:: Content
 .. rst-class:: compact-list
 .. toctree::
 
