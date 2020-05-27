@@ -1,13 +1,13 @@
-.. include:: ../Includes.rst.txt
+.. include:: /Includes.rst.txt
 
 
 ==============
 Run parameters
 ==============
 
-   DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
-   DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
-   DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
+DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
+DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
+DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
 
 .. versionadded:: v2.3.0
 
@@ -209,8 +209,4 @@ Some interesting values filled in::
    }
 
 ((to be continued))
-
-   DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
-   DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
-   DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP • DRAFT • WIP •
 

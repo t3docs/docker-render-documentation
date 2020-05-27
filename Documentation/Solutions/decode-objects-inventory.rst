@@ -1,7 +1,7 @@
-.. include:: ../Includes.rst.txt
+.. include:/Includes.rst.txt
 
 ========================================================
-Decode Sphinx Crossreferencing Inventories 'objects.inv'
+Decode Sphinx crossreferencing inventories 'objects.inv'
 ========================================================
 
 .. contents:: This page
@@ -37,8 +37,8 @@ The amazing thing is, that the link text, that is shown, automatically will be
 that of the headline in the destination manual.
 
 
-What link targets are there?
-============================
+What link targets are out there?
+================================
 
 In order create a reference to a spot in another manual you need to know about
 the possible link targets. And that may be a problem, if the target site
@@ -50,30 +50,25 @@ The solution sounds easy and would be: "Have a look into the other manual's
 How to decode `objects.inv`?
 ============================
 
-Sphinx know how to decode and read that file. So let's directly use Sphinx for
-that purpose.
-Read about this in the Sphinx docs:
+This is Sphinx know-how to decode and read that file. So let's directly use
+Sphinx for that purpose. Read about this in the Sphinx docs:
 `Showing all links of an Intersphinx mapping file
 <https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html#showing-all-links-of-an-intersphinx-mapping-file)>`__
 
 Here is a sample command that does the trick::
 
    OBJECTS_INV_URL=https://docs.typo3.org/c/typo3/cms-core/master/en-us/objects.inv
-   # set one IMAGE_TAG
-   IMAGE_TAG=v2.3.0
-   IMAGE_TAG=latest
-   IMAGE_TAG=develop
    docker run --rm -t --entrypoint /bin/bash \
-      t3docs/render-documentation:$IMAGE_TAG \
-      -c "pipenv run python -m sphinx.ext.intersphinx $OBJECTS_INV_URL"
+      t3docs/render-documentation \
+      -c "source /ALL/userhome/.bashrc;python -m sphinx.ext.intersphinx $OBJECTS_INV_URL"
 
    # Result is a long list in text format shown in the terminal.
 
 
 What's going on here? Explanation:
 
-`docker run t3docs/render-documentation:$IMAGE_TAG`
-   We run our Docker container.
+`docker run t3docs/render-documentation`
+   We are running our Docker container.
 
 `--rm`
    We want to have that container removed right after finishing.
@@ -87,18 +82,18 @@ What's going on here? Explanation:
 `-c`
    For the bash we specify that the following is a command to be executed.
 
-`pipenv run python`
+`source /ALL/userhome/.bashrc`
    Inside the container :file:`/ALL/venv` is our current folder. A Python
    virtual environment is prepared in the container, but it isn't activated.
-   `pipenv run EXECUTABLE` can start an executable of that environment.
-   We want to start `python`.
+   `source /ALL/userhome/.bashrc` activates that environment.
 
-`-m sphinx.ext.intersphinx`
-   We run the intersphinx module as a "__main__" program. For that case the
-   module provides code that can do a very simple dump of an link inventory.
-   Not great, but works.
+`;`
+   Join two commands.
 
-
+`python -m sphinx.ext.intersphinx`
+   Have Python run the intersphinx module as a "__main__" program. In that case
+   the module provides code that does a very simple dump of an link inventory.
+   Not sophisticated, but works.
 
 `https://docs.typo3.org/c/typo3/cms-core/master/en-us/objects.inv`
    This is the inventory we want to have downloaded and queried. In TYPO3 we
@@ -109,8 +104,8 @@ What's going on here? Explanation:
 About inventories
 =================
 
-Watch out: There are at least two lists of labels. One is for `:doc:…` linking
-and one is for `:ref:…`linking.
+Watch out: There are at least two lists of labels. One is for ``:doc:…``
+linking and one is for ``:ref:…`` linking.
 
 
 Example: Looking for '75625'
@@ -121,14 +116,12 @@ changelog?
 
 A: The docker container can answer that::
 
-   OBJECTS_INV_URL=https://docs.typo3.org/c/typo3/cms-core/master/en-us/objects.inv
-   # set one IMAGE_TAG
-   IMAGE_TAG=v2.3.0
-   IMAGE_TAG=latest
    docker run --rm -t --entrypoint /bin/bash \
-      t3docs/render-documentation:$IMAGE_TAG \
-      -c "pipenv run python -m sphinx.ext.intersphinx https://docs.typo3.org/c/typo3/cms-core/master/en-us/objects.inv" \
+      t3docs/render-documentation \
+      -c "source /ALL/userhome/.bashrc;python -m sphinx.ext.intersphinx  \
+      https://docs.typo3.org/c/typo3/cms-core/master/en-us/objects.inv"  \
       | grep 75625
+
 
 Shows `Changelog/8.1/Deprecation-75625-DeprecatedCacheClearingOptions
 Deprecation: #75625 - Deprecated cache clearing options:
@@ -136,7 +129,20 @@ Changelog/8.1/Deprecation-75625-DeprecatedCacheClearingOptions.html`
 
 So the answer is: `Changelog/8.1/Deprecation-75625-DeprecatedCacheClearingOptions`
 
-Now you can use this link::
+The following command finds this in one go. It finds the line, removes tabs
+and returns the first word (non-blank string)::
+
+   docker run --rm -t --entrypoint /bin/bash \
+      t3docs/render-documentation \
+      -c "source /ALL/userhome/.bashrc;python -m sphinx.ext.intersphinx  \
+      https://docs.typo3.org/c/typo3/cms-core/master/en-us/objects.inv"  \
+      | grep 75625 | sed 's/\t//' | grep -Eo "^[^ ]*"
+
+   # shows:
+   Changelog/8.1/Deprecation-75625-DeprecatedCacheClearingOptions
+
+Now you can use this string for symbolic linking. The file is the target of
+the link::
 
    :doc:`t3changelog:Changelog/8.1/Deprecation-75625-DeprecatedCacheClearingOptions`
 

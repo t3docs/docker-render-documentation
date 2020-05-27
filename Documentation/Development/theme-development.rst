@@ -1,4 +1,4 @@
-.. include:: ../Includes.rst.txt
+.. include:: /Includes.rst.txt
 .. index:: development; theme
 .. _Theme-development:
 

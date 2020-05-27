@@ -1,5 +1,5 @@
 
-.. include:: ../Includes.rst.txt
+.. include:: /Includes.rst.txt
 
 
 
@@ -19,8 +19,6 @@ Pages:
    dockrun
    docker-run
    caching
-   windows-users
-   gitlab-ci
    *
 
 

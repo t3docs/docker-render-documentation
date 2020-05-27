@@ -1,4 +1,4 @@
-.. include:: ../../Includes.rst.txt
+.. include:: /Includes.rst.txt
 .. index:: Gitlab CI
 .. _Render_with_Gitlab_CI:
 

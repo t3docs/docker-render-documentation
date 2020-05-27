@@ -1,4 +1,4 @@
-.. include:: ../Includes.rst.txt
+.. include:: /Includes.rst.txt
 .. _quickstart-windows:
 
 ====================
@@ -10,7 +10,6 @@ For Windows.
 How to get TYPO3 documentation rendering going on Windows using the Docker
 container.
 
-----
 
 .. contents:: This page
    :backlinks: top

@@ -1,12 +1,11 @@
-.. include:: ../Includes.rst.txt
+.. include:: /Includes.rst.txt
+.. highlight:: shell
+.. _Individuell-Python-Packages:
 
+==========================
+Individual Python packages
+==========================
 
-====================
-PDF-generation
-====================
-
-Compare with
-https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.latex.LaTeXBuilder
 
 .. contents:: This page
    :backlinks: top
@@ -15,143 +14,173 @@ https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.l
    :local:
 
 
-Using texlive installed on Linux or Mac
-=======================================
+Intention
+=========
 
-1. Install `texlive` locally on your machine::
-
-      sudo apt-get \
-         latexmk \
-         texlive \
-         texlive-fonts-recommended \
-         texlive-latex-extra \
-         texlive-latex-recommended
-
-   Alternatively find a texlive Docker container to do the job. And don't
-   forget to report back to here what you have found.
+Python packages usually are distributed in a single "wheel" file named
+`SOMETHING.whl`. Quite a bunch of such packages come installed with the
+container and ready for use. There may be situations however where wished there
+was an extra package installed or a different version. The container can handle
+this "on the fly" for single runs and saves you the hassle of having to
+`docker build` a specialized image.
 
 
-2. Create latex output from your project::
+How does it work?
+=================
 
-      dockrun_t3rd  makeall
+Within the container several convenience scripts (bash) are working and you
+can select an action from the menu. The scripts now have an eye on the
+:file:`/WHEELS` folder within the container. If there are :file:`*.whl` files
+these are installed "on the fly" for the single run, for example, before
+rendering takes place. Additionally a `pip freeze` command is run and reveals
+in the listing on the console what exact Python packages are going to be used.
+The idea is of course that you do a volume mapping to provide the wheels
+packages and the :file:`/WHEELS` folder is otherwise empty by default.
 
-   or::
-
-      dockrun_t3rd  makehtml  -c make_latex 1
-
-   The container automatically adds TYPO3-specific resources. The usual result
-   file is PROJECT.tex. The container automatically make a copy named
-   PROJECT.typo3.tex and does some replacements.
-
-
-3. Run `run-make.sh` (rather fast)::
-
-      Documentation-GENERATED-temp/Result/latex/run-make.sh
-
-
-   This should produce a pdf file named `PROJECT.pdf` and a second one named
-   `PROJECT.typo3.pdf`. The second one should have some TYPO3-specific colors
-   and layout features.
+Theme development is a perfect use case.
+Let's say you want to try a variant of our theme `sphinx_typo3_theme`_.
+Make some changes and as a result of your work build a local wheel file like
+:file:`mywheels/sphinx_typo3_theme-4.2.1.dev4+ge50e4ff-py2.py3-none-any.whl`.
+If you  then map the :file:`mywheels` folder into the container the modified
+theme will be installed on the fly and will be used in the subsequent rendering.
 
 
-Example listings
-----------------
+Example 1
+=========
 
-After `make_latex`::
+Here you create a folder with a special name und use the `dockrun_t3rd`
+command::
 
-   ➜  project ls -la ./Documentation-GENERATED-temp/Result/latex/
-   insgesamt 212
-   drwxr-xr-x 3 marble marble  4096 Aug 15 13:42 .
-   drwxr-xr-x 4 marble marble  4096 Aug 15 09:26 ..
-   -rw-r--r-- 1 marble marble  8888 Aug 15 11:40 footnotehyper-sphinx.sty
-   -rw-r--r-- 1 marble marble   683 Aug 15 11:40 latexmkjarc
-   -rw-r--r-- 1 marble marble   405 Aug 15 13:42 latexmkrc
-   -rw-r--r-- 1 marble marble 18693 Aug 15 11:40 LatinRules.xdy
-   -rw-r--r-- 1 marble marble  4366 Aug 15 11:40 LICRcyr2utf8.xdy
-   -rw-r--r-- 1 marble marble 10189 Aug 15 11:40 LICRlatin2utf8.xdy
-   -rw-r--r-- 1 marble marble   473 Aug 15 13:42 make.bat
-   -rw-r--r-- 1 marble marble  1648 Aug 15 13:42 Makefile
-   -rw-r--r-- 1 marble marble  2639 Aug 15 13:42 PROJECT.tex
-   -rw-r--r-- 1 marble marble  2637 Aug 15 13:42 PROJECT.typo3.tex
-   -rw-r--r-- 1 marble marble   392 Aug 15 11:40 python.ist
-   -rwxr-xr-x 1 marble marble   234 Aug 15 13:42 run-make.sh
-   -rw-r--r-- 1 marble marble  8137 Aug 15 13:42 sphinxhighlight.sty
-   -rw-r--r-- 1 marble marble  2696 Aug 15 11:40 sphinxhowto.cls
-   -rw-r--r-- 1 marble marble  3622 Aug 15 11:40 sphinxmanual.cls
-   -rw-r--r-- 1 marble marble 14618 Aug 15 11:40 sphinxmulticell.sty
-   -rw-r--r-- 1 marble marble 76220 Aug 15 11:40 sphinx.sty
-   -rw-r--r-- 1 marble marble  8132 Aug 15 11:40 sphinx.xdy
-   drwxr-xr-x 4 marble marble  4096 Aug 15 11:11 texmf_typo3
-
-  ➜  project
-
-After `run-make.sh`::
-
-   ➜  project ls -la ./Documentation-GENERATED-temp/Result/latex/
-   insgesamt 512
-   drwxr-xr-x 3 marble marble  4096 Aug 15 13:45 .
-   drwxr-xr-x 4 marble marble  4096 Aug 15 09:26 ..
-   -rw-r--r-- 1 marble marble  8888 Aug 15 11:40 footnotehyper-sphinx.sty
-   -rw-r--r-- 1 marble marble   683 Aug 15 11:40 latexmkjarc
-   -rw-r--r-- 1 marble marble   405 Aug 15 13:42 latexmkrc
-   -rw-r--r-- 1 marble marble 18693 Aug 15 11:40 LatinRules.xdy
-   -rw-r--r-- 1 marble marble  4366 Aug 15 11:40 LICRcyr2utf8.xdy
-   -rw-r--r-- 1 marble marble 10189 Aug 15 11:40 LICRlatin2utf8.xdy
-   -rw-r--r-- 1 marble marble   473 Aug 15 13:42 make.bat
-   -rw-r--r-- 1 marble marble  1648 Aug 15 13:42 Makefile
-   -rw-rw-r-- 1 marble marble  1030 Aug 15 13:45 PROJECT.aux
-   -rw-rw-r-- 1 marble marble 15197 Aug 15 13:45 PROJECT.fdb_latexmk
-   -rw-rw-r-- 1 marble marble 16214 Aug 15 13:45 PROJECT.fls
-   -rw-rw-r-- 1 marble marble     0 Aug 15 13:45 PROJECT.idx
-   -rw-rw-r-- 1 marble marble   296 Aug 15 13:45 PROJECT.ilg
-   -rw-rw-r-- 1 marble marble     0 Aug 15 13:45 PROJECT.ind
-   -rw-rw-r-- 1 marble marble 50206 Aug 15 13:45 PROJECT.log
-   -rw-rw-r-- 1 marble marble   129 Aug 15 13:45 PROJECT.out
-   -rw-rw-r-- 1 marble marble 41872 Aug 15 13:45 PROJECT.pdf
-   -rw-r--r-- 1 marble marble  2639 Aug 15 13:42 PROJECT.tex
-   -rw-rw-r-- 1 marble marble    94 Aug 15 13:45 PROJECT.toc
-   -rw-rw-r-- 1 marble marble  1030 Aug 15 13:45 PROJECT.typo3.aux
-   -rw-rw-r-- 1 marble marble 16548 Aug 15 13:45 PROJECT.typo3.fdb_latexmk
-   -rw-rw-r-- 1 marble marble 16987 Aug 15 13:45 PROJECT.typo3.fls
-   -rw-rw-r-- 1 marble marble     0 Aug 15 13:45 PROJECT.typo3.idx
-   -rw-rw-r-- 1 marble marble   314 Aug 15 13:45 PROJECT.typo3.ilg
-   -rw-rw-r-- 1 marble marble     0 Aug 15 13:45 PROJECT.typo3.ind
-   -rw-rw-r-- 1 marble marble 53199 Aug 15 13:45 PROJECT.typo3.log
-   -rw-rw-r-- 1 marble marble   129 Aug 15 13:45 PROJECT.typo3.out
-   -rw-rw-r-- 1 marble marble 48453 Aug 15 13:45 PROJECT.typo3.pdf
-   -rw-r--r-- 1 marble marble  2637 Aug 15 13:42 PROJECT.typo3.tex
-   -rw-rw-r-- 1 marble marble    94 Aug 15 13:45 PROJECT.typo3.toc
-   -rw-r--r-- 1 marble marble   392 Aug 15 11:40 python.ist
-   -rwxr-xr-x 1 marble marble   234 Aug 15 13:42 run-make.sh
-   -rw-r--r-- 1 marble marble  8137 Aug 15 13:42 sphinxhighlight.sty
-   -rw-r--r-- 1 marble marble  2696 Aug 15 11:40 sphinxhowto.cls
-   -rw-r--r-- 1 marble marble  3622 Aug 15 11:40 sphinxmanual.cls
-   -rw-r--r-- 1 marble marble 14618 Aug 15 11:40 sphinxmulticell.sty
-   -rw-r--r-- 1 marble marble 76220 Aug 15 11:40 sphinx.sty
-   -rw-r--r-- 1 marble marble  8132 Aug 15 11:40 sphinx.xdy
-   drwxr-xr-x 4 marble marble  4096 Aug 15 11:11 texmf_typo3
-
-   ➜  project
-
-
-Using texlive Docker container
-==============================
-
-Using thomasweise/docker-texlive-full::
-
+   # Think of ~/project/Documentation and go to your project
    cd ~/project
 
-   mkdir -p Documentation-GENERATED-temp
+   # make a temp folder with this special name
+   mkdir tmp-GENERATED-Wheels
 
-   docker run --rm \
-         -v $(pwd):/PROJECT:ro \
-         -v $(pwd)/Documentation-GENERATED-temp:/RESULT \
-         t3docs/render-documentation:develop \
-         makeall -c jobfile /PROJECT/Documentation/jobfile.json
+   # place your wheel file(s) there
+   cp fromsomewhere/sphinx_typo3_theme-4.2.1.dev4+ge50e4ff-py2.py3-none-any.whl tmp-GENERATED-Wheels/
 
-   docker run --rm \
-         -v $(pwd)/Documentation-GENERATED-temp/Result/latex:/RESULT \
-         --workdir="/RESULT/" \
-         thomasweise/docker-texlive-full:latest \
-         "./run-make.sh"
+   # Use the dockrun_t3rd command for rendering. It knows about the special name
+   dockrun_t3rd makehtml
 
+
+.. tip:: Use a global :file:`.gitignore` file and add the line `*GENERATED*`.
+
+
+Example 2
+=========
+
+You may as well use the `dockrun_t3rd` command in junction with a special
+environment variable::
+
+   # Think of ~/project/Documentation and go to your project
+   cd ~/project
+
+   # specify the absolute path to your folder with wheel packages
+   T3DOCS_WHEELS=/home/me/mywheels
+
+   # ask for some extra console output for your enlightment
+   T3DOCS_DEBUG=1
+
+   # Use the dockrun_t3rd command for rendering. It knows about the envvars
+   dockrun_t3rd makehtml
+
+
+Example output
+==============
+
+In both the examples you should see on the console something like this:
+
+.. code-block:: none
+
+   ➜  dockrun_t3rd  makehtml
+   Processing /WHEELS/sphinx_typo3_theme-4.2.1.dev4+ge50e4ff-py2.py3-none-any.whl
+   Installing collected packages: sphinx-typo3-theme
+     Attempting uninstall: sphinx-typo3-theme
+       Found existing installation: sphinx-typo3-theme 4.2.1
+       Uninstalling sphinx-typo3-theme-4.2.1:
+         Successfully uninstalled sphinx-typo3-theme-4.2.1
+   Successfully installed sphinx-typo3-theme-4.2.1.dev4+ge50e4ff
+   ablog==0.9.5
+   alabaster==0.7.12
+   atomicwrites==1.4.0
+   attrs==19.3.0
+   Babel==2.8.0
+   backports.functools-lru-cache==1.6.1
+   beautifulsoup4==4.9.1
+   certifi==2020.4.5.1
+   chardet==3.0.4
+   click==7.1.2
+   commonmark==0.9.1
+   configparser==4.0.2
+   contextlib2==0.6.0.post1
+   docutils==0.16
+   funcparserlib==0.3.6
+   funcsigs==1.0.2
+   future==0.18.2
+   idna==2.9
+   imagesize==1.2.0
+   importlib-metadata==1.6.0
+   invoke==1.4.1
+   Jinja2==2.11.2
+   lxml==4.5.1
+   MarkupSafe==1.1.1
+   more-itertools==5.0.0
+   packaging==20.4
+   pathlib2==2.3.5
+   Pillow==6.2.2
+   pluggy==0.13.1
+   py==1.8.1
+   Pygments==2.5.2
+   pyparsing==2.4.7
+   pytest==4.6.10
+   python-dateutil==2.8.1
+   pytz==2020.1
+   PyYAML==5.3.1
+   recommonmark==0.6.0
+   requests==2.23.0
+   scandir==1.10.0
+   six==1.15.0
+   snowballstemmer==2.0.0
+   soupsieve==1.9.6
+   Sphinx==1.8.5
+   sphinx-automodapi==0.12
+   sphinx-rtd-theme==0.4.3
+   sphinx-typo3-theme @ file:///WHEELS/sphinx_typo3_theme-4.2.1.dev4%2Bge50e4ff-py2.py3-none-any.whl
+   sphinxcontrib-gitloginfo==1.0.0
+   sphinxcontrib-googlechart @ https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/t3v0.2.1.zip
+   sphinxcontrib-googlemaps @ https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/t3v0.1.1.zip
+   sphinxcontrib-phpdomain==0.7.0
+   sphinxcontrib-slide @ https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/t3v1.0.1.zip
+   sphinxcontrib-websupport==1.1.2
+   sphinxcontrib-youtube @ https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/t3v1.0.zip
+   t3fieldlisttable @ https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/v0.3.0.zip
+   t3sphinxtools-includecheck @ https://github.com/TYPO3-Documentation/t3SphinxTools_includecheck/archive/v1.0.0.zip
+   t3tablerows @ https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.2.0.zip
+   t3targets @ https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/develop.zip
+   TCT-Toolchain-Tool @ https://github.com/marble/TCT/archive/develop.zip
+   typing==3.7.4.1
+   urllib3==1.25.9
+   wcwidth==0.1.9
+   Werkzeug==1.0.1
+   zipp==1.2.0
+
+   ==================================================
+      10-Toolchain-actions/run_01-Start-with-everything.py
+      exitcode:   0            36 ms
+
+   ==================================================
+      10-Toolchain-actions/run_02-Show-help-and-exit.py
+      exitcode:   0            35 ms
+
+
+Limitations
+===========
+
+Note that this method of "on the fly installation" is limited to updating
+Python packages only. You *can* install a `sphinxcontrib-plantuml` extension
+for example. However, it will not work because the required Java packages are
+not installed in the container.
+
+
+.. _sphinx_typo3_theme: https://github.com/TYPO3-Documentation/sphinx_typo3_theme
