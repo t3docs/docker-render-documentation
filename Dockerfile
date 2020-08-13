@@ -75,8 +75,10 @@ RUN \
    && COMMENT "What the toolchains needs" \
    && apt-get install -yq --no-install-recommends \
       git \
+      graphviz \
       moreutils \
       pandoc \
+      plantuml \
       rsync \
       tidy \
       unzip \

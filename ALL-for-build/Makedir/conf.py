@@ -180,6 +180,7 @@ extensions_to_be_loaded = [
     'sphinxcontrib.googlechart',
     'sphinxcontrib.googlemaps',
     'sphinxcontrib.phpdomain',
+    'sphinxcontrib.plantuml',
     'sphinxcontrib.slide',
     'sphinxcontrib.t3fieldlisttable',
     'sphinxcontrib.t3tablerows',
