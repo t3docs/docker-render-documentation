@@ -10,6 +10,7 @@ pathlib2
 pytest
 recommonmark
 sphinxcontrib-phpdomain
+sphinxcontrib-plantuml
 sphinxcontrib-gitloginfo
 https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/t3v0.2.1.zip
 https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/t3v0.1.1.zip

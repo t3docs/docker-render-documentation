@@ -2,21 +2,9 @@ FROM ubuntu:18.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
 ARG OUR_IMAGE_VERSION=v2.7-dev
-#
-### Select tag. Is 'latest' or 'develop' or '<RELEASE_VERSION>'
-#
-# Uncomment next line for a release
-# ARG OUR_IMAGE_TAG=${OUR_IMAGE_VERSION}
-#
-# Uncomment next line in branch master
-# ARG OUR_IMAGE_TAG=latest
-#
-# Uncomment next line in branch develop
+# Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
+# release version looks like 'v2.6.1'
 ARG OUR_IMAGE_TAG=develop
-# ARG OUR_IMAGE_TAG=v2.7-dev
-#
-# AFTER pushing a release: Do a FOLLOW-UP push with tag 'latest' or 'develop'
-# depending on where you pushed the release.
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -88,8 +76,10 @@ RUN \
    && COMMENT "What the toolchains needs" \
    && apt-get install -yq --no-install-recommends \
       git \
+      graphviz \
       moreutils \
       pandoc \
+      plantuml \
       rsync \
       tidy \
       unzip \

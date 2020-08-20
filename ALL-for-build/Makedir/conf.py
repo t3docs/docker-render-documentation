@@ -180,6 +180,7 @@ extensions_to_be_loaded = [
     'sphinxcontrib.googlechart',
     'sphinxcontrib.googlemaps',
     'sphinxcontrib.phpdomain',
+    'sphinxcontrib.plantuml',
     'sphinxcontrib.slide',
     'sphinxcontrib.t3fieldlisttable',
     'sphinxcontrib.t3tablerows',
@@ -204,6 +205,10 @@ extlinks = {}
 extlinks['forge' ] = ('https://forge.typo3.org/issues/%s', 'Forge #')
 extlinks['issue' ] = ('https://forge.typo3.org/issues/%s', 'Issue #')
 extlinks['review'] = ('https://review.typo3.org/%s', 'Review #')
+
+# PlantUML stylesheet
+plantumlstylesabspath = ospj(confpyfolder, 'typo3_plantuml_styles.iuml')
+plantuml = ['plantuml', '-I' + plantumlstylesabspath]
 
 intersphinx_mapping = {}
 #
