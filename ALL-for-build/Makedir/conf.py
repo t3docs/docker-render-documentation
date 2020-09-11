@@ -166,7 +166,7 @@ html_use_smartypants = False
 language = None
 master_doc = os.path.splitext(ospsplit(masterdocabspath)[1])[0]
 todo_include_todos = False
-
+exclude_patterns = []
 extensions_to_be_loaded = [
     'sphinx.ext.autodoc',
     'sphinx.ext.coverage',
@@ -230,8 +230,8 @@ merge_settings_file(settingsabspath, US, notes)
 # (5) More hardcoded settings in this conf.py file
 #
 us_general = US['general'] = US.get('general', {})
-
-us_general['exclude_patterns'] = ['_make']
+if US.get('exclude_patterns') is None:
+    US['exclude_patterns'] = {'anyname': '_make'}
 us_general['html_last_updated_fmt'] = '%b %d, %Y %H:%M'
 us_general['html_static_path'] = []
 us_general['html_theme_path'] = ['_themes',
@@ -307,6 +307,10 @@ def updateModuleGlobals(GLOBALS, US):
     if type(GLOBALS['source_suffix']) in [type(''), type(u'')]:
         GLOBALS['source_suffix'] = [v.strip() for v in
                                     GLOBALS['source_suffix'].split(',')]
+
+    for k, v in sorted(US.get('exclude_patterns', {}).items()):
+        if not v in GLOBALS['exclude_patterns']:
+            GLOBALS['exclude_patterns'].append(v)
 
     for k, e in US.get('extensions', {}).items():
         if not e in GLOBALS['extensions']:
