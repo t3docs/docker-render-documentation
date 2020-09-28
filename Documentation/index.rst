@@ -38,6 +38,19 @@ Comprehensive manual
    <https://github.com/t3docs/docker-render-documentation/issues/>`__.
 
 
+
+-----
+See also
+
+See chapter
+`How to render documentation
+<https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/RenderingDocs/>`_
+in `Writing documentation
+<https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/>`_.
+
+
+
+
 -----
 
 Helper links while in draft status:
