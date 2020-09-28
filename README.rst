@@ -8,11 +8,11 @@ rendering TYPO3 documentation.
 :Repository:      https://github.com/t3docs/docker-render-documentation
 :Version:         v2.7-dev
 :Capabilites:     html, singlehtml, latex
-:Docker image:    t3docs/render-documentation:latest
-                  https://hub.docker.com/r/t3docs/render-documentation/
+:Docker image:    t3docs/render-documentation:develop
+:Docker hub:      https://hub.docker.com/r/t3docs/render-documentation/
 :Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
 :Authors:         TYPO3 Documentation Team
-:Main caretaker:  Martin Bless <martin.bless@typo3.org>
+:Main caretaker:  Martin Bless <martin.bless@mbless.de>
 
 .. :Documented at:   https://github.com/t3docs/t3docs-documentation
 
