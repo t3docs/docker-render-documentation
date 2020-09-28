@@ -9,9 +9,9 @@ pyyaml
 pathlib2
 pytest
 recommonmark
+sphinxcontrib-gitloginfo
 sphinxcontrib-phpdomain
 sphinxcontrib-plantuml
-sphinxcontrib-gitloginfo
 https://github.com/TYPO3-Documentation/sphinx-contrib-googlechart/archive/t3v0.2.1.zip
 https://github.com/TYPO3-Documentation/sphinx-contrib-googlemaps/archive/t3v0.1.1.zip
 https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/t3v1.0.1.zip
