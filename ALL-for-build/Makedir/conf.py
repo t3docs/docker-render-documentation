@@ -421,10 +421,28 @@ if ospe(settingsjsonabspath):
 # As other modules of Sphinx check the values of conf.py let's do
 # a bit of housekeeping und remove helper vars that aren't needed any more.
 
-for k in ['f1', 'f1name', 'o', 'contents', 'D', 'extensions_to_be_loaded',
-          'section', 'legal_extensions', 'config', 'US', 'item', 's', 'v', 'e',
-          'user_settings', 'WithSection', 'us_html_theme_options',
-          'us_general']:
+for k in [
+    'config',
+    'contents',
+    'D',
+    'e',
+    'extensions_to_be_loaded',
+    'f1',
+    'f1name',
+    'item',
+    'legal_extensions',
+    'o',
+    'plantumlfolder',
+    'plantumlstylesabspath',
+    's',
+    'section',
+    'US',
+    'us_general',
+    'us_html_theme_options',
+    'user_settings',
+    'v',
+    'WithSection',
+    ]:
     if k in G:
         del G[k]
 del k, G
@@ -444,7 +462,7 @@ if 1 and 'dump resulting settings as json':
             pass
     with codecs.open(settingsDumpJsonFile, 'w', 'utf-8') as f2:
         json.dump(D, f2, indent=4, sort_keys=True)
-    del D
+    del D, settingsDumpJsonFile
 
 if 'notes' in globals():
     del notes
