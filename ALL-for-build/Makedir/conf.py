@@ -207,7 +207,8 @@ extlinks['issue' ] = ('https://forge.typo3.org/issues/%s', 'Issue #')
 extlinks['review'] = ('https://review.typo3.org/%s', 'Review #')
 
 # PlantUML stylesheet
-plantumlstylesabspath = ospj(confpyfolder, 'typo3_plantuml_styles.iuml')
+plantumlfolder = ospj(confpyfolder, 'sphinxcontrib-plantuml')
+plantumlstylesabspath = ospj(plantumlfolder, 'typo3_styles.iuml')
 plantuml = ['plantuml', '-I' + plantumlstylesabspath]
 
 intersphinx_mapping = {}
