@@ -29,3 +29,12 @@ Release notes
 What has changed? See `CHANGES <CHANGES.rst>`_.
 
 
+See also
+========
+
+See chapter
+`How to render documentation
+<https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/RenderingDocs/>`_
+in `Writing documentation
+<https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/>`_.
+

@@ -1,7 +1,12 @@
 Release v2.7-dev
 ================
 
-...
+New feature
+-----------
+
+* plantuml, graphviz
+* `exclude_patterns` can be specified in Defaults.cfg, Settings.cfg,
+  Overrides.cfg
 
 
 Release v2.6.1 (May 26, 2020)
