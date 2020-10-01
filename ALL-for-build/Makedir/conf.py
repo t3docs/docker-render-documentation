@@ -171,6 +171,7 @@ extensions_to_be_loaded = [
     'sphinx.ext.autodoc',
     'sphinx.ext.coverage',
     'sphinx.ext.extlinks',
+    'sphinx.ext.graphviz',
     'sphinx.ext.ifconfig',
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
