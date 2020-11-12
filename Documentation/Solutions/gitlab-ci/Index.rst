@@ -8,8 +8,6 @@ Render with Gitlab CI
 
 .. contents:: This page
    :backlinks: top
-   :class: compact-list
-   :depth: 3
    :local:
 
 
