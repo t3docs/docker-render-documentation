@@ -482,3 +482,148 @@ To make it a bit more complete project, release and version are shown as well:
          "version": "1.0",
        }
      },
+
+
+Personal use of container v2.6
+==============================
+
+Run the container:
+
+.. code-block:: shell
+
+   cd mbw-the-mbless-world
+   dockrun_t3rd makehtml-no-cache -c jobfile /PROJECT/Documentation/jobfile.json
+
+
+
+File :file:`mbw-the-mbless-world/Documentation/jobfile.json`:
+
+.. code-block:: json
+
+   {
+      "Overrides_cfg": {
+         "general": {
+            "html_theme": "sphinx_typo3_theme",
+            "html_theme_options": {},
+            "html_logo": "../TheProject/Documentation/_static/logo/logo.png",
+            "html_css_files": ["css/mbwstyles.css"],
+            "html_favicon": "../TheProject/Documentation/_static/icons/favicon.ico",
+            "html_static_path": ["../TheProject/Documentation/_static"],
+            "html_context": {
+               "display_gitlab": true,
+               "gitlab_protocol": "http://",
+               "gitlab_host": "gitlab.local.mbless.de:81",
+               "gitlab_user":"-/ide/project/marble",
+               "gitlab_repo": "mbw-the-mbless-world",
+               "theme_vcs_pageview_mode": "edit",
+               "gitlab_version": "master/-/",
+               "conf_py_path": "Documentation/"
+            },
+            "keep_warnings": 0,
+            "nitpicky": false,
+            "nitpick_ignore": [["py:class", "type"]],
+            "project": "MBW - The Mbless World",
+            "release": "1.0.0",
+            "rst_epilog": "",
+            "rst_prolog_DISABLED": "\n.. This is 'Includes.txt'. It is included at the very top of each and\n   every ReST source file in THIS documentation project (= manual).\n\n.. role:: aspect (emphasis)\n.. role:: html(code)\n.. role:: js(code)\n.. role:: php(code)\n.. role:: typoscript(code)\n.. role:: ts(typoscript)\n   :class: typoscript\n\n.. highlight:: php\n.. default-role:: code\n",
+            "smartquotes": false,
+            "templates_path": ["../TheProject/Documentation/_templates"],
+             "todo_include_todos": true,
+            "version": "1.0",
+            "zzz": 0
+         }
+      },
+      "tctconfig": {
+         "activateLocalSphinxDebugging": 0,
+         "disable_include_files_check": 1,
+         "force_rebuild_needed": 1,
+         "make_html": 1,
+         "make_latex": 0,
+         "make_pdf": 0,
+         "make_singlehtml": 0,
+         "rebuild_needed": 1,
+         "replace_static_in_html": 0,
+         "reveal_exitcodes": 1,
+         "reveal_milestones": 1,
+         "talk": 1,
+         "try_pdf_build_from_published_latex": 1
+      }
+   }
+
+
+
+File structure:
+
+.. code-block:: text
+
+   .
+   ├── Documentation
+   │   ├── 00-Todo
+   │   │   ├── Explore-this
+   │   │   │   └── Index.rst
+   │   │   └── Index.rst
+   │   ├── 90-Targets.rst
+   │   ├── 91-Sitemap.rst.txt
+   │   ├── genindex.rst
+   │   ├── Includes.rst.txt
+   │   ├── Index.rst
+   │   ├── jobfile.json
+   │   ├── _static
+   │   │   ├── css
+   │   │   │   └── mbwstyles.css
+   │   │   ├── icons
+   │   │   │   └── favicon.ico
+   │   │   └── logo
+   │   │       ├── logo-242x242.png
+   │   │       └── logo.png
+   │   └── _templates
+   │       ├── breadcrumbs.html
+   │       └── sitemap.html
+   └── Documentation-GENERATED-temp
+       ├── Cache
+       ├── last-docker-run-command-GENERATED.sh.txt
+       ├── Result
+       │   ├── exitcodes.json
+       │   ├── milestones.json
+       │   ├── project
+       │   │   └── 0.0.0
+       │   │       ├── 00-Todo
+       │   │       │   ├── Explore-this
+       │   │       │   │   └── Index.html
+       │   │       │   └── Index.html
+       │   │       ├── Index.html
+       │   │       ├── objects.inv
+       │   │       ├── search.html
+       │   │       ├── searchindex.js
+       │   │       ├── _sources
+       │   │       │   ├── 00-Todo
+       │   │       │   │   ├── Explore-this
+       │   │       │   │   │   └── Index.rst.txt
+       │   │       │   │   └── Index.rst.txt
+       │   │       └── _static
+       │   │           ├── css
+       │   │           │   ├── fontawesome.css
+       │   │           │   ├── mbwstyles.css
+       │   │           │   ├── theme.css
+       │   │           │   └── webfonts.css
+       │   │           ├── favicon.ico
+       │   │           ├── fonts
+       │   │           │   ├── ...
+       │   │           │   └── ...
+       │   │           ├── graphviz.css
+       │   │           ├── icons
+       │   │           │   └── favicon.ico
+       │   │           ├── img
+       │   │           │   └── typo3-logo.svg
+       │   │           ├── js
+       │   │           │   ├── autocomplete.min.js
+       │   │           │   └── ...
+       │   │           ├── language_data.js
+       │   │           ├── logo
+       │   │           │   ├── logo-242x242.png
+       │   │           │   └── logo.png
+       │   │           ├── logo.png
+       │   │           ├── pygments.css
+       │   │           └── ...
+       │   └── publish-params.json
+       └── warning-files.txt
