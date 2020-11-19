@@ -168,6 +168,8 @@ RUN \
    && COMMENT "Memorize the settings in the container" \
    && echo "export DEBIAN_FRONTEND=\"${DEBIAN_FRONTEND}\""         >> /ALL/Downloads/envvars.sh \
    && echo "export DOCKRUN_PREFIX=\"${DOCKRUN_PREFIX}\""           >> /ALL/Downloads/envvars.sh \
+   && echo "export OS_NAME=\"$(   grep -e ^NAME=    /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\""  >> /ALL/Downloads/envvars.sh \
+   && echo "export OS_VERSION=\"$(grep -e ^VERSION= /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\""  >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE=\"${OUR_IMAGE}\""                     >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""         >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_SLOGAN=\"${OUR_IMAGE_SLOGAN}\""       >> /ALL/Downloads/envvars.sh \
@@ -186,6 +188,8 @@ RUN \
       TypoScript lexer    :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
       \n\
       DOCKRUN_PREFIX      :: ${DOCKRUN_PREFIX}\n\
+      OS_NAME             :: $(grep -e ^NAME=    /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
+      OS_VERSION          :: $(grep -e ^VERSION= /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
       OUR_IMAGE           :: ${OUR_IMAGE}\n\
       OUR_IMAGE_SHORT     :: ${OUR_IMAGE_SHORT}\n\
       OUR_IMAGE_SLOGAN    :: ${OUR_IMAGE_SLOGAN}\n\
