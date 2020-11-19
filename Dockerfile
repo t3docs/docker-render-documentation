@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
 ARG OUR_IMAGE_VERSION=v2.7-dev
