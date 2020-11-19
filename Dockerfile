@@ -68,10 +68,8 @@ RUN \
    && chmod 666 /.gitconfig \
    \
    && COMMENT "Install and upgrade system packages" \
-   && apt-get update \
-   && apt-get upgrade -qy \
-   && apt-get install -yq  \
-      python-pip \
+   && apt update \
+   && apt upgrade -qy \
    \
    && COMMENT "What the toolchains needs" \
    && apt-get install -yq --no-install-recommends \
@@ -86,6 +84,19 @@ RUN \
       wget \
       zip \
    \
+   && COMMENT "Make sure we have the latest plantuml.jar" \
+   && wget https://sourceforge.net/projects/plantuml/files/plantuml.jar/download \
+           --quiet --output-document /usr/share/plantuml/plantuml.jar \
+   \
+   && COMMENT "Install python2, pip, setuptools, wheel" \
+   && apt install -yq  \
+      python2 \
+   && COMMENT "Make python2 the default" \
+   && ln -s /usr/bin/python2 /usr/bin/python \
+   && /usr/bin/wget  https://bootstrap.pypa.io/get-pip.py \
+           --quiet --output-document /ALL/Downloads/get-pip.py \
+   && /usr/bin/python2 /ALL/Downloads/get-pip.py \
+   \
    && COMMENT "What we need - convenience tools" \
    && apt-get install -yq --no-install-recommends \
       less \
@@ -97,8 +108,6 @@ RUN \
    && rm -rf /var/lib/apt/lists/* \
    \
    && COMMENT "Python stuff" \
-   && /usr/bin/pip install --upgrade pip \
-   && apt-get remove python-pip -y \
    && /usr/local/bin/pip install --upgrade virtualenv \
    \
    && echo "Empty /ALL/venv/.venv" \
