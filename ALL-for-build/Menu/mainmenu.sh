@@ -262,6 +262,7 @@ makeall-no-cache)    mm-makeall-no-cache $@ ;;
 makehtml)            mm-makehtml $@ ;;
 makehtml-no-cache)   mm-makehtml-no-cache $@ ;;
 show-shell-commands) mm-show-shell-commands $@ ;;
+show-windows-bat)    mm-show-windows-bat $@ ;;
 show-faq)            mm-show-faq $@ ;;
 show-howto)          mm-show-howto $@ ;;
 tct)                 mm-tct $@ ;;
