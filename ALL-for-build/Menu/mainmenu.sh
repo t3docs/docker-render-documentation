@@ -64,6 +64,7 @@ Usage:
             makehtml             Create HTML output
             makehtml-no-cache    Remove cache first, then build HTML
             show-shell-commands  Show useful shell commands and functions
+            show-windows-bat     Show file 'dockrun_t3rd.bat' for Windows
             show-howto           Show howto (not totally up to date)
             show-faq             Show questions and answers (not totally up to date)
             bashcmd              Run a bash command in the container
@@ -81,6 +82,7 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT bashcmd 'ls -la /ALL'
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /usr/bin/bash
+
 
 End of usage.
 EOT
@@ -104,6 +106,11 @@ function mm-show-faq() {
 
 function mm-show-shell-commands() {
    $(dirname $0)/show-shell-commands.sh
+}
+
+
+function mm-show-windows-bat() {
+   $(dirname $0)/show-windows-bat.sh
 }
 
 
