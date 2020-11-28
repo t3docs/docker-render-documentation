@@ -178,7 +178,6 @@ extensions_to_be_loaded = [
     'sphinx.ext.todo',
     'sphinx_typo3_theme',
     'sphinxcontrib.gitloginfo',
-    'sphinxcontrib.googlemaps',
     'sphinxcontrib.phpdomain',
     'sphinxcontrib.plantuml',
     'sphinxcontrib.slide',
