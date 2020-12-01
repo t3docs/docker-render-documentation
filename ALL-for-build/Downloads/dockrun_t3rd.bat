@@ -1,16 +1,20 @@
 @echo OFF
 
-rem dockrun_t3rd.bat, mb, 2019-09-27, 2020-04-03, 2020-11-28
+rem dockrun_t3rd.bat, mb, 2019-09-27, 2020-04-03, 2020-12-01
 rem Author: Martin.Bless@mbless.de
 rem License: MIT (feel free, use on your own risk, cite me)
 rem
-rem Save this script as:  %home%\dockrun_t3rd.bat
-rem Run it like:          %home%\dockrun_t3rd.bat [ARGS] <ENTER>'
+rem Save this script as:  %USERPROFILE%\dockrun_t3rd.bat
+rem
+rem To run this script:
+rem    Open a "Command line" window ("Kommandozeile"). Not Powershell!
+rem    Run the command:
+rem       %USERPROFILE%\dockrun_t3rd.bat [ARGS] <ENTER>'
 rem
 rem Learn from https://en.wikibooks.org/wiki/Windows_Batch_Scripting
+rem Type 'echo %USERPROFILE% <ENTER>' to see what folder %USERPROFILE% is.
 rem
 rem Welcome to the power of Spaghetti code :-)
-rem
 rem Created and tested on Windows 10.
 rem
 
@@ -114,16 +118,20 @@ echo ==========================================
 echo Render TYPO3 documentation
 echo ------------------------------------------
 echo.
+echo Run this script in a "Command line" window ("Kommandozeile").
+echo Do not use Powershell.
+echo.
 echo Usage:
 echo    dockrun_t3rd.bat [ARGS]
 echo.
 echo Advice:
-echo    1. Save the script to %%HOME%%\dockrun_t3rd.bat
-echo    2. Start the script from everywhere with:
-echo          %%HOME%%\dockrun_t3rd.bat
+echo    1. Save the script to %%USERPROFILE%%\dockrun_t3rd.bat
+echo    2. Open a command line window and navigate to your project.
+echo    3. Run the script:
+echo          %%USERPROFILE%%\dockrun_t3rd.bat
 echo.
 echo Example:
-echo    %%HOME%%\dockrun_t3rd.bat  makehtml -c make_singlehtml 1
+echo    %%USERPROFILE%%\dockrun_t3rd.bat  makehtml -c make_singlehtml 1
 echo.
 echo Usage:
 echo    dockrun_t3rd.bat [ARGS]
@@ -161,7 +169,7 @@ echo    to use. Afterwards run 'dockrun_t3rd.bat'.
 echo.
 echo    Example:
 echo       set T3DOCS_OURIMAGE=t3docs/render-documentation:develop
-echo cm      %%HOME%%\dockrun_t3rd.bat
+echo       %%USERPROFILE%%\dockrun_t3rd.bat
 echo.
 if x%interactive%x == x1x  pause & goto menu
 goto alldone
@@ -196,6 +204,7 @@ set arg1=makehtml-no-cache
 goto menuaction
 
 :pull
+@echo docker pull %T3DOCS_OURIMAGE%
 docker pull %T3DOCS_OURIMAGE%
 pause
 goto menu
@@ -232,8 +241,7 @@ if x%arg1%x == xbashcmdx (
 set cmd=%cmd% -v %PROJECT%:/PROJECT:ro
 set cmd=%cmd% -v %RESULT%:/RESULT
 if not x%TMP%x == xx (
-   set cmd=%cmd% -v %TMP%:/tmpq
-
+   set cmd=%cmd% -v %TMP%:/tmp
 )
 set cmd=%cmd% %T3DOCS_OURIMAGE% %trailingargs%
 %cmd%
