@@ -185,23 +185,25 @@ RUN \
    && echo "\
       $OUR_IMAGE_VERSION\n\
       Versions used for $OUR_IMAGE_VERSION:\n\
-      Sphinx theme        :: $THEME_NAME  :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
-      Toolchain           :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
-      Toolchain tool      :: TCT                 :: $TOOLCHAIN_TOOL_VERSION\n\
-      TYPO3-Documentation :: typo3.latex         :: v1.1.0\n\
-      TypoScript lexer    :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
+      Theme                :: $THEME_NAME :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
+      Toolchain            :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
+      Toolchain tool       :: TCT                 :: $TOOLCHAIN_TOOL_VERSION\n\
+      TYPO3-Documentation  :: typo3.latex         :: v1.1.0\n\
+      TypoScript lexer     :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
       \n\
-      DOCKRUN_PREFIX      :: ${DOCKRUN_PREFIX}\n\
-      OS_NAME             :: $(grep -e ^NAME=    /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
-      OS_VERSION          :: $(grep -e ^VERSION= /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
-      OUR_IMAGE           :: ${OUR_IMAGE}\n\
-      OUR_IMAGE_SHORT     :: ${OUR_IMAGE_SHORT}\n\
-      OUR_IMAGE_SLOGAN    :: ${OUR_IMAGE_SLOGAN}\n\
-      OUR_IMAGE_TAG       :: ${OUR_IMAGE_TAG}\n\
-      OUR_IMAGE_VERSION   :: ${OUR_IMAGE_VERSION}\n\
-      TOOLCHAIN_TOOL_URL  :: ${TOOLCHAIN_TOOL_URL}\n\
-      TOOLCHAIN_URL       :: ${TOOLCHAIN_URL}\n\
+      DOCKRUN_PREFIX       :: ${DOCKRUN_PREFIX}\n\
+      OS_NAME              :: $(grep -e ^NAME=    /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
+      OS_VERSION           :: $(grep -e ^VERSION= /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
+      OUR_IMAGE            :: ${OUR_IMAGE}\n\
+      OUR_IMAGE_SHORT      :: ${OUR_IMAGE_SHORT}\n\
+      OUR_IMAGE_SLOGAN     :: ${OUR_IMAGE_SLOGAN}\n\
+      OUR_IMAGE_TAG        :: ${OUR_IMAGE_TAG}\n\
+      OUR_IMAGE_VERSION    :: ${OUR_IMAGE_VERSION}\n\
+      TOOLCHAIN_TOOL_URL   :: ${TOOLCHAIN_TOOL_URL}\n\
+      TOOLCHAIN_URL        :: ${TOOLCHAIN_URL}\n\
+      PLANTUML_TAGGED_FILE :: /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}\n\
       \n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
+   && cat /ALL/Downloads/envvars.sh >> /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
 
 
