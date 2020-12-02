@@ -12,6 +12,9 @@ ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
 ARG hack_OUR_IMAGE_SHORT="t3rd"
 ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
+#
+# PlantUML tagged file name as shown on https://plantuml.com/en/download
+ARG PLANTUML_TAGGED_FILE_NAME="plantuml.1.2020.20.jar"
 
 # requires toolchain version >= 2.7.0, since /ALL/dummy_webroot is gone
 
@@ -84,9 +87,9 @@ RUN \
       wget \
       zip \
    \
-   && COMMENT "Make sure we have the latest plantuml.jar" \
-   && wget https://sourceforge.net/projects/plantuml/files/plantuml.jar/download \
-           --quiet --output-document /usr/share/plantuml/plantuml.jar \
+   && COMMENT "Make sure we have the latest plantuml.jar - DISABLED this time" \
+   && COMMENT "wget https://sourceforge.net/projects/plantuml/files/${PLANTUML_TAGGED_FILE_NAME}/download \
+           --quiet --output-document /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
    \
    && COMMENT "Install python2, pip, setuptools, wheel" \
    && apt install -yq  \
