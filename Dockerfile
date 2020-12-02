@@ -159,7 +159,8 @@ RUN \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
-   && rm -rf /tmp/* $HOME/.cache \
+   && pip cache purge \
+   && rm -rf /tmp/* \
    \
    && COMMENT "Make sure other users can write" \
    && chmod -R a+w \
