@@ -185,6 +185,7 @@ extensions_to_be_loaded = [
     'sphinxcontrib.t3tablerows',
     'sphinxcontrib.t3targets',
     'sphinxcontrib.youtube',
+    'sphinx_tabs.tabs',
 ]
 
 # Legal extensions will be loaded if requested in Settings.cfg or Overrides.cfg
