@@ -90,6 +90,7 @@ RUN \
    && COMMENT "Make sure we have the latest plantuml.jar - DISABLED this time" \
    && COMMENT "wget https://sourceforge.net/projects/plantuml/files/${PLANTUML_TAGGED_FILE_NAME}/download \
            --quiet --output-document /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
+   && COMMENT "PLANTUML_TAGGED_FILE :: /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
    \
    && COMMENT "Install python2, pip, setuptools, wheel" \
    && apt install -yq  \
@@ -201,7 +202,6 @@ RUN \
       OUR_IMAGE_VERSION    :: ${OUR_IMAGE_VERSION}\n\
       TOOLCHAIN_TOOL_URL   :: ${TOOLCHAIN_TOOL_URL}\n\
       TOOLCHAIN_URL        :: ${TOOLCHAIN_URL}\n\
-      PLANTUML_TAGGED_FILE :: /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}\n\
       \n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/envvars.sh >> /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
