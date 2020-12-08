@@ -235,6 +235,7 @@ available from https://typo3.org/.
    Inspection/Index
    Development/Index
    Solutions/Index
+   Whatsnew/Index
    Glossary
    Targets
    Sitemap
