@@ -14,6 +14,7 @@ ARG hack_OUR_IMAGE_SHORT="t3rd"
 ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 #
 # PlantUML tagged file name as shown on https://plantuml.com/en/download
+# Doesn't work at the moment, but should in future.
 ARG PLANTUML_TAGGED_FILE_NAME="plantuml.1.2020.20.jar"
 
 # requires toolchain version >= 2.7.0, since /ALL/dummy_webroot is gone
@@ -33,10 +34,9 @@ ENV \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
-   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.10.1" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.10.1.zip" \
-   TOOLCHAIN_VERSION="2.10.1" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.11.0-dev" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.11.0-dev.zip" \
+   TOOLCHAIN_VERSION="2.11.0-dev" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
