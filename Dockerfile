@@ -34,9 +34,9 @@ ENV \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.11.0-dev" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.11.0-dev.zip" \
-   TOOLCHAIN_VERSION="2.11.0-dev" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.11.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.11.0.zip" \
+   TOOLCHAIN_VERSION="2.11.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
