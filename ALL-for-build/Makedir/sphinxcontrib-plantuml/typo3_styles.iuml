@@ -1,0 +1,27 @@
+'
+' TYPO3 PlantUML Stylesheet
+'
+' Parameters:
+' Get all available style parameters at the command line of this Docker container:
+' # source <(docker run --rm t3docs/render-documentation show-shell-commands)
+' # dockrun_t3rd /bin/bash
+' # plantuml -language
+' => search for "skinparameter"
+'
+' Icons:
+' Preprocessor directives like !include, !define, etc. are not supported in this global stylesheet when rendered by
+' PlantUML v2017.15 - which is used in the current TYPO3 documentation rendering process - such that
+' custom macros and sprites cannot be provided globally. In newer versions of PlantUML, icons can be
+' provided globally by
+'   - including custom sprites and macros in this file
+'   - using the globally available PlantUML Standard Library
+'
+' @see https://forum.plantuml.net/6718/cannot-recognize-included-file-in-config-file
+' @see https://github.com/tupadr3/plantuml-icon-font-sprites#getting-started
+' @see https://plantuml.com/stdlib
+'
+skinparam ArrowColor #f49700
+skinparam BackgroundColor #FFFFFF
+skinparam DefaultFontColor #333333
+skinparam Padding 8
+skinparam Shadowing false

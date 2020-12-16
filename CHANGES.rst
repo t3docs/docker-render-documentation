@@ -1,13 +1,20 @@
 Release v2.7-dev
 ================
 
-...
+New feature
+-----------
+
+*  plantuml, graphviz
+*  `exclude_patterns` can be specified in Defaults.cfg, Settings.cfg,
+   Overrides.cfg
+
+*  Remove Sphinx extension googlemaps (didn't work any more)
 
 
 Release v2.6.1 (May 26, 2020)
 =============================
 
-* Bugfix: Make on-the-fly installation of Sphinx extensions from /WHEELS work.
+*  Bugfix: Make on-the-fly installation of Sphinx extensions from /WHEELS work.
 
 
 Release v2.6.0 (May 11, 2020)
@@ -16,97 +23,97 @@ Release v2.6.0 (May 11, 2020)
 Using `sphinx_typo3_theme v2.4.0`, `sphinxcontrib.gitloginfo v1.0.0` (new),
 toolchain `RenderDocumentation v2.10.1`.
 
-* Toolchain: FINAL_EXIT_CODE should now be trustworthy and either have
-  value `0` (success) or value `255` (failure). `0` means, the toolchain
-  came to an end and at least the step "build html" was successful.
-  `255` indicates a failure where either the toolchain didn't come to normal
-  end or html wasn't built.
+*  Toolchain: FINAL_EXIT_CODE should now be trustworthy and either have
+   value `0` (success) or value `255` (failure). `0` means, the toolchain
+   came to an end and at least the step "build html" was successful.
+   `255` indicates a failure where either the toolchain didn't come to normal
+   end or html wasn't built.
 
-* Theme: 'last modified' date appears in page html head section if
-  available.
+*  Theme: 'last modified' date appears in page html head section if
+   available.
 
-* Theme: 'Last updated' in the page footer with a link to the latest commit.
+*  Theme: 'Last updated' in the page footer with a link to the latest commit.
 
-* Theme: Search result pages with highlighted search text show a link to
-  deselect the hightlighting.
+*  Theme: Search result pages with highlighted search text show a link to
+   deselect the hightlighting.
 
-* Theme: The intra page menu is now appended to the left menu column to fix
-  the - so called - "missing third menu level" issue.
+*  Theme: The intra page menu is now appended to the left menu column to fix
+   the - so called - "missing third menu level" issue.
 
-* Theme: The logo is now defineable in the theme configuration file
-  `theme.conf`.
+*  Theme: The logo is now defineable in the theme configuration file
+   `theme.conf`.
 
-* Toolchain: `dockrun_t3rd makehtml -c allow_unsafe 1` to skip the extensive
-  and time consuming html postprocessing, to skip file include checks and to
-  allow the reST 'raw' directive.
+*  Toolchain: `dockrun_t3rd makehtml -c allow_unsafe 1` to skip the extensive
+   and time consuming html postprocessing, to skip file include checks and to
+   allow the reST 'raw' directive.
 
-* Toolchain: `dockrun_t3rd makehtml -c sphinxVerboseLevel n'. With `n=3`
-  the Sphinx build will be started with three times `-v`. This would mean
-  `sphinx-build -v -v -v …`
+*  Toolchain: `dockrun_t3rd makehtml -c sphinxVerboseLevel n'. With `n=3`
+   the Sphinx build will be started with three times `-v`. This would mean
+   `sphinx-build -v -v -v …`
 
 Bug fixes:
 
-* Theme: Remove false warnings about illegal theme options
-* Toolchain: Remove pip warnings about 'Cache dir not writable'.
+*  Theme: Remove false warnings about illegal theme options
+*  Toolchain: Remove pip warnings about 'Cache dir not writable'.
 
 
 
 Release v2.5.1 (Feb 26, 2020)
 =============================
 
-* Use toolchain v2.9.1: Fix static files
+*  Use toolchain v2.9.1: Fix static files
 
 
 Release v2.5.0 (Feb 25, 2020)
 =============================
 
-* Use develop.zip of Sphinx extension t3targets to fix
-  https://github.com/t3docs/docker-render-documentation/issues/80 Line numbers
-  point to *.txt instead of *.rst.txt
-  Fixed with `b0d6a7
-  <https://github.com/t3docs/docker-render-documentation/commit/b0d6a7e743f437461fa571061fcb0963a9003589>`
-  and
-  https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/releases/tag/v0.3.0
+*  Use develop.zip of Sphinx extension t3targets to fix
+   https://github.com/t3docs/docker-render-documentation/issues/80 Line numbers
+   point to *.txt instead of *.rst.txt
+   Fixed with `b0d6a7
+   <https://github.com/t3docs/docker-render-documentation/commit/b0d6a7e743f437461fa571061fcb0963a9003589>`
+   and
+   https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/releases/tag/v0.3.0
 
-* Use sphinx_typo3_theme from PyPi
-* Use toolchain v2.9.0
-* Add T3DOCS_WHEELS folder. If it contains Python wheel packages, those get
-  installed within the container prior to rendering. So this is an easy way to
-  extra install Python packages prior to rendering.
+*  Use sphinx_typo3_theme from PyPi
+*  Use toolchain v2.9.0
+*  Add T3DOCS_WHEELS folder. If it contains Python wheel packages, those get
+   installed within the container prior to rendering. So this is an easy way to
+   extra install Python packages prior to rendering.
 
 
 
 Release v2.4.0 (Oct 21, 2019)
 =============================
 
-* Add 'dockrun_t3rd  /usr/bin/bash'
-* Use Toolchain v2.8.0
-* Use TCT v1.1.0
-* Account for /THEMES mapping
-* Add 'ablog' to Pipfile
-* 6ff41f3 List localizations in 'Find the results'
-* 8785da4 Add directive and textrole 'confval' in conf.py
+*  Add 'dockrun_t3rd  /usr/bin/bash'
+*  Use Toolchain v2.8.0
+*  Use TCT v1.1.0
+*  Account for /THEMES mapping
+*  Add 'ablog' to Pipfile
+*  6ff41f3 List localizations in 'Find the results'
+*  8785da4 Add directive and textrole 'confval' in conf.py
 
 
 
 Release v2.3.0 (August 19, 2019)
 ================================
 
-* Use toolchain >= v2.7.1
+*  Use toolchain >= v2.7.1
 
 
 
 Release v2.2.6 (released June 23, 2019)
 =======================================
 
-* Use bugfixed toolchain v2.6.1
+*  Use bugfixed toolchain v2.6.1
 
 
 
 Release v2.2.5 (released June 22, 2019)
 =======================================
 
-* Build again, make sphinx-contrib-slide-t3v1.0.1.zip available
+*  Build again, make sphinx-contrib-slide-t3v1.0.1.zip available
 
 
 
@@ -289,20 +296,20 @@ Release v1.6.11-html (released May 23, 2018)
 Bugs fixed
 ----------
 
-* typoscript syntax highlighter should now always succeed
-* PDF generation working again
+*  typoscript syntax highlighter should now always succeed
+*  PDF generation working again
 
 Features added
 --------------
 
-* update mtime of repo files automatically if 'git-restore-mtime' is in path
+*  update mtime of repo files automatically if 'git-restore-mtime' is in path
 
 Info
 ----
 
-* improved toolchain
-* as before: uses Sphinx caching
-* standalone *.zip is much smaller, as most fonts aren't shipped any more
+*  improved toolchain
+*  as before: uses Sphinx caching
+*  standalone *.zip is much smaller, as most fonts aren't shipped any more
 
 
 
@@ -323,8 +330,8 @@ Release v1.6.6 (released May 2, 2018)
 Release v1.6.4 (released Nov 16, 2017)
 ======================================
 
-* Bump version from v0.6.3 to v1.6.4
-* Use toolchain RenderDocumentation v2.2.0
+*  Bump version from v0.6.3 to v1.6.4
+*  Use toolchain RenderDocumentation v2.2.0
 
 
 

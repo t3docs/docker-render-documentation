@@ -1,9 +1,10 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.6.1
-### Select tag. Is 'latest' or 'develop' or '<RELEASE_VERSION>'
-ARG OUR_IMAGE_TAG=latest
+ARG OUR_IMAGE_VERSION=v2.7-dev
+# Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
+# release version looks like 'v2.6.1'
+ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -11,6 +12,10 @@ ARG DOCKRUN_PREFIX="dockrun_"
 ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
 ARG hack_OUR_IMAGE_SHORT="t3rd"
 ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
+#
+# PlantUML tagged file name as shown on https://plantuml.com/en/download
+# Doesn't work at the moment, but should in future.
+ARG PLANTUML_TAGGED_FILE_NAME="plantuml.1.2020.20.jar"
 
 # requires toolchain version >= 2.7.0, since /ALL/dummy_webroot is gone
 
@@ -22,17 +27,16 @@ ENV \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
    PIP_NO_CACHE_DIR_xxx=1 \
-   PIP_CACHE_DIR_xxx="" \
-   PIP_DISABLE_PIP_VERSION_CHECK_xxx=1 \
+   PIP_CACHE_DIR_xxx="/ALL/userhome/.cache/pip" \
+   PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
    THEME_MTIME="1588954791" \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
-   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/develop.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.10.1" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.10.1.zip" \
-   TOOLCHAIN_VERSION="2.10.1" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.11.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.11.0.zip" \
+   TOOLCHAIN_VERSION="2.11.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
@@ -67,21 +71,35 @@ RUN \
    && chmod 666 /.gitconfig \
    \
    && COMMENT "Install and upgrade system packages" \
-   && apt-get update \
-   && apt-get upgrade -qy \
-   && apt-get install -yq  \
-      python-pip \
+   && apt update \
+   && apt upgrade -qy \
    \
    && COMMENT "What the toolchains needs" \
    && apt-get install -yq --no-install-recommends \
       git \
+      graphviz \
       moreutils \
       pandoc \
+      plantuml \
       rsync \
       tidy \
       unzip \
       wget \
       zip \
+   \
+   && COMMENT "Make sure we have the latest plantuml.jar - DISABLED this time" \
+   && COMMENT "wget https://sourceforge.net/projects/plantuml/files/${PLANTUML_TAGGED_FILE_NAME}/download \
+           --quiet --output-document /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
+   && COMMENT "PLANTUML_TAGGED_FILE :: /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
+   \
+   && COMMENT "Install python2, pip, setuptools, wheel" \
+   && apt install -yq  \
+      python2 \
+   && COMMENT "Make python2 the default" \
+   && ln -s /usr/bin/python2 /usr/bin/python \
+   && /usr/bin/wget  https://bootstrap.pypa.io/get-pip.py \
+           --quiet --output-document /ALL/Downloads/get-pip.py \
+   && /usr/bin/python2 /ALL/Downloads/get-pip.py \
    \
    && COMMENT "What we need - convenience tools" \
    && apt-get install -yq --no-install-recommends \
@@ -94,8 +112,6 @@ RUN \
    && rm -rf /var/lib/apt/lists/* \
    \
    && COMMENT "Python stuff" \
-   && /usr/bin/pip install --upgrade pip \
-   && apt-get remove python-pip -y \
    && /usr/local/bin/pip install --upgrade virtualenv \
    \
    && echo "Empty /ALL/venv/.venv" \
@@ -144,7 +160,8 @@ RUN \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
-   && rm -rf /tmp/* $HOME/.cache \
+   && pip cache purge \
+   && rm -rf /tmp/* \
    \
    && COMMENT "Make sure other users can write" \
    && chmod -R a+w \
@@ -156,6 +173,8 @@ RUN \
    && COMMENT "Memorize the settings in the container" \
    && echo "export DEBIAN_FRONTEND=\"${DEBIAN_FRONTEND}\""         >> /ALL/Downloads/envvars.sh \
    && echo "export DOCKRUN_PREFIX=\"${DOCKRUN_PREFIX}\""           >> /ALL/Downloads/envvars.sh \
+   && echo "export OS_NAME=\"$(   grep -e ^NAME=    /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\""  >> /ALL/Downloads/envvars.sh \
+   && echo "export OS_VERSION=\"$(grep -e ^VERSION= /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\""  >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE=\"${OUR_IMAGE}\""                     >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""         >> /ALL/Downloads/envvars.sh \
    && echo "export OUR_IMAGE_SLOGAN=\"${OUR_IMAGE_SLOGAN}\""       >> /ALL/Downloads/envvars.sh \
@@ -167,21 +186,24 @@ RUN \
    && echo "\
       $OUR_IMAGE_VERSION\n\
       Versions used for $OUR_IMAGE_VERSION:\n\
-      Sphinx theme        :: $THEME_NAME  :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
-      Toolchain           :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
-      Toolchain tool      :: TCT                 :: $TOOLCHAIN_TOOL_VERSION\n\
-      TYPO3-Documentation :: typo3.latex         :: v1.1.0\n\
-      TypoScript lexer    :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
+      Theme                :: $THEME_NAME :: $THEME_VERSION :: mtime:$THEME_MTIME\n\
+      Toolchain            :: RenderDocumentation :: $TOOLCHAIN_VERSION\n\
+      Toolchain tool       :: TCT                 :: $TOOLCHAIN_TOOL_VERSION\n\
+      TYPO3-Documentation  :: typo3.latex         :: v1.1.0\n\
+      TypoScript lexer     :: typoscript.py       :: $TYPOSCRIPT_PY_VERSION\n\
       \n\
-      DOCKRUN_PREFIX      :: ${DOCKRUN_PREFIX}\n\
-      OUR_IMAGE           :: ${OUR_IMAGE}\n\
-      OUR_IMAGE_SHORT     :: ${OUR_IMAGE_SHORT}\n\
-      OUR_IMAGE_SLOGAN    :: ${OUR_IMAGE_SLOGAN}\n\
-      OUR_IMAGE_TAG       :: ${OUR_IMAGE_TAG}\n\
-      OUR_IMAGE_VERSION   :: ${OUR_IMAGE_VERSION}\n\
-      TOOLCHAIN_TOOL_URL  :: ${TOOLCHAIN_TOOL_URL}\n\
-      TOOLCHAIN_URL       :: ${TOOLCHAIN_URL}\n\
+      DOCKRUN_PREFIX       :: ${DOCKRUN_PREFIX}\n\
+      OS_NAME              :: $(grep -e ^NAME=    /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
+      OS_VERSION           :: $(grep -e ^VERSION= /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\n\
+      OUR_IMAGE            :: ${OUR_IMAGE}\n\
+      OUR_IMAGE_SHORT      :: ${OUR_IMAGE_SHORT}\n\
+      OUR_IMAGE_SLOGAN     :: ${OUR_IMAGE_SLOGAN}\n\
+      OUR_IMAGE_TAG        :: ${OUR_IMAGE_TAG}\n\
+      OUR_IMAGE_VERSION    :: ${OUR_IMAGE_VERSION}\n\
+      TOOLCHAIN_TOOL_URL   :: ${TOOLCHAIN_TOOL_URL}\n\
+      TOOLCHAIN_URL        :: ${TOOLCHAIN_URL}\n\
       \n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
+   && cat /ALL/Downloads/envvars.sh >> /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
 
 
