@@ -1,14 +1,38 @@
-Release v2.7-dev
-================
+Release v2.7.0 (Dec 16, 2020)
+=============================
 
-New feature
------------
+New
+---
 
-*  plantuml, graphviz
-*  `exclude_patterns` can be specified in Defaults.cfg, Settings.cfg,
+*  42e0120 Show OS_NAME and OS_VERSION in versioninfo
+*  111c165 Use Ubuntu 20.04
+*  f5efcb3 Add Graphviz
+*  8b81f71 Add PlantUML
+*  1eb5b7a `exclude_patterns` can be specified in Defaults.cfg, Settings.cfg,
    Overrides.cfg
 
-*  Remove Sphinx extension googlemaps (didn't work any more)
+
+Removed
+-------
+
+*  7fcc524 Remove sphinxcontrib.googlemaps - doesn't work any more
+*  c074131 Drop Sphinx extension googlechart - Google stopped service
+
+
+Important commits
+-----------------
+
+*  e5165c2 Use Toolchain v2.11.0
+*  e15ff08 Add Sphinx extension sphinx-tabs
+*  74c96c8 Update dockrun_t3rd.bat - Tested batch file for Windows
+*  f0758b7 Add dockrun_t3rd.bat for Windows users
+*  7fcc524 Remove sphinxcontrib.googlemaps
+*  42e0120 Show OS_NAME and OS_VERSION in versioninfo
+*  c074131 Drop Sphinx extension googlechart
+*  111c165 Use Ubuntu 20.04
+*  f5efcb3 Add Defaults.cfg, update conf.py, add Graphviz - Martin Bless
+*  8b81f71 Merge pull request #97 from alexander-nitsche/feature/sphinx-plantuml
+*  1eb5b7a [FEATURE] Implement Issue 98, exclude_patterns
 
 
 Release v2.6.1 (May 26, 2020)
