@@ -4,7 +4,7 @@ FROM ubuntu:20.04
 ARG OUR_IMAGE_VERSION=v2.7.1
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # release version looks like 'v2.6.1'
-ARG OUR_IMAGE_TAG=latest
+ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
