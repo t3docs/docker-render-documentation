@@ -1,3 +1,9 @@
+Release v2.7.1 (Jan 6, 2021)
+============================
+
+*  Use sphinx_typo3_theme v4.4.2 with styled Index page
+
+
 Release v2.7.0 (Dec 16, 2020)
 =============================
 
