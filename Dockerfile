@@ -3,8 +3,8 @@ FROM ubuntu:20.04
 # like vX.Y-dev
 ARG OUR_IMAGE_VERSION=v2.7.1
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v2.6.1'
-ARG OUR_IMAGE_TAG=develop
+# release version looks like 'v2.7.1'
+ARG OUR_IMAGE_TAG=v2.7.1
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
