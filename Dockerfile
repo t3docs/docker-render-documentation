@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.7.1
+ARG OUR_IMAGE_VERSION=v2.7.2
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v2.7.1'
-ARG OUR_IMAGE_TAG=latest
+# release version looks like 'v2.7.2'
+ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -34,9 +34,9 @@ ENV \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.11.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.11.0.zip" \
-   TOOLCHAIN_VERSION="2.11.0" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.11.1" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.11.1.zip" \
+   TOOLCHAIN_VERSION="2.11.1" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
