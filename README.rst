@@ -8,7 +8,7 @@ rendering TYPO3 documentation.
 :Repository:      https://github.com/t3docs/docker-render-documentation
 :Version:         v2.7.2
 :Capabilites:     html, singlehtml, latex
-:Docker image:    t3docs/render-documentation:develop
+:Docker image:    t3docs/render-documentation:v2.7.2
 :Docker hub:      https://hub.docker.com/r/t3docs/render-documentation/
 :Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
 :Authors:         TYPO3 Documentation Team
