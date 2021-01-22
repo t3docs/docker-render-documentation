@@ -1,5 +1,6 @@
 .. include:: /Includes.rst.txt
-
+.. index:: PDF generation
+.. _PDF-generation:
 
 ====================
 PDF-generation
@@ -11,7 +12,6 @@ https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.l
 .. contents:: This page
    :backlinks: top
    :class: compact-list
-   :depth: 3
    :local:
 
 
