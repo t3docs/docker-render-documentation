@@ -1,5 +1,5 @@
 Sphinx==1.8.5
-https://github.com/TYPO3-Documentation/sphinx_typo3_theme/archive/master.zip
+sphinx-typo3-theme
 sphinx-rtd-theme
 ablog
 pillow
