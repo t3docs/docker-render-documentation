@@ -13,10 +13,10 @@ sphinxcontrib-gitloginfo
 sphinxcontrib-phpdomain
 sphinxcontrib-plantuml
 sphinx-tabs
-https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/t3v1.0.1.zip
+https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/t3v1.1.0.zip
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/v0.3.1.zip
-https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.2.0.zip
-https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/develop.zip
-https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/t3v1.0.zip
+https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.3.1.zip
+https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/v0.3.1.zip
+https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/t3v1.1.0.zip
 https://github.com/TYPO3-Documentation/t3SphinxTools_includecheck/archive/v1.0.0.zip
 https://github.com/marble/TCT/archive/develop.zip
