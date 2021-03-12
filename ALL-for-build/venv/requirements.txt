@@ -13,7 +13,7 @@ sphinxcontrib-gitloginfo
 sphinxcontrib-phpdomain
 sphinxcontrib-plantuml
 sphinx-tabs
-https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/t3v1.1.0.zip
+https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/v1.1.0.zip
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/v0.3.1.zip
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.3.1.zip
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/v0.3.1.zip

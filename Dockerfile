@@ -71,8 +71,9 @@ RUN \
    && chmod 666 /.gitconfig \
    \
    && COMMENT "Install and upgrade system packages" \
-   && apt update \
-   && apt upgrade -qy \
+   && apt-get update \
+   && apt-get install -y apt-utils 2>/dev/null \
+   && apt-get upgrade -qy \
    \
    && COMMENT "What the toolchains needs" \
    && apt-get install -yq --no-install-recommends \
@@ -93,11 +94,11 @@ RUN \
    && COMMENT "PLANTUML_TAGGED_FILE :: /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
    \
    && COMMENT "Install python2, pip, setuptools, wheel" \
-   && apt install -yq  \
+   && apt-get install -yq  \
       python2 \
    && COMMENT "Make python2 the default" \
    && ln -s /usr/bin/python2 /usr/bin/python \
-   && /usr/bin/wget  https://bootstrap.pypa.io/get-pip.py \
+   && /usr/bin/wget  https://bootstrap.pypa.io/pip/2.7/get-pip.py \
            --quiet --output-document /ALL/Downloads/get-pip.py \
    && /usr/bin/python2 /ALL/Downloads/get-pip.py \
    \
