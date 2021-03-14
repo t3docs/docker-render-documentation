@@ -1,7 +1,6 @@
 Sphinx==1.8.5
 sphinx-typo3-theme
 sphinx-rtd-theme
-ablog
 pillow
 beautifulsoup4
 lxml
