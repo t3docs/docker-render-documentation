@@ -2,6 +2,7 @@ Release v2.8.1 (Mar 26, 2021)
 ============================
 
 *  Use sphinx_typo3_theme v4.5.2
+*  Set h2edit_url in Overrides.cfg
 
 
 Release v2.8.0
