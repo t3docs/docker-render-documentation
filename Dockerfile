@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.8.0
+ARG OUR_IMAGE_VERSION=v2.8.1
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v2.7.2'
-ARG OUR_IMAGE_TAG=latest
+# release version looks like 'v2.8.1'
+ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -30,7 +30,7 @@ ENV \
    PIP_CACHE_DIR_xxx="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1588954791" \
+   THEME_MTIME="1616756420" \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \

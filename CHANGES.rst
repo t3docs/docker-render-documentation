@@ -1,8 +1,13 @@
-Release v2.7.2 (Jan 21, 2021)
+Release v2.8.1 (Mar 26, 2021)
 ============================
 
-*  Use sphinx_typo3_theme v4.4.3, full screen usage breakpoint at 2049px
-*  BUGFIX: Use toolchain v2.11.1, path issues for logo on subpages
+*  Use sphinx_typo3_theme v4.5.2
+
+
+Release v2.8.0
+============================
+
+*  ...
 
 
 Release v2.7.1 (Jan 6, 2021)
