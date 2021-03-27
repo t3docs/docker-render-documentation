@@ -8,6 +8,7 @@ import os
 import shlex
 import sys
 import threading
+import time
 import urlparse
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from SocketServer import ThreadingMixIn
@@ -94,15 +95,18 @@ class GetHandler(BaseHTTPRequestHandler):
                 http_response_code = 503
                 server.shutdown()
                 sys.exit(1)
+            atime = time.time()
             exitcode = makehtml()
+            btime = time.time()
+            duration = '%3.3f' % round(btime - atime, 3)
             if exitcode:
                 # Service Unavailable
                 http_response_code = 503
-                msglines.append('%s, %s, exitcode: %s' %
-                    (http_response_code, 'failed', exitcode))
+                msglines.append('%s, %s, exitcode: %s, took: %s seconds' %
+                    (http_response_code, 'failed', exitcode, duration))
             else:
-                msglines.append('%s, %s, exitcode: %s' %
-                    (http_response_code, 'succeeded', exitcode))
+                msglines.append('%s, %s, exitcode: %s, took: %s seconds' %
+                    (http_response_code, 'succeeded', exitcode, duration))
             prelines = prelines_of_file(warnings_fpath)
 
         elif parsed_path.path == '/makehtml':
@@ -110,14 +114,17 @@ class GetHandler(BaseHTTPRequestHandler):
                 if ospe(afile):
                     with open(afile, 'wb') as f2:
                         pass
+            atime = time.time()
             exitcode = makehtml()
+            btime = time.time()
+            duration = '%3.3f' % round(btime - atime, 3)
             if exitcode:
                 http_response_code = 503
-                msglines.append('%s, %s, exitcode: %s' %
-                    (http_response_code, 'failed', exitcode))
+                msglines.append('%s, %s, exitcode: %s, took: %s seconds' %
+                    (http_response_code, 'failed', exitcode, duration))
             else:
-                msglines.append('%s, %s, exitcode: %s' %
-                    (http_response_code, 'succeeded', exitcode))
+                msglines.append('%s, %s, exitcode: %s, took: %s seconds' %
+                    (http_response_code, 'succeeded', exitcode, duration))
             prelines = prelines_of_file(warnings_fpath)
 
         elif parsed_path.path == '/show_cmd':
