@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.8.1
+ARG OUR_IMAGE_VERSION=v2.8.2
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v2.8.1'
-ARG OUR_IMAGE_TAG=latest
+# release version looks like 'v2.8.2'
+ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -26,8 +26,8 @@ ENV \
    OUR_IMAGE="$hack_OUR_IMAGE" \
    OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
-   PIP_NO_CACHE_DIR_xxx=1 \
-   PIP_CACHE_DIR_xxx="/ALL/userhome/.cache/pip" \
+   PIP_NO_CACHE_DIR=1 \
+   PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
    THEME_MTIME="1616756420" \
@@ -126,13 +126,6 @@ RUN \
    && .venv/bin/pip install -r requirements.txt \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
-   && COMMENT "Provide some special files" \
-   && wget https://raw.githubusercontent.com/TYPO3-Documentation/typo3-docs-typo3-org-resources/master/userroot/scripts/config/_htaccess-2016-08.txt \
-           --quiet --output-document /ALL/Makedir/_htaccess \
-   && wget https://github.com/etobi/Typo3ExtensionUtils/raw/master/bin/t3xutils.phar \
-           --quiet --output-document /usr/local/bin/t3xutils.phar \
-   && chmod +x /usr/local/bin/t3xutils.phar \
-   \
    && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
    \
    && COMMENT "All files of the theme of a given theme version should have the" \
@@ -161,8 +154,8 @@ RUN \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
-   && pip cache purge \
-   && rm -rf /tmp/* \
+   && COMMENT pip cache purge \
+   && rm -rf /tmp/* /ALL/userhome/.cache \
    \
    && COMMENT "Make sure other users can write" \
    && chmod -R a+w \

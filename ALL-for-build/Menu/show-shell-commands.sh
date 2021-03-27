@@ -68,6 +68,11 @@ elif [[ "\$@" = "/usr/bin/bash" ]]; then
    local CREATING=1
    cmd="\$cmd --user=\$(id -u):\$(id -g)"
    cmd="\$cmd --entrypoint /bin/bash -it"
+elif [[ "\$1" = "serve4build" ]]; then
+   local CREATING=1
+   local PORT=\${2:-9999}
+   cmd="\$cmd --user=\$(id -u):\$(id -g) -it"
+   cmd="\$cmd --publish=\${PORT}:\${PORT}/tcp"
 elif [[ "\$@" = "export-ALL" ]]; then
    local CREATING=1
    cmd="\$cmd --entrypoint /bin/bash"
@@ -175,6 +180,8 @@ if [[ "\$@" = "/bin/bash" ]]; then
    true "do nothing here"
 elif [[ "\$@" = "/usr/bin/bash" ]]; then
    true "do nothing here"
+elif [[ "\$1" = "serve4build" ]]; then
+   cmd="\$cmd \${1} \${PORT}"
 elif [[ "\$@" = "export-ALL" ]]; then
    cmd="\$cmd -c \"rsync -a --delete --chown=\$(id -u):\$(id -g) /ALL/ /RESULT/ALL-exported\""
    echo The export will go to:
@@ -204,7 +211,7 @@ if [[ "\$DRY_RUN" = "0" ]]; then
 fi
 }
 
-echo "This function is now defined FOR THIS terminal window to run ${OUR_IMAGE_TAG}:"
+echo "This function is now defined FOR THIS terminal window to run '${OUR_IMAGE_TAG}':"
 echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
 
 EOT

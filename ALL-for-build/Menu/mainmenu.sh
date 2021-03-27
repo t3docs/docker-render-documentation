@@ -68,6 +68,7 @@ Usage:
             show-howto           Show howto (not totally up to date)
             show-faq             Show questions and answers (not totally up to date)
             bashcmd              Run a bash command in the container
+            serve4build [port]   Run container as server for 'sphinx-build'
             /bin/bash            Enter the container's Bash shell as superuser
             /usr/bin/bash        Enter the container's Bash shell as normal user
             export-ALL           Copy /ALL to /RESULT/ALL-exported
@@ -82,6 +83,7 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT bashcmd 'ls -la /ALL'
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /usr/bin/bash
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT serve4build 9999
 
 
 End of usage.
@@ -118,6 +120,12 @@ function mm-tct() {
    shift
    install-wheels
    tct $@
+}
+
+
+function mm-serve4build() {
+   shift
+   python2 /ALL/Scripts/serve4build.py $@
 }
 
 
@@ -188,14 +196,6 @@ then
    source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
 
-# # is now handled in toolchain using '-c resultdir ...'
-# if [[ ( $exitstatus -eq 0 ) \
-#    && ( -d /ALL/dumy_webroot/typo3cms/drafts/project ) \
-#    && ( -d /RESULT ) ]]
-# then
-# rsync -a /ALL/dumy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
-# exitstatus=$?
-# fi
 
 tell-about-results $exitstatus
 }
@@ -232,15 +232,6 @@ then
    source /tmp/RenderDocumentation/Todo/ALL.source-me.sh
 fi
 
-# # is now handled in toolchain using '-c resultdir ...'
-# if [[ ( $exitstatus -eq 0 ) \
-#    && ( -d /ALL/dumy_webroot/typo3cms/drafts/project ) \
-#    && ( -d /RESULT ) ]]
-# then
-# rsync -a /ALL/dumy_webroot/typo3cms/drafts/project /RESULT/Result/ --delete
-# exitstatus=$?
-# fi
-
 tell-about-results $exitstatus
 }
 
@@ -266,5 +257,6 @@ show-windows-bat)    mm-show-windows-bat $@ ;;
 show-faq)            mm-show-faq $@ ;;
 show-howto)          mm-show-howto $@ ;;
 tct)                 mm-tct $@ ;;
+serve4build)         mm-serve4build $@ ;;
 *)                   mm-minimalhelp $@ ;;
 esac
