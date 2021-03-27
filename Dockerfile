@@ -154,7 +154,7 @@ RUN \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
-   && pip cache purge \
+   && COMMENT pip cache purge \
    && rm -rf /tmp/* /ALL/userhome/.cache \
    \
    && COMMENT "Make sure other users can write" \
