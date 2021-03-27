@@ -1,3 +1,9 @@
+Release v2.8.2 (2021-03-27)
+===========================
+
+*  [FEATURE] Add serve4build functionality
+
+
 Release v2.8.1 (Mar 26, 2021)
 ============================
 
