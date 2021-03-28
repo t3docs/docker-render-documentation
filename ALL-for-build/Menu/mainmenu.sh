@@ -68,6 +68,7 @@ Usage:
             show-howto           Show howto (not totally up to date)
             show-faq             Show questions and answers (not totally up to date)
             bashcmd              Run a bash command in the container
+            just1sphinxbuild     Run the container for just one 'sphinx-build' command
             serve4build [port]   Run container as server for 'sphinx-build'
             /bin/bash            Enter the container's Bash shell as superuser
             /usr/bin/bash        Enter the container's Bash shell as normal user
@@ -84,6 +85,8 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /usr/bin/bash
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT serve4build 9999
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT just1sphinxbuild
+
 
 
 End of usage.
@@ -126,6 +129,12 @@ function mm-tct() {
 function mm-serve4build() {
    shift
    python2 /ALL/Scripts/serve4build.py $@
+}
+
+
+function mm-just1sphinxbuild() {
+   shift
+   python2 /ALL/Scripts/just1sphinxbuild.py $@
 }
 
 
@@ -258,5 +267,6 @@ show-faq)            mm-show-faq $@ ;;
 show-howto)          mm-show-howto $@ ;;
 tct)                 mm-tct $@ ;;
 serve4build)         mm-serve4build $@ ;;
+just1sphinxbuild)    mm-just1sphinxbuild $@ ;;
 *)                   mm-minimalhelp $@ ;;
 esac

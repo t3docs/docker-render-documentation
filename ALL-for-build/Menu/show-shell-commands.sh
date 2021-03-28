@@ -73,6 +73,9 @@ elif [[ "\$1" = "serve4build" ]]; then
    local PORT=\${2:-9999}
    cmd="\$cmd --user=\$(id -u):\$(id -g) -it"
    cmd="\$cmd --publish=\${PORT}:\${PORT}/tcp"
+elif [[ "\$1" = "just1sphinxbuild" ]]; then
+   local CREATING=1
+   cmd="\$cmd --user=\$(id -u):\$(id -g)"
 elif [[ "\$@" = "export-ALL" ]]; then
    local CREATING=1
    cmd="\$cmd --entrypoint /bin/bash"
@@ -182,6 +185,9 @@ elif [[ "\$@" = "/usr/bin/bash" ]]; then
    true "do nothing here"
 elif [[ "\$1" = "serve4build" ]]; then
    cmd="\$cmd \${1} \${PORT}"
+elif [[ "\$1" = "just1sphinxbuild" ]]; then
+   cmd="\$cmd \$@"
+   echo "See 'Documentation-GENERATED-temp/sphinx-build' for build information"
 elif [[ "\$@" = "export-ALL" ]]; then
    cmd="\$cmd -c \"rsync -a --delete --chown=\$(id -u):\$(id -g) /ALL/ /RESULT/ALL-exported\""
    echo The export will go to:
