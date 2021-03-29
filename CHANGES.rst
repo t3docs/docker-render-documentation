@@ -1,3 +1,9 @@
+Release 'develop' (v2.8.3 (2021-03-29)
+======================================
+
+*  [FEATURE] Add just1sphinxbuild functionality
+
+
 Release v2.8.2 (2021-03-27)
 ===========================
 
@@ -8,13 +14,20 @@ Release v2.8.1 (Mar 26, 2021)
 ============================
 
 *  Use sphinx_typo3_theme v4.5.2
+*  Disable autoSelect for Sphinx search autocompletion
 *  Set h2edit_url in Overrides.cfg
+*  Link "How to edit" to proper URL and show always and not as hover effect
+*  Constrain area of logo link to actual image
 
 
 Release v2.8.0
 ============================
 
-*  ...
+*  Using sphinx_typo3_theme v4.5.1
+*  How to edit button
+*  Sphinx can use parallel processes
+*  Collapsed menu for TYPO3 Exceptions
+*  Removed: Full width for extra wide screens
 
 
 Release v2.7.1 (Jan 6, 2021)
