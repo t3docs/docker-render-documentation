@@ -167,6 +167,7 @@ language = None
 master_doc = os.path.splitext(ospsplit(masterdocabspath)[1])[0]
 todo_include_todos = False
 exclude_patterns = []
+# Keep in sync with Defaults.cfg:
 extensions_to_be_loaded = [
     'sphinx.ext.autodoc',
     'sphinx.ext.coverage',
@@ -190,6 +191,9 @@ extensions_to_be_loaded = [
 ]
 
 # Legal extensions will be loaded if requested in Settings.cfg or Overrides.cfg
+# Actually, this is not activated at the moment. Any (available) extension may
+# be requested in Settings.cfg
+
 legal_extensions = [
     # to be extended ...
 ]
@@ -316,7 +320,8 @@ def updateModuleGlobals(GLOBALS, US):
 
     for k, e in US.get('extensions', {}).items():
         if not e in GLOBALS['extensions']:
-            if e in legal_extensions:
+            # DISABLED: check for legal_extensions
+            if True or e in legal_extensions:
                 GLOBALS['extensions'].append(e)
 
     for k, v in US.get('extlinks', {}).items():
