@@ -1,9 +1,9 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.8.3
+ARG OUR_IMAGE_VERSION=v2.9-dev
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v2.8.3'
+# release version looks like 'v2.9.0'
 ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
@@ -124,6 +124,7 @@ RUN \
    \
    && virtualenv .venv \
    && .venv/bin/pip install -r requirements.txt \
+   && COMMENT 'find /ALL/Downloads/wheels -type f -name "*.whl" | xargs --no-run-if-empty .venv/bin/pip --disable-pip-version-check install --force --no-cache-dir' \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
