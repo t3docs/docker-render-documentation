@@ -176,6 +176,8 @@ extensions_to_be_loaded = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.mathjax',
     'sphinx.ext.todo',
+    'sphinx_copybutton',
+    'sphinx_tabs.tabs',
     'sphinx_typo3_theme',
     'sphinxcontrib.gitloginfo',
     'sphinxcontrib.phpdomain',
@@ -185,7 +187,6 @@ extensions_to_be_loaded = [
     'sphinxcontrib.t3tablerows',
     'sphinxcontrib.t3targets',
     'sphinxcontrib.youtube',
-    'sphinx_tabs.tabs',
 ]
 
 # Legal extensions will be loaded if requested in Settings.cfg or Overrides.cfg
