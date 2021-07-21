@@ -30,7 +30,7 @@ ENV \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1616756420" \
+   THEME_MTIME="1626861600" \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
@@ -123,8 +123,8 @@ RUN \
    && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
    \
    && virtualenv .venv \
-   && .venv/bin/pip install -r requirements.txt \
-   && COMMENT 'find /ALL/Downloads/wheels -type f -name "*.whl" | xargs --no-run-if-empty .venv/bin/pip --disable-pip-version-check install --force --no-cache-dir' \
+   && .venv/bin/pip install --upgrade --disable-pip-version-check install pip pathlib2 \
+   && .venv/bin/pip install --disable-pip-version-check install -r requirements.txt \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
