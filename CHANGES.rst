@@ -1,3 +1,10 @@
+Release v2.9.0 (2021-07-22)
+======================================
+
+*  [FEATURE] Use sphinx_typo3_theme >=4.6 with global search
+*  [FEATURE] Add sphinx-copybutton to code-blocks
+
+
 Release 'develop' (v2.8.3 (2021-03-29)
 ======================================
 

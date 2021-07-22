@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.9-dev
+ARG OUR_IMAGE_VERSION=v2.9.0
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # release version looks like 'v2.9.0'
-ARG OUR_IMAGE_TAG=develop
+ARG OUR_IMAGE_TAG=v2.9.0
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
