@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.8.3
+ARG OUR_IMAGE_VERSION=v2.9-dev
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v2.8.3'
-ARG OUR_IMAGE_TAG=latest
+# release version looks like 'v2.9.0'
+ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -30,7 +30,7 @@ ENV \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1616756420" \
+   THEME_MTIME="1626861600" \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
@@ -123,7 +123,8 @@ RUN \
    && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
    \
    && virtualenv .venv \
-   && .venv/bin/pip install -r requirements.txt \
+   && .venv/bin/pip install --upgrade --disable-pip-version-check install pip pathlib2 \
+   && .venv/bin/pip install --disable-pip-version-check install -r requirements.txt \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
