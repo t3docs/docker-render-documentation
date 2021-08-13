@@ -23,5 +23,13 @@
 skinparam ArrowColor #f49700
 skinparam BackgroundColor #FFFFFF
 skinparam DefaultFontColor #333333
+skinparam DividerBackgroundColor  #f7a831
+skinparam GroupBackgroundColor    #f7a831
+skinparam LifeLineBackgroundColor white
+skinparam LifeLineBorderColor #e18d00
+skinparam ParticipantBackgroundColor  #f7a831
+skinparam ParticipantBorderColor  #e18d00
+skinparam BoxLineColor    #e18d00
+skinparam BoxBackgroundColor  #DDDDDD
 skinparam Padding 8
 skinparam Shadowing false
