@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v2.9.0
+ARG OUR_IMAGE_VERSION=v3.0.0
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # release version looks like 'v2.9.0'
-ARG OUR_IMAGE_TAG=latest
+ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -16,8 +16,6 @@ ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 # PlantUML tagged file name as shown on https://plantuml.com/en/download
 # Doesn't work at the moment, but should in future.
 ARG PLANTUML_TAGGED_FILE_NAME="plantuml.1.2020.20.jar"
-
-# requires toolchain version >= 2.7.0, since /ALL/dummy_webroot is gone
 
 ENV \
    LC_ALL=C.UTF-8 \
@@ -33,10 +31,10 @@ ENV \
    THEME_MTIME="1626861600" \
    THEME_NAME="unknown" \
    THEME_VERSION="unknown" \
-   TOOLCHAIN_TOOL_VERSION="develop (1.2.0-dev)" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.11.1" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/v2.11.1.zip" \
-   TOOLCHAIN_VERSION="2.11.1" \
+   TOOLCHAIN_TOOL_VERSION="develop (2.12-dev)" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
+   TOOLCHAIN_VERSION="2.12-dev" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
@@ -93,14 +91,14 @@ RUN \
            --quiet --output-document /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
    && COMMENT "PLANTUML_TAGGED_FILE :: /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
    \
-   && COMMENT "Install python2, pip, setuptools, wheel" \
+   && COMMENT "Install python3, pip, setuptools, wheel" \
    && apt-get install -yq  \
-      python2 \
-   && COMMENT "Make python2 the default" \
-   && ln -s /usr/bin/python2 /usr/bin/python \
-   && /usr/bin/wget  https://bootstrap.pypa.io/pip/2.7/get-pip.py \
-           --quiet --output-document /ALL/Downloads/get-pip.py \
-   && /usr/bin/python2 /ALL/Downloads/get-pip.py \
+      python3-pip \
+      python3-dev \
+      python3.8-venv \
+   && COMMENT "Make python3 the default" \
+   && ln -s /usr/bin/python3 /usr/local/bin/python \
+   && pip3 install --upgrade pip wheel \
    \
    && COMMENT "What we need - convenience tools" \
    && apt-get install -yq --no-install-recommends \
@@ -113,25 +111,16 @@ RUN \
    && rm -rf /var/lib/apt/lists/* \
    \
    && COMMENT "Python stuff" \
-   && /usr/local/bin/pip install --upgrade virtualenv \
-   \
-   && echo "Empty /ALL/venv/.venv" \
-   && rm -rf /ALL/venv/.venv/.gitkeep \
-   \
-   && echo "Disable /ALL/venv/Pipfile.lock - it didn't work reliably" \
-   && rm -f Pipfile.lock.DISABLED \
-   && if [ -f "Pipfile.lock" ]; then mv Pipfile.lock Pipfile.lock.DISABLED; fi \
-   \
-   && virtualenv .venv \
-   && .venv/bin/pip install --upgrade --disable-pip-version-check install pip pathlib2 \
-   && .venv/bin/pip install --disable-pip-version-check install -r requirements.txt \
+   && rm -rf /ALL/venv/.venv  \
+   && python3 -m venv /ALL/venv/.venv \
+   && /ALL/venv/.venv/bin/python3 -m pip install -r requirements.txt \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
    \
    && COMMENT "All files of the theme of a given theme version should have the" \
    && COMMENT "same mtime (last commit) to not turn off Sphinx caching" \
-   && python=$(pwd)/.venv/bin/python \
+   && python=$(pwd)/.venv/bin/python3 \
    && destdir=$(dirname $($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.__file__")) \
    && THEME_MTIME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_mtime()") \
    && THEME_NAME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_name()") \
@@ -140,7 +129,8 @@ RUN \
    \
    && COMMENT "Update TypoScript lexer for highlighting. It comes with Sphinx" \
    && COMMENT "but isn't up to date there. So we use it from our own repo." \
-   && COMMENT "usually: /usr/local/lib/python2.7/site-packages/pygments/lexers" \
+
+   && COMMENT "usually: /ALL/venv/.venv/lib/python3.8/site-packages/pygments/lexers" \
    && destdir=$(dirname $($python -c "import pygments; print pygments.__file__"))/lexers \
    && rm $destdir/typoscript.* \
    && wget $TYPOSCRIPT_PY_URL --quiet --output-document $destdir/typoscript.py \
@@ -200,7 +190,6 @@ RUN \
       \n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/envvars.sh >> /ALL/Downloads/buildinfo.txt \
    && cat /ALL/Downloads/buildinfo.txt
-
 
 ENTRYPOINT ["/ALL/Menu/mainmenu.sh"]
 
