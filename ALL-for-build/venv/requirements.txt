@@ -1,18 +1,18 @@
 Sphinx==1.8.5
-sphinx-typo3-theme
-sphinx-rtd-theme
+beautifulsoup4
+configparser
+lxml
 pathlib2
 pillow
-beautifulsoup4
-lxml
-pyyaml
-pathlib2
 pytest
+pyyaml
 recommonmark
+sphinx-rtd-theme
+sphinx-tabs
+sphinx-typo3-theme
 sphinxcontrib-gitloginfo
 sphinxcontrib-phpdomain
 sphinxcontrib-plantuml
-sphinx-tabs
 subprocess32
 https://github.com/TYPO3-Documentation/sphinx-contrib-slide/archive/v1.1.0.zip
 https://github.com/TYPO3-Documentation/sphinx-contrib-youtube/archive/t3v1.1.0.zip
@@ -20,6 +20,6 @@ https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/v0
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.3.1.zip
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/v0.3.4.zip
 https://github.com/TYPO3-Documentation/t3SphinxTools_includecheck/archive/v1.0.0.zip
-https://github.com/marble/TCT/archive/develop.zip
+https://github.com/marble/TCT/archive/master.zip
 https://github.com/TYPO3-Documentation/sphinx-copybutton/archive/refs/heads/hacked-for-python27.zip
 
