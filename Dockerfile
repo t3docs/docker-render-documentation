@@ -1,9 +1,9 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
-# like vX.Y-dev
-ARG OUR_IMAGE_VERSION=v3.0.0
+# like vX.Y.devN
+ARG OUR_IMAGE_VERSION=v3.0.dev1
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v2.9.0'
+# release version looks like 'v3.0.0'
 ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
@@ -17,6 +17,7 @@ ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 # Doesn't work at the moment, but should in future.
 ARG PLANTUML_TAGGED_FILE_NAME="plantuml.1.2020.20.jar"
 
+# THEME_MTIME=int(datetime.datetime(2021, 10, 3).timestamp())
 ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
@@ -28,20 +29,31 @@ ENV \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1626861600" \
+   THEME_MTIME="1633212000" \
    THEME_NAME="unknown" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme/releases/tag/v4.7.dev1" \
    THEME_VERSION="unknown" \
-   TOOLCHAIN_TOOL_VERSION="develop (2.12-dev)" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip" \
+   TOOLCHAIN_TOOL_VERSION="v1.2.0" \
+   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.2.0.zip" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.12.dev1" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v2.12.dev1.zip" \
    TOOLCHAIN_VERSION="2.12-dev" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
+## Set THEME_PIP_SOURCE to any argument PIP accepts, like:
+#  THEME_PIP_SOURCE=sphinx_typo3_theme
+#  THEME_PIP_SOURCE=git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@develop
+#  THEME_PIP_SOURCE=git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme/releases/tag/v4.7.dev1
+
 # Notation:
-#  TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop"
 #  TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip"
-#  TOOLCHAIN_VERSION="2.10-dev"
+#  TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop"
+#  TOOLCHAIN_VERSION="develop (2.12.dev1)"
+#
+#  TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v2.12.dev1.zip"
+#  TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.12.dev1"
+#  TOOLCHAIN_VERSION="2.12.dev1"
 
 
 LABEL \
@@ -113,25 +125,30 @@ RUN \
    && COMMENT "Python stuff" \
    && rm -rf /ALL/venv/.venv  \
    && python3 -m venv /ALL/venv/.venv \
-   && /ALL/venv/.venv/bin/python3 -m pip install -r requirements.txt \
+   && bash -c 'ls -la /ALL/venv/.venv/bin' \
+   && python=$(pwd)/.venv/bin/python3 \
+   && pip=$(pwd)/.venv/bin/pip3 \
+   && $pip install wheel \
+   && $pip install future \
+   && $pip install setuptools_scm \
+   && $pip install "$THEME_PIP_SOURCE" "$TOOLCHAIN_TOOL_URL"\
+   && $pip install -r requirements.txt \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
    && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
    \
    && COMMENT "All files of the theme of a given theme version should have the" \
    && COMMENT "same mtime (last commit) to not turn off Sphinx caching" \
-   && python=$(pwd)/.venv/bin/python3 \
-   && destdir=$(dirname $($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.__file__")) \
-   && THEME_MTIME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_mtime()") \
-   && THEME_NAME=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.get_theme_name()") \
-   && THEME_VERSION=$($python -c "import sphinx_typo3_theme; print sphinx_typo3_theme.__version__") \
+   && destdir=$(dirname $($python -c "import sphinx_typo3_theme; print(sphinx_typo3_theme.__file__, end='')")) \
+   && THEME_MTIME=$($python -c "import sphinx_typo3_theme; print(sphinx_typo3_theme.get_theme_mtime())") \
+   && THEME_NAME=$($python -c "import sphinx_typo3_theme; print(sphinx_typo3_theme.get_theme_name())") \
+   && THEME_VERSION=$($python -c "import sphinx_typo3_theme; print(sphinx_typo3_theme.__version__)") \
    && find $destdir -exec touch --no-create --time=mtime --date="$(date --rfc-2822 --date=@$THEME_MTIME)" {} \; \
    \
    && COMMENT "Update TypoScript lexer for highlighting. It comes with Sphinx" \
    && COMMENT "but isn't up to date there. So we use it from our own repo." \
-
    && COMMENT "usually: /ALL/venv/.venv/lib/python3.8/site-packages/pygments/lexers" \
-   && destdir=$(dirname $($python -c "import pygments; print pygments.__file__"))/lexers \
+   && destdir=$(dirname $($python -c "import pygments; print(pygments.__file__, end='')"))/lexers \
    && rm $destdir/typoscript.* \
    && wget $TYPOSCRIPT_PY_URL --quiet --output-document $destdir/typoscript.py \
    && echo curdir=$(pwd); cd $destdir; $python _mapping.py; cd $curdir \
@@ -142,6 +159,8 @@ RUN \
    && unzip /ALL/Downloads/Toolchain_RenderDocumentation.zip -d /ALL/Toolchains \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
+   \
+   && $pip freeze > /ALL/venv/pip-frozen-requirements.txt \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \
@@ -167,8 +186,10 @@ RUN \
    && echo "export OUR_IMAGE_VERSION=\"${OUR_IMAGE_VERSION}\""     >> /ALL/Downloads/envvars.sh \
    && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""             >> /ALL/Downloads/envvars.sh \
    \
-   && COMMENT "Let\'s have some debug info ('::' as separator)" \
-   && echo "\
+   && COMMENT "Let\'s have some info ('::' as separator) about the build" \
+   && echo "# cat /ALL/venv/pip-frozen-requirements.txt:"\
+   && cat /ALL/venv/pip-frozen-requirements.txt \
+   && echo "\n\
       $OUR_IMAGE_VERSION\n\
       Versions used for $OUR_IMAGE_VERSION:\n\
       Theme                :: $THEME_NAME :: $THEME_VERSION :: mtime:$THEME_MTIME\n\

@@ -1,4 +1,5 @@
-Sphinx==1.8.5
+docutils<0.17
+sphinx
 beautifulsoup4
 configparser
 lxml
@@ -7,9 +8,9 @@ pillow
 pytest
 pyyaml
 recommonmark
+sphinx-copybutton
 sphinx-rtd-theme
 sphinx-tabs
-sphinx-typo3-theme
 sphinxcontrib-gitloginfo
 sphinxcontrib-phpdomain
 sphinxcontrib-plantuml
@@ -20,6 +21,4 @@ https://github.com/TYPO3-Documentation/sphinxcontrib.t3fieldlisttable/archive/v0
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3tablerows/archive/v0.3.1.zip
 https://github.com/TYPO3-Documentation/sphinxcontrib.t3targets/archive/v0.3.4.zip
 https://github.com/TYPO3-Documentation/t3SphinxTools_includecheck/archive/v1.0.0.zip
-https://github.com/marble/TCT/archive/master.zip
-https://github.com/TYPO3-Documentation/sphinx-copybutton/archive/refs/heads/hacked-for-python27.zip
 

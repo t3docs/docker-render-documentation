@@ -1,5 +1,10 @@
 info.txt about /ALL/venv and /ALL/venv/.venv
 
+2021-08-25
+==========
+
+Why docutils<0.17? See: https://docutils.sourceforge.io/RELEASE-NOTES.html
+
 2020-05-07
 ==========
 

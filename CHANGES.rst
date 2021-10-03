@@ -1,5 +1,16 @@
+Release v3.0.dev1 (2021-10-03)
+==============================
+
+*  [MAJOR CHANGE] Use newer versions:
+
+   *  Python v3.8.10 (was v2.7)
+   *  Sphinx v4.2.x (was v1.8.5)
+   *  sphinx_typo3_theme >=4.7.dev1
+   *  tct >=1.2.0
+   *  toolchain_RenderDocumentation v2.12.dev1
+
 Release v2.9.0 (2021-07-22)
-======================================
+===========================
 
 *  [FEATURE] Use sphinx_typo3_theme >=4.6 with global search
 *  [FEATURE] Add sphinx-copybutton to code-blocks
