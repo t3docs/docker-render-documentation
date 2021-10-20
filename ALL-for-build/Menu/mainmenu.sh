@@ -86,6 +86,7 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /usr/bin/bash
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT serve4build 9999
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT just1sphinxbuild
+        T3DOCS_DEBUG=1 ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [...]
 
 
 
