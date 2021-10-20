@@ -32,6 +32,8 @@ function mm-minimalhelp(){
 $OUR_IMAGE_SLOGAN (${OUR_IMAGE_TAG}, ${OUR_IMAGE_VERSION})
 For help:
    docker run --rm $OUR_IMAGE --help
+
+   # or, if you defined the helper function:
    ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
 
 ... did you mean '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml'?
@@ -47,12 +49,10 @@ function mm-usage() {
    cat <<EOT
 Usage:
     Prepare:
-        Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the commandline of your system:
-            source <(docker run --rm $OUR_IMAGE show-shell-commands)
-        Or, if that fails, use the long form:
-            docker run --rm $OUR_IMAGE show-shell-commands >shell-commands.sh
-            source shell-commands.sh
-        That makes a function defined. To inspect that:
+        Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the command line of your system.
+        It will help running Docker with the correct parameters and mappings:
+            eval "\$(docker run --rm $OUR_IMAGE show-shell-commands)"
+        If you like, use run 'declare' to inspect the function:
             declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}
     Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]
