@@ -8,4 +8,8 @@ Keep version number like above in files:
 *  README.rst
 *  CHANGES.rst
 
+And check:
+
+*  public_envvars.sh
+
 End of text.
