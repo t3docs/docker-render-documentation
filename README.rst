@@ -70,7 +70,7 @@ Getting the image from GitHub::
 
    # Assign our usual tag `t3docs/render-documentation:develop`
    docker tag ghcr.io/t3docs/render-documentation:develop \
-              ghcr.io/t3docs/render-documentation:develop
+                      t3docs/render-documentation:develop
 
    # Define the helper function `dockrun_t3rd`
     eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
@@ -79,9 +79,12 @@ Getting the image from GitHub::
 Using the image::
 
    # some (educational) example calls
+   #
    docker run --rm ghcr.io/t3docs/render-documentation:develop
    docker run --rm t3docs/render-documentation:develop
    docker run --rm t3docs/render-documentation:develop --help
+   #
+   # define 'dockrun_t3rd'
    eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
    dockrun_t3rd
    dockrun_t3rd --help
