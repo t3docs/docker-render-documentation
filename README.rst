@@ -10,17 +10,18 @@ DRC - Docker Rendering Container
    granted a free plan for TYPO3 yet we are currently switching to GitHub's
    package repository https://ghcr.io/
 
-   Was::
+   WAS::
 
       docker pull t3docs/render-documentation:develop
       eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
 
-   Is now::
+   IS NOW::
 
       docker pull ghcr.io/t3docs/render-documentation:develop
       docker tag ghcr.io/t3docs/render-documentation:develop \
-                 ghcr.io/t3docs/render-documentation:develop
+                         t3docs/render-documentation:develop
       eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
+
 
 What is this?
 =============
