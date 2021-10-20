@@ -52,7 +52,7 @@ Usage:
         Define function '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT' on the command line of your system.
         It will help running Docker with the correct parameters and mappings:
             eval "\$(docker run --rm $OUR_IMAGE show-shell-commands)"
-        If you like, use run 'declare' to inspect the function:
+        If you like to, use 'declare' to inspect the function:
             declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}
     Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]

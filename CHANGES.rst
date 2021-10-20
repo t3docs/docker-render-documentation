@@ -1,4 +1,4 @@
-Release v3.0.dev1 (2021-10-03)
+Release v3.0.dev2 (2021-10-20)
 ==============================
 
 *  [MAJOR CHANGE] Use newer versions:
