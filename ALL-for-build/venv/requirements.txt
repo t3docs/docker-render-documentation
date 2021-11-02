@@ -9,6 +9,7 @@ pytest
 pyyaml
 recommonmark
 sphinx-copybutton
+sphinx-panels
 sphinx-rtd-theme
 sphinx-tabs
 sphinxcontrib-gitloginfo

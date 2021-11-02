@@ -179,6 +179,7 @@ language = None
 master_doc = os.path.splitext(ospsplit(masterdocabspath)[1])[0]
 todo_include_todos = False
 exclude_patterns = []
+
 # Keep in sync with Defaults.cfg:
 extensions_to_be_loaded = [
     "sphinx.ext.autodoc",
@@ -190,6 +191,7 @@ extensions_to_be_loaded = [
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
     "sphinx_copybutton",
+    "sphinx_panels",
     "sphinx_tabs.tabs",
     "sphinx_typo3_theme",
     "sphinxcontrib.gitloginfo",
@@ -229,6 +231,8 @@ plantumlstylesabspath = ospj(plantumlfolder, "typo3_styles.iuml")
 plantuml = ["plantuml", "-I" + plantumlstylesabspath]
 
 intersphinx_mapping = {}
+#
+panels_add_bootstrap_css = False
 #
 #
 #

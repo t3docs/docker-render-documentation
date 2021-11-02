@@ -1,3 +1,13 @@
+Release v3.0.dev3 (2021-11-02)
+==============================
+
+*  [FEATURE]] Add Sphinx extension "sphinx-tabs"
+   https://sphinx-panels.readthedocs.io/en/latest/
+
+*  Includes latest version of the theme with Display Settings Options like
+   'Use full width' and 'Make settings permanent'.
+
+
 Release v3.0.dev2 (2021-10-20)
 ==============================
 
