@@ -1,3 +1,9 @@
+Release v3.0.dev4 (2021-11-05)
+==============================
+
+*  Update docutils.conf
+*  Add Sphinx extension sphinxcontrib.collections
+
 Release v3.0.dev3 (2021-11-02)
 ==============================
 
