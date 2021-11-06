@@ -1,3 +1,8 @@
+Release v3.0.dev6 (2021-11-06)
+==============================
+
+*  Set nitpick_ignore_regex in conf.py.
+
 Release v3.0.dev5 (2021-11-06)
 ==============================
 

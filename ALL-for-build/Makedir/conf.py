@@ -179,6 +179,7 @@ language = None
 master_doc = os.path.splitext(ospsplit(masterdocabspath)[1])[0]
 todo_include_todos = False
 exclude_patterns = []
+nitpick_ignore_regex = [('py:.*', '.*'), ('php:.*', '.*'), ('std:class', '.*')]
 
 # Keep in sync with Defaults.cfg:
 extensions_to_be_loaded = [

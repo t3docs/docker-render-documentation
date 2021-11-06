@@ -30,7 +30,7 @@ Use this repository and `docker build` to build the TYPO3 official Docker image
 `t3docs/render-documentation` for rendering TYPO3 documentation.
 
 :Repository:      https://github.com/t3docs/docker-render-documentation
-:Version:         develop (v3.0.dev5)
+:Version:         develop (v3.0.dev6)
 :Authors:         TYPO3 Documentation Team
 :Main caretaker:  Martin Bless <martin.bless@mbless.de>
 :Documentation:   `The T3DocsRenderingContainer (Draft)
