@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.0.dev4
+ARG OUR_IMAGE_VERSION=v3.0.dev5
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # release version looks like 'v3.0.0'
 ARG OUR_IMAGE_TAG=develop
@@ -17,7 +17,7 @@ ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 # Doesn't work at the moment, but should in future.
 ARG PLANTUML_TAGGED_FILE_NAME="plantuml.1.2020.20.jar"
 
-# THEME_MTIME=1636066800=int(datetime.datetime(2021, 11, 5).timestamp())
+# THEME_MTIME=1636153200=int(datetime.datetime(2021, 11, 6).timestamp())
 ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
@@ -29,7 +29,7 @@ ENV \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1636066800" \
+   THEME_MTIME="1636153200" \
    THEME_NAME="unknown" \
    THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@develop" \
    THEME_VERSION="unknown" \
@@ -49,11 +49,11 @@ ENV \
 # Notation:
 #  TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/develop.zip"
 #  TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-develop"
-#  TOOLCHAIN_VERSION="develop (2.12.dev1)"
+#  TOOLCHAIN_VERSION="develop (2.12.dev2)"
 #
-#  TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v2.12.dev1.zip"
-#  TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.12.dev1"
-#  TOOLCHAIN_VERSION="2.12.dev1"
+#  TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v2.12.dev2.zip"
+#  TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.12.dev2"
+#  TOOLCHAIN_VERSION="2.12.dev2"
 
 
 LABEL \

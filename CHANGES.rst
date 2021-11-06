@@ -1,3 +1,9 @@
+Release v3.0.dev5 (2021-11-06)
+==============================
+
+*  Use newer toolchain.
+*  Use newer theme
+
 Release v3.0.dev4 (2021-11-05)
 ==============================
 
