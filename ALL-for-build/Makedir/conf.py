@@ -196,6 +196,7 @@ extensions_to_be_loaded = [
     "sphinx_tabs.tabs",
     "sphinx_typo3_theme",
     "sphinxcontrib.collections",
+    "sphinxcontrib.docstypo3",
     "sphinxcontrib.gitloginfo",
     "sphinxcontrib.phpdomain",
     "sphinxcontrib.plantuml",
