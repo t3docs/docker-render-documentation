@@ -26,6 +26,8 @@ try:
 except ImportError:
     from cStringIO import StringIO
 
+__version__ = "2021-12-04_11-21"
+
 lexers["php"] = PhpLexer(startinline=True)
 lexers["php-annotations"] = PhpLexer(startinline=True)
 
