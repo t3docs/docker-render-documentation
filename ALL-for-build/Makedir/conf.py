@@ -76,7 +76,10 @@ read_method(StringIO(u"[" + section + u"]\n" + data))
 # Required:
 MASTERDOC = config.get(section, "MASTERDOC")
 BUILDDIR = config.get(section, "BUILDDIR")
+GITDIR = config.get(section, "GITDIR")
 LOGDIR = config.get(section, "LOGDIR")
+MASTERDOC = config.get(section, "MASTERDOC")
+T3DOCDIR = config.get(section, "T3DOCDIR")
 
 # find absolute path to conf.py(c)
 confpyabspath = None
@@ -93,7 +96,7 @@ confpyfolder = ospsplit(confpyabspath)[0]
 if isabs(MASTERDOC):
     masterdocabspath = normpath(MASTERDOC)
 else:
-    masterdocabspath = normpath(ospj(confpyfolder, MASTERDOC))
+    masterdocabspath = normpath(ospj(GITDIR, MASTERDOC))
 
 if isabs(LOGDIR):
     logdirabspath = normpath(LOGDIR)
@@ -101,11 +104,12 @@ else:
     logdirabspath = normpath(ospj(confpyfolder, LOGDIR))
 
 # the absolute path to ./Documentation/
-projectabspath = ospsplit(masterdocabspath)[0]
+projectabspath = ospj(GITDIR, T3DOCDIR)
 # the absolute path to Documentation/Settings.cfg
 settingsabspath = projectabspath + "/" + "Settings.cfg"
 defaultsabspath = ospj(confpyfolder, "Defaults.cfg")
 overridesabspath = ospj(confpyfolder, "Overrides.cfg")
+# Makefile/Settings.json is the 'conf_py' part of jobfile.json
 settingsjsonabspath = ospj(confpyfolder, "Settings.json")
 
 
@@ -123,9 +127,19 @@ def merge_settings_file(fpath, D, notes):
     config = six.moves.configparser.RawConfigParser()
     config.readfp(codecs.open(fpath, "r", "utf-8"))
     for s in config.sections():
-        D[s] = D.get(s, {})
-        for o in config.options(s):
-            D[s][o] = config.get(s, o)
+        s2 = s.replace('-', '_')
+        parts = s2.split('_')
+        if parts[0] == 'docstypo3':
+            D2 = D
+            for part in parts:
+                D2[part] = D2.get(part, {})
+                D2 = D2[part]
+            for o in config.options(s):
+                D2[o] = config.get(s, o)
+        else:
+            D[s2] = D.get(s, {})
+            for o in config.options(s):
+                D[s2][o] = config.get(s, o)
 
 
 #
@@ -138,7 +152,7 @@ project = u"The Project's Title"
 copyright = u"Since ever by authors and copyright holders"
 t3shortname = u"t3shortname"
 t3author = u"The Author(s)"
-description = u"This is project '" + project + "'"
+description = u""
 
 version = "0.0"
 release = "0.0.0"
@@ -330,6 +344,13 @@ def updateModuleGlobals(GLOBALS, US):
     if "general" in US:
         GLOBALS.update(US["general"])
 
+    if "docstypo3" in US:
+        GLOBALS["docstypo3"] = US["docstypo3"]
+        # Provide 'description' in the module, if empty but specified in dt3m.
+        # The value is used to set up other formats like epub, latex, man, ...
+        description = US["docstypo3"].get("meta", {}).get("description", "")
+        GLOBALS["description"] = GLOBALS.get("description", "") or description
+
     # allow comma separated values like: .rst,.md
     if type(GLOBALS["source_suffix"]) in [type(""), type(u"")]:
         GLOBALS["source_suffix"] = [
@@ -427,7 +448,8 @@ if not "htmlhelp_basename" in G:
 #
 #
 #
-# (7) Settings from Settings.json
+# (7) Settings from ../Makedir/Settings.json
+#     This is the "conf_py" subpart of "jobfile.json"
 #
 # Now: Everything can be overriden. Use at you own risk!
 #
