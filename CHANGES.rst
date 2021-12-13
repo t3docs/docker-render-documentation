@@ -1,3 +1,12 @@
+Release v3.0.dev9 (2021-12-13)
+==============================
+
+*  Update sphinxcontrib.docstypo3 and use v1.0.dev4
+*  Use sphinx_typo3_theme v4.7.dev6
+
+   *  Create project links in footer not only when rendering for docs.typo3.org
+
+
 Release v3.0.dev7 (2021-11-01)
 ==============================
 
