@@ -1,3 +1,9 @@
+Release v3.0.dev10 (2021-12-14)
+==============================
+
+* Turn parallel reading off with sphinxcontrib.t3targets/archive/v0.3.5.zip
+
+
 Release v3.0.dev9 (2021-12-13)
 ==============================
 
