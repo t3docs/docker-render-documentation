@@ -1,3 +1,13 @@
+Release v3.0.dev11 (2021-12-xx)
+==============================
+
+*  update conf.py
+*  Allow list-like string in Settings.cfg for 'graphviz_dot_args'
+*  update extlinks, adding 't3ext' and 'packagist'
+*  work on EditButton for GitHub, Bitbucket, GitLab
+*  Update docutils.conf
+
+
 Release v3.0.dev10 (2021-12-14)
 ==============================
 

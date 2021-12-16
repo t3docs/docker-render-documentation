@@ -26,7 +26,7 @@ try:
 except ImportError:
     from cStringIO import StringIO
 
-__version__ = "2021-12-04_11-21"
+__version__ = "2021-12-16_18-45"
 
 lexers["php"] = PhpLexer(startinline=True)
 lexers["php-annotations"] = PhpLexer(startinline=True)
@@ -55,8 +55,6 @@ else:
 G = globals()
 # where we merge the various settings
 US = user_settings = {}
-# a dictionary to take notes while within conf.py
-notes = {}
 
 
 #
@@ -119,11 +117,34 @@ def firstNotNone(*args):
             return a
     return None
 
+def get_list_of_strings_from_string(s):
+    result = []
+    s = s.strip()
+    ok = s.startswith("[") and s.endswith("]")
+    if ok:
+        s = s[1:-1].strip()
+        ok = not not s
+    if ok:
+        for part in s.split(','):
+            part = part.strip()
+            if part:
+                ok = (
+                    (part.startswith("'") and part.endswith("'"))
+                    or
+                    (part.startswith('"') and part.endswith('"'))
+                )
+                if not ok:
+                    break
+                result.append(part[1:-1])
+    if not ok:
+        result = []
+    return result
 
-def merge_settings_file(fpath, D, notes):
+
+
+def merge_settings_file(fpath, D):
     if not ospe(fpath):
         return
-    notes[os.path.split(fpath)[1]] = fpath
     config = six.moves.configparser.RawConfigParser()
     config.readfp(codecs.open(fpath, "r", "utf-8"))
     for s in config.sections():
@@ -137,10 +158,21 @@ def merge_settings_file(fpath, D, notes):
             for o in config.options(s):
                 D2[o] = config.get(s, o)
         else:
-            D[s2] = D.get(s, {})
+            D[s2] = D.get(s2, {})
             for o in config.options(s):
                 D[s2][o] = config.get(s, o)
 
+    v = D.get("general", {}).get("graphviz_dot_args", "")
+    if v:
+        del D["general"]["graphviz_dot_args"]
+        v = get_list_of_strings_from_string(v)
+    if v:
+        D2 = D.get("graphviz_dot_args_as_dict", {})
+        D["graphviz_dot_args_as_dict"] = D2
+        for elm in v:
+            parts = elm.split("=", 1)
+            if len(parts) == 2:
+                D2[parts[0]] = parts[1]
 
 #
 #
@@ -170,11 +202,12 @@ html_theme_options[
 ] = ""  # 'TYPO3-Documentation/TYPO3CMS-Reference-Typoscript'
 html_theme_options[
     "path_to_documentation_dir"
-] = ""  # 'Documentation' or e.g. 'typo3/sysext/form/Documentation'
+] = ""  # 'Documentation/' or e.g. 'typo3/sysext/form/Documentation/'
 html_theme_options[
     "github_revision_msg"
 ] = ""  # '<a href="https://github.com/TYPO3-Documentation/EXAMPLE' + '/commit/' +'a2e479886bfa7e866dbb5bfd6aad77355f567db0' + '" target="_blank">' + 'a2e47988' + '</a>'
-html_theme_options["github_sphinx_locale"] = ""  # ?
+html_theme_options["github_sphinx_locale"] = ""  # deprecated, use t3docs_locale
+html_theme_options["t3docs_locale"] = ""         # "" for en_US, "de_DE", "fr_FR", ...
 html_theme_options["project_contact"] = ""  # 'mailto:documentation@typo3.org'
 html_theme_options[
     "project_discussions"
@@ -240,9 +273,8 @@ for e in extensions_to_be_loaded:
 extensions = extensions_to_be_loaded[:]
 
 extlinks = {}
-extlinks["forge"] = ("https://forge.typo3.org/issues/%s", "Forge #")
-extlinks["issue"] = ("https://forge.typo3.org/issues/%s", "Issue #")
-extlinks["review"] = ("https://review.typo3.org/%s", "Review #")
+# extlinks["role"] = ("url/%s", "prefix")
+
 
 # Graphviz styles
 #
@@ -255,23 +287,47 @@ extlinks["review"] = ("https://review.typo3.org/%s", "Review #")
 # Find all attributes at https://graphviz.org/doc/info/attrs.html.
 #
 # Align with PlantUML styles.
-graphviz_dot_args = [
-    "-Gcolor=#000000",
-    "-Gfillcolor=#FFFFFF",
-    "-Gfontname=sans-serif",
-    "-Gfontsize=10.0",
-    "-Gfontcolor=#333333",
-    "-Nstyle=filled",
-    "-Ncolor=#A80036",
-    "-Nfillcolor=#FEFECE",
-    "-Nfontname=sans-serif",
-    "-Nfontsize=10.0",
-    "-Nfontcolor=#333333",
-    "-Ecolor=#F49700",
-    "-Efontname=sans-serif",
-    "-Efontsize=9.0",
-    "-Efontcolor=#333333",
-]
+
+# use dict so we can do overrides
+graphviz_dot_args_as_dict = {}
+
+# graphviz_dot_args_as_dict = {
+#     "-Gcolor"     : "#000000",
+#     "-Gfillcolor" : "#FFFFFF",
+#     "-Gfontname"  : "sans-serif",
+#     "-Gfontsize"  : "10.0",
+#     "-Gfontcolor" : "#333333",
+#     "-Nstyle"     : "filled",
+#     "-Ncolor"     : "#A80036",
+#     "-Nfillcolor" : "#FEFECE",
+#     "-Nfontname"  : "sans-serif",
+#     "-Nfontsize"  : "10.0",
+#     "-Nfontcolor" : "#333333",
+#     "-Ecolor"     : "#F49700",
+#     "-Efontname"  : "sans-serif",
+#     "-Efontsize"  : "9.0",
+#     "-Efontcolor" : "#333333",
+# }
+#
+# what we need in the end
+# [general]
+#graphviz_dot_args = [
+#    "-Gcolor=#000000",
+#    "-Gfillcolor=#FFFFFF",
+#    "-Gfontname=sans-serif",
+#    "-Gfontsize=10.0",
+#    "-Gfontcolor=#333333",
+#    "-Nstyle=filled",
+#    "-Ncolor=#A80036",
+#    "-Nfillcolor=#FEFECE",
+#    "-Nfontname=sans-serif",
+#    "-Nfontsize=10.0",
+#    "-Nfontcolor=#333333",
+#    "-Ecolor=#F49700",
+#    "-Efontname=sans-serif",
+#    "-Efontsize=9.0",
+#    "-Efontcolor=#333333",
+#]
 
 # PlantUML stylesheet
 plantumlfolder = ospj(confpyfolder, "sphinxcontrib-plantuml")
@@ -286,13 +342,13 @@ panels_add_bootstrap_css = False
 #
 #
 # (3) Settings from MAKEDIR/Defaults.cfg
-merge_settings_file(defaultsabspath, US, notes)
+merge_settings_file(defaultsabspath, US)
 #
 #
 #
 #
 # (4) User settings from ./Documentation/Settings.cfg
-merge_settings_file(settingsabspath, US, notes)
+merge_settings_file(settingsabspath, US)
 #
 #
 #
@@ -364,7 +420,7 @@ else:
 #
 #
 # (6) Settings in MAKEDIR/Overrides.cfg
-merge_settings_file(overridesabspath, US, notes)
+merge_settings_file(overridesabspath, US)
 #
 #
 #
@@ -407,6 +463,9 @@ def updateModuleGlobals(GLOBALS, US):
 
     for k, v in US.get("html_theme_options", {}).items():
         GLOBALS["html_theme_options"][k] = v
+
+    for k, v in US.get("graphviz_dot_args_as_dict", {}).items():
+        GLOBALS["graphviz_dot_args_as_dict"][k] = v
 
     # derive default settings for the other builders from the values we
     # already have
@@ -495,17 +554,18 @@ if ospe(settingsjsonabspath):
         if not e in extensions:
             extensions.append(e)
 
-    # extlinks are merged (added or updated)
     extlinks.update(D.get("extlinks", {}))
-
-    # html_theme_options are merged (added or updated)
     html_theme_options.update(D.get("html_theme_options", {}))
-
-    # intersphinx_mapping is merged (added or updated)
     intersphinx_mapping.update(D.get("intersphinx_mapping", {}))
+    graphviz_dot_args_as_dict.update(D.get("graphviz_dot_args_as_dict", {}))
 
     # ATTENTION:
     # settings.json is totally in you hand. No sanity checks are made here.
+
+
+graphviz_dot_args = ["%s=%s" % (k, v)
+                     for k, v in sorted(graphviz_dot_args_as_dict.items())
+                     if v != "None"]
 
 
 # As other modules of Sphinx check the values of conf.py let's do
@@ -556,9 +616,6 @@ if 1 and "dump resulting settings as json":
             f2, indent=4, sort_keys=True)
     del settingsDumpJsonFile
 
-if "notes" in G:
-    del notes
-del globals()["G"]
 
 # From Sphinx "Extensions to theme docs"
 def setup(app):
