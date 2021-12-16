@@ -244,6 +244,35 @@ extlinks["forge"] = ("https://forge.typo3.org/issues/%s", "Forge #")
 extlinks["issue"] = ("https://forge.typo3.org/issues/%s", "Issue #")
 extlinks["review"] = ("https://review.typo3.org/%s", "Review #")
 
+# Graphviz styles
+#
+# Assign default attributes to graphs, nodes and edges by
+#
+# - -G<attribute=value>
+# - -N<attribute=value> and
+# - -E<attribute=value>.
+#
+# Find all attributes at https://graphviz.org/doc/info/attrs.html.
+#
+# Align with PlantUML styles.
+graphviz_dot_args = [
+    "-Gcolor=#000000",
+    "-Gfillcolor=#FFFFFF",
+    "-Gfontname=sans-serif",
+    "-Gfontsize=10.0",
+    "-Gfontcolor=#333333",
+    "-Nstyle=filled",
+    "-Ncolor=#A80036",
+    "-Nfillcolor=#FEFECE",
+    "-Nfontname=sans-serif",
+    "-Nfontsize=10.0",
+    "-Nfontcolor=#333333",
+    "-Ecolor=#F49700",
+    "-Efontname=sans-serif",
+    "-Efontsize=9.0",
+    "-Efontcolor=#333333",
+]
+
 # PlantUML stylesheet
 plantumlfolder = ospj(confpyfolder, "sphinxcontrib-plantuml")
 plantumlstylesabspath = ospj(plantumlfolder, "typo3_styles.iuml")
