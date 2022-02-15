@@ -1,3 +1,10 @@
+Release v3.0.dev12 (2022-02-15)
+===============================
+
+*  update conf.py: add toml, strip types from confval
+*  use custom sphinxcontrib-phpdomain@develop-for-typo3
+
+
 Release v3.0.dev11 (2021-12-xx)
 ==============================
 

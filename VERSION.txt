@@ -1,4 +1,4 @@
-v3.0.dev11
+v3.0.dev12
 
 
 Keep version number like above in files:
