@@ -628,19 +628,5 @@ def setup(app):
         "confval",
         objname="configuration value",
         indextemplate="pair: %s; configuration value",
-        doc_field_types=[
-            PyField(
-                "type",
-                label=_("Type"),
-                has_arg=False,
-                names=("type",),
-                bodyrolename="class",  # TODO: Fix this line!
-            ),
-            Field(
-                "default",
-                label=_("Default"),
-                has_arg=False,
-                names=("default",),
-            ),
-        ],
+        doc_field_types=[],
     )
