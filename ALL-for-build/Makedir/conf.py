@@ -14,6 +14,7 @@
 import codecs
 import json
 import os
+import toml
 from os.path import exists as ospe, isabs, join as ospj, normpath, split as ospsplit
 
 import six.moves.configparser
@@ -607,7 +608,7 @@ def json_serializable(obj):
         return False
 
 if 1 and "dump resulting settings as json":
-    # This dumpy is important, as the Docker container refers to it to report
+    # This dump is important, as the Docker container refers to it to report
     # back what happened during the build.
     settingsDumpJsonFile = logdirabspath + "/Settings.dump.json"
     with codecs.open(settingsDumpJsonFile, "w", "utf-8") as f2:
@@ -615,6 +616,14 @@ if 1 and "dump resulting settings as json":
             {k:v for k, v in list(globals().items()) if k not in ["G"] and json_serializable(v)},
             f2, indent=4, sort_keys=True)
     del settingsDumpJsonFile
+
+if 1 and "dump resulting settings as toml":
+    settingsDumpTomlFile = logdirabspath + "/Settings.dump.toml"
+    with codecs.open(settingsDumpTomlFile, "w", "utf-8") as f2:
+        toml.dump(
+            {k:v for k, v in list(globals().items()) if k not in ["G"] and json_serializable(v)},
+            f2)
+    del settingsDumpTomlFile
 
 
 # From Sphinx "Extensions to theme docs"
