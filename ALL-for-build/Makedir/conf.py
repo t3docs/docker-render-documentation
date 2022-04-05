@@ -57,6 +57,8 @@ G = globals()
 # where we merge the various settings
 US = user_settings = {}
 
+# must exist - used by setup() function
+sphinx_object_types_to_add = {}
 
 #
 #
@@ -509,6 +511,15 @@ def updateModuleGlobals(GLOBALS, US):
             firstNotNone(TD.get("category"), "Miscellaneous"),
         )
     ]
+    OTA = US.get("sphinx_object_types_to_add", {})
+    OTA_cleaned = {}
+    for k in OTA.keys():
+        v = [vv.strip() for vv in OTA[k].split('//')]
+        if len(v) == 3 and len(v[0]) and len(v[1]) and len(v[2]):
+            OTA_cleaned[k] = v
+    if OTA_cleaned:
+        GLOBALS["sphinx_object_types_to_add"] = OTA_cleaned
+
     return
 
 
@@ -626,16 +637,10 @@ if 1 and "dump resulting settings as toml":
     del settingsDumpTomlFile
 
 
-# From Sphinx "Extensions to theme docs"
 def setup(app):
-    from sphinx.domains.python import PyField
-    from sphinx.util.docfields import Field
-    from sphinx.locale import _
 
-    app.add_object_type(
-        "confval",
-        "confval",
-        objname="configuration value",
-        indextemplate="pair: %s; configuration value",
-        doc_field_types=[],
-    )
+    for k, v in sphinx_object_types_to_add.items():
+        directive, textrole, objname = v
+        indextemplate = "pair: %s; " + objname
+        app.add_object_type(directive, textrole, objname=objname, indextemplate=indextemplate)
+
