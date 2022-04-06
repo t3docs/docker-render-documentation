@@ -1,3 +1,9 @@
+Release v3.0.dev13 (2022-04-06)
+===============================
+
+*  update conf.py, Default.cfg: Add section [sphinx_object_types_to_add]
+
+
 Release v3.0.dev12 (2022-02-15)
 ===============================
 
