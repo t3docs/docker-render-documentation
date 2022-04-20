@@ -55,7 +55,7 @@ Usage:
         If you like to, use 'declare' to inspect the function:
             declare -f ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}
     Usage:
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGS]
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [ARGUMENT]
             ARGUMENT             DESCRIPTION
             --help               Show this menu
             --version            Show buildinfo.txt of this container
@@ -75,8 +75,10 @@ Usage:
             export-ALL           Copy /ALL to /RESULT/ALL-exported
             tct                  Run TCT, the toolchain runner
 
+            Without argument minimal help is shown.
+
     Examples:
-        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT           # show minimal help
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT --help
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT export-ALL
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makeall-no-cache
@@ -87,7 +89,6 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT serve4build 9999
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT just1sphinxbuild
         T3DOCS_DEBUG=1 ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [...]
-
 
 
 End of usage.
