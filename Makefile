@@ -55,12 +55,12 @@ help:  ## Show this help (default).
 
 
 .PHONY: build
-build:  ## [OUR_IMAGE_TAG] ## Build Docker container. Example: make build test
+build:  ## Build Docker container. Example: make OUR_IMAGE_TAG=test build
 	OUR_IMAGE_TAG=$(OUR_IMAGE_TAG) /bin/bash Dockerfile.build.sh
 
 
 .PHONY: push_to_ghcr
-push_to_ghcr:  ## [OUR_IMAGE_TAG] ## Push as ghcr.io/t3docs/render-documentation:[OUR_IMAGE_TAG]
+push_to_ghcr:  ## [OUR_IMAGE_TAG] ## Example: make OUR_IMAGE_TAG=test push_to_ghcr
 	docker tag t3docs/render-documentation:$(OUR_IMAGE_TAG) ghcr.io/t3docs/render-documentation:$(OUR_IMAGE_TAG)
 	docker push ghcr.io/t3docs/render-documentation:$(OUR_IMAGE_TAG)
 

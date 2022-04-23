@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.0.dev15
+ARG OUR_IMAGE_VERSION=v3.0.dev16
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # release version looks like 'v3.0.0'
 ARG OUR_IMAGE_TAG=develop
@@ -38,7 +38,7 @@ ENV \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.2.0.zip" \
    TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.12.dev2" \
    TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v2.12.dev2.zip" \
-   TOOLCHAIN_VERSION="2.12.dev2" \
+   TOOLCHAIN_VERSION="2.12.dev4" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 

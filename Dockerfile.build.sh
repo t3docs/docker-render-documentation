@@ -58,4 +58,5 @@ if ((1)); then
    fi
    echo "building t3docs/render-documentation:${OUR_IMAGE_TAG} in $BUILD_ELAPSED seconds"
 fi
-docker image ls | grep t3 | grep ${OUR_IMAGE_TAG}
+echo Looking for image 't3docs:render-documentation:'"${OUR_IMAGE_TAG}"
+docker image ls | awk '$1=="t3docs/render-documentation" && $2=="'${OUR_IMAGE_TAG}'"'

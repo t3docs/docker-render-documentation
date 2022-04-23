@@ -1,3 +1,10 @@
+Release v3.0.dev16 (2022-04-23)
+===============================
+
+*  use latest sphinx_typo3_theme v4.7.dev (+scm version)
+*  use latest toolchain 2.12.dev4
+
+
 Release v3.0.dev13 (2022-04-06)
 ===============================
 
