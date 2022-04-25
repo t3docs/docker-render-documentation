@@ -1,9 +1,9 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.0.dev16
+ARG OUR_IMAGE_VERSION=v3.0.dev17
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# release version looks like 'v3.0.0'
+# real release versions looks like 'v3.0.0'
 ARG OUR_IMAGE_TAG=develop
 #
 # flag for apt-get - affects only build time
@@ -14,11 +14,9 @@ ARG hack_OUR_IMAGE_SHORT="t3rd"
 ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 #
 # PlantUML tagged file name as shown on https://plantuml.com/en/download
-# Doesn't work at the moment, but should in future.
-ARG PLANTUML_TAGGED_FILE_NAME="plantuml.1.2020.20.jar"
+ARG PLANTUML_TAGGED_FILE_NAME="plantuml-1.2022.4.jar"
 
-# THEME_MTIME=1636153200=int(datetime.datetime(2021, 11, 6).timestamp())
-# THEME_MTIME=#1f6a652 2021-12-13 1639389494 (HEAD -> develop, origin/develop) v4.7.dev6
+# THEME_MTIME=1650837600=python -c "import datetime; print(int(datetime.datetime(2022, 4, 25).timestamp()))"
 ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
@@ -30,15 +28,15 @@ ENV \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1639389494" \
+   THEME_MTIME="1650837600" \
    THEME_NAME="unknown" \
-   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@develop" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.0" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="v1.2.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.2.0.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-2.12.dev2" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v2.12.dev2.zip" \
-   TOOLCHAIN_VERSION="2.12.dev4" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-3.0.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v3.0.0.zip" \
+   TOOLCHAIN_VERSION="3.0.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
