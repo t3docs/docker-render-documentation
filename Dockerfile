@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.0.dev17
+ARG OUR_IMAGE_VERSION=v3.0.dev18
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # real release versions looks like 'v3.0.0'
 ARG OUR_IMAGE_TAG=develop

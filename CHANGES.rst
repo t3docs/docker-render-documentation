@@ -1,3 +1,8 @@
+Release v3.0.dev18 (2022-04-26)
+===============================
+
+*  update conf.py: do not load sphinxcontrib.t3targets by default
+
 Release v3.0.dev16 (2022-04-23)
 ===============================
 

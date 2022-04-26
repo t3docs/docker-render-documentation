@@ -255,7 +255,7 @@ extensions_to_be_loaded = [
     "sphinxcontrib.slide",
     "sphinxcontrib.t3fieldlisttable",
     "sphinxcontrib.t3tablerows",
-    "sphinxcontrib.t3targets",
+    # "sphinxcontrib.t3targets",
     "sphinxcontrib.youtube",
 ]
 
