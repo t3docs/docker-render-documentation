@@ -195,33 +195,30 @@ release = "0.0.0"
 html_theme = "sphinx_typo3_theme"
 pygments_style = "none"
 
-html_theme_options = {}
-html_theme_options["github_branch"] = ""  # 'master'
-html_theme_options[
-    "github_commit_hash"
-] = ""  # 'a2e479886bfa7e866dbb5bfd6aad77355f567db0'
-html_theme_options[
-    "github_repository"
-] = ""  # 'TYPO3-Documentation/TYPO3CMS-Reference-Typoscript'
-html_theme_options[
-    "path_to_documentation_dir"
-] = ""  # 'Documentation/' or e.g. 'typo3/sysext/form/Documentation/'
-html_theme_options[
-    "github_revision_msg"
-] = ""  # '<a href="https://github.com/TYPO3-Documentation/EXAMPLE' + '/commit/' +'a2e479886bfa7e866dbb5bfd6aad77355f567db0' + '" target="_blank">' + 'a2e47988' + '</a>'
-html_theme_options["github_sphinx_locale"] = ""  # deprecated, use t3docs_locale
-html_theme_options["t3docs_locale"] = ""         # "" for en_US, "de_DE", "fr_FR", ...
-html_theme_options["project_contact"] = ""  # 'mailto:documentation@typo3.org'
-html_theme_options[
-    "project_discussions"
-] = ""  # 'http://lists.typo3.org/cgi-bin/mailman/listinfo/typo3-project-documentation'
-html_theme_options["project_home"] = ""  # some url
-html_theme_options[
-    "project_issues"
-] = ""  # 'https://github.com/TYPO3-Documentation/TYPO3CMS-Reference-Typoscript/issues'
-html_theme_options[
-    "project_repository"
-] = ""  # 'https://github.com/TYPO3-Documentation/TYPO3CMS-Reference-Typoscript.git'
+html_theme_options = {
+    "docstypo3org": "",
+    "edit_button_type": "",
+    "github_branch": "",
+    "github_repository": "",
+    "h2edit_url": "",
+    "path_to_documentation_dir": "",
+    "project_contact": "",
+    "project_discussions": "",
+    "project_home": "",
+    "project_issues": "",
+    "project_repository": "",
+    "repo_file_edit_url": "",
+    "repository_branch": "",
+    "repository_url": "",
+    "show_copyright": "yes",
+    "show_last_updated": "yes",
+    "show_legalinfo": "yes",
+    "show_revision": "yes",
+    "show_sourcelink": "yes",
+    "show_sphinx": "yes",
+    "t3docs_locale": "",
+    "use_opensearch": "",
+    }
 
 html_use_opensearch = ""  # like: 'https://docs.typo3.org/typo3cms/TyposcriptReference/0.0'  no trailing slash!
 
@@ -579,9 +576,85 @@ graphviz_dot_args = ["%s=%s" % (k, v)
                      for k, v in sorted(graphviz_dot_args_as_dict.items())
                      if v != "None"]
 
+def prepare_edit_button(hto):
+    repository = ''
+    branch = ''
+    removed = {}
+    edit_button_type = hto['edit_button_type']
+    result = hto["repo_file_edit_url"]
+    removed['edit_button_type_original'] = edit_button_type
+    removed['repo_file_edit_url_original'] = result
+    proceed = True
+    if proceed:
+        if result and edit_button_type in ['bitbucket', 'github', 'gitlab']:
+            # We already have what we want.
+            proceed = False
+    if proceed:
+        if edit_button_type not in ['auto', 'bitbucket', 'github', 'gitlab']:
+            # The edit button is not to be shown.
+            edit_button_type = 'none'
+            result = ''
+            proceed = False
+    if proceed:
+        repository = hto['repository_url']
+        if not repository and hto['github_repository']:
+            repository = f"https://github.com/{hto['github_repository']}"
+        branch = hto['repository_branch']
+        if not branch and hto['github_branch']:
+            branch = hto['github_branch']
+        proceed = repository and branch
+        if not (repository and branch):
+            result = ''
+            edit_button_type = 'none'
+            proceed = False
+    if proceed:
+        if edit_button_type == 'auto':
+            if '//github' in repository:
+                edit_button_type = 'github'
+            elif '//bitbucket' in repository:
+                edit_button_type = 'bitbucket'
+            elif '//gitlab' in repository:
+                edit_button_type = 'gitlab'
+            else:
+                edit_button_type = 'gitlab'
 
-# As other modules of Sphinx check the values of conf.py let's do
+        specific_url_part = {
+            'bitbucket': 'src',
+            'github': 'edit',
+            'gitlab': '-/edit',
+            }[edit_button_type]
+
+        result = '/'.join([
+            repository.rstrip('/'),
+            specific_url_part,
+            branch])
+
+    # So, here we have the two crucial values, stored as side effect
+    # in the html_theme_options:
+    hto["edit_button_type"] = edit_button_type
+    hto["repo_file_edit_url"] = result
+
+    # The other settings aren't "real" theme variables. So remove them, but
+    # keep the original values for the records (dump file Settings.dump.json)
+    for k in [
+        "github_branch",
+        "github_repository",
+        "repository_branch",
+        "repository_url",
+    ]:
+        removed[k] = hto[k]
+        del hto[k]
+
+    return removed
+
+
+html_theme_options_intermediate = prepare_edit_button(html_theme_options)
+
+
+# As other modules of Sphinx may check the values of conf.py let's do
 # a bit of housekeeping und remove helper vars that aren't needed any more.
+# Later: As it turns out, this is not really necessary, as Sphinx only keeps
+# know config variables
 
 for k in [
     "config",
@@ -624,7 +697,7 @@ if 1 and "dump resulting settings as json":
     settingsDumpJsonFile = logdirabspath + "/Settings.dump.json"
     with codecs.open(settingsDumpJsonFile, "w", "utf-8") as f2:
         json.dump(
-            {k:v for k, v in list(globals().items()) if k not in ["G"] and json_serializable(v)},
+            {k: v for k, v in list(globals().items()) if k not in ["G"] and json_serializable(v)},
             f2, indent=4, sort_keys=True)
     del settingsDumpJsonFile
 
@@ -632,7 +705,7 @@ if 1 and "dump resulting settings as toml":
     settingsDumpTomlFile = logdirabspath + "/Settings.dump.toml"
     with codecs.open(settingsDumpTomlFile, "w", "utf-8") as f2:
         toml.dump(
-            {k:v for k, v in list(globals().items()) if k not in ["G"] and json_serializable(v)},
+            {k: v for k, v in list(globals().items()) if k not in ["G"] and json_serializable(v)},
             f2)
     del settingsDumpTomlFile
 

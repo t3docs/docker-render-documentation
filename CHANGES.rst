@@ -1,3 +1,10 @@
+Release v3.0.dev20 (2022-05-..)
+===============================
+
+*  Use sphinxcontrib-docstypo3.git@v1.0.dev5
+*  Use theme v4.7.2
+
+
 Release v3.0.dev19 (2022-05-04)
 ===============================
 
