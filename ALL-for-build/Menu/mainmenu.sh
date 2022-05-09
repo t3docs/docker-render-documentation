@@ -20,7 +20,7 @@ function mm-bashcmd() {
    local cmd
    shift
    cmd="/bin/bash -c"
-   cmd="$cmd \"$@\""
+   cmd="$cmd"$(printf ' %q' "$@")
    eval ${cmd}
    local exitstatus="$?"
    tell-about-results "$exitstatus"
@@ -124,19 +124,19 @@ function mm-show-windows-bat() {
 function mm-tct() {
    shift
    install-wheels
-   tct $@
+   tct "$@"
 }
 
 
 function mm-serve4build() {
    shift
-   python2 /ALL/Scripts/serve4build.py $@
+   python2 /ALL/Scripts/serve4build.py "$@"
 }
 
 
 function mm-just1sphinxbuild() {
    shift
-   python2 /ALL/Scripts/just1sphinxbuild.py $@
+   python2 /ALL/Scripts/just1sphinxbuild.py "$@"
 }
 
 
@@ -196,7 +196,7 @@ fi
 cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
 cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
-cmd="$cmd $@"
+cmd="$cmd"$(printf ' %q' "$@")
 eval $cmd
 
 local exitstatus=$?
@@ -216,7 +216,7 @@ function mm-makeall-no-cache() {
    if [ -d "/RESULT/Cache" ]; then
       rm -rf /RESULT/Cache
    fi
-   mm-makeall $@
+   mm-makeall "$@"
 }
 
 
@@ -232,7 +232,7 @@ then
 fi
 cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-cmd="$cmd $@"
+cmd="$cmd"$(printf ' %q' "$@")
 eval $cmd
 
 local exitstatus=$?
@@ -251,24 +251,24 @@ function mm-makehtml-no-cache() {
    if [ -d "/RESULT/Cache" ]; then
       rm -rf /RESULT/Cache
    fi
-   mm-makehtml $@
+   mm-makehtml "$@"
 }
 
 
 case "$1" in
---help)              mm-usage $@ ;;
---version)           mm-version $@ ;;
-bashcmd)             mm-bashcmd $@ ;;
-makeall)             mm-makeall $@ ;;
-makeall-no-cache)    mm-makeall-no-cache $@ ;;
-makehtml)            mm-makehtml $@ ;;
-makehtml-no-cache)   mm-makehtml-no-cache $@ ;;
-show-shell-commands) mm-show-shell-commands $@ ;;
-show-windows-bat)    mm-show-windows-bat $@ ;;
-show-faq)            mm-show-faq $@ ;;
-show-howto)          mm-show-howto $@ ;;
-tct)                 mm-tct $@ ;;
-serve4build)         mm-serve4build $@ ;;
-just1sphinxbuild)    mm-just1sphinxbuild $@ ;;
-*)                   mm-minimalhelp $@ ;;
+--help)              mm-usage "$@" ;;
+--version)           mm-version "$@" ;;
+bashcmd)             mm-bashcmd "$@" ;;
+makeall)             mm-makeall "$@" ;;
+makeall-no-cache)    mm-makeall-no-cache "$@" ;;
+makehtml)            mm-makehtml "$@" ;;
+makehtml-no-cache)   mm-makehtml-no-cache "$@" ;;
+show-shell-commands) mm-show-shell-commands "$@" ;;
+show-windows-bat)    mm-show-windows-bat "$@" ;;
+show-faq)            mm-show-faq "$@" ;;
+show-howto)          mm-show-howto "$@" ;;
+tct)                 mm-tct "$@" ;;
+serve4build)         mm-serve4build "$@" ;;
+just1sphinxbuild)    mm-just1sphinxbuild "$@" ;;
+*)                   mm-minimalhelp "$@" ;;
 esac
