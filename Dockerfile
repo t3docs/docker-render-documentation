@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.0.dev21
+ARG OUR_IMAGE_VERSION=v3.0.dev22
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # real release versions looks like 'v3.0.0'
 ARG OUR_IMAGE_TAG=develop
@@ -16,7 +16,7 @@ ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
 # PlantUML tagged file name as shown on https://plantuml.com/en/download
 ARG PLANTUML_TAGGED_FILE_NAME="plantuml-1.2022.4.jar"
 
-# THEME_MTIME=1650837600=python -c "import datetime; print(int(datetime.datetime(2022, 4, 25).timestamp()))"
+# THEME_MTIME=1652047200=python -c "import datetime; print(int(datetime.datetime(2022, 5, 9).timestamp()))"
 ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
@@ -28,15 +28,15 @@ ENV \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1650837600" \
+   THEME_MTIME="1652047200" \
    THEME_NAME="unknown" \
-   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.3" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.4" \
    THEME_VERSION="unknown" \
-   TOOLCHAIN_TOOL_VERSION="v1.2.0" \
-   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.2.0.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-3.0.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v3.0.0.zip" \
-   TOOLCHAIN_VERSION="3.0.0" \
+   TOOLCHAIN_TOOL_VERSION="v1.3.0" \
+   TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.3.0.zip" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-3.1.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v3.1.0.zip" \
+   TOOLCHAIN_VERSION="3.1.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
