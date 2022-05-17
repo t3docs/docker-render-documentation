@@ -9,19 +9,27 @@ export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
 
+export mmLOGFILE=/RESULT/within-container-command-history.log.txt
 
 function install-wheels(){
    find /WHEELS -type f -name "*.whl" | xargs --no-run-if-empty pip --disable-pip-version-check install --force --no-cache-dir
    find /WHEELS/ -name "*.whl" -exec pip freeze \; -quit
 }
 
+function utcstamp(){
+    printf '%s' $(date -u +"%Y-%m-%dT%H:%M:%S%z")
+}
 
 function mm-bashcmd() {
    local cmd
    shift
    cmd="/bin/bash -c"
-   cmd="$cmd"$(printf ' %q' "$@")
-   eval ${cmd}
+   if [ -z "$@" ]; then false
+   else
+      cmd="$cmd"$(printf ' %q' "$@")
+   fi
+   echo $(utcstamp) "${cmd}" >>"$mmLOGFILE"
+   eval "${cmd}"
    local exitstatus="$?"
    tell-about-results "$exitstatus"
 }
@@ -196,8 +204,13 @@ fi
 cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
 cmd="$cmd -c make_latex 1 -c make_package 1 -c make_pdf 1 -c make_singlehtml 1"
-cmd="$cmd"$(printf ' %q' "$@")
-eval $cmd
+if [ -z "$@" ]; then false
+else
+   cmd="$cmd"$(printf ' %q' "$@")
+fi
+
+echo $(utcstamp) cmd: "${cmd}" >>"$mmLOGFILE"
+eval "$cmd"
 
 local exitstatus=$?
 
@@ -232,7 +245,12 @@ then
 fi
 cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-cmd="$cmd"$(printf ' %q' "$@")
+if [ -z "$@" ]; then "pass"
+else
+   cmd="$cmd"$(printf ' %q' "$@")
+fi
+
+echo $(utcstamp) cmd: "${cmd}" >>"$mmLOGFILE"
 eval $cmd
 
 local exitstatus=$?
