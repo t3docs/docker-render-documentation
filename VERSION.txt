@@ -1,4 +1,4 @@
-v3.0.dev24
+v3.0.dev25
 
 
 Keep version number like above in files:
@@ -10,6 +10,6 @@ Keep version number like above in files:
 
 And check:
 
-*  public_envvars.sh
+*  Dockerfile.build.sh
 
 End of text.

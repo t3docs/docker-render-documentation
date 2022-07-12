@@ -2,9 +2,6 @@
 
 # https://www.gnu.org/software/make/manual/make.html
 
-include public_envvars.sh
-export $(shell sed 's/=.*//' public_envvars.sh)
-
 
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
@@ -55,14 +52,12 @@ help:  ## Show this help (default).
 
 
 .PHONY: build
-build:  ## Build Docker container. Example: make OUR_IMAGE_TAG=test build
-	OUR_IMAGE_TAG=$(OUR_IMAGE_TAG) /bin/bash Dockerfile.build.sh
+build:  ## Build Docker container. Example: OUR_IMAGE_TAG=local OUR_IMAGE_SHORT=local make build
+	/bin/bash  Dockerfile.build.sh
 
 
 .PHONY: push_to_ghcr
-push_to_ghcr:  ## [OUR_IMAGE_TAG] ## Example: make OUR_IMAGE_TAG=test push_to_ghcr
+push_to_ghcr:  ## [OUR_IMAGE_TAG] ## Example: OUR_IMAGE_TAG=local  make  push_to_ghcr
 	docker tag t3docs/render-documentation:$(OUR_IMAGE_TAG) ghcr.io/t3docs/render-documentation:$(OUR_IMAGE_TAG)
 	docker push ghcr.io/t3docs/render-documentation:$(OUR_IMAGE_TAG)
-
-
 

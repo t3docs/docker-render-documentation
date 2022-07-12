@@ -1,18 +1,19 @@
 FROM ubuntu:20.04
+
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.0.dev24
+ARG OUR_IMAGE_VERSION=v3.0.dev25
+
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # real release versions looks like 'v3.0.0'
 ARG OUR_IMAGE_TAG=develop
-#
+ARG OUR_IMAGE_SHORT=t3rd
+
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
-ARG hack_OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}"
-ARG hack_OUR_IMAGE_SHORT="t3rd"
-ARG OUR_IMAGE_SLOGAN="t3rd - TYPO3 render documentation"
-#
+ARG OUR_IMAGE_SLOGAN="${DOCKRUN_PREFIX}_${OUR_IMAGE_SHORT} - TYPO3 render documentation"
+
 # PlantUML tagged file name as shown on https://plantuml.com/en/download
 ARG PLANTUML_TAGGED_FILE_NAME="plantuml-1.2022.4.jar"
 
@@ -21,8 +22,8 @@ ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
-   OUR_IMAGE="$hack_OUR_IMAGE" \
-   OUR_IMAGE_SHORT="$hack_OUR_IMAGE_SHORT" \
+   OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}" \
+   OUR_IMAGE_SHORT="${OUR_IMAGE_SHORT}" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
    PIP_NO_CACHE_DIR=1 \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \

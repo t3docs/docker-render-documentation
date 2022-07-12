@@ -1,30 +1,26 @@
 #!/bin/bash
 
-
-OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-OUR_IMAGE_TAG}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
+OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-develop}
 EXITCODE=0
 
 function usage() {
+   echo "Dockerfile.build.sh: Build the Docker image."
    echo "Usage:"
-   echo "   Specify the desired tag for the image on the command"
-   echo "   line followed by a blank and the command."
-   echo
-   echo "Examples:"
-   echo "   ./$(basename -- $0) --help"
-   echo "   OUR_IMAGE_TAG=v77.88.99 ./$(basename -- $0)"
+   echo "   /bin/bash  ./$(basename -- $0)"
+   echo "   /bin/bash  ./$(basename -- $0) --help"
+   echo ""
+   echo "More examples:"
+   echo "   OUR_IMAGE_TAG=v77.88.99  OUR_IMAGE_SHORT=t3rd     /bin/bash  ./$(basename -- $0)"
+   echo "   OUR_IMAGE_TAG=latest     OUR_IMAGE_SHORT=t3rd     /bin/bash  ./$(basename -- $0)"
+   echo "   OUR_IMAGE_TAG=develop    OUR_IMAGE_SHORT=develop  /bin/bash  ./$(basename -- $0)"
+   echo "   OUR_IMAGE_TAG=test       OUR_IMAGE_SHORT=test     /bin/bash  ./$(basename -- $0)"
    echo
 }
 
 if [[ "/ $@ /" =~ " --help " ]]; then
    usage
-   echo "Sample build command could be:"
-   echo "   docker build -t t3docs/render-documentation:${OUR_IMAGE_TAG} ."
    exit 0
-fi
-
-if [[ "$OUR_IMAGE_TAG" == "OUR_IMAGE_TAG" ]]; then
-   usage
-   exit 1
 fi
 
 if ((1)); then
@@ -33,12 +29,20 @@ fi
 
 if ((1)); then
    BUILD_START=$(date '+%s')
-   docker build \
-      --force-rm=true \
-      --no-cache=true \
-      -f ./Dockerfile \
-      -t t3docs/render-documentation:${OUR_IMAGE_TAG} \
-      .
+   cmd="docker build"
+   cmd="$cmd --force-rm=true"
+   cmd="$cmd --no-cache=true"
+   cmd="$cmd -f ./Dockerfile"
+   cmd="$cmd -t t3docs/render-documentation:${OUR_IMAGE_TAG}"
+   if [[ ! -z "$OUR_IMAGE_SHORT" ]]; then
+     cmd="$cmd --build-arg OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""
+   fi
+   if [[ ! -z "$OUR_IMAGE_TAG" ]]; then
+     cmd="$cmd --build-arg OUR_IMAGE_TAG=\"${OUR_IMAGE_TAG}\""
+   fi
+   cmd="$cmd ."
+   echo $cmd
+   eval "$cmd"
    EXITCODE=$?
    BUILD_END=$(date '+%s')
    BUILD_ELAPSED=$(expr $BUILD_END - $BUILD_START)
@@ -48,13 +52,8 @@ if ((1)); then
       echo "You may now run:"
       echo "   docker run --rm t3docs/render-documentation:${OUR_IMAGE_TAG}"
       echo "   eval \"\$(docker run --rm t3docs/render-documentation:${OUR_IMAGE_TAG} show-shell-commands)\""
-      # echo "Rename:"
-      # echo "   docker rmi t3docs/render-documentation:latest"
-      # echo "   docker tag t3docs/render-documentation:${OUR_IMAGE_TAG} \\"
-      # echo "              t3docs/render-documentation:latest"
-
    else
-      echo Failed!
+      echo Failed
    fi
    echo "building t3docs/render-documentation:${OUR_IMAGE_TAG} in $BUILD_ELAPSED seconds"
 fi
