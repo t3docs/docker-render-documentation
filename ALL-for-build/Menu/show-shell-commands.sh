@@ -15,17 +15,21 @@ OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 OUR_IMAGE=${OUR_IMAGE:-"t3docs/render-documentation:$OUR_IMAGE_TAG"}
 
 cat <<EOT
-
 # NOTE
-# You can 'source' this file directly into the shell at your command line with:
+# Run this 'eval' command at the command line to define the helper
+# function for the current terminal:
+#     eval "\$(docker run --rm $OUR_IMAGE show-shell-commands)"
+#
+# As alternative, you can 'source' the code directly into the shell:
 #     source <(docker run --rm $OUR_IMAGE show-shell-commands)
 # ATTENTION:
 #     No whitespace between '<('
-# Or, if that fails:
+#
+# Or, use an intermediate file:
 #     docker run --rm $OUR_IMAGE show-shell-commands >shell-commands.sh
 #     source shell-commands.sh
 
-# the usual worker command like 'dockrun_t3rd'
+# This function defines the helper function, usually named \'dockrun_t3rd\'
 function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 
 # Environment variables the USER may find important (on the host!),
@@ -48,12 +52,14 @@ function ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} () {
 #     T3DOCS_WHEELS=/abspathto/WheelsFolder
 #     T3DOCS_DEBUG=0         (0 or 1, talk to stdout)
 #     T3DOCS_DRY_RUN=0       (0 or 1, don't really execute)
+#     T3DOCS_GIT_RESTORE_MTIME=1  (0 or 1, usually 1=on)
 
 local DEBUG=\${T3DOCS_DEBUG:-0}
+local GIT_RESTORE_MTIME=${T3DOCS_GIT_RESTORE_MTIME:-1}
 local DRY_RUN=\${T3DOCS_DRY_RUN:-0}
 local git_restore_mtime=\$(which git-restore-mtime)
 local exitcode=\$?
-if [[ \$exitcode -ne 0 ]]; then git_restore_mtime=; fi
+if [[ \$exitcode -ne 0 ]] || [[ "\$GIT_RESTORE_MTIME" = "0" ]]; then git_restore_mtime=; fi
 
 # start command building
 local cmd="docker run --rm"
@@ -98,11 +104,11 @@ local RESULT=\${T3DOCS_RESULT:-\$(pwd)}
 RESULT=\${RESULT}/Documentation-GENERATED-temp
 cmd="\$cmd -v \$RESULT:/RESULT"
 if ((\$CREATING)); then
-   if ((\$DEBUG)); then echo creating: mkdir -p "\$RESULT" ; fi
+   if ((\$DEBUG)); then echo creating.....: mkdir -p "\$RESULT" ; fi
    mkdir -p "\$RESULT" 2>/dev/null
 fi
+if ((\$DEBUG)); then echo "git_restore_mtime: \$git_restore_mtime"; fi
 if ((\$DEBUG)); then echo "RESULT.......: \$RESULT"; fi
-
 # TMP
 # absolute path to existing folder TMP of (TMP/tmp-GENERATED-temp)
 local TMP=\${T3DOCS_TMP:-\$(pwd)}
