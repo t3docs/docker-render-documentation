@@ -1,5 +1,4 @@
 #!/bin/bash
-# http://www.thegeekstuff.com/2010/07/bash-case-statement/
 
 source "$HOME/.bashrc"
 source /ALL/Downloads/envvars.sh
@@ -7,7 +6,7 @@ source /ALL/Downloads/envvars.sh
 # provide defaults
 export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
-export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-t3rd_TYPO3_render_documentation}
+export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-dockrun_t3rd - TYPO3-render-documentation}
 
 export mmLOGFILE=/RESULT/within-container-command-history.log.txt
 
@@ -46,8 +45,7 @@ For help:
 
 ... did you mean '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml'?
 
-See manual (draft) at
-https://docs.typo3.org/m/typo3/T3DocsRenderingContainer/draft/en-us/
+See manual: https://t3docs.github.io/DRC-The-Docker-Rendering-Container/
 
 EOT
 }
@@ -245,7 +243,9 @@ then
 fi
 cmd="tct --cfg-file=/ALL/venv/tctconfig.cfg --verbose"
 cmd="$cmd run RenderDocumentation -c makedir /ALL/Makedir"
-if [ -z "$@" ]; then "pass"
+if [[ -z "$@" ]]
+then
+   true "do nothing"
 else
    cmd="$cmd"$(printf ' %q' "$@")
 fi
