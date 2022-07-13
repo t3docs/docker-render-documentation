@@ -31,7 +31,7 @@ ENV \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
    THEME_MTIME="1652047200" \
    THEME_NAME="unknown" \
-   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.4" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.5" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="v1.3.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.3.0.zip" \

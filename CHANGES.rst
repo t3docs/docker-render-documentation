@@ -4,6 +4,7 @@ Release v3.0.dev25 (2022-07-12)
 *  Test suite for DRC was successfully run
 *  Updated: mainmenu.sh, now also knows T3DOCS_GIT_RESTORE_MTIME=1 (or 0)
 *  Improved and bugfixed: 'make build' and 'Dockerfile.build.sh'
+*  Use sphinx_typo3_theme 4.7.5
 
 
 Release v3.0.dev24 (2022-05-17)
