@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.0.dev29
+ARG OUR_IMAGE_VERSION=v3.0.dev30
 
 # Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
 # real release versions looks like 'v3.0.0'
@@ -31,7 +31,7 @@ ENV \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
    THEME_MTIME="1662328800" \
    THEME_NAME="unknown" \
-   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.8" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.9" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="v1.3.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.3.0.zip" \
