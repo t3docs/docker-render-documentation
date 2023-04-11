@@ -58,6 +58,6 @@ build:  ## Build Docker container. Example: OUR_IMAGE_TAG=local OUR_IMAGE_SHORT=
 
 .PHONY: push_to_ghcr
 push_to_ghcr:  ## [OUR_IMAGE_TAG] ## Example: OUR_IMAGE_TAG=local  make  push_to_ghcr
-	docker tag t3docs/render-documentation:$(OUR_IMAGE_TAG) ghcr.io/t3docs/render-documentation:$(OUR_IMAGE_TAG)
+	docker tag ghcr.io/t3docs/render-documentation:$(OUR_IMAGE_TAG)
 	docker push ghcr.io/t3docs/render-documentation:$(OUR_IMAGE_TAG)
 

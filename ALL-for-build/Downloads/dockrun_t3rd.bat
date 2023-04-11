@@ -29,7 +29,7 @@ if not exist %TMP% (
 )
 
 if x%T3DOCS_OURIMAGE%x == xx (
-   set T3DOCS_OURIMAGE=t3docs/render-documentation:latest
+   set T3DOCS_OURIMAGE=ghcr.io/t3docs/render-documentation:latest
 )
 
 if not exist %RESULT% (
@@ -168,7 +168,7 @@ echo    Set the environment variable T3DOCS_OURIMAGE to the container you want
 echo    to use. Afterwards run 'dockrun_t3rd.bat'.
 echo.
 echo    Example:
-echo       set T3DOCS_OURIMAGE=t3docs/render-documentation:develop
+echo       set T3DOCS_OURIMAGE=ghcr.io/t3docs/render-documentation:develop
 echo       %%USERPROFILE%%\dockrun_t3rd.bat
 echo.
 if x%interactive%x == x1x  pause & goto menu

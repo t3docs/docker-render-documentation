@@ -4,7 +4,7 @@ source "$HOME/.bashrc"
 source /ALL/Downloads/envvars.sh
 
 # provide default
-OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
+OUR_IMAGE=${OUR_IMAGE:-ghcr.io/t3docs/render-documentation}
 OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 
 cat <<EOT
@@ -27,8 +27,8 @@ Experts: Quickstart for the impatient
 
 Prepare:
 
-   docker pull t3docs/render-documentation
-   source <(docker run --rm t3docs/renderdocumentation show-shell-commands)
+   docker pull ghcr.io/t3docs/render-documentation
+   source <(docker run --rm ghcr.io/t3docs/renderdocumentation show-shell-commands)
 
 Render:
 
@@ -158,7 +158,7 @@ Required and possible volume mappings:
 
 Fetch the docker image (= our executable):
 
-   docker pull t3docs/render-documentation
+   docker pull ghcr.io/t3docs/render-documentation
 
 
 ==================================================

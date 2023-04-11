@@ -22,7 +22,7 @@ ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
    HOME="/ALL/userhome" \
-   OUR_IMAGE="t3docs/render-documentation:${OUR_IMAGE_TAG}" \
+   OUR_IMAGE="ghcr.io/t3docs/render-documentation:${OUR_IMAGE_TAG}" \
    OUR_IMAGE_SHORT="${OUR_IMAGE_SHORT}" \
    OUR_IMAGE_VERSION="$OUR_IMAGE_VERSION" \
    PIP_NO_CACHE_DIR=1 \

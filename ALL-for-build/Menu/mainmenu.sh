@@ -4,7 +4,7 @@ source "$HOME/.bashrc"
 source /ALL/Downloads/envvars.sh
 
 # provide defaults
-export OUR_IMAGE=${OUR_IMAGE:-t3docs/render-documentation}
+export OUR_IMAGE=${OUR_IMAGE:-ghcr.io/t3docs/render-documentation}
 export OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-t3rd}
 export OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-dockrun_t3rd - TYPO3-render-documentation}
 

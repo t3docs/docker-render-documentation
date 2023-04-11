@@ -6,9 +6,8 @@ DRC - Docker Rendering Container
 
    2021-10-20 (tag 'develop')
 
-   The image used to be distributed via Docker hub. However, since Docker hasn't
-   granted a free plan for TYPO3 yet we are currently switching to GitHub's
-   package repository https://ghcr.io/
+   The image used to be distributed via Docker hub. However, since Docker hasn't granted a free plan for TYPO3,
+   we have switched to GitHub's container repository https://ghcr.io/
 
    WAS::
 
@@ -18,16 +17,15 @@ DRC - Docker Rendering Container
    IS NOW::
 
       docker pull ghcr.io/t3docs/render-documentation:develop
-      docker tag ghcr.io/t3docs/render-documentation:develop \
-                         t3docs/render-documentation:develop
-      eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
+      docker tag ghcr.io/t3docs/render-documentation:develop
+      eval "$(docker run --rm ghcr.io/t3docs/render-documentation:develop show-shell-commands)"
 
 
 What is this?
 =============
 
 Use this repository and `docker build` to build the TYPO3 official Docker image
-`t3docs/render-documentation` for rendering TYPO3 documentation.
+`ghcr.io/t3docs/render-documentation` for rendering TYPO3 documentation.
 
 :Repository:      https://github.com/t3docs/docker-render-documentation
 :Version:         develop (v3.0.dev30)
@@ -51,9 +49,8 @@ host the latest version at the moment and you should not use the usual `docker
 pull t3docs/render-documentation:develop` command. Use `GitHub registry`_
 instead.
 
-:Docker image:    t3docs/render-documentation:develop
-:Docker hub:      https://hub.docker.com/r/t3docs/render-documentation/
-:Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
+:Docker image:    ghcr.io/t3docs/render-documentation:develop
+:GitHub Container Registry (GHCR):      https://github.com/orgs/t3docs/packages/container/package/render-documentation
 
 
 GitHub registry
@@ -69,12 +66,11 @@ Getting the image from GitHub::
    # pull
    docker pull ghcr.io/t3docs/render-documentation:develop
 
-   # Assign our usual tag `t3docs/render-documentation:develop`
-   docker tag ghcr.io/t3docs/render-documentation:develop \
-                      t3docs/render-documentation:develop
+   # Assign our usual tag `ghcr.io/t3docs/render-documentation:develop`
+   docker tag ghcr.io/t3docs/render-documentation:develop
 
    # Define the helper function `dockrun_t3rd`
-    eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
+    eval "$(docker run --rm ghcr.io/t3docs/render-documentation:develop show-shell-commands)"
 
 
 Using the image::
@@ -82,11 +78,10 @@ Using the image::
    # some (educational) example calls
    #
    docker run --rm ghcr.io/t3docs/render-documentation:develop
-   docker run --rm t3docs/render-documentation:develop
-   docker run --rm t3docs/render-documentation:develop --help
+   docker run --rm ghcr.io/t3docs/render-documentation:develop --help
    #
    # define 'dockrun_t3rd'
-   eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
+   eval "$(docker run --rm ghcr.io/t3docs/render-documentation:develop show-shell-commands)"
    dockrun_t3rd
    dockrun_t3rd --help
    T3DOCS_DEBUG=1  dockrun_t3rd

@@ -24,7 +24,7 @@ if [[ "/ $@ /" =~ " --help " ]]; then
 fi
 
 if ((1)); then
-   docker rmi t3docs/render-documentation:${OUR_IMAGE_TAG}
+   docker rmi ghcr.io/t3docs/render-documentation:${OUR_IMAGE_TAG}
 fi
 
 if ((1)); then
@@ -33,7 +33,7 @@ if ((1)); then
    cmd="$cmd --force-rm=true"
    cmd="$cmd --no-cache=true"
    cmd="$cmd -f ./Dockerfile"
-   cmd="$cmd -t t3docs/render-documentation:${OUR_IMAGE_TAG}"
+   cmd="$cmd -t ghcr.io/t3docs/render-documentation:${OUR_IMAGE_TAG}"
    if [[ ! -z "$OUR_IMAGE_SHORT" ]]; then
      cmd="$cmd --build-arg OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""
    fi
@@ -50,12 +50,12 @@ if ((1)); then
    if [ $EXITCODE -eq 0 ]; then
       echo Success!
       echo "You may now run:"
-      echo "   docker run --rm t3docs/render-documentation:${OUR_IMAGE_TAG}"
-      echo "   eval \"\$(docker run --rm t3docs/render-documentation:${OUR_IMAGE_TAG} show-shell-commands)\""
+      echo "   docker run --rm ghcr.io/t3docs/render-documentation:${OUR_IMAGE_TAG}"
+      echo "   eval \"\$(docker run --rm ghcr.io/t3docs/render-documentation:${OUR_IMAGE_TAG} show-shell-commands)\""
    else
       echo Failed
    fi
-   echo "building t3docs/render-documentation:${OUR_IMAGE_TAG} in $BUILD_ELAPSED seconds"
+   echo "building ghcr.io/t3docs/render-documentation:${OUR_IMAGE_TAG} in $BUILD_ELAPSED seconds"
 fi
-echo Looking for image 't3docs:render-documentation:'"${OUR_IMAGE_TAG}"
-docker image ls | awk '$1=="t3docs/render-documentation" && $2=="'${OUR_IMAGE_TAG}'"'
+echo Looking for image 'ghcr.io/t3docs:render-documentation:'"${OUR_IMAGE_TAG}"
+docker image ls | awk '$1=="ghcr.io/t3docs/render-documentation" && $2=="'${OUR_IMAGE_TAG}'"'

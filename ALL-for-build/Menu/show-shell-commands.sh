@@ -12,7 +12,7 @@ OUR_IMAGE_SLOGAN=${OUR_IMAGE_SLOGAN:-"t3rd - TYPO3 render documentation"}
 #2
 OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-"$VERSION"}
 #3
-OUR_IMAGE=${OUR_IMAGE:-"t3docs/render-documentation:$OUR_IMAGE_TAG"}
+OUR_IMAGE=${OUR_IMAGE:-"ghcr.io/t3docs/render-documentation:$OUR_IMAGE_TAG"}
 
 cat <<EOT
 # NOTE

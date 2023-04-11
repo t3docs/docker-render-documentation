@@ -3,7 +3,7 @@
 '
 ' Parameters:
 ' Get all available style parameters at the command line of this Docker container:
-' # source <(docker run --rm t3docs/render-documentation show-shell-commands)
+' # source <(docker run --rm ghcr.io/t3docs/render-documentation show-shell-commands)
 ' # dockrun_t3rd /bin/bash
 ' # plantuml -language
 ' => search for "skinparameter"
