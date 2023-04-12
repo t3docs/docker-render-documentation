@@ -2,96 +2,104 @@
 DRC - Docker Rendering Container
 ================================
 
-.. attention::
+Use this repository and :code:`docker build` to build the TYPO3 official Docker
+image :code:`t3docs/render-documentation` for rendering `TYPO3 documentation
+<https://docs.typo3.org/>`__. You may as well skip building and use ready
+made containers from `ghcr.io <https://ghcr.io/>`__.
 
-   2021-10-20 (tag 'develop')
+What for?
 
-   The image used to be distributed via Docker hub. However, since Docker hasn't
-   granted a free plan for TYPO3 yet we are currently switching to GitHub's
-   package repository https://ghcr.io/
-
-   WAS::
-
-      docker pull t3docs/render-documentation:develop
-      eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
-
-   IS NOW::
-
-      docker pull ghcr.io/t3docs/render-documentation:develop
-      docker tag ghcr.io/t3docs/render-documentation:develop \
-                         t3docs/render-documentation:develop
-      eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
+TYPO3 uses plain UTF-8 text files with reStructuredText (reST) markup
+for documentation. Such documentation is readable by itself to some extend.
+However, the `Sphinx documentation tool
+<https://www.sphinx-doc.org/>`__ is used to produce the final html result.
+This DRC bundles everything that's needed for generating the final
+documentation. All it takes is a simple command at the command line.
+However, having Docker installed is a requirement.
 
 
-What is this?
-=============
-
-Use this repository and `docker build` to build the TYPO3 official Docker image
-`t3docs/render-documentation` for rendering TYPO3 documentation.
-
-:Repository:      https://github.com/t3docs/docker-render-documentation
-:Version:         develop (v3.0.dev30)
-:Authors:         TYPO3 Documentation Team
-:Main caretaker:  Martin Bless <martin.bless@mbless.de>
-:Documentation:   `The T3DocsRenderingContainer (Draft)
-                  <https://docs.typo3.org/m/typo3/T3DocsRenderingContainer/draft/en-us/>`__
-:Documentation repository:
-                  `GitHub rendering-container-documentation@documentation-draft
-                  <https://github.com/t3docs/rendering-container-documentation/tree/documentation-draft>`__
-
-
-Docker hub
-==========
-
-** DO NOT USE at the moment for tag `develop` (2021-10-20)!**
-
-Usually we have been using Docker hub as registry for our Docker image. However,
-Docker hasn't granted a free plan to us yet. This means, Docker hub DOES NOT
-host the latest version at the moment and you should not use the usual `docker
-pull t3docs/render-documentation:develop` command. Use `GitHub registry`_
-instead.
-
-:Docker image:    t3docs/render-documentation:develop
-:Docker hub:      https://hub.docker.com/r/t3docs/render-documentation/
-:Docker tags:     https://hub.docker.com/r/t3docs/render-documentation/tags/
-
-
-GitHub registry
+Characteristics
 ===============
 
-** USE THIS at the moment (2021-10-20) for tag `develop`!**
-
-:GitHub image:    ghcr.io/t3docs/render-documentation:develop
-
-
-Getting the image from GitHub::
-
-   # pull
-   docker pull ghcr.io/t3docs/render-documentation:develop
-
-   # Assign our usual tag `t3docs/render-documentation:develop`
-   docker tag ghcr.io/t3docs/render-documentation:develop \
-                      t3docs/render-documentation:develop
-
-   # Define the helper function `dockrun_t3rd`
-    eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
+:Repository:      https://github.com/t3docs/docker-render-documentation
+:Branches:        "main" for image tagged "latest", "develop" for image
+                  tagged "develop"
+:Releases:        See `Releases <https://github.com/t3docs/docker-render-documentation/releases>`__
+                  for more tags
+:Version:         See `VERSION.txt <VERSION.txt>`__
+:Authors:         TYPO3 Documentation Team
+:Main caretaker:  Martin Bless <martin.bless@mbless.de>
+:License:         MIT
 
 
-Using the image::
+Installation
+============
 
-   # some (educational) example calls
-   #
-   docker run --rm ghcr.io/t3docs/render-documentation:develop
-   docker run --rm t3docs/render-documentation:develop
-   docker run --rm t3docs/render-documentation:develop --help
-   #
-   # define 'dockrun_t3rd'
-   eval "$(docker run --rm t3docs/render-documentation:develop show-shell-commands)"
-   dockrun_t3rd
-   dockrun_t3rd --help
-   T3DOCS_DEBUG=1  dockrun_t3rd
-   T3DOCS_DEBUG=1  dockrun_t3rd makehtml
-   T3DOCS_DEBUG=1  dockrun_t3rd makehtml-no-cache -c make_singlehtml 1
+Docker is required on your machine. You can use Linux-like systems like Mac, Linux, WSL2.
+
+Windows with Docker installed (no WSL2) is also possible. Important: Use the older
+:code:`command line` window and NOT Powershell.
+
+At the command line::
+
+   # Fetch the Docker image. "tag" may be "latest (default)", "develop", "dev30" or similar.
+   docker pull ghcr.io/t3docs/render-documenation[:tag]
+
+   # Attach the canonical tag "t3docs/render-documentation" to the image - without "ghcr.io/"!
+   docker tag  ghcr.io/t3docs/render-documenation[:tag]  ghcr.io/t3docs/render-documenation[:tag]
+
+   # verify the image can be run as container
+   docker run --rm t3docs/render-documentation[:tag]
+   docker run --rm t3docs/render-documentation[:tag] --help
+   docker run --rm t3docs/render-documentation[:tag] --version
+   docker run --rm t3docs/render-documentation[:tag] show-shell-commands
+
+   # on Mac, Linux, WSL2: define helper function `dockrun_t3rd`
+   eval "$(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)"
+
+   # On Windows (not WSL2) create file 'dockrun_t3rd.bat'
+   # Make sure the file is somehwere on your PATH.
+   docker run --rm t3docs/render-documentation[:tag] show-windows-bat > dockrun_t3rd.bat
+
+
+To update to a newer container version just repeat these steps.
+
+
+Usage
+=====
+
+1. Open terminal window
+
+2. Prepare::
+
+      # Linux-like systems (Linux, Mac, WSL2)
+      # Define helper function, if it's not already in your .bashrc or .zshrc
+      eval "$(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)"
+
+      # for Windows there is nothing to do. However, 'dockrun_t3rd.bat' should
+      # be on your PATH.
+
+3. Verify::
+
+      # Verify it's working. If it runs, it's ok.
+      dockrun_t3rd --help
+
+4. Render documentation::
+
+      # Go to the PROJECT = first = root = start (!) folder of your project.
+      # The actual documentation is expected to be in PROJECT/Documentation
+      cd PROJECT
+
+      # Run the rendering
+      dockrun_t3rd  makehtml
+
+5. Find rendering results in :code:`PROJECT/Documentation-GENERATED-temp`
+
+6. Optionally, try these examples::
+
+      T3DOCS_DEBUG=1  dockrun_t3rd
+      T3DOCS_DEBUG=1  dockrun_t3rd makehtml
+      T3DOCS_DEBUG=1  dockrun_t3rd makehtml-no-cache -c make_singlehtml 1
 
 
 Documentation
@@ -100,18 +108,33 @@ Documentation
 *  `The T3DocsRenderingContainer (Draft)
    <https://docs.typo3.org/m/typo3/T3DocsRenderingContainer/draft/en-us/>`__
 
-*  `Release notes and What's new?`
+*  `Release notes and What's new?
    <https://docs.typo3.org/m/typo3/T3DocsRenderingContainer/draft/en-us/Whatsnew/Index.html>`__
 
 
-See also
+Features
 ========
 
-See chapter
-`How to render documentation
-<https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/RenderingDocs/>`_
-in `Writing documentation
-<https://docs.typo3.org/m/typo3/docs-how-to-document/master/en-us/>`_.
+What markup can you use?
+
+The DRC bundles the Sphinx tool, Sphinx extensions, a Sphinx TYPO3 theme, a toolchain and some
+logic and user interface components. We are using a "stress test" demonstration manual (`GitHub repository
+<https://github.com/TYPO3-Documentation/sphinx_typo3_theme_rendering_test>`__)
+to test that everything works as expected.
+Check the rendering result `Sphinx TYPO3 Theme Rendering Test
+<https://typo3-documentation.github.io/sphinx_typo3_theme_rendering_test/>`__
+of this repository to find out what markup you can use and how it will look like when rendered.
+
+
+Contributing
+============
+
+Contributions are always welcome! Please use
+`GitHub issues <https://github.com/t3docs/docker-render-documentation/issues>`__
+or
+`GitHub pull requests <https://github.com/t3docs/docker-render-documentation/pulls>`__.
+
+
 
 
 Enjoy!
