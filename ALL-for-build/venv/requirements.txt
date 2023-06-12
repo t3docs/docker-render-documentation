@@ -12,7 +12,7 @@ sphinx-copybutton
 sphinx-collections
 sphinx-panels
 sphinx-rtd-theme
-sphinx-tabs
+sphinx-tabs>=3.2.0,<3.3.0
 sphinxcontrib-gitloginfo
 sphinxcontrib-plantuml
 subprocess32
