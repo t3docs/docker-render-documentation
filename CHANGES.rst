@@ -1,8 +1,22 @@
-Release v3.0.dev31 (2023-04-12)
+Release v3.0.dev31 (2023-06-12)
 ===============================
 
 *  Update README.rst
 
+*  Use sphinx_typo3_theme v4.7.10 (= master).
+   Line numbers of codeblocks aren't included
+   and selected any more when copying.
+
+*  Use toolchain 'RenderDocumentation v3.2.0'.
+   This should fix some layout problems caused by the fact,
+   that Docutils inserts css class 'container' which is
+   also used by the Bootstrap layout package.
+   Those classes get renamed to 'du-container'.
+
+*  Dockerfile.build.sh now knows about an option
+   PLANTUML_JAR_VERSION which can be used in junction
+   with the 'make build' command. Run 'make' for an
+   example.
 
 Release v3.0.dev30 (2022-09-23)
 ===============================
