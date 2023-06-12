@@ -4,20 +4,49 @@ FROM ubuntu:20.04
 # like vX.Y.devN
 ARG OUR_IMAGE_VERSION=v3.0.dev31
 
-# Specify tag. Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
-# real release versions looks like 'v3.0.0'
+# 1. Specify tag.
+#    Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
+#    real release versions looks like 'v3.0.0'
+#
+# 2. Specify short name.
+#    'show-shell-commands' will then use 'dockrun_<OUR_IMAGE_SHORT>'
+#    to name the helper function.
+#
+# 3. Use this pair for the latest version in branch 'master':
+#    ARG OUR_IMAGE_TAG=latest
+#    ARG OUR_IMAGE_SHORT=t3rd
+#
+# or
+#
+#    Use this pair for the 'develop' branch:
+#    ARG OUR_IMAGE_TAG=develop
+#    ARG OUR_IMAGE_SHORT=develop
+#
+# or
+#
+#    Use this pair for the latest version in branch 'master':
+#    ARG OUR_IMAGE_TAG=v3.0.dev31
+#    ARG OUR_IMAGE_SHORT=v3.0.dev31
+#
+# or
+#
+#    Use this pair for the latest version in branch 'master':
+#    ARG OUR_IMAGE_TAG=v3.0.dev31
+#    ARG OUR_IMAGE_SHORT=t3rd
+#
+
 ARG OUR_IMAGE_TAG=develop
-ARG OUR_IMAGE_SHORT=t3rd
+ARG OUR_IMAGE_SHORT=develop
 
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
 ARG DOCKRUN_PREFIX="dockrun_"
-ARG OUR_IMAGE_SLOGAN="${DOCKRUN_PREFIX}_${OUR_IMAGE_SHORT} - TYPO3 render documentation"
+ARG OUR_IMAGE_SLOGAN="${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} - TYPO3 render documentation"
 
-# PlantUML tagged file name as shown on https://plantuml.com/en/download
-ARG PLANTUML_TAGGED_FILE_NAME="plantuml-1.2022.4.jar"
+# PlantUML tagged file name as shown on https://github.com/plantuml/plantuml/releases/
+ARG PLANTUML_JAR_VERSION="1.2023.6"
 
-# THEME_MTIME=1662328800=python -c "import datetime; print(int(datetime.datetime(2022, 9, 5).timestamp()))"
+# THEME_MTIME=1662328800=python -c "import datetime; print(int(datetime.datetime(2023, 5, 9).timestamp()))"
 ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
@@ -29,15 +58,16 @@ ENV \
    PIP_CACHE_DIR="/ALL/userhome/.cache/pip" \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
-   THEME_MTIME="1662328800" \
+   PLANTUML_JAR_VERSION="${PLANTUML_JAR_VERSION}" \
+   THEME_MTIME="1683583200" \
    THEME_NAME="unknown" \
-   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.9" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.10" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="v1.3.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.3.0.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-3.1.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v3.1.0.zip" \
-   TOOLCHAIN_VERSION="3.1.0" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-3.2.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v3.2.0.zip" \
+   TOOLCHAIN_VERSION="3.2.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
 
@@ -98,10 +128,12 @@ RUN \
       wget \
       zip \
    \
-   && COMMENT "Make sure we have the latest plantuml.jar - DISABLED this time" \
-   && COMMENT "wget https://sourceforge.net/projects/plantuml/files/${PLANTUML_TAGGED_FILE_NAME}/download \
-           --quiet --output-document /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
-   && COMMENT "PLANTUML_TAGGED_FILE :: /usr/share/plantuml/${PLANTUML_TAGGED_FILE_NAME}" \
+   && COMMENT "Make sure we also provide the latest plantuml.jar" \
+   && COMMENT "For example: https://github.com/plantuml/plantuml/releases/download/v1.2023.5/plantuml-1.2023.5.jar" \
+   && cmd="wget https://github.com/plantuml/plantuml/releases/download/v${PLANTUML_JAR_VERSION}/plantuml-${PLANTUML_JAR_VERSION}.jar \
+           --quiet --output-document /usr/share/plantuml/plantuml-${PLANTUML_JAR_VERSION}.jar" \
+   && echo $cmd \
+   && $cmd \
    \
    && COMMENT "Install python3, pip, setuptools, wheel" \
    && apt-get install -yq  \
@@ -126,8 +158,8 @@ RUN \
    && rm -rf /ALL/venv/.venv  \
    && python3 -m venv /ALL/venv/.venv \
    && bash -c 'ls -la /ALL/venv/.venv/bin' \
-   && python=$(pwd)/.venv/bin/python3 \
-   && pip=$(pwd)/.venv/bin/pip3 \
+   && python=/ALL/venv/.venv/bin/python3 \
+   && pip=/ALL/venv/.venv/bin/pip3 \
    && $pip install wheel \
    && $pip install future \
    && $pip install setuptools_scm \
@@ -149,7 +181,7 @@ RUN \
    && COMMENT "but isn't up to date there. So we use it from our own repo." \
    && COMMENT "usually: /ALL/venv/.venv/lib/python3.8/site-packages/pygments/lexers" \
    && destdir=$(dirname $($python -c "import pygments; print(pygments.__file__, end='')"))/lexers \
-   && rm $destdir/typoscript.* \
+   && rm -f $destdir/typoscript.* \
    && wget $TYPOSCRIPT_PY_URL --quiet --output-document $destdir/typoscript.py \
    && echo curdir=$(pwd); cd $destdir; $python _mapping.py; cd $curdir \
    && curdir=$(pwd); cd $destdir; $python _mapping.py; cd $curdir \
@@ -160,6 +192,9 @@ RUN \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
+   && python=/ALL/venv/.venv/bin/python3 \
+   && pip=/ALL/venv/.venv/bin/pip3 \
+   && touch /ALL/venv/pip-frozen-requirements.txt \
    && $pip freeze > /ALL/venv/pip-frozen-requirements.txt \
    \
    && COMMENT "Final cleanup" \
@@ -175,20 +210,22 @@ RUN \
       /RESULT \
    \
    && COMMENT "Memorize the settings in the container" \
-   && echo "export DEBIAN_FRONTEND=\"${DEBIAN_FRONTEND}\""         >> /ALL/Downloads/envvars.sh \
-   && echo "export DOCKRUN_PREFIX=\"${DOCKRUN_PREFIX}\""           >> /ALL/Downloads/envvars.sh \
+   && echo "export DEBIAN_FRONTEND=\"${DEBIAN_FRONTEND}\""           >> /ALL/Downloads/envvars.sh \
+   && echo "export DOCKRUN_PREFIX=\"${DOCKRUN_PREFIX}\""             >> /ALL/Downloads/envvars.sh \
    && echo "export OS_NAME=\"$(   grep -e ^NAME=    /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\""  >> /ALL/Downloads/envvars.sh \
    && echo "export OS_VERSION=\"$(grep -e ^VERSION= /etc/os-release | sed -r 's/.*"(.+)".*/\1/')\""  >> /ALL/Downloads/envvars.sh \
-   && echo "export OUR_IMAGE=\"${OUR_IMAGE}\""                     >> /ALL/Downloads/envvars.sh \
-   && echo "export OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""         >> /ALL/Downloads/envvars.sh \
-   && echo "export OUR_IMAGE_SLOGAN=\"${OUR_IMAGE_SLOGAN}\""       >> /ALL/Downloads/envvars.sh \
-   && echo "export OUR_IMAGE_TAG=\"${OUR_IMAGE_TAG}\""             >> /ALL/Downloads/envvars.sh \
-   && echo "export OUR_IMAGE_VERSION=\"${OUR_IMAGE_VERSION}\""     >> /ALL/Downloads/envvars.sh \
-   && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""             >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE=\"${OUR_IMAGE}\""                       >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_SHORT=\"${OUR_IMAGE_SHORT}\""           >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_SLOGAN=\"${OUR_IMAGE_SLOGAN}\""         >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_TAG=\"${OUR_IMAGE_TAG}\""               >> /ALL/Downloads/envvars.sh \
+   && echo "export OUR_IMAGE_VERSION=\"${OUR_IMAGE_VERSION}\""       >> /ALL/Downloads/envvars.sh \
+   && echo "export PLANTUML_JAR_VERSION=\"${PLANTUML_JAR_VERSION}\"" >> /ALL/Downloads/envvars.sh \
+   && echo "export TOOLCHAIN_URL=\"${TOOLCHAIN_URL}\""               >> /ALL/Downloads/envvars.sh \
    \
    && COMMENT "Let\'s have some info ('::' as separator) about the build" \
-   && echo "# cat /ALL/venv/pip-frozen-requirements.txt:"\
-   && cat /ALL/venv/pip-frozen-requirements.txt \
+   && cmd="cat /ALL/venv/pip-frozen-requirements.txt" \
+   && echo ${cmd}: \
+   && $cmd \
    && echo "\n\
       $OUR_IMAGE_VERSION\n\
       Versions used for $OUR_IMAGE_VERSION:\n\
@@ -206,6 +243,7 @@ RUN \
       OUR_IMAGE_SLOGAN     :: ${OUR_IMAGE_SLOGAN}\n\
       OUR_IMAGE_TAG        :: ${OUR_IMAGE_TAG}\n\
       OUR_IMAGE_VERSION    :: ${OUR_IMAGE_VERSION}\n\
+      PLANTUML_JAR_VERSION :: ${PLANTUML_JAR_VERSION} :: /usr/share/plantuml/plantuml-${PLANTUML_JAR_VERSION}.jar\n\
       TOOLCHAIN_TOOL_URL   :: ${TOOLCHAIN_TOOL_URL}\n\
       TOOLCHAIN_URL        :: ${TOOLCHAIN_URL}\n\
       \n" | cut -b 7- > /ALL/Downloads/buildinfo.txt \
