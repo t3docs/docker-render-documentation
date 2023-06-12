@@ -45,7 +45,7 @@ For help:
 
 ... did you mean '${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml'?
 
-See manual: https://t3docs.github.io/DRC-The-Docker-Rendering-Container/
+Also see manual: https://t3docs.github.io/DRC-The-Docker-Rendering-Container/
 
 EOT
 }
@@ -89,6 +89,7 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT export-ALL
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makeall-no-cache
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml
+        ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT makehtml -c toolchain_help 1
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT bashcmd 'ls -la /ALL'
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /bin/bash
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT /usr/bin/bash
@@ -96,6 +97,7 @@ Usage:
         ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT just1sphinxbuild
         T3DOCS_DEBUG=1 ${DOCKRUN_PREFIX}$OUR_IMAGE_SHORT [...]
 
+Also see manual: https://t3docs.github.io/DRC-The-Docker-Rendering-Container/
 
 End of usage.
 EOT
