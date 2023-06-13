@@ -1,3 +1,12 @@
+Release v3.0.0 (2023-06-13)
+===========================
+
+From branch master:
+
+* Release as ghcr.io/t3docs/render-documentation:v3.0.0
+* Release as ghcr.io/t3docs/render-documentation:latest
+
+
 Release v3.0.dev31 (2023-06-12)
 ===============================
 
