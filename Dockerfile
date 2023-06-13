@@ -35,7 +35,7 @@ ARG OUR_IMAGE_VERSION=v3.0.0
 #    ARG OUR_IMAGE_SHORT=t3rd
 #
 
-ARG OUR_IMAGE_TAG=v3.0.0
+ARG OUR_IMAGE_TAG=latest
 ARG OUR_IMAGE_SHORT=t3rd
 
 # flag for apt-get - affects only build time
