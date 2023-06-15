@@ -223,8 +223,14 @@ if [[ "\$DRY_RUN" = "0" ]]; then
 fi
 }
 
-echo "This function is now defined FOR THIS terminal window to run '${OUR_IMAGE_TAG}':"
-echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
+if [[ ! -v DOCKRUN_FN_QUIET ]]; then true
+   DOCKRUN_FN_QUIET=0
+fi
+if [[ "\$DOCKRUN_FN_QUIET" -ne 1 ]]; then true
+   echo "This function is now defined FOR THIS terminal window to run '${OUR_IMAGE_TAG}':"
+   echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
+   echo ""
+   echo "(Define  DOCKRUN_FN_QUIET=1  to turn this message off)"
+fi
 
 EOT
-
