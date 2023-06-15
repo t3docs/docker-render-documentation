@@ -230,7 +230,7 @@ if [[ "\$DOCKRUN_FN_QUIET" -ne 1 ]]; then true
    echo "This function is now defined FOR THIS terminal window to run '${OUR_IMAGE_TAG}':"
    echo "    ${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT}"
    echo ""
-   echo "(Define  DOCKRUN_FN_QUIET=1  to turn this message off)"
+   echo "(Define  'export DOCKRUN_FN_QUIET=1'  to turn this message off)"
 fi
 
 EOT
