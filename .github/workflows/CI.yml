@@ -22,8 +22,8 @@ jobs:
           password: ${{ secrets.DRC_GITHUB_REGISTRY }}
 
       - name: Build
-        run: OUR_IMAGE_TAG=v3.0.0  OUR_IMAGE_SHORT=v3.0.0  make build
+        run: OUR_IMAGE_TAG=develop  OUR_IMAGE_SHORT=develop  make build
 
       - name: Push to ghcr.io
-        run: OUR_IMAGE_TAG=v3.0.0  make push_to_ghcr
+        run: OUR_IMAGE_TAG=develop  make push_to_ghcr
 

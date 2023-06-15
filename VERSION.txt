@@ -1,15 +1,22 @@
-v3.0.0
-
+v3.1.dev1
 
 Keep version number like above in files:
 
 *  First line in this file
-*  Dockerfile
+*  Dockerfile (as OUR_IMAGE_VERSION)
 *  README.rst
 *  CHANGES.rst
 
-And check:
+Check:
 
-*  Dockerfile.build.sh
+   OUR_IMAGE_TAG
+     in CI.yml
+     in Dockerfile
+     in Dockerfile.build.sh
+
+   OUR_IMAGE_SHORT
+     in CI.yml
+     in Dockerfile
+     in Dockerfile.build.sh
 
 End of text.

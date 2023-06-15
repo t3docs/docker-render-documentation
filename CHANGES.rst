@@ -1,3 +1,9 @@
+Start 'develop' v3.1.dev (2023-06-15)
+=====================================
+
+* Add DOCKRUN_FN_QUIET to show-shell-commands
+
+
 Release v3.0.0 (2023-06-13)
 ===========================
 
