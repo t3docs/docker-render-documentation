@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.1.dev3
+ARG OUR_IMAGE_VERSION=v3.1.dev5
 
 # 1. Specify tag.
 #    Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
@@ -61,7 +61,7 @@ ENV \
    PLANTUML_JAR_VERSION="${PLANTUML_JAR_VERSION}" \
    THEME_MTIME="1683583200" \
    THEME_NAME="unknown" \
-   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.7.10" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.8.0" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="v1.3.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.3.0.zip" \
