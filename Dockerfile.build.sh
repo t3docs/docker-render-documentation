@@ -1,7 +1,7 @@
 #!/bin/bash
 
-OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-develop}
-OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-develop}
+OUR_IMAGE_TAG=${OUR_IMAGE_TAG:-v3.1.0}
+OUR_IMAGE_SHORT=${OUR_IMAGE_SHORT:-v3.1.0}
 EXITCODE=0
 
 function usage() {

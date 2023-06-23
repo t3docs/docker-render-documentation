@@ -1,7 +1,10 @@
-Start 'develop' v3.1.dev (2023-06-15)
-=====================================
+Release v3.1.0 (2023-06-23)
+===========================
 
-* Add DOCKRUN_FN_QUIET to show-shell-commands
+*  Add DOCKRUN_FN_QUIET to show-shell-commands
+*  Use sphinx_typo3_theme v4.8.0
+*  Release as ghcr.io/t3docs/render-documentation:v3.1.0
+*  Release as ghcr.io/t3docs/render-documentation:latest
 
 
 Release v3.0.0 (2023-06-13)

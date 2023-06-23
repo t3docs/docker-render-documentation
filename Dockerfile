@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.1.dev5
+ARG OUR_IMAGE_VERSION=v3.1.0
 
 # 1. Specify tag.
 #    Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
@@ -35,8 +35,8 @@ ARG OUR_IMAGE_VERSION=v3.1.dev5
 #    ARG OUR_IMAGE_SHORT=t3rd
 #
 
-ARG OUR_IMAGE_TAG=develop
-ARG OUR_IMAGE_SHORT=develop
+ARG OUR_IMAGE_TAG=v3.1.0
+ARG OUR_IMAGE_SHORT=v3.1.0
 
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
