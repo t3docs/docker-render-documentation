@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.1.0
+ARG OUR_IMAGE_VERSION=v3.2.0
 
 # 1. Specify tag.
 #    Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
@@ -46,7 +46,7 @@ ARG OUR_IMAGE_SLOGAN="${DOCKRUN_PREFIX}${OUR_IMAGE_SHORT} - TYPO3 render documen
 # PlantUML tagged file name as shown on https://github.com/plantuml/plantuml/releases/
 ARG PLANTUML_JAR_VERSION="1.2023.6"
 
-# THEME_MTIME=1662328800=python -c "import datetime; print(int(datetime.datetime(2023, 5, 9).timestamp()))"
+# THEME_MTIME=1688594400=python -c "import datetime; print(int(datetime.datetime(2023, 7, 6).timestamp()))"
 ENV \
    LC_ALL=C.UTF-8 \
    LANG=C.UTF-8 \
@@ -59,9 +59,9 @@ ENV \
    PIP_DISABLE_PIP_VERSION_CHECK=1 \
    PIP_NO_PYTHON_VERSION_WARNING=1 \
    PLANTUML_JAR_VERSION="${PLANTUML_JAR_VERSION}" \
-   THEME_MTIME="1683583200" \
+   THEME_MTIME="1688594400" \
    THEME_NAME="unknown" \
-   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.8.0" \
+   THEME_PIP_SOURCE="git+https://github.com/TYPO3-Documentation/sphinx_typo3_theme@v4.9.0" \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="v1.3.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.3.0.zip" \
