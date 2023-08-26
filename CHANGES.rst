@@ -1,3 +1,10 @@
+Release v3.2.1 (2023-08-26)
+===========================
+
+*  Use toolchain v3.3.0 to fix Markdown conversion
+   (`issue #132 <https://github.com/t3docs/docker-render-documentation/issues/132>`__
+
+
 Release v3.2.0 (2023-07-06)
 ===========================
 
