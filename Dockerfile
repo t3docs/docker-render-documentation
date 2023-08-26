@@ -35,8 +35,8 @@ ARG OUR_IMAGE_VERSION=v3.2.1
 #    ARG OUR_IMAGE_SHORT=t3rd
 #
 
-ARG OUR_IMAGE_TAG=v3.2.1
-ARG OUR_IMAGE_SHORT=v3.2.1
+ARG OUR_IMAGE_TAG=latest
+ARG OUR_IMAGE_SHORT=t3rd
 
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
