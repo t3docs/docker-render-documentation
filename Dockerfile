@@ -65,8 +65,8 @@ ENV \
    THEME_VERSION="unknown" \
    TOOLCHAIN_TOOL_VERSION="v1.3.0" \
    TOOLCHAIN_TOOL_URL="https://github.com/marble/TCT/archive/refs/tags/v1.3.0.zip" \
-   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-3.2.0" \
-   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v3.2.0.zip" \
+   TOOLCHAIN_UNPACKED="Toolchain_RenderDocumentation-3.3.0" \
+   TOOLCHAIN_URL="https://github.com/marble/Toolchain_RenderDocumentation/archive/refs/tags/v3.3.0.zip" \
    TOOLCHAIN_VERSION="3.3.0" \
    TYPOSCRIPT_PY_URL="https://raw.githubusercontent.com/TYPO3-Documentation/Pygments-TypoScript-Lexer/v2.2.4/typoscript.py" \
    TYPOSCRIPT_PY_VERSION="v2.2.4"
