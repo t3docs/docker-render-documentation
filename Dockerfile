@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 # Reflect the development progress. Set to the release number or something
 # like vX.Y.devN
-ARG OUR_IMAGE_VERSION=v3.2.1
+ARG OUR_IMAGE_VERSION=v3.3.0
 
 # 1. Specify tag.
 #    Should be 'latest' or 'develop' or '<RELEASE_VERSION>' where
@@ -35,8 +35,8 @@ ARG OUR_IMAGE_VERSION=v3.2.1
 #    ARG OUR_IMAGE_SHORT=t3rd
 #
 
-ARG OUR_IMAGE_TAG=latest
-ARG OUR_IMAGE_SHORT=t3rd
+ARG OUR_IMAGE_TAG=develop
+ARG OUR_IMAGE_SHORT=develop
 
 # flag for apt-get - affects only build time
 ARG DEBIAN_FRONTEND=noninteractive
@@ -167,6 +167,12 @@ RUN \
    && $pip install -r requirements.txt \
    && echo source $(pwd)/.venv/bin/activate >>$HOME/.bashrc \
    \
+   && python=/ALL/venv/.venv/bin/python3 \
+   && pip=/ALL/venv/.venv/bin/pip3 \
+   && touch /ALL/venv/pip-frozen-requirements.txt \
+   && $pip freeze > /ALL/venv/pip-frozen-requirements.txt \
+   && $pip install -r requirements-repositories.txt \
+   \
    && COMMENT bash -c 'find /ALL/Downloads -name "*.whl" -exec .venv/bin/pip install -v {} \;' \
    \
    && COMMENT "All files of the theme of a given theme version should have the" \
@@ -192,10 +198,6 @@ RUN \
    && mv /ALL/Toolchains/${TOOLCHAIN_UNPACKED} /ALL/Toolchains/RenderDocumentation \
    && rm /ALL/Downloads/Toolchain_RenderDocumentation.zip \
    \
-   && python=/ALL/venv/.venv/bin/python3 \
-   && pip=/ALL/venv/.venv/bin/pip3 \
-   && touch /ALL/venv/pip-frozen-requirements.txt \
-   && $pip freeze > /ALL/venv/pip-frozen-requirements.txt \
    \
    && COMMENT "Final cleanup" \
    && apt-get clean \

@@ -1,3 +1,10 @@
+Release v3.3.0 (unreleased)
+===========================
+
+*  Separate 'requirements-repositories.txt' from
+   'requirements.txt'
+
+
 Release v3.2.1 (2023-08-26)
 ===========================
 
