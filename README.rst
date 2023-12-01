@@ -43,10 +43,10 @@ Windows with Docker installed (no WSL2) is also possible. Important: Use the old
 At the command line::
 
    # Fetch the Docker image. "tag" may be "latest (default)", "develop", "dev30" or similar.
-   docker pull ghcr.io/t3docs/render-documenation[:tag]
+   docker pull ghcr.io/t3docs/render-documentation[:tag]
 
    # Attach the canonical tag "t3docs/render-documentation" to the image - without "ghcr.io/"!
-   docker tag  ghcr.io/t3docs/render-documenation[:tag]  ghcr.io/t3docs/render-documenation[:tag]
+   docker tag  ghcr.io/t3docs/render-documentation[:tag]  ghcr.io/t3docs/render-documentation[:tag]
 
    # verify the image can be run as container
    docker run --rm t3docs/render-documentation[:tag]
