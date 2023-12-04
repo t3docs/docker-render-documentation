@@ -46,7 +46,7 @@ At the command line::
    docker pull ghcr.io/t3docs/render-documentation[:tag]
 
    # Attach the canonical tag "t3docs/render-documentation" to the image - without "ghcr.io/"!
-   docker tag  ghcr.io/t3docs/render-documentation[:tag]  ghcr.io/t3docs/render-documentation[:tag]
+   docker tag  ghcr.io/t3docs/render-documentation[:tag]  t3docs/render-documentation[:tag]
 
    # verify the image can be run as container
    docker run --rm t3docs/render-documentation[:tag]
