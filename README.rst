@@ -7,15 +7,15 @@ image :code:`t3docs/render-documentation` for rendering `TYPO3 documentation
 <https://docs.typo3.org/>`__. You may as well skip building and use ready
 made containers from `ghcr.io <https://ghcr.io/>`__.
 
-What for?
+For what reason?
 
 TYPO3 uses plain UTF-8 text files with reStructuredText (reST) markup
-for documentation. Such documentation is readable by itself to some extend.
+for documentation. Such documentation is readable by itself to some extent.
 However, the `Sphinx documentation tool
 <https://www.sphinx-doc.org/>`__ is used to produce the final html result.
-This DRC bundles everything that's needed for generating the final
+This DRC bundles everything that is needed for generating the final
 documentation. All it takes is a simple command at the command line.
-However, having Docker installed is a requirement.
+However having Docker installed is a requirement.
 
 
 Characteristics
@@ -35,9 +35,10 @@ Characteristics
 Installation
 ============
 
-Docker is required on your machine. You can use Linux-like systems like Mac, Linux, WSL2.
+Docker is required on your machine. You can use Linux or Linux-like systems like Mac or
+Windows 11 with WSL 2.
 
-Windows with Docker installed (no WSL2) is also possible. Important: Use the older
+Windows with Docker installed (no WSL 2) is also possible. Important: Use the older
 :code:`command line` window and NOT Powershell.
 
 At the command line::
@@ -72,7 +73,7 @@ Usage
 
 2. Prepare::
 
-      # Linux-like systems (Linux, Mac, WSL2)
+      # Linux-like systems (Linux, Mac, WSL 2)
       # Define helper function, if it's not already in your .bashrc or .zshrc
       eval "$(docker run --rm t3docs/render-documentation[:tag] show-shell-commands)"
 
